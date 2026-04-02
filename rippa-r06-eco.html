@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>RIPPA R06-ECO - K&L Global Import</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .r06-hero-section {
+      position: relative;
+      min-height: 380px;
+      margin: 20px 6vw;
+      border-radius: 20px;
+      overflow: hidden;
+      background: url('r06.jpeg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .r06-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(6, 20, 33, 0.86), rgba(6, 20, 33, 0.42));
+      z-index: 1;
+    }
+    .r06-hero-text {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      padding: 34px 24px;
+    }
+    .r06-hero-text h1 {
+      color: var(--text-main);
+      font-size: 1.95rem;
+      margin-bottom: 14px;
+    }
+    .r06-hero-text p {
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 1.02rem;
+    }
+    .r06-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #2e9fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 12px 6vw;
+      transition: var(--transition-fast);
+    }
+    .r06-back-link:hover {
+      color: #fff;
+    }
+    .r06-detail-grid {
+      display: grid;
+      gap: 22px;
+      padding: 40px 6vw;
+      margin: 20px 0;
+      background: radial-gradient(circle at top left, #0a2a4a, #061421);
+      border-radius: 20px;
+    }
+    .r06-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: radial-gradient(ellipse at top left, var(--bg-card-soft), var(--bg-card));
+    }
+    .r06-row.reverse {
+      grid-template-columns: 1fr 1.2fr;
+    }
+    .r06-text {
+      padding: 24px;
+    }
+    .r06-text h3 {
+      color: var(--text-main);
+      font-size: 1.24rem;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #0066CC;
+      display: inline-block;
+    }
+    .r06-text h4 {
+      margin: 10px 0;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+    .r06-text p {
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-top: 8px;
+    }
+    .r06-specs-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0;
+    }
+    .r06-specs-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-soft);
+      color: var(--text-muted);
+    }
+    .r06-specs-list li strong {
+      color: var(--text-main);
+    }
+    .r06-photo-slot {
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(15, 40, 67, 0.55), rgba(6, 20, 33, 0.8));
+      border-left: 1px dashed rgba(46, 159, 255, 0.45);
+      color: #9ccfff;
+      font-size: 1rem;
+      text-align: center;
+      padding: 20px;
+    }
+    .r06-row.reverse .r06-photo-slot {
+      border-left: none;
+      border-right: 1px dashed rgba(46, 159, 255, 0.45);
+    }
+    .r06-final {
+      padding: 24px;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      background: radial-gradient(ellipse at top left, var(--bg-card-soft), var(--bg-card));
+    }
+    .r06-final p {
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-top: 8px;
+    }
+    .r06-highlight {
+      color: #2e9fff;
+      font-weight: 600;
+    }
+    @media (max-width: 900px) {
+      .r06-row,
+      .r06-row.reverse {
+        grid-template-columns: 1fr;
+      }
+      .r06-photo-slot,
+      .r06-row.reverse .r06-photo-slot {
+        border-left: none;
+        border-right: none;
+        border-top: 1px dashed rgba(46, 159, 255, 0.45);
+      }
+      .r06-hero-section {
+        margin: 20px 3vw;
+        min-height: 280px;
+      }
+      .r06-hero-text h1 {
+        font-size: 1.45rem;
+      }
+    }
+  </style>
+  <script src="micro-interactions.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo"><img src="header-logo.jpeg" alt="K&L Global Import" width="640" height="640"></div>
+  <nav class="topnav" aria-label="Navigation principale">
+    <a href="index.html">ACCUEIL</a>
+    <div class="catalogue-item">
+      <a href="index.html#catalogue" class="catalogue-trigger" aria-haspopup="true">CATALOGUE</a>
+      <div class="mega-menu" role="group" aria-label="Catalogue">
+        <div class="mega-menu__grid">
+          <article class="mega-menu__column">
+            <h3>ENGINS RIPPA</h3>
+            <p>Mini-pelles, chargeuses et machines de chantier compactes pour les usages intensifs.</p>
+            <a href="engins-rippa.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>SPACE CAPSULE &amp; HABITAT</h3>
+            <p>Modules habitables innovants pensés pour l’hébergement, l’accueil et les projets modernes.</p>
+            <a href="habitat.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>LOISIR ET HABITAT</h3>
+            <p>Équipements de confort et d’extérieur pour enrichir l’expérience résidentielle.</p>
+            <a href="loisir-habitat.html">Découvrir</a>
+          </article>
+        </div>
+      </div>
+    </div>
+    <a href="#">TARIFS</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
+</header>
+
+
+<nav class="main-tabs">
+  <a href="index.html">Accueil</a>
+  <a href="habitat.html">SPACE CAPSULE & HABITAT</a>
+  <a href="loisir-habitat.html">LOISIR ET HABITAT</a>
+  <a href="engins-rippa.html" class="active">ENGINS RIPPA</a>
+  <a href="#">Grande Projets</a>
+  <a href="#">À Propos</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<main class="main-content">
+  <section class="section-title" style="background: linear-gradient(90deg, #003d7a, #0066CC);">
+    <h2>RIPPA R06-ECO</h2>
+  </section>
+
+  <a href="engins-rippa.html" class="r06-back-link">← Retour aux engins RIPPA</a>
+
+  <div class="r06-hero-section">
+    <div class="r06-hero-overlay"></div>
+    <div class="r06-hero-text">
+      <h1>RIPPA R06-ECO : L'Ultra-Compacité au Service de la Performance</h1>
+      <p>La RIPPA R06-ECO est la solution ultime pour les chantiers où chaque centimètre compte. Avec une largeur de châssis record de seulement 747 mm, cette mini-pelle est conçue pour s'infiltrer là où toutes les autres s'arrêtent : portillons de jardin standard, couloirs étroits ou interventions à l'intérieur de bâtiments. C'est l'outil de prédilection des paysagistes et des professionnels de la maintenance urbaine.</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px;">
+    <section class="r06-detail-grid">
+
+      <article class="r06-row">
+        <div class="r06-text">
+          <h3>UNE MOTORISATION KUBOTA DE RÉFÉRENCE</h3>
+          <h4>Fiabilité Japonaise et Efficacité Énergétique</h4>
+          <p>Le cœur de la R06-ECO bat au rythme du moteur Kubota Z482 (2 cylindres, refroidi par eau). Ce choix technique haut de gamme garantit :</p>
+          <ul class="r06-specs-list">
+            <li><strong>Une puissance stable :</strong> Délivrant 8,2 kW (11,23 ch), il offre le couple nécessaire pour les travaux d'excavation précis.</li>
+            <li><strong>Consommation minimale :</strong> Une ingénierie optimisée pour un coût d'exploitation extrêmement réduit.</li>
+            <li><strong>Silence de fonctionnement :</strong> Un moteur réputé pour son faible niveau de bruit et de vibrations, idéal pour les zones résidentielles.</li>
+            <li><strong>Conformité et durabilité :</strong> Un refroidissement par eau performant pour un travail continu sans surchauffe.</li>
+          </ul>
+        </div>
+        <div class="r06-photo-slot" style="background-image:url('moteur.png'); background-position:center; background-size:cover; background-repeat:no-repeat; color:transparent;"></div>
+      </article>
+
+      <article class="r06-row reverse">
+        <div class="r06-photo-slot" style="background-image:url('acces.webp'); background-position:center; background-size:cover; background-repeat:no-repeat; color:transparent;"></div>
+        <div class="r06-text">
+          <h3>AGILITÉ EXTRÊME ET CONCEPTION INTELLIGENTE</h3>
+          <h4>Un Châssis "Passe-Partout"</h4>
+          <p>Avec seulement 747 mm de large, la R06-ECO redéfinit la mobilité. Elle circule avec aisance dans les espaces les plus confinés. Son déport de flèche (pivotement) exceptionnel de 70 degrés de chaque côté permet de creuser le long des murs et dans les angles sans avoir à repositionner la machine.</p>
+          <h4>Performances d'Excavation</h4>
+          <p>Ne vous fiez pas à sa finesse, elle affiche des capacités de travail sérieuses :</p>
+          <ul class="r06-specs-list">
+            <li><strong>Force de creusement :</strong> 9,2 kN pour briser les sols compacts.</li>
+            <li><strong>Profondeur de fouille :</strong> Environ 1016 mm, parfaite pour les réseaux et les plantations.</li>
+            <li><strong>Hauteur de déversement :</strong> 1550 mm, permettant de charger facilement de petits contenants ou remorques.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="r06-row">
+        <div class="r06-text">
+          <h3>CONFORT ET SÉCURITÉ DE L'OPÉRATEUR</h3>
+          <h4>Poste de Conduite Ergonomique</h4>
+          <p>Malgré sa petite taille, la R06-ECO ne sacrifie pas l'utilisateur :</p>
+          <ul class="r06-specs-list">
+            <li><strong>Commandes frontales :</strong> Positionnées pour un accès facilité et une meilleure visibilité sur la zone de travail.</li>
+            <li><strong>Confort réglable :</strong> Siège ajustable équipé d'une ceinture de sécurité pour une protection optimale.</li>
+            <li><strong>Visibilité Nocturne :</strong> Phares LED haute intensité pour prolonger vos chantiers en toute sécurité.</li>
+          </ul>
+        </div>
+        <div class="r06-photo-slot" style="background-image:url('nuit.webp'); background-position:center; background-size:cover; background-repeat:no-repeat; color:transparent;"></div>
+      </article>
+
+      <article class="r06-row reverse">
+        <div class="r06-photo-slot" style="background-image:url('profil.webp'); background-position:center; background-size:cover; background-repeat:no-repeat; color:transparent;"></div>
+        <div class="r06-text">
+          <h3>CARACTÉRISTIQUES TECHNIQUES CLÉS</h3>
+          <ul class="r06-specs-list">
+            <li><strong>Poids Opérationnel :</strong> Format ultra-léger pour un transport facile.</li>
+            <li><strong>Vitesse de déplacement :</strong> 0-1,5 km/h avec une excellente motricité.</li>
+            <li><strong>Pente franchissable :</strong> 30% (Gradeability) pour évoluer sur terrains inclinés.</li>
+            <li><strong>Capacité du godet :</strong> 0,014 m³.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="r06-row">
+        <div class="r06-text">
+          <h3>TRANSPORT FACILITÉ &amp; SOLS PRÉSERVÉS</h3>
+          <p>* <strong>Poids opérationnel :</strong> 600 - 800 kg</p>
+          <p><strong>Atout transport :</strong> Chargeable dans un utilitaire standard.</p>
+          <p><strong>Atout terrain :</strong> Pression au sol minimale pour zéro dégât sur vos chantiers paysagers.</p>
+        </div>
+        <div class="r06-photo-slot" style="background-image:url('fourgon.webp'); background-position:center; background-size:cover; background-repeat:no-repeat; color:transparent;"></div>
+      </article>
+
+      <article class="r06-final">
+        <p>La <span class="r06-highlight">Rippa R06-ECO</span> est l'investissement intelligent pour transformer vos efforts manuels en résultats professionnels. Compacte, motorisée par Kubota et incroyablement maniable, elle est la partenaire indispensable de vos projets les plus exigeants.</p>
+        <a href="contact.html" class="btn-primary btn-rippa devis-btn" style="margin-top: 18px; display: inline-block;">DEMANDER UN DEVIS</a>
+      </article>
+
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>© 2026 K&L Global Import · <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions Légales</a> · Tous droits réservés.</p>
+</footer>
+<a href="https://wa.me/33673300054" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Nous contacter sur WhatsApp">
+  <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+</a>
+</body>
+</html>

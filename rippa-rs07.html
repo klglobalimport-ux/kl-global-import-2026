@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>RIPPA RS07 - Mini Chargeuse - K&L Global Import</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .rs07-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #2e9fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 12px 6vw;
+      transition: var(--transition-fast);
+    }
+    .rs07-back-link:hover {
+      color: #fff;
+    }
+    .rs07-hero {
+      position: relative;
+      min-height: 420px;
+      margin: 20px 6vw;
+      border-radius: 20px;
+      overflow: hidden;
+      background: url('RS07.jpeg') center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+    }
+    .rs07-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(6, 20, 33, 0.88), rgba(6, 20, 33, 0.46));
+    }
+    .rs07-hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 34px;
+      max-width: 760px;
+    }
+    .rs07-hero-content h1 {
+      font-size: 2rem;
+      color: var(--text-main);
+      margin: 0 0 12px;
+    }
+    .rs07-hero-content p {
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .rs07-sections {
+      display: grid;
+      gap: 24px;
+      margin: 20px 6vw 50px;
+    }
+    .rs07-row {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      background: radial-gradient(ellipse at top left, var(--bg-card-soft), var(--bg-card));
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .rs07-row.reverse {
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+    .rs07-text {
+      padding: 24px;
+    }
+    .rs07-text h3 {
+      margin: 0 0 10px;
+      font-size: 1.28rem;
+      color: var(--text-main);
+      padding-bottom: 8px;
+      border-bottom: 2px solid #0066cc;
+      display: inline-block;
+    }
+    .rs07-text h4 {
+      margin: 12px 0 8px;
+      color: #cde8ff;
+      font-size: 1rem;
+    }
+    .rs07-text p {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .rs07-list {
+      margin: 10px 0 0;
+      padding-left: 20px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .rs07-list li {
+      margin-bottom: 8px;
+    }
+    .rs07-list strong {
+      color: var(--text-main);
+    }
+    .rs07-photo-slot {
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: #0d1b2a;
+      border-left: 1px solid var(--border-soft);
+    }
+    .rs07-row.reverse .rs07-photo-slot {
+      border-left: none;
+      border-right: 1px solid var(--border-soft);
+    }
+    .rs07-photo-box {
+      width: 100%;
+      min-height: 230px;
+      border: 2px dashed rgba(46, 159, 255, 0.45);
+      border-radius: 14px;
+      color: #9ccfff;
+      font-size: 0.94rem;
+      line-height: 1.6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+    }
+    .rs07-photo-image {
+      width: 100%;
+      min-height: 230px;
+      border-radius: 14px;
+      object-fit: cover;
+      display: block;
+    }
+    .rs07-specs {
+      padding: 24px;
+      background: radial-gradient(ellipse at top left, #0f2d4a, #081c2f);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+    }
+    .rs07-specs h3 {
+      margin-top: 0;
+      font-size: 1.3rem;
+      color: var(--text-main);
+      padding-bottom: 8px;
+      border-bottom: 2px solid #0066cc;
+      display: inline-block;
+    }
+    .rs07-cta {
+      display: flex;
+      justify-content: center;
+      padding: 0 6vw 24px;
+    }
+    .rs07-quote-btn {
+      text-transform: none;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 920px) {
+      .rs07-row,
+      .rs07-row.reverse {
+        grid-template-columns: 1fr;
+      }
+      .rs07-photo-slot,
+      .rs07-row.reverse .rs07-photo-slot {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid var(--border-soft);
+      }
+    }
+    @media (max-width: 640px) {
+      .rs07-hero {
+        min-height: 320px;
+      }
+      .rs07-hero-content {
+        padding: 22px;
+      }
+      .rs07-hero-content h1 {
+        font-size: 1.45rem;
+      }
+      .rs07-sections {
+        margin: 16px 3vw 36px;
+      }
+      .rs07-cta {
+        padding-left: 3vw;
+        padding-right: 3vw;
+      }
+    }
+  </style>
+  <script src="micro-interactions.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo"><img src="header-logo.jpeg" alt="K&L Global Import" width="640" height="640"></div>
+  <nav class="topnav" aria-label="Navigation principale">
+    <a href="index.html">ACCUEIL</a>
+    <div class="catalogue-item">
+      <a href="index.html#catalogue" class="catalogue-trigger" aria-haspopup="true">CATALOGUE</a>
+      <div class="mega-menu" role="group" aria-label="Catalogue">
+        <div class="mega-menu__grid">
+          <article class="mega-menu__column">
+            <h3>ENGINS RIPPA</h3>
+            <p>Mini-pelles, chargeuses et machines de chantier compactes pour les usages intensifs.</p>
+            <a href="engins-rippa.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>SPACE CAPSULE &amp; HABITAT</h3>
+            <p>Modules habitables innovants pensés pour l’hébergement, l’accueil et les projets modernes.</p>
+            <a href="habitat.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>LOISIR ET HABITAT</h3>
+            <p>Équipements de confort et d’extérieur pour enrichir l’expérience résidentielle.</p>
+            <a href="loisir-habitat.html">Découvrir</a>
+          </article>
+        </div>
+      </div>
+    </div>
+    <a href="#">TARIFS</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
+</header>
+
+
+<nav class="main-tabs">
+  <a href="index.html">Accueil</a>
+  <a href="habitat.html">SPACE CAPSULE & HABITAT</a>
+  <a href="loisir-habitat.html">LOISIR ET HABITAT</a>
+  <a href="engins-rippa.html" class="active">ENGINS RIPPA</a>
+  <a href="#">Grande Projets</a>
+  <a href="#">À Propos</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<main class="main-content">
+  <section class="section-title" style="background: linear-gradient(90deg, #003d7a, #0066CC);">
+    <h2>RIPPA RS07</h2>
+    <p>Mini chargeuse puissante et polyvalente pour les chantiers exigeants.</p>
+  </section>
+
+  <a href="engins-rippa.html" class="rs07-back-link">&larr; Retour aux engins RIPPA</a>
+
+  <section class="rs07-hero">
+    <div class="rs07-hero-content">
+      <h1>RIPPA RS07 : Puissance, stabilité et rendement sur tous terrains</h1>
+      <p>
+        La RIPPA RS07 est conçue pour les professionnels qui recherchent une mini chargeuse compacte,
+        nerveuse et fiable. Elle combine une excellente capacité de travail, une grande maniabilité et
+        une structure renforcée pour les applications en BTP, aménagement extérieur et manutention.
+      </p>
+    </div>
+  </section>
+
+  <section class="rs07-sections">
+    <article class="rs07-row">
+      <div class="rs07-text">
+        <h3>Performance moteur et productivité</h3>
+        <h4>Réactivité pour les cycles intensifs</h4>
+        <p>La RS07 apporte la puissance nécessaire pour enchaîner les opérations de chargement et de déplacement.</p>
+        <ul class="rs07-list">
+          <li><strong>Couple élevé :</strong> bonne tenue à la charge dans les phases de poussée et de levage.</li>
+          <li><strong>Rendement constant :</strong> comportement stable dans les usages prolongés.</li>
+          <li><strong>Travail fluide :</strong> machine adaptée aux cadences régulières sur chantier.</li>
+        </ul>
+      </div>
+      <div class="rs07-photo-slot">
+        <img class="rs07-photo-image" src="compartiment.webp" alt="Vue compartiment moteur RS07" width="786" height="717">
+      </div>
+    </article>
+
+    <article class="rs07-row reverse">
+      <div class="rs07-photo-slot">
+        <img class="rs07-photo-image" src="poste.webp" alt="Poste de conduite RS07" width="621" height="703">
+      </div>
+      <div class="rs07-text">
+        <h3>Confort opérateur et contrôle</h3>
+        <h4>Prise en main immédiate</h4>
+        <p>
+          L'ergonomie du poste de pilotage favorise la précision et limite la fatigue. Les commandes sont pensées
+          pour garder un contrôle fin des mouvements, y compris lors des manœuvres serrées.
+        </p>
+      </div>
+    </article>
+
+    <article class="rs07-row">
+      <div class="rs07-text">
+        <h3>Hydraulique et polyvalence accessoires</h3>
+        <h4>Une base multi-outils</h4>
+        <p>La RS07 peut recevoir des équipements pour multiplier les usages selon la mission :</p>
+        <ul class="rs07-list">
+          <li>Godet de terrassement et de chargement.</li>
+          <li>Fourches à palettes pour la manutention.</li>
+          <li>Accessoires de nettoyage et d'entretien de site.</li>
+          <li>Outils de préparation terrain et nivellement.</li>
+        </ul>
+      </div>
+      <div class="rs07-photo-slot">
+        <img class="rs07-photo-image" src="scie.png" alt="Accessoire scie monté sur RS07" width="379" height="379">
+      </div>
+    </article>
+
+    <article class="rs07-specs">
+      <h3>Fiche technique résumée</h3>
+      <ul class="rs07-list">
+        <li><strong>Type :</strong> Mini chargeuse compacte (Skid Steer).</li>
+        <li><strong>Positionnement :</strong> Puissance et polyvalence pour usage professionnel.</li>
+        <li><strong>Applications :</strong> BTP, agriculture, entretien de terrain, manutention.</li>
+        <li><strong>Atout majeur :</strong> Format compact avec forte capacité opérationnelle.</li>
+      </ul>
+      <p>
+        La RIPPA RS07 constitue une solution de travail robuste et rentable pour les entreprises
+        qui veulent une machine compacte capable d'assurer un rythme de production élevé.
+      </p>
+    </article>
+  </section>
+
+  <section class="rs07-cta">
+    <a href="contact.html" class="btn-primary rs07-quote-btn devis-btn">demander un devis</a>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>© 2026 K&L Global Import · <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions Légales</a> · Tous droits réservés.</p>
+</footer>
+<a href="https://wa.me/33673300054" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Nous contacter sur WhatsApp">
+  <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+</a>
+</body>
+</html>

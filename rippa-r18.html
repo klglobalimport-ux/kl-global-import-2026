@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>RIPPA R18 PRO - K&L Global Import</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .r18-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      padding: 40px 6vw;
+      margin: 20px 0;
+      background: radial-gradient(circle at top left, #0a2a4a, #061421);
+      border-radius: 20px;
+    }
+    .r18-detail-grid .card {
+      background: radial-gradient(ellipse at top left, var(--bg-card-soft), var(--bg-card));
+    }
+    .r18-detail-grid .card-image {
+      min-height: 220px;
+    }
+    .r18-full-width {
+      grid-column: 1 / -1;
+    }
+    .r18-full-width .card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .r18-full-width .card-image {
+      min-height: 300px;
+      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    }
+    .r18-full-width .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .r18-hero-section {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      background: url('r18-hero.webp') center/cover no-repeat;
+      border-radius: 20px;
+      margin: 20px 6vw;
+      overflow: hidden;
+    }
+    .r18-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(6,20,33,0.85), rgba(6,20,33,0.4));
+      z-index: 1;
+    }
+    .r18-hero-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px 30px;
+      max-width: 700px;
+    }
+    .r18-hero-text h1 {
+      font-size: 2rem;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+    .r18-hero-text p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .r18-specs-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0;
+    }
+    .r18-specs-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-soft);
+      color: var(--text-muted);
+      font-size: 0.97rem;
+    }
+    .r18-specs-list li strong {
+      color: var(--text-main);
+    }
+    .r18-section-title {
+      color: var(--text-main);
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #0066CC;
+      display: inline-block;
+    }
+    .r18-highlight {
+      color: #2e9fff;
+      font-weight: 600;
+    }
+    .r18-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #2e9fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 12px 6vw;
+      transition: var(--transition-fast);
+    }
+    .r18-back-link:hover {
+      color: #fff;
+    }
+    @media (max-width: 720px) {
+      .r18-detail-grid {
+        grid-template-columns: 1fr;
+      }
+      .r18-full-width .card {
+        grid-template-columns: 1fr;
+      }
+      .r18-full-width .card-image {
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        min-height: 200px;
+      }
+      .r18-hero-section {
+        min-height: 280px;
+        margin: 20px 3vw;
+      }
+      .r18-hero-text h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+  <script src="micro-interactions.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo"><img src="header-logo.jpeg" alt="K&L Global Import" width="640" height="640"></div>
+  <nav class="topnav" aria-label="Navigation principale">
+    <a href="index.html">ACCUEIL</a>
+    <div class="catalogue-item">
+      <a href="index.html#catalogue" class="catalogue-trigger" aria-haspopup="true">CATALOGUE</a>
+      <div class="mega-menu" role="group" aria-label="Catalogue">
+        <div class="mega-menu__grid">
+          <article class="mega-menu__column">
+            <h3>ENGINS RIPPA</h3>
+            <p>Mini-pelles, chargeuses et machines de chantier compactes pour les usages intensifs.</p>
+            <a href="engins-rippa.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>SPACE CAPSULE &amp; HABITAT</h3>
+            <p>Modules habitables innovants pensés pour l’hébergement, l’accueil et les projets modernes.</p>
+            <a href="habitat.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>LOISIR ET HABITAT</h3>
+            <p>Équipements de confort et d’extérieur pour enrichir l’expérience résidentielle.</p>
+            <a href="loisir-habitat.html">Découvrir</a>
+          </article>
+        </div>
+      </div>
+    </div>
+    <a href="#">TARIFS</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
+</header>
+
+
+<nav class="main-tabs">
+  <a href="index.html">Accueil</a>
+  <a href="habitat.html">SPACE CAPSULE & HABITAT</a>
+  <a href="loisir-habitat.html">LOISIR ET HABITAT</a>
+  <a href="engins-rippa.html" class="active">ENGINS RIPPA</a>
+  <a href="#">Grande Projets</a>
+  <a href="#">&Agrave; Propos</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<main class="main-content">
+  <section class="section-title" style="background: linear-gradient(90deg, #003d7a, #0066CC);">
+    <h2>RIPPA R18 PRO</h2>
+  </section>
+
+  <a href="engins-rippa.html" class="r18-back-link">&larr; Retour aux engins RIPPA</a>
+
+  <!-- Hero -->
+  <div class="r18-hero-section">
+    <div class="r18-hero-overlay"></div>
+    <div class="r18-hero-text">
+      <h1>RIPPA R18 PRO : L'Excellence Ing&eacute;nierie au Service des Professionnels</h1>
+      <p>La RIPPA R18 PRO n'est pas une mini-pelle ordinaire. Avec un poids op&eacute;rationnel de 1806 kg, elle a &eacute;t&eacute; con&ccedil;ue pour red&eacute;finir les standards de sa cat&eacute;gorie. Alliant une robustesse m&eacute;canique &agrave; toute &eacute;preuve et des composants hydrauliques de renomm&eacute;e mondiale, elle offre une pr&eacute;cision et une s&eacute;curit&eacute; in&eacute;gal&eacute;es pour vos projets de construction les plus exigeants.</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px;">
+    <section class="r18-detail-grid">
+
+      <!-- Section : Conception Durabilité & Sécurité - Full width -->
+      <div class="r18-full-width">
+        <article class="card">
+          <div class="card-image" style="background-image:url('r18-protection.png'); background-position: center; background-size: contain; background-repeat: no-repeat; background-color: #e8edf2;"></div>
+          <div class="card-body">
+            <h3 class="r18-section-title">UNE CONCEPTION AX&Eacute;E SUR LA DURABILIT&Eacute; ET LA S&Eacute;CURIT&Eacute;</h3>
+            <h4 style="color: var(--text-main); margin-bottom: 8px;">Protection Int&eacute;grale et Innovante</h4>
+            <p>La R18 PRO se distingue par des choix de conception rares qui prolongent la dur&eacute;e de vie de votre investissement :</p>
+            <ul class="r18-specs-list">
+              <li><strong>V&eacute;rin Sup&eacute;rieur &amp; Blindage :</strong> Contrairement aux mod&egrave;les standards, le v&eacute;rin principal est plac&eacute; sur le dessus de la fl&egrave;che et prot&eacute;g&eacute; par une plaque de garde. Cette configuration r&eacute;duit drastiquement les risques de dommages accidentels et d'usure pr&eacute;matur&eacute;e lors de l'excavation.</li>
+              <li><strong>Bouclier de S&eacute;curit&eacute; Op&eacute;rateur :</strong> La cabine (ou le canopy) int&egrave;gre des grilles de protection frontales et sup&eacute;rieures contre les chutes d'objets. Un atout majeur pour la s&eacute;curit&eacute; sur les sites &agrave; haut risque.</li>
+              <li><strong>Stabilit&eacute; Maximale :</strong> Gr&acirc;ce &agrave; son design avec contrepoids optimis&eacute;, la R18 PRO conserve un &eacute;quilibre parfait, m&ecirc;me lors de manipulations de charges lourdes ou sur terrains instables.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <!-- Section : Sécurité en action - Full width (image inversée) -->
+      <div class="r18-full-width">
+        <article class="card">
+          <div class="card-body">
+            <h3 class="r18-section-title">S&Eacute;CURIT&Eacute; ET POLYVALENCE SUR CHANTIER</h3>
+            <p>La R18 PRO est con&ccedil;ue pour les environnements de travail les plus exigeants. Ses grilles de protection frontales et sup&eacute;rieures offrent un <span class="r18-highlight">bouclier de s&eacute;curit&eacute;</span> contre les chutes d'objets, tandis que sa structure robuste permet de manipuler des charges lourdes en toute confiance.</p>
+            <p style="margin-top: 10px;">Id&eacute;ale pour les travaux d'arrachage de souches, de terrassement ou de d&eacute;blaiement, elle s'adapte &agrave; tous les types de chantiers, des espaces r&eacute;sidentiels aux sites professionnels.</p>
+          </div>
+          <div class="card-image" style="background-image:url('r18-securite.png'); background-position: center;"></div>
+        </article>
+      </div>
+
+      <!-- Section : Technologie Hydraulique -->
+      <article class="card">
+        <div class="card-image" style="background-image:url('r18-detail1.png'); background-position: center; background-size: contain; background-repeat: no-repeat; background-color: #e8edf2;"></div>
+        <div class="card-body">
+          <h3 class="r18-section-title">TECHNOLOGIE HYDRAULIQUE DE POINTE</h3>
+          <p><strong>Valve de d&eacute;tection de charge &amp; Pompe &agrave; pistons variables :</strong> Ce syst&egrave;me ajuste automatiquement la puissance hydraulique en fonction de l'effort demand&eacute;. R&eacute;sultat : une <span class="r18-highlight">pr&eacute;cision chirurgicale</span> dans les mouvements et une consommation de carburant r&eacute;duite.</p>
+          <p style="margin-top: 10px;"><strong>Translation Bi-Vitesse :</strong> &Eacute;quip&eacute;e de moteurs de marche &agrave; deux vitesses (High/Low) pour des d&eacute;placements rapides sur site et un contr&ocirc;le total lors des phases de travail de pr&eacute;cision.</p>
+        </div>
+      </article>
+
+      <!-- Section : Moteur Eaton & Rotation -->
+      <article class="card">
+        <div class="card-image" style="background-image:url('r18-excavation.png'); background-position: center;"></div>
+        <div class="card-body">
+          <h3 class="r18-section-title">Moteur de Rotation EATON</h3>
+          <p>R&eacute;put&eacute; pour sa <span class="r18-highlight">fiabilit&eacute; mondiale</span>, le moteur Eaton garantit une rotation fluide, stable et puissante, m&ecirc;me dans les environnements de travail les plus complexes.</p>
+          <p style="margin-top: 10px;">Profondeur d'excavation de <span class="r18-highlight">2,42 m&egrave;tres</span> pour vos fondations et r&eacute;seaux profonds.</p>
+        </div>
+      </article>
+
+      <!-- Section : Écran Tactile Intelligent - Full width -->
+      <div class="r18-full-width">
+        <article class="card">
+          <div class="card-image" style="background-image:url('r18-ecran.png'); background-position: center; background-size: contain; background-repeat: no-repeat; background-color: #111c28;"></div>
+          <div class="card-body">
+            <h3 class="r18-section-title">COCKPIT INTELLIGENT</h3>
+            <h4 style="color: var(--text-main); margin-bottom: 8px;">Grand &Eacute;cran Haute D&eacute;finition</h4>
+            <p>Le grand &eacute;cran intelligent peut afficher en temps r&eacute;el les diff&eacute;rents param&egrave;tres de fonctionnement de l'excavatrice, tels que :</p>
+            <ul class="r18-specs-list">
+              <li><strong>&Eacute;tat du moteur :</strong> Surveillance en temps r&eacute;el des performances du moteur Kubota.</li>
+              <li><strong>Pression de l'huile :</strong> Contr&ocirc;le permanent du syst&egrave;me hydraulique.</li>
+              <li><strong>Consommation de carburant :</strong> Optimisez votre rendement &eacute;nerg&eacute;tique sur chaque chantier.</li>
+              <li><strong>Temp&eacute;rature :</strong> Suivi des temp&eacute;ratures critiques pour pr&eacute;venir toute surchauffe.</li>
+              <li><strong>Syst&egrave;me hydraulique :</strong> Visualisation de l'&eacute;tat complet du circuit hydraulique.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <!-- Section : Motorisation Kubota -->
+      <div class="r18-full-width">
+        <article class="card">
+          <div class="card-body">
+            <h3 class="r18-section-title">MOTORISATION KUBOTA</h3>
+            <h4 style="color: var(--text-main); margin-bottom: 8px;">Puissance et Fiabilit&eacute;</h4>
+            <p>Propuls&eacute;e par un moteur <span class="r18-highlight">Diesel Kubota</span> reconnu mondialement pour sa fiabilit&eacute; et sa long&eacute;vit&eacute;, la R18 PRO d&eacute;livre le couple n&eacute;cessaire pour les travaux de terrassement les plus exigeants tout en restant sobre en consommation de carburant.</p>
+            <p style="margin-top: 10px;">Ce moteur certifi&eacute; aux normes environnementales europ&eacute;ennes offre un excellent rapport puissance/consommation, r&eacute;duisant vos co&ucirc;ts d'exploitation au quotidien.</p>
+          </div>
+          <div class="card-image" style="background-image:url('r18-moteur-kubota.png'); background-position: center; background-size: contain; background-repeat: no-repeat; background-color: #e8edf2;"></div>
+        </article>
+      </div>
+
+      <!-- Section : Pack Équipement - Full width -->
+      <div class="r18-full-width">
+        <article class="card">
+          <div class="card-image" style="background-image:url('r18-detail2.webp'); background-position: center; background-size: contain; background-repeat: no-repeat; background-color: #e8edf2;"></div>
+          <div class="card-body">
+            <h3 class="r18-section-title">PACK &Eacute;QUIPEMENT TOUT INCLUS</h3>
+            <p style="margin-bottom: 12px;">La R18 PRO est livr&eacute;e pr&ecirc;te &agrave; l'emploi avec une polyvalence totale :</p>
+            <ul class="r18-specs-list">
+              <li><strong>Pouce Hydraulique inclus</strong> pour saisir des roches ou des souches.</li>
+              <li><strong>Attache Rapide Hydraulique</strong> pour changer d'outil sans quitter votre si&egrave;ge.</li>
+              <li><strong>Pack Accessoires complet :</strong> Godet de curage inclinable (80cm), godet de tranch&eacute;e, r&acirc;teau et dent de d&eacute;rippage.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <!-- Section : Fiche Technique -->
+      <div class="r18-full-width">
+        <article class="card">
+          <div class="card-image" style="background-image:url('r18-fiche.png'); background-position: center; background-color: #fff;"></div>
+          <div class="card-body">
+            <h3 class="r18-section-title">CARACT&Eacute;RISTIQUES TECHNIQUES</h3>
+            <ul class="r18-specs-list">
+              <li><strong>Poids op&eacute;rationnel :</strong> <span class="r18-highlight">1 806 kg</span></li>
+              <li><strong>Moteur :</strong> <span class="r18-highlight">Diesel Kubota puissant et fiable</span></li>
+              <li><strong>Profondeur d'excavation :</strong> <span class="r18-highlight">2,42 m&egrave;tres</span></li>
+              <li><strong>Hydraulique :</strong> Valve de d&eacute;tection de charge + Pompe &agrave; pistons variables</li>
+              <li><strong>Rotation :</strong> Moteur EATON haute performance</li>
+              <li><strong>Translation :</strong> Bi-vitesse (High/Low)</li>
+              <li><strong>Garantie :</strong> <span class="r18-highlight">2 ans ou 1500 heures</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <!-- Section : Avantages Client -->
+      <div class="r18-full-width">
+        <article class="card" style="display: block;">
+          <div class="card-body" style="text-align: center;">
+            <h3 class="r18-section-title">VOS AVANTAGES CLIENT</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;">
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">R18 PRO</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Mod&egrave;le</div>
+              </div>
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">Kubota Diesel</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Motorisation</div>
+              </div>
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">1 806 kg</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Poids op&eacute;rationnel</div>
+              </div>
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">2,42 m</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Profondeur d'excavation</div>
+              </div>
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">Moteur EATON</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Rotation fiable</div>
+              </div>
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">2 ans / 1500 h</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Garantie constructeur</div>
+              </div>
+            </div>
+            <p style="margin-top: 24px; color: var(--text-muted); font-size: 1rem; line-height: 1.7;"><strong style="color: var(--text-main);">Puissance &amp; Compacit&eacute; :</strong> Id&eacute;ale pour le secteur pro (BTP, &eacute;lectricit&eacute;, plomberie). <strong style="color: var(--text-main);">Fabrication Haute Qualit&eacute; :</strong> Mat&eacute;riaux s&eacute;lectionn&eacute;s pour une long&eacute;vit&eacute; accrue. <strong style="color: var(--text-main);">Enti&egrave;rement Personnalisable :</strong> Configurez votre machine selon vos besoins sp&eacute;cifiques.</p>
+            <p style="margin-top: 12px; color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">La Rippa R18 PRO est l'outil ultime pour ceux qui recherchent une machine capable de travailler plus dur, plus longtemps et en toute s&eacute;curit&eacute;. C'est l'investissement rentable par excellence pour booster la productivit&eacute; de vos chantiers.</p>
+            <p style="margin-top: 8px; color: var(--text-muted); font-size: 0.85rem; font-style: italic;">Note : Les sp&eacute;cifications techniques sont bas&eacute;es sur les donn&eacute;es d'ing&eacute;nierie et peuvent varier selon les configurations. Machine certifi&eacute;e CE.</p>
+            <a href="contact.html" class="btn-primary btn-rippa devis-btn" style="margin-top: 20px; display: inline-block;">DEMANDER UN DEVIS</a>
+          </div>
+        </article>
+      </div>
+
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>&copy; 2026 K&L Global Import &middot; <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions L&eacute;gales</a> &middot; Tous droits r&eacute;serv&eacute;s.</p>
+</footer>
+<a href="https://wa.me/33673300054" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Nous contacter sur WhatsApp">
+  <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+</a>
+</body>
+</html>

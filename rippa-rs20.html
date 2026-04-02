@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>RIPPA RS20 - Mini Chargeuse - K&L Global Import</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .rs20-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #2e9fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 12px 6vw;
+      transition: var(--transition-fast);
+    }
+    .rs20-back-link:hover {
+      color: #fff;
+    }
+    .rs20-hero {
+      position: relative;
+      margin: 20px 6vw;
+      min-height: 380px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: url('RS20.jpeg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+    }
+    .rs20-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(6,20,33,0.9), rgba(6,20,33,0.5));
+    }
+    .rs20-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      padding: 40px 36px;
+    }
+    .rs20-hero-content h1 {
+      color: var(--text-main);
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+    .rs20-hero-content p {
+      color: var(--text-muted);
+      line-height: 1.75;
+      font-size: 1.02rem;
+    }
+    .rs20-sections {
+      display: grid;
+      gap: 22px;
+      padding: 20px 6vw 50px;
+    }
+    .rs20-row {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+      background: radial-gradient(circle at top left, #0a2a4a, #061421);
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .rs20-row.reverse {
+      grid-template-columns: 1fr 1.35fr;
+    }
+    .rs20-text {
+      padding: 24px;
+    }
+    .rs20-text h3 {
+      color: var(--text-main);
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #0066CC;
+      display: inline-block;
+    }
+    .rs20-text h4 {
+      color: #82c3ff;
+      font-size: 1rem;
+      margin: 4px 0 10px;
+      font-weight: 600;
+    }
+    .rs20-text p {
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+    .rs20-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .rs20-list li {
+      margin-bottom: 8px;
+    }
+    .rs20-list strong {
+      color: var(--text-main);
+    }
+    .rs20-photo-slot {
+      background: linear-gradient(145deg, #12253a, #0b1724);
+      border-left: 1px solid var(--border-soft);
+      min-height: 280px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+    }
+    .rs20-row.reverse .rs20-photo-slot {
+      border-left: 0;
+      border-right: 1px solid var(--border-soft);
+    }
+    .rs20-photo-box {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      border: 2px dashed rgba(130, 195, 255, 0.45);
+      border-radius: 14px;
+      color: #a8d6ff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      background: rgba(255,255,255,0.02);
+    }
+    .rs20-photo-img {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid rgba(130, 195, 255, 0.35);
+      display: block;
+    }
+    .rs20-specs {
+      background: radial-gradient(circle at top left, #0a2a4a, #061421);
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .rs20-specs h3 {
+      color: var(--text-main);
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #0066CC;
+      display: inline-block;
+    }
+    .rs20-cta {
+      display: flex;
+      justify-content: center;
+      padding: 0 6vw 24px;
+    }
+    .rs20-quote-btn {
+      text-transform: none;
+      letter-spacing: 0.02em;
+    }
+    @media (max-width: 900px) {
+      .rs20-row,
+      .rs20-row.reverse {
+        grid-template-columns: 1fr;
+      }
+      .rs20-photo-slot,
+      .rs20-row.reverse .rs20-photo-slot {
+        border-left: 0;
+        border-right: 0;
+        border-top: 1px solid var(--border-soft);
+        min-height: 220px;
+      }
+    }
+    @media (max-width: 720px) {
+      .rs20-hero {
+        min-height: 280px;
+        margin: 20px 3vw;
+      }
+      .rs20-hero-content {
+        padding: 28px 22px;
+      }
+      .rs20-hero-content h1 {
+        font-size: 1.45rem;
+      }
+      .rs20-sections {
+        padding-left: 3vw;
+        padding-right: 3vw;
+      }
+      .rs20-cta {
+        padding-left: 3vw;
+        padding-right: 3vw;
+      }
+    }
+  </style>
+  <script src="micro-interactions.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo"><img src="header-logo.jpeg" alt="K&L Global Import" width="640" height="640"></div>
+  <nav class="topnav" aria-label="Navigation principale">
+    <a href="index.html">ACCUEIL</a>
+    <div class="catalogue-item">
+      <a href="index.html#catalogue" class="catalogue-trigger" aria-haspopup="true">CATALOGUE</a>
+      <div class="mega-menu" role="group" aria-label="Catalogue">
+        <div class="mega-menu__grid">
+          <article class="mega-menu__column">
+            <h3>ENGINS RIPPA</h3>
+            <p>Mini-pelles, chargeuses et machines de chantier compactes pour les usages intensifs.</p>
+            <a href="engins-rippa.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>SPACE CAPSULE &amp; HABITAT</h3>
+            <p>Modules habitables innovants pensés pour l’hébergement, l’accueil et les projets modernes.</p>
+            <a href="habitat.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>LOISIR ET HABITAT</h3>
+            <p>Équipements de confort et d’extérieur pour enrichir l’expérience résidentielle.</p>
+            <a href="loisir-habitat.html">Découvrir</a>
+          </article>
+        </div>
+      </div>
+    </div>
+    <a href="#">TARIFS</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
+</header>
+
+
+<nav class="main-tabs">
+  <a href="index.html">Accueil</a>
+  <a href="habitat.html">SPACE CAPSULE & HABITAT</a>
+  <a href="loisir-habitat.html">LOISIR ET HABITAT</a>
+  <a href="engins-rippa.html" class="active">ENGINS RIPPA</a>
+  <a href="#">Grande Projets</a>
+  <a href="#">&Agrave; Propos</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<main class="main-content">
+  <section class="section-title" style="background: linear-gradient(90deg, #003d7a, #0066CC);">
+    <h2>RIPPA RS20</h2>
+  </section>
+
+  <a href="engins-rippa.html" class="rs20-back-link">&larr; Retour aux engins RIPPA</a>
+
+  <section class="rs20-hero">
+    <div class="rs20-hero-content">
+      <h1>RIPPA RS20 : La Force de Frappe Haute Performance (67 CV)</h1>
+      <p>
+        La RIPPA RS20 est le fleuron de la gamme des chargeurs compacts (Skid Steer). Avec une capacit&eacute; de charge nominale de 1050 kg et une puissance moteur impressionnante, elle est con&ccedil;ue pour les chantiers de haute intensit&eacute;. Alliant une ing&eacute;nierie robuste &agrave; un environnement de conduite ultra-confortable, la RS20 est le porte-outils multifonction ultime pour le BTP, l'agriculture &agrave; grande &eacute;chelle et le terrassement lourd.
+      </p>
+    </div>
+  </section>
+
+  <section class="rs20-sections">
+    <article class="rs20-row">
+      <div class="rs20-text">
+        <h3>PUISSANCE ET R&Eacute;ACTIVIT&Eacute; SANS COMPROMIS</h3>
+        <h4>Motorisation Kubota V2607 : L'Excellence Japonaise</h4>
+        <p>
+          La RS20 est propuls&eacute;e par le moteur Kubota V2607, d&eacute;veloppant une puissance colossale de 66,9 ch (49,9 kW). Ce moteur &agrave; haut rendement garantit :
+        </p>
+        <ul class="rs20-list">
+          <li>Une force de pouss&eacute;e et de levage exceptionnelle pour manipuler des palettes lourdes ou des mat&eacute;riaux denses.</li>
+          <li>Une vitesse de d&eacute;placement jusqu'&agrave; 9 km/h gr&acirc;ce &agrave; son moteur bi-vitesse, permettant des cycles de travail rapides.</li>
+          <li>Une efficacit&eacute; &eacute;nerg&eacute;tique optimale avec des &eacute;missions ultra-faibles, respectant les standards environnementaux les plus stricts.</li>
+        </ul>
+      </div>
+      <div class="rs20-photo-slot">
+        <img class="rs20-photo-img" src="assets/rs20/moteur.png" alt="Moteur Kubota V2607 et performances" width="360" height="354">
+      </div>
+    </article>
+
+    <article class="rs20-row reverse">
+      <div class="rs20-photo-slot">
+        <img class="rs20-photo-img" src="assets/rs20/ventilo.png" alt="Syst&egrave;me de refroidissement &agrave; double ventilateur" width="525" height="471">
+      </div>
+      <div class="rs20-text">
+        <h3>SYST&Egrave;ME DE REFROIDISSEMENT INTELLIGENT</h3>
+        <p>
+          Pour maintenir des performances constantes lors de travaux intensifs, la RS20 int&egrave;gre un syst&egrave;me de refroidissement &agrave; double ventilateur. Cette technologie offre une surface de dissipation thermique accrue et une gestion intelligente de la temp&eacute;rature, prolongeant ainsi la dur&eacute;e de vie de tous les composants hydrauliques et m&eacute;caniques.
+        </p>
+      </div>
+    </article>
+
+    <article class="rs20-row">
+      <div class="rs20-text">
+        <h3>UN POSTE DE PILOTAGE &laquo; GRAND LUXE &raquo;</h3>
+        <h4>Le Concept &laquo; Functional Zone &raquo;</h4>
+        <p>RIPPA a repens&eacute; l'ergonomie pour l'op&eacute;rateur avec un cockpit haut de gamme :</p>
+        <ul class="rs20-list">
+          <li><strong>Confort Absolu :</strong> Si&egrave;ge de luxe r&eacute;glable &agrave; absorption de chocs, con&ccedil;u pour minimiser la fatigue lors des longues journ&eacute;es de travail.</li>
+          <li><strong>Commandes de Pr&eacute;cision :</strong> Manipulateurs &eacute;lectroniques ergonomiques int&eacute;grant les fonctions auxiliaires (claxon, commandes d'accessoires) pour une ma&icirc;trise totale sans l&acirc;cher les joysticks.</li>
+          <li><strong>Affichage Intelligent :</strong> &Eacute;cran LCD multifonction affichant en temps r&eacute;el tous les param&egrave;tres de la machine pour une surveillance intuitive.</li>
+        </ul>
+      </div>
+      <div class="rs20-photo-slot">
+        <img class="rs20-photo-img" src="assets/rs20/interieur.jpeg" alt="Cockpit, si&egrave;ge de luxe, joysticks et &eacute;cran LCD" width="1024" height="681">
+      </div>
+    </article>
+
+    <article class="rs20-row reverse">
+      <div class="rs20-photo-slot">
+        <img class="rs20-photo-img" src="assets/rs20/terre.webp" alt="Hydraulique load sensing et s&eacute;curit&eacute; anti-choc" width="593" height="440">
+      </div>
+      <div class="rs20-text">
+        <h3>TECHNOLOGIE HYDRAULIQUE ET S&Eacute;CURIT&Eacute; AVANC&Eacute;ES</h3>
+        <ul class="rs20-list">
+          <li><strong>Position Flottante (Floating Position) :</strong> La fl&egrave;che peut suivre automatiquement les irr&eacute;gularit&eacute;s du terrain, une fonction indispensable pour le nivellement ou le balayage.</li>
+          <li><strong>Syst&egrave;me Anti-Choc :</strong> Une valve de r&eacute;approvisionnement d'huile &eacute;limine les impacts hydrauliques en fin de course du v&eacute;rin, prot&eacute;geant ainsi la structure de la machine.</li>
+          <li><strong>Circuit Ferm&eacute; &amp; Load Sensing :</strong> Une double pompe &agrave; circuit ferm&eacute; associ&eacute;e &agrave; une valve sensible &agrave; la charge (Load Sensing) pour une fluidit&eacute; de mouvement et une force de levage in&eacute;gal&eacute;es.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="rs20-row">
+      <div class="rs20-text">
+        <h3>UN PORTE-OUTILS POLYVALENT HAUTE CAPACIT&Eacute;</h3>
+        <p>La RS20 transforme vos chantiers gr&acirc;ce &agrave; sa compatibilit&eacute; avec une vaste gamme d'accessoires :</p>
+        <ul class="rs20-list">
+          <li><strong>Rognage de souches :</strong> Disque de coupe haute performance pour le dessouchage rapide.</li>
+          <li><strong>Fourches &agrave; palettes renforc&eacute;es :</strong> Pour le levage s&eacute;curis&eacute; de charges jusqu'&agrave; 1050 kg.</li>
+          <li><strong>R&acirc;teau &agrave; Grappin (Grapple Rake) :</strong> L'outil id&eacute;al pour le nettoyage de sites, la manipulation de troncs et de d&eacute;bris encombrants.</li>
+          <li><strong>Plateforme Extensible :</strong> Pour le levage et le positionnement de mat&eacute;riaux larges ou de panneaux en hauteur.</li>
+        </ul>
+      </div>
+      <div class="rs20-photo-slot">
+        <img class="rs20-photo-img" src="assets/rs20/scie.png" alt="Accessoires : rogneuse, fourches, grappin et plateforme" width="572" height="577">
+      </div>
+    </article>
+
+    <article class="rs20-specs">
+      <h3>FICHE TECHNIQUE R&Eacute;SUM&Eacute;E</h3>
+      <ul class="rs20-list">
+        <li><strong>Charge nominale :</strong> 1050 kg (2310 lb).</li>
+        <li><strong>Puissance moteur :</strong> 66,9 HP (Kubota V2607).</li>
+        <li><strong>Vitesse max :</strong> 9 km/h.</li>
+        <li><strong>S&eacute;curit&eacute; :</strong> Structure certifi&eacute;e ROPS (protection contre le retournement).</li>
+        <li><strong>Structure :</strong> Acier haute r&eacute;sistance optimis&eacute; par analyse par &eacute;l&eacute;ments finis pour une robustesse maximale.</li>
+      </ul>
+      <p style="margin-top: 14px; color: var(--text-muted); line-height: 1.8;">
+        La Rippa RS20 est la machine de choix pour les professionnels qui exigent le meilleur : puissance brute, technologie intelligente et confort sup&eacute;rieur. Elle repr&eacute;sente l'investissement le plus rentable pour dominer vos chantiers les plus difficiles.
+      </p>
+    </article>
+  </section>
+
+  <section class="rs20-cta">
+    <a href="contact.html" class="btn-primary rs20-quote-btn devis-btn">demander un devis</a>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>&copy; 2026 K&amp;L Global Import &middot; <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions L&eacute;gales</a> &middot; Tous droits r&eacute;serv&eacute;s.</p>
+</footer>
+<a href="https://wa.me/33673300054" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Nous contacter sur WhatsApp">
+  <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+</a>
+</body>
+</html>

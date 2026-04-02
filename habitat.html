@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Space Capsule & Habitat - K&L Global Import</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Maisons modulaires pliables, maisons insolites et capsules modernes. Habitats innovants livrés en France. Demandez votre devis gratuit.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Specific styles for Habitat page to avoid the blue wood background of product-grid */
+    .habitat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+      align-items: stretch;
+      gap: 22px;
+      padding: 40px 6vw;
+      margin: 20px 0;
+      background: radial-gradient(circle at top left, #3a5a40, #1a2f23); /* Eco green tone */
+      border-radius: 20px;
+    }
+    .habitat-grid .card {
+      height: 100%;
+    }
+
+    @media (max-width: 980px) {
+      .habitat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .habitat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Styles for nested tiles in Maison Modulaire */
+    .model-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    .model-item {
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+      padding-bottom: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.2s;
+    }
+    .model-item:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .model-img {
+      height: 80px;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 6px;
+    }
+    .card-action {
+      margin-top: auto;
+    }
+    .model-item span {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+    }
+
+    .modular-carousel {
+      margin: 6px 0 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: linear-gradient(145deg, rgba(8, 8, 8, 0.7), rgba(30, 30, 30, 0.66));
+      padding: 10px;
+    }
+
+    .modular-carousel__viewport {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .modular-carousel__track {
+      display: flex;
+      transition: transform 0.35s ease;
+      will-change: transform;
+    }
+
+    .modular-carousel__slide {
+      flex: 0 0 100%;
+      margin: 0;
+      aspect-ratio: 16 / 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .modular-carousel__slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      padding: 4px;
+    }
+
+    .modular-carousel__control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      z-index: 1;
+    }
+
+    .modular-carousel__control:hover,
+    .modular-carousel__control:focus-visible {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.45);
+      outline: none;
+    }
+
+    .modular-carousel__control--prev {
+      left: 8px;
+    }
+
+    .modular-carousel__control--next {
+      right: 8px;
+    }
+
+    .modular-carousel__dots {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      padding-top: 10px;
+    }
+
+    .modular-carousel__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      border: 0;
+      background: rgba(255, 255, 255, 0.35);
+      padding: 0;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .modular-carousel__dot.is-active {
+      transform: scale(1.18);
+      background: #ffffff;
+    }
+
+    @media (max-width: 720px) {
+      .modular-carousel {
+        padding: 8px;
+      }
+
+      .modular-carousel__slide {
+        aspect-ratio: 4 / 3;
+      }
+
+      .modular-carousel__control {
+        width: 28px;
+        height: 28px;
+        font-size: 18px;
+      }
+    }
+  </style>
+  <script src="micro-interactions.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo"><img src="header-logo.jpeg" alt="K&L Global Import" width="640" height="640"></div>
+  <nav class="topnav" aria-label="Navigation principale">
+    <a href="index.html">ACCUEIL</a>
+    <div class="catalogue-item">
+      <a href="index.html#catalogue" class="catalogue-trigger" aria-haspopup="true">CATALOGUE</a>
+      <div class="mega-menu" role="group" aria-label="Catalogue">
+        <div class="mega-menu__grid">
+          <article class="mega-menu__column">
+            <h3>ENGINS RIPPA</h3>
+            <p>Mini-pelles, chargeuses et machines de chantier compactes pour les usages intensifs.</p>
+            <a href="engins-rippa.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>SPACE CAPSULE &amp; HABITAT</h3>
+            <p>Modules habitables innovants pensés pour l’hébergement, l’accueil et les projets modernes.</p>
+            <a href="habitat.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>LOISIR ET HABITAT</h3>
+            <p>Équipements de confort et d’extérieur pour enrichir l’expérience résidentielle.</p>
+            <a href="loisir-habitat.html">Découvrir</a>
+          </article>
+        </div>
+      </div>
+    </div>
+    <a href="#">TARIFS</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
+</header>
+
+
+<nav class="main-tabs">
+  <a href="index.html">Accueil</a>
+  <a href="habitat.html" class="active">SPACE CAPSULE & HABITAT</a>
+  <a href="loisir-habitat.html">LOISIR ET HABITAT</a>
+  <a href="engins-rippa.html">ENGINS RIPPA</a>
+  <a href="#">Grande Projets</a>
+  <a href="#">À Propos</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<main class="main-content">
+  <section class="section-title" style="background: linear-gradient(90deg, #588157, #344e41);">
+    <h2>SPACE CAPSULE & HABITAT</h2>
+  </section>
+
+  <section class="hero" style="background-image: url('caps.webp'); padding: 50px 6vw;">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-content">
+      <h1>L'HABITAT DE DEMAIN</h1>
+      <p>Découvrez notre gamme complète d'habitats modulaires et insolites, alliant design futuriste et confort absolu.</p>
+    </div>
+  </section>
+
+  <div style="margin-top: 40px;">
+    <section class="habitat-grid">
+      <article class="card">
+        <div class="card-image" style="background-image:url('maison.jpeg');"></div>
+        <div class="card-body">
+          <h3>Maison Modulaire</h3>
+          <p>Une solution flexible et rapide pour votre habitation principale ou secondaire.</p>
+          
+          <div class="model-grid">
+            <a href="https://klglobal-maison-modulaire.netlify.app" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('10FT.jpeg');"></div>
+              <span>10 FT</span>
+            </a>
+            <a href="https://klglobal-maison-modulaire.netlify.app" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('20FT.jpg');"></div>
+              <span>20 FT</span>
+            </a>
+            <a href="https://klglobal-maison-modulaire.netlify.app" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('30FT.jpg');"></div>
+              <span>30 FT</span>
+            </a>
+            <a href="https://klglobal-maison-modulaire.netlify.app" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('40FT.jpg');"></div>
+              <span>40 FT</span>
+            </a>
+          </div>
+
+          <div class="modular-carousel" data-carousel>
+            <div class="modular-carousel__viewport">
+              <div class="modular-carousel__track" data-carousel-track>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-01.webp" alt="Maison modulaire photo 1" loading="lazy" width="773" height="574">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-02.webp" alt="Maison modulaire photo 2" loading="lazy" width="775" height="563">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-03.webp" alt="Maison modulaire photo 3" loading="lazy" width="775" height="613">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-04.webp" alt="Maison modulaire photo 4" loading="lazy" width="773" height="579">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-05.webp" alt="Maison modulaire photo 5" loading="lazy" width="773" height="507">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-06.webp" alt="Maison modulaire photo 6" loading="lazy" width="773" height="588">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-07.webp" alt="Maison modulaire photo 7" loading="lazy" width="772" height="470">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-08.png" alt="Maison modulaire photo 8" loading="lazy" width="708" height="457">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-09.png" alt="Maison modulaire photo 9" loading="lazy" width="487" height="767">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-10.png" alt="Maison modulaire photo 10" loading="lazy" width="483" height="763">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-11.png" alt="Maison modulaire photo 11" loading="lazy" width="468" height="564">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-12.png" alt="Maison modulaire photo 12" loading="lazy" width="474" height="571">
+                </figure>
+                <figure class="modular-carousel__slide">
+                  <img src="assets/habitat/maison-modulaire-carousel/maison-modulaire-13.png" alt="Maison modulaire photo 13" loading="lazy" width="570" height="377">
+                </figure>
+              </div>
+
+              <button class="modular-carousel__control modular-carousel__control--prev" type="button" aria-label="Photo précédente" data-carousel-prev>&lsaquo;</button>
+              <button class="modular-carousel__control modular-carousel__control--next" type="button" aria-label="Photo suivante" data-carousel-next>&rsaquo;</button>
+            </div>
+            <div class="modular-carousel__dots" data-carousel-dots></div>
+          </div>
+
+          <a href="https://klglobal-maison-modulaire.netlify.app" class="btn-secondary card-action">DÉTAILS</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image" style="background-image:url('triangle.webp');"></div>
+        <div class="card-body">
+          <h3>Maison Insolite</h3>
+          <p>Architecture unique pour des expériences inoubliables. Idéal pour le locatif.</p>
+
+          <div class="model-grid">
+            <a href="maison-insolite.html#tipi" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('Tipi.webp');"></div>
+              <span>TIPI</span>
+            </a>
+            <a href="maison-insolite.html#hobbit" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('hobbit.webp');"></div>
+              <span>HOBBIT</span>
+            </a>
+            <a href="maison-insolite.html#chalet" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('Chalet.webp');"></div>
+              <span>CHALET</span>
+            </a>
+            <a href="maison-insolite.html#nid-abeille" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('nid-abeille.webp');"></div>
+              <span>NID D'ABEILLE</span>
+            </a>
+          </div>
+
+          <a href="maison-insolite.html" class="btn-secondary card-action">DÉTAILS</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image cutout-glow" style="--card-image:url('cpas-1.webp'); --glow-rgb: 33, 110, 126;"></div>
+        <div class="card-body">
+          <h3>Capsule Moderne</h3>
+          <p>Le futur du logement. Compacte, équipée et ultra-design.</p>
+
+          <div class="model-grid">
+            <a href="capsule-moderne.html#capsule-5-5m" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('assets/habitat/capsule-5-5m.png');"></div>
+              <span>5,5 M</span>
+            </a>
+            <a href="capsule-moderne.html#capsule-8-5m" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('assets/habitat/capsule-8-5m.png');"></div>
+              <span>8,5 M</span>
+            </a>
+            <a href="capsule-moderne.html#capsule-9-5m" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('assets/habitat/capsule-9-5m.png');"></div>
+              <span>9,5 M</span>
+            </a>
+            <a href="capsule-moderne.html#capsule-11-5m" class="model-item" style="text-decoration: none; display: block;">
+              <div class="model-img" style="background-image: url('assets/habitat/capsule-11-5m.png');"></div>
+              <span>11,5 M</span>
+            </a>
+          </div>
+
+          <a href="capsule-moderne.html" class="btn-secondary card-action">DÉTAILS</a>
+        </div>
+      </article>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>© 2026 K&L Global Import · <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions Légales</a> · Tous droits réservés.</p>
+</footer>
+<a href="https://wa.me/33673300054" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Nous contacter sur WhatsApp">
+  <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+</a>
+<script>
+  (function () {
+    var carousels = Array.prototype.slice.call(document.querySelectorAll('[data-carousel]'));
+    if (!carousels.length) {
+      return;
+    }
+
+    carousels.forEach(function (carousel) {
+      var track = carousel.querySelector('[data-carousel-track]');
+      var slides = Array.prototype.slice.call(carousel.querySelectorAll('.modular-carousel__slide'));
+      var dotsContainer = carousel.querySelector('[data-carousel-dots]');
+      var prevButton = carousel.querySelector('[data-carousel-prev]');
+      var nextButton = carousel.querySelector('[data-carousel-next]');
+
+      if (!track || !slides.length || !dotsContainer || !prevButton || !nextButton) {
+        return;
+      }
+
+      var index = 0;
+      var dots = slides.map(function (_, slideIndex) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'modular-carousel__dot';
+        dot.setAttribute('aria-label', 'Aller à la photo ' + (slideIndex + 1));
+        dot.addEventListener('click', function () {
+          update(slideIndex);
+        });
+        dotsContainer.appendChild(dot);
+        return dot;
+      });
+
+      function update(nextIndex) {
+        index = (nextIndex + slides.length) % slides.length;
+        track.style.transform = 'translateX(-' + (index * 100) + '%)';
+
+        dots.forEach(function (dot, dotIndex) {
+          var isActive = dotIndex === index;
+          dot.classList.toggle('is-active', isActive);
+          dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+        });
+      }
+
+      prevButton.addEventListener('click', function () {
+        update(index - 1);
+      });
+
+      nextButton.addEventListener('click', function () {
+        update(index + 1);
+      });
+
+      update(0);
+    });
+  })();
+</script>
+</body>
+</html>

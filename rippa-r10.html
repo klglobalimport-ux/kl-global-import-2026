@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>RIPPA R10 ECO - K&L Global Import</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .r10-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      padding: 40px 6vw;
+      margin: 20px 0;
+      background: radial-gradient(circle at top left, #0a2a4a, #061421);
+      border-radius: 20px;
+    }
+    .r10-detail-grid .card {
+      background: radial-gradient(ellipse at top left, var(--bg-card-soft), var(--bg-card));
+    }
+    .r10-detail-grid .card-image {
+      min-height: 220px;
+    }
+    .r10-full-width {
+      grid-column: 1 / -1;
+    }
+    .r10-full-width .card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .r10-full-width .card-image {
+      min-height: 300px;
+      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    }
+    .r10-full-width .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .r10-hero-section {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      background: url('r10-hero.webp') center/cover no-repeat;
+      border-radius: 20px;
+      margin: 20px 6vw;
+      overflow: hidden;
+    }
+    .r10-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(6,20,33,0.85), rgba(6,20,33,0.4));
+      z-index: 1;
+    }
+    .r10-hero-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px 30px;
+      max-width: 700px;
+    }
+    .r10-hero-text h1 {
+      font-size: 2rem;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+    .r10-hero-text p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .r10-specs-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0;
+    }
+    .r10-specs-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-soft);
+      color: var(--text-muted);
+      font-size: 0.97rem;
+    }
+    .r10-specs-list li strong {
+      color: var(--text-main);
+    }
+    .r10-section-title {
+      color: var(--text-main);
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #0066CC;
+      display: inline-block;
+    }
+    .r10-highlight {
+      color: #2e9fff;
+      font-weight: 600;
+    }
+    .r10-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #2e9fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 12px 6vw;
+      transition: var(--transition-fast);
+    }
+    .r10-back-link:hover {
+      color: #fff;
+    }
+    @media (max-width: 720px) {
+      .r10-detail-grid {
+        grid-template-columns: 1fr;
+      }
+      .r10-full-width .card {
+        grid-template-columns: 1fr;
+      }
+      .r10-full-width .card-image {
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        min-height: 200px;
+      }
+      .r10-hero-section {
+        min-height: 280px;
+        margin: 20px 3vw;
+      }
+      .r10-hero-text h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+  <script src="micro-interactions.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo"><img src="header-logo.jpeg" alt="K&L Global Import" width="640" height="640"></div>
+  <nav class="topnav" aria-label="Navigation principale">
+    <a href="index.html">ACCUEIL</a>
+    <div class="catalogue-item">
+      <a href="index.html#catalogue" class="catalogue-trigger" aria-haspopup="true">CATALOGUE</a>
+      <div class="mega-menu" role="group" aria-label="Catalogue">
+        <div class="mega-menu__grid">
+          <article class="mega-menu__column">
+            <h3>ENGINS RIPPA</h3>
+            <p>Mini-pelles, chargeuses et machines de chantier compactes pour les usages intensifs.</p>
+            <a href="engins-rippa.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>SPACE CAPSULE &amp; HABITAT</h3>
+            <p>Modules habitables innovants pensés pour l’hébergement, l’accueil et les projets modernes.</p>
+            <a href="habitat.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>LOISIR ET HABITAT</h3>
+            <p>Équipements de confort et d’extérieur pour enrichir l’expérience résidentielle.</p>
+            <a href="loisir-habitat.html">Découvrir</a>
+          </article>
+        </div>
+      </div>
+    </div>
+    <a href="#">TARIFS</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
+</header>
+
+
+<nav class="main-tabs">
+  <a href="index.html">Accueil</a>
+  <a href="habitat.html">SPACE CAPSULE & HABITAT</a>
+  <a href="loisir-habitat.html">LOISIR ET HABITAT</a>
+  <a href="engins-rippa.html" class="active">ENGINS RIPPA</a>
+  <a href="#">Grande Projets</a>
+  <a href="#">À Propos</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<main class="main-content">
+  <section class="section-title" style="background: linear-gradient(90deg, #003d7a, #0066CC);">
+    <h2>RIPPA R10 ECO</h2>
+  </section>
+
+  <a href="engins-rippa.html" class="r10-back-link">← Retour aux engins RIPPA</a>
+
+  <!-- Hero avec photo du monsieur qui travaille -->
+  <div class="r10-hero-section" style="background-image: url('r10-fiche.png');">
+    <div class="r10-hero-overlay"></div>
+    <div class="r10-hero-text">
+      <h1>RIPPA R10 ECO : La Mini-Pelle qui Redéfinit la Performance Compacte</h1>
+      <p>Découvrez la puissance et l'agilité concentrées dans la RIPPA R10 ECO. Conçue par Shandong Rippa Machinery Group, cette machine d'une tonne est le partenaire idéal des professionnels du paysage et des experts de la rénovation. Que ce soit pour des fondations précises, du terrassement de jardin ou des travaux en intérieur, la R10 ECO franchit les obstacles là où les autres s'arrêtent.</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px;">
+    <section class="r10-detail-grid">
+
+      <!-- Section : Excellence Technique - Image + Texte en full width -->
+      <div class="r10-full-width">
+        <article class="card">
+          <div class="card-image" style="background-image:url('r10-hero.webp'); background-position: center;"></div>
+          <div class="card-body">
+            <h3 class="r10-section-title">L'EXCELLENCE TECHNIQUE AU SERVICE DE VOS CHANTIERS</h3>
+            <h4 style="color: var(--text-main); margin-bottom: 8px;">Une Agilité Hors Norme</h4>
+            <p>Le secret de la R10 ECO réside dans son châssis à voie variable. D'une simple commande hydraulique, passez d'une largeur de <span class="r10-highlight">900 mm</span> pour franchir une porte standard ou un portillon, à <span class="r10-highlight">1200 mm</span> pour une stabilité de travail optimale. Son rayon d'excavation de <span class="r10-highlight">3233 mm</span> vous permet de travailler plus efficacement sans déplacer la machine constamment.</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- Section : Motorisation Kubota -->
+      <article class="card">
+        <div class="card-image" style="background-image:url('r10-specs.png'); background-position: center;"></div>
+        <div class="card-body">
+          <h3 class="r10-section-title">Motorisation Kubota : Fiabilité Japonaise</h3>
+          <p>Sous le capot, le moteur <span class="r10-highlight">Kubota Z482</span> (2 cylindres, refroidissement liquide) offre une puissance de <span class="r10-highlight">11,2 CV (8,2 kW)</span>. Ce moteur de renommée mondiale garantit non seulement une longévité exceptionnelle, mais aussi une consommation de carburant ultra-maîtrisée, oscillant entre <span class="r10-highlight">0,8 et 1,2 litre par heure</span>.</p>
+        </div>
+      </article>
+
+      <!-- Section : Capacité de Travail -->
+      <article class="card">
+        <div class="card-image" style="background-image:url('r10.png'); background-size: cover; background-position: center;"></div>
+        <div class="card-body">
+          <h3 class="r10-section-title">Capacité de Travail Maximale</h3>
+          <ul class="r10-specs-list">
+            <li><strong>Profondeur d'excavation :</strong> 1833 mm (plus de 1,80 m pour vos tranchées et réseaux).</li>
+            <li><strong>Force de cavage :</strong> 9,2 kN, une puissance impressionnante pour briser les sols compacts.</li>
+            <li><strong>Hauteur de déversement :</strong> 2247 mm, idéale pour charger directement dans des camions ou des bennes de chantier.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Section : Confort & Sécurité - Full width -->
+      <div class="r10-full-width">
+        <article class="card">
+          <div class="card-image" style="background-image:url('r10-motorisation.webp'); background-position: center;"></div>
+          <div class="card-body">
+            <h3 class="r10-section-title">CONÇUE POUR L'OPÉRATEUR : CONFORT & SÉCURITÉ</h3>
+            <h4 style="color: var(--text-main); margin-bottom: 8px;">Poste de Pilotage Ergonomique</h4>
+            <p>Le confort n'est pas une option. Les leviers de commande latéraux sont disposés de manière à réduire la fatigue musculaire. Le siège ergonomique offre un soutien lombaire supérieur, tandis que les pédales de commande libèrent vos mains pour une précision de mouvement absolue.</p>
+            <h4 style="color: var(--text-main); margin-top: 16px; margin-bottom: 8px;">Sécurité et Durabilité</h4>
+            <ul class="r10-specs-list">
+              <li><strong>Isolation Thermique Intégrale :</strong> Le compartiment moteur est équipé d'un isolant thermique complet pour éviter les brûlures et réduire les nuisances sonores.</li>
+              <li><strong>Protection Canopy :</strong> Un toit robuste protège l'opérateur contre les chutes d'objets et les intempéries, avec un éclairage LED haute intensité pour prolonger vos chantiers à la tombée de la nuit.</li>
+              <li><strong>Protection Hydraulique :</strong> Les flexibles sont intelligemment routés à l'intérieur de la flèche pour éviter tout arrachement lors des travaux en zones encombrées.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <!-- Section : Fiche Technique -->
+      <div class="r10-full-width">
+        <article class="card" style="display: block;">
+          <div class="card-body" style="text-align: center;">
+            <h3 class="r10-section-title">FICHE TECHNIQUE RÉSUMÉE</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;">
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">R10 ECO</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Modèle</div>
+              </div>
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">1018 kg</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Poids opérationnel</div>
+              </div>
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">0,014 m³</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Capacité du godet</div>
+              </div>
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">1,5 km/h</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Vitesse de déplacement</div>
+              </div>
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">121°</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Rotation de flèche</div>
+              </div>
+              <div style="padding: 16px; background: rgba(0,102,204,0.1); border-radius: var(--radius-md); border: 1px solid rgba(0,102,204,0.2);">
+                <div style="color: #2e9fff; font-size: 1.4rem; font-weight: 700;">25,53 kPa</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">Pression au sol</div>
+              </div>
+            </div>
+            <p style="margin-top: 24px; color: var(--text-muted); font-size: 1rem; line-height: 1.7;">La Rippa R10 ECO n'est pas qu'une mini-pelle, c'est un investissement dans votre efficacité quotidienne. Robuste, simple d'entretien et incroyablement polyvalente, elle est prête à relever tous vos défis.</p>
+            <a href="contact.html" class="btn-primary btn-rippa devis-btn" style="margin-top: 20px; display: inline-block;">DEMANDER UN DEVIS</a>
+          </div>
+        </article>
+      </div>
+
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>© 2026 K&L Global Import · <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions Légales</a> · Tous droits réservés.</p>
+</footer>
+<a href="https://wa.me/33673300054" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Nous contacter sur WhatsApp">
+  <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+</a>
+</body>
+</html>

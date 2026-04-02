@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>K&L Global Import</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="K&L Global Import : importateur direct de mini-pelles RIPPA moteur Kubota, maisons modulaires pliables et équipements de loisirs. Zéro intermédiaire, prix usine, livraison France.">
+  <link rel="stylesheet" href="style.css">
+  <script src="micro-interactions.js" defer></script>
+</head>
+<body>
+
+<!-- Popup Foire Expo GAP -->
+<div id="popup-foire" class="popup-overlay">
+  <div class="popup-box">
+    <button class="popup-close" id="popup-close-btn">&times;</button>
+    <img src="foire-expo-gap.webp" alt="K&L Global Import - Foire Expo de GAP 2026" class="popup-image" width="1136" height="941">
+    <div class="popup-content">
+      <h2>Venez nous rencontrer !</h2>
+      <p class="popup-event">Foire Expo de GAP</p>
+      <p class="popup-dates">Du 8 au 17 mai 2026</p>
+      <p class="popup-location">Juste à côté de l'entrée du Rond-Point du Cèdre</p>
+      <a href="contact.html" class="btn-primary popup-cta">Contactez-nous</a>
+    </div>
+  </div>
+</div>
+<script>
+(function() {
+  var popup = document.getElementById('popup-foire');
+  var closeBtn = document.getElementById('popup-close-btn');
+  function closePopup() { popup.classList.remove('active'); }
+  setTimeout(function() { popup.classList.add('active'); }, 4000);
+  closeBtn.addEventListener('click', closePopup);
+  popup.addEventListener('click', function(e) { if (e.target === popup) closePopup(); });
+})();
+</script>
+
+<header class="topbar">
+  <div class="logo"><img src="header-logo.jpeg" alt="K&L Global Import" width="640" height="640"></div>
+  <nav class="topnav" aria-label="Navigation principale">
+    <a href="index.html">ACCUEIL</a>
+    <div class="catalogue-item">
+      <a href="index.html#catalogue" class="catalogue-trigger" aria-haspopup="true">CATALOGUE</a>
+      <div class="mega-menu" role="group" aria-label="Catalogue">
+        <div class="mega-menu__grid">
+          <article class="mega-menu__column">
+            <h2>ENGINS RIPPA</h2>
+            <p>Gamme Mini-Pelles</p>
+            <a href="engins-rippa.html">Voir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h2>SPACE CAPSULE</h2>
+            <p>Habitats Futuristes</p>
+            <a href="habitat.html">Voir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h2>LOISIR &amp; HABITAT</h2>
+            <p>Équipements Premium</p>
+            <a href="loisir-habitat.html">Voir</a>
+          </article>
+        </div>
+      </div>
+    </div>
+    <a href="#">TARIFS</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
+</header>
+
+
+<section class="hero">
+  <div class="hero-bg-overlay"></div>
+  <div class="hero-content">
+    <h1>K&L : L'ESSENTIEL DU MONDE<br>DIRECTEMENT DEVANT CHEZ VOUS !</h1>
+    <p>Logistique 100% optimisée. Zero intermédiaire, prix usine.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">NOS OFFRES</a>
+      <a href="https://www.vesselfinder.com/" target="_blank" class="btn-secondary">SUIVRE VOTRE CARGO</a>
+    </div>
+  </div>
+</section>
+
+<nav class="main-tabs">
+  <a href="index.html" class="active">Accueil</a>
+  <a href="habitat.html">SPACE CAPSULE & HABITAT</a>
+  <a href="loisir-habitat.html">LOISIR ET HABITAT</a>
+  <a href="engins-rippa.html">ENGINS RIPPA</a>
+  <a href="#">Grande Projets</a>
+  <a href="#">À Propos</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<main class="main-content">
+  <section class="carousel">
+    <article class="card large card-rippa">
+      <div class="card-image" style="background-image:url('R32.jpeg');"></div>
+      <div class="card-body">
+        <h2>ENGINS RIPPA</h2>
+        <p>Toutes nos machines sont équipées de moteur Diesel japonais KUBOTA, pour une fiabilitée extrême.</p>
+        <div class="thumbs-grid">
+          <div style="text-align: center;">
+            <div style="background-image:url('r06.jpeg'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
+            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">R06</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="background-image:url('R22.jpeg'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
+            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">R22</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="background-image:url('RS06.jpeg'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
+            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">RS 06</p>
+          </div>
+        </div>
+        <a href="engins-rippa.html" class="btn-primary btn-rippa">DÉCOUVRIR LA GAMME</a>
+      </div>
+    </article>
+
+    <article class="card large card-space">
+      <div class="card-image" style="background-image:url('caps.webp');"></div>
+      <div class="card-body">
+        <h2>SPACE CAPSULE & HABITAT</h2>
+        <p>Une gamme complète d'habitats modulaires et insolites.</p>
+        <div class="thumbs-grid">
+          <div style="text-align: center;">
+            <div style="background-image:url('maison.jpeg'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
+            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Maison Modulaire</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="background-image:url('triangle.webp'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
+            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Maison Insolite</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="background-image:url('cpas-1.webp'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
+            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Capsule Moderne</p>
+          </div>
+        </div>
+        <a href="habitat.html" class="btn-primary btn-eco">DÉCOUVRIR LA GAMME</a>
+      </div>
+    </article>
+
+    <article class="card large card-loisir">
+      <div class="card-image" style="background-image:url('fond.jpeg');"></div>
+      <div class="card-body">
+        <h2>LOISIR ET HABITAT</h2>
+        <p>Découvrez nos équipements de loisirs pour votre habitat.</p>
+        <div class="thumbs-grid">
+          <div style="text-align: center;">
+            <div style="background-image:url('Piscine%20ronde.jpeg'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
+            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Piscine</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="background-image:url('Canapé%20angle%20beige.jpeg'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
+            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Canapé</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="background-image:url('Bugui.jpeg'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
+            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Véhicule</p>
+          </div>
+        </div>
+        <a href="loisir-habitat.html" class="btn-secondary btn-loisir">DÉCOUVRIR LA GAMME</a>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>© 2026 K&L Global Import · <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions Légales</a> · Tous droits réservés.</p>
+</footer>
+<a href="https://wa.me/33673300054" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Nous contacter sur WhatsApp">
+  <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+</a>
+</body>
+</html>
