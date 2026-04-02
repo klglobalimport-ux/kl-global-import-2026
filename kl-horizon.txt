@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K&L Global Import - Horizon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: #000; color: #fff; font-family: Arial, sans-serif;">
+    <header>
+        <nav style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <div class="logo">
+                <img src="assets/header-logo.jpeg" alt="Logo K&L" style="max-height: 70px;">
+            </div>
+            <ul style="list-style: none; display: flex; gap: 20px;">
+                <li><a href="index.html" style="color: #fff; text-decoration: none;">Accueil</a></li>
+                <li><a href="kl-horizon.html" style="color: #fff; text-decoration: none; border-bottom: 2px solid #fff;">Horizon</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main style="padding: 40px; text-align: center;">
+        <section class="hero">
+            <h1 style="font-size: 3rem; margin-bottom: 20px;">GAMME HORIZON</h1>
+            <p style="font-size: 1.2rem; color: #ccc;">L'excellence de l'importation pour vos projets.</p>
+        </section>
+
+        <section class="gallery" style="margin-top: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <img src="assets/habitat/horizon/ta-photo.webp" alt="Produit Horizon" style="width: 100%; border-radius: 10px;" onerror="this.style.display='none'">
+        </section>
+    </main>
+
+    <footer style="text-align: center; padding: 40px; color: #666;">
+        <p>&copy; 2026 K&L Global Import - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
