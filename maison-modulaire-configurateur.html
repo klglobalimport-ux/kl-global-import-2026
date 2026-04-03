@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurateur Maison Modulaire | K&L Global Import</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-darker: #050505;
+            --card-dark: #1a1a1a;
+            --card-green: #2a4540;
+            --card-green-light: #354f4a;
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            --text-muted: #808080;
+            --accent-green: #4ade80;
+            --border-dark: #2a2a2a;
+            --whatsapp-green: #25d366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background: #000;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            width: 100vw;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+        }
+
+        .top-banner-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            gap: 20px;
+        }
+
+        .top-banner-logo {
+            height: 100%;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-banner-logo img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .breadcrumb-link:hover {
+            background: var(--card-dark);
+            border-color: var(--text-muted);
+        }
+
+        .breadcrumb-link::before {
+            content: '← ';
+            margin-right: 8px;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: 80px 20px;
+            text-align: center;
+            background-image: url('/assets/mosaique.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            width: 100vw;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .hero h1,
+        .hero p {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #f0f0f0;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Main Layout avec Sidebar Sticky */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 40px;
+            margin: 60px 0;
+            align-items: start;
+        }
+
+        /* Configurator */
+        .configurator {
+            background: var(--card-green);
+            border-radius: 12px;
+            padding: 50px 40px;
+        }
+
+        .configurator-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .option-group {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Griser les groupes d'options désactivés */
+        .option-group.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .option-group.disabled::after {
+            content: '🔒 Non disponible pour E700';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .option-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .view-pack-btn {
+            background: transparent;
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .view-pack-btn:hover {
+            background: var(--accent-green);
+            color: var(--bg-dark);
+        }
+
+        .option-description {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        /* Button Group avec Photos */
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .btn-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-white);
+            padding: 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .btn-option:hover {
+            border-color: rgba(74, 222, 128, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-option.active {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2);
+        }
+
+        .btn-option-img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: zoom-in;
+        }
+
+        .btn-option-label {
+            padding: 12px 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-option.active .btn-option-label {
+            background: var(--accent-green);
+            color: var(--bg-dark);
+        }
+
+        .option-price {
+            font-size: 0.9rem;
+            color: #4ade80;
+            font-weight: 600;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        /* Zoom icon overlay */
+        .zoom-icon {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            pointer-events: none;
+        }
+
+        /* Toggle avec photo */
+        .toggle-with-photo {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .toggle-photo-container {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .toggle-photo {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            cursor: zoom-in;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-photo:hover {
+            border-color: var(--accent-green);
+            transform: scale(1.05);
+        }
+
+        .toggle-content {
+            flex: 1;
+        }
+
+        /* Toggle */
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toggle {
+            position: relative;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+            border-radius: 26px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: rgba(255, 255, 255, 0.3);
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        .toggle input:checked + .toggle-slider {
+            background-color: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .toggle input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+            background-color: var(--bg-dark);
+        }
+
+        .toggle-label {
+            font-size: 0.9rem;
+            color: var(--text-white);
+            font-weight: 500;
+        }
+
+        /* Checkboxes pour Fret */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(0, 0, 0, 0.3);
+            border-color: rgba(74, 222, 128, 0.3);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--accent-green);
+        }
+
+        .checkbox-label {
+            font-size: 0.85rem;
+            color: var(--text-white);
+            font-weight: 500;
+            flex: 1;
+        }
+
+        /* Counter Control */
+        .counter-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .counter-btn {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-green);
+            border: none;
+            border-radius: 6px;
+            color: var(--bg-dark);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .counter-btn:hover {
+            background: #3bc46e;
+            transform: scale(1.1);
+        }
+
+        .counter-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .counter-value {
+            min-width: 30px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-white);
+        }
+
+        /* Info Box */
+        .info-box {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            border-radius: 6px;
+            font-size: 0.7rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        .info-box strong {
+            color: var(--accent-green);
+        }
+
+        .future-options-note {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(74, 222, 128, 0.05);
+            border: 1px dashed rgba(74, 222, 128, 0.3);
+            border-radius: 8px;
+        }
+
+        .future-options-note h4 {
+            font-size: 0.8rem;
+            color: var(--accent-green);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .future-options-note p {
+            font-size: 0.7rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        /* Summary Panel STICKY */
+        .summary-sidebar {
+            position: sticky;
+            top: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .summary-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-align: center;
+        }
+
+        .summary-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 16px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 12px;
+        }
+
+        .summary-item-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .summary-item-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-white);
+        }
+
+        .options-list {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 16px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 20px 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .options-list-title {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .option-tag {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            margin: 4px 4px 4px 0;
+        }
+
+        .price-display {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 2px dashed rgba(74, 222, 128, 0.3);
+            margin-top: 20px;
+        }
+
+        .price-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .price-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-green);
+        }
+
+        .price-subtitle {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px 30px;
+            background: var(--accent-green);
+            border: none;
+            border-radius: 8px;
+            color: var(--bg-dark);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background: #3bc46e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(74, 222, 128, 0.3);
+        }
+
+        /* Carrousel Final */
+        .final-carousel-section {
+            margin: 80px 0 60px;
+            background: var(--card-dark);
+            border-radius: 12px;
+            padding: 50px 40px;
+            border: 1px solid var(--border-dark);
+        }
+
+        .final-carousel-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-slide img,
+        .carousel-slide svg {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: zoom-in;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: var(--accent-green);
+            color: var(--bg-dark);
+        }
+
+        .carousel-prev {
+            left: 20px;
+        }
+
+        .carousel-next {
+            right: 20px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--accent-green);
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            background: var(--card-dark);
+            border-radius: 12px;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            border: 1px solid var(--border-dark);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-green);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .pack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .pack-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .pack-item-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: zoom-in;
+        }
+
+        .pack-item-label {
+            font-size: 0.75rem;
+            color: var(--text-white);
+            font-weight: 600;
+        }
+
+        /* Galerie */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: zoom-in;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .gallery-img:hover {
+            border-color: var(--accent-green);
+            transform: scale(1.02);
+        }
+
+        /* Lightbox Zoom */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .lightbox-close:hover {
+            color: var(--accent-green);
+            transform: scale(1.1);
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--whatsapp-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-sidebar {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-banner {
+                height: 56px;
+                padding: 0 12px;
+            }
+            .top-banner-inner {
+                gap: 12px;
+            }
+            .breadcrumb-link {
+                padding: 8px 14px;
+                font-size: 0.7rem;
+            }
+            .hero {
+                min-height: 300px;
+                padding: 60px 16px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .configurator {
+                padding: 30px 20px;
+            }
+
+            .btn-group {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pack-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-value {
+                font-size: 1.8rem;
+            }
+
+            .carousel-container {
+                height: 300px;
+            }
+
+            .toggle-with-photo {
+                flex-direction: column;
+            }
+        }
+
+        /* Scrollbar */
+        .options-list::-webkit-scrollbar,
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .options-list::-webkit-scrollbar-track,
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .options-list::-webkit-scrollbar-thumb,
+        .modal-content::-webkit-scrollbar-thumb {
+            background: var(--accent-green);
+            border-radius: 4px;
+        }
+        .size-gallery img:hover {
+            transform: scale(1.05);
+            border-color: #4ade80 !important;
+        }
+
+        .size-option-wrapper .btn-option {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="top-banner-inner">
+            <div class="top-banner-logo">
+                <img src="/assets/logo-kl-global.webp" alt="K&L Global Import">
+            </div>
+            <div class="breadcrumb">
+                <a href="https://klglobalimport.com/habitat" class="breadcrumb-link">RETOUR AUX MAISONS MODULAIRES</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Hero -->
+        <div class="hero">
+            <h1>CONFIGURATEUR MAISON MODULAIRE</h1>
+            <p>Créez votre habitat sur-mesure avec notre configurateur interactif. Sélectionnez vos options et découvrez le prix en temps réel.</p>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+            <!-- Configurator -->
+            <section class="configurator">
+                <h2 class="configurator-title">Configurateur Interactif</h2>
+                
+                <div class="config-grid">
+                    <!-- Taille -->
+                    <div class="option-group">
+                        <div class="option-label">Taille</div>
+                        <div class="option-description">Choisissez la surface adaptée à votre projet</div>
+                        <div class="btn-group">
+                            <div class="size-option-wrapper">
+                                <button class="btn-option active" data-option="size" data-value="10ft">
+                                    <img class="btn-option-img" src="/assets/configurateur/tailles/10ft.webp" alt="Maison 10ft" onclick="event.stopPropagation(); zoomImage(this)">
+                                    <div class="zoom-icon">🔍</div>
+                                    <span class="btn-option-label">10 FT<br>17,6 m²</span>
+                                    <div class="option-price" id="price-size-10ft">9 500 €</div>
+                                </button>
+                                <div class="size-gallery" data-size="10ft" style="display: flex; gap: 8px; margin-top: 10px; justify-content: center;">
+                                    <img src="/assets/configurateur/10ft.webp" onclick="openGalleryLightbox('/assets/configurateur/10ft.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/10ft1.webp" onclick="openGalleryLightbox('/assets/configurateur/10ft1.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/10ft2.webp" onclick="openGalleryLightbox('/assets/configurateur/10ft2.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/10ft3.webp" onclick="openGalleryLightbox('/assets/configurateur/10ft3.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                </div>
+                            </div>
+                            <div class="size-option-wrapper">
+                                <button class="btn-option" data-option="size" data-value="20ft">
+                                    <img class="btn-option-img" src="/assets/configurateur/tailles/20ft.webp" alt="Maison 20ft" onclick="event.stopPropagation(); zoomImage(this)">
+                                    <div class="zoom-icon">🔍</div>
+                                    <span class="btn-option-label">20 FT<br>37 m²</span>
+                                    <div class="option-price" id="price-size-20ft">15 000 €</div>
+                                </button>
+                                <div class="size-gallery" data-size="20ft" style="display: flex; gap: 8px; margin-top: 10px; justify-content: center;">
+                                    <img src="/assets/configurateur/20ft.webp" onclick="openGalleryLightbox('/assets/configurateur/20ft.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/20ft1.webp" onclick="openGalleryLightbox('/assets/configurateur/20ft1.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/20ft2.webp" onclick="openGalleryLightbox('/assets/configurateur/20ft2.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/20ft3.webp" onclick="openGalleryLightbox('/assets/configurateur/20ft3.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                </div>
+                            </div>
+                            <div class="size-option-wrapper">
+                                <button class="btn-option" data-option="size" data-value="30ft">
+                                    <img class="btn-option-img" src="/assets/configurateur/tailles/30ft.webp" alt="Maison 30ft" onclick="event.stopPropagation(); zoomImage(this)">
+                                    <div class="zoom-icon">🔍</div>
+                                    <span class="btn-option-label">30 FT<br>56 m²</span>
+                                    <div class="option-price" id="price-size-30ft">18 000 €</div>
+                                </button>
+                                <div class="size-gallery" data-size="30ft" style="display: flex; gap: 8px; margin-top: 10px; justify-content: center;">
+                                    <img src="/assets/configurateur/30ft.webp" onclick="openGalleryLightbox('/assets/configurateur/30ft.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/30ft1.webp" onclick="openGalleryLightbox('/assets/configurateur/30ft1.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/30ft2.jpg" onclick="openGalleryLightbox('/assets/configurateur/30ft2.jpg')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/30ft3.webp" onclick="openGalleryLightbox('/assets/configurateur/30ft3.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                </div>
+                            </div>
+                            <div class="size-option-wrapper">
+                                <button class="btn-option" data-option="size" data-value="40ft">
+                                    <img class="btn-option-img" src="/assets/configurateur/tailles/40ft.webp" alt="Maison 40ft" onclick="event.stopPropagation(); zoomImage(this)">
+                                    <div class="zoom-icon">🔍</div>
+                                    <span class="btn-option-label">40 FT<br>72 m²</span>
+                                    <div class="option-price" id="price-size-40ft">22 000 €</div>
+                                </button>
+                                <div class="size-gallery" data-size="40ft" style="display: flex; gap: 8px; margin-top: 10px; justify-content: center;">
+                                    <img src="/assets/configurateur/40ft.webp" onclick="openGalleryLightbox('/assets/configurateur/40ft.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/40ft1.webp" onclick="openGalleryLightbox('/assets/configurateur/40ft1.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/40ft2.webp" onclick="openGalleryLightbox('/assets/configurateur/40ft2.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                    <img src="/assets/configurateur/40ft3.webp" onclick="openGalleryLightbox('/assets/configurateur/40ft3.webp')" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Toit -->
+                    <div class="option-group">
+                        <div class="option-label">Type de Toit</div>
+                        <div class="option-description">2 pentes classique, possible avancé pour terrasse (compris si option terrasse)</div>
+                        <div class="btn-group">
+                            <button class="btn-option active" data-option="roof" data-value="none">
+                                <img class="btn-option-img" src="/assets/configurateur/toits/sans.jpg" alt="Sans toit" onclick="event.stopPropagation(); zoomImage(this)">
+                                <div class="zoom-icon">🔍</div>
+                                <span class="btn-option-label">Sans toit</span>
+                                <div class="option-price" id="price-roof-none">Inclus</div>
+                            </button>
+                            <button class="btn-option" data-option="roof" data-value="uniform">
+                                <img class="btn-option-img" src="/assets/configurateur/toits/uniforme.jpg" alt="Toit 2 pentes uniforme" onclick="event.stopPropagation(); zoomImage(this)">
+                                <div class="zoom-icon">🔍</div>
+                                <span class="btn-option-label">2 pentes uniforme</span>
+                                <div class="option-price" id="price-roof-uniform">+1 500 €</div>
+                            </button>
+                            <button class="btn-option" data-option="roof" data-value="offset">
+                                <img class="btn-option-img" src="/assets/configurateur/toits/decale.webp" alt="Toit 2 pentes décalé" onclick="event.stopPropagation(); zoomImage(this)">
+                                <div class="zoom-icon">🔍</div>
+                                <span class="btn-option-label">2 pentes décalé</span>
+                                <div class="option-price" id="price-roof-offset">+1 700 €</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Terrasse -->
+                    <div class="option-group">
+                        <div class="option-label">Terrasse</div>
+                        <div class="option-description">Sur le côté en option (à préciser lors du devis)</div>
+                        <div class="toggle-with-photo">
+                            <div class="toggle-photo-gallery" style="display: flex; gap: 8px; margin-bottom: 10px;">
+                                <div class="toggle-photo-container" style="flex: 1;">
+                                    <img class="toggle-photo" src="/assets/configurateur/terrasse/terrasse1.png" alt="Terrasse 1" onclick="zoomImage(this)">
+                                    <div class="zoom-icon">🔍</div>
+                                </div>
+                                <div class="toggle-photo-container" style="flex: 1;">
+                                    <img class="toggle-photo" src="/assets/configurateur/terrasse/terrasse2.webp" alt="Terrasse 2" onclick="zoomImage(this)">
+                                    <div class="zoom-icon">🔍</div>
+                                </div>
+                            </div>
+                            <div class="toggle-content">
+                                <div class="toggle-group">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="terrasse" data-option="terrace">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="toggle-label">Ajouter une terrasse (+3000€)</span>
+                                </div>
+                                <div class="option-price" id="price-terrace">+3 000 €</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aménagement -->
+                    <div class="option-group" id="option-amenagement">
+                        <div class="option-header">
+                            <div class="option-label">Aménagement Intérieur Complet</div>
+                            <button class="view-pack-btn" onclick="openModal('amenagement')">📦 Voir le Pack</button>
+                        </div>
+                        <div class="option-description">Électricité, chambres avec lits et meubles, SDB complète (douche italienne, revêtements), cuisine au choix, éclairage LED complet, portes intérieures, 1 baie vitrée + 4-6 fenêtres, parquet ou dalle PVC</div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="amenagement" data-option="furnished">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Maison aménagée</span>
+                        </div>
+                        <div class="option-price" id="price-furnished">+2 500 €</div>
+                    </div>
+
+                    <!-- Gouttières -->
+                    <div class="option-group">
+                        <div class="option-label">Gouttières</div>
+                        <div class="option-description">Système d'évacuation des eaux pluviales</div>
+                        <div class="toggle-with-photo">
+                            <div class="toggle-photo-container">
+                                <img class="toggle-photo" src="/assets/configurateur/gouttieres/gouttieres.png" alt="Gouttières" onclick="zoomImage(this)">
+                                <div class="zoom-icon">🔍</div>
+                            </div>
+                            <div class="toggle-content">
+                                <div class="toggle-group">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="gutters" data-option="gutters">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="toggle-label">Avec gouttières</span>
+                                </div>
+                                <div class="option-price" id="price-gutters">+400 €</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Covering Extérieur -->
+                    <div class="option-group" id="option-covering">
+                        <div class="option-header">
+                            <div class="option-label">Covering Extérieur</div>
+                            <button class="view-pack-btn" onclick="openModal('covering')">🎨 Voir les Options</button>
+                        </div>
+                        <div class="option-description">Revêtement mural extérieur couleur spécial (bardage imitation volet/persienne design, bardage aluminium ou acier galvanisé à chaud bitton)</div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="covering" data-option="covering">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Covering décoratif</span>
+                        </div>
+                        <div class="option-price" id="price-covering">+500 €</div>
+                    </div>
+
+                    <!-- Baies Vitrées -->
+                    <div class="option-group" id="option-baywindow">
+                        <div class="option-label">Baies Vitrées Supplémentaires</div>
+                        <div class="option-description">En option si vous souhaitez remplacer des fenêtres (700€ par baie)</div>
+                        <div class="toggle-with-photo">
+                            <div class="toggle-photo-gallery" style="display: flex; gap: 8px; margin-bottom: 10px;">
+                                <div class="toggle-photo-container" style="flex: 1;">
+                                    <img class="toggle-photo" src="/assets/configurateur/baie-vitree-1.webp" alt="Baie vitrée 1" onclick="zoomImage(this)">
+                                    <div class="zoom-icon">🔍</div>
+                                </div>
+                                <div class="toggle-photo-container" style="flex: 1;">
+                                    <img class="toggle-photo" src="/assets/configurateur/baie-vitree-2.webp" alt="Baie vitrée 2" onclick="zoomImage(this)">
+                                    <div class="zoom-icon">🔍</div>
+                                </div>
+                            </div>
+                            <div class="toggle-content">
+                                <div class="toggle-group">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="bay-window" data-option="bayWindow">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="toggle-label">Ajouter des baies vitrées</span>
+                                </div>
+                                <div class="option-price" id="price-baywindow">700 €/unité</div>
+                                <div class="counter-control" id="bay-counter" style="display: none; margin-top: 12px;">
+                                    <button class="counter-btn" onclick="updateCounter('bayWindowCount', -1)">−</button>
+                                    <span class="counter-value" id="bayWindowCount">1</span>
+                                    <button class="counter-btn" onclick="updateCounter('bayWindowCount', 1)">+</button>
+                                    <span style="margin-left: 10px; font-size: 0.75rem; color: var(--text-muted);">baie(s)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fenêtre Longue -->
+                    <div class="option-group" id="option-longwindow">
+                        <div class="option-label">Fenêtres Longues 2,00m × 0,60m</div>
+                        <div class="option-description">Fenêtre panoramique rectangulaire (300€ par fenêtre)</div>
+                        <div class="toggle-with-photo">
+                            <div class="toggle-photo-container">
+                                <img class="toggle-photo" src="/assets/configurateur/fenetre-longue.webp" alt="Fenêtre longue" onclick="zoomImage(this)">
+                                <div class="zoom-icon">🔍</div>
+                            </div>
+                            <div class="toggle-content">
+                                <div class="toggle-group">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="long-window" data-option="longWindow">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="toggle-label">Ajouter des fenêtres longues</span>
+                                </div>
+                                <div class="option-price" id="price-longwindow">300 €/unité</div>
+                                <div class="counter-control" id="window-counter" style="display: none; margin-top: 12px;">
+                                    <button class="counter-btn" onclick="updateCounter('longWindowCount', -1)">−</button>
+                                    <span class="counter-value" id="longWindowCount">1</span>
+                                    <button class="counter-btn" onclick="updateCounter('longWindowCount', 1)">+</button>
+                                    <span style="margin-left: 10px; font-size: 0.75rem; color: var(--text-muted);">fenêtre(s)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Climatisation -->
+                    <div class="option-group" id="option-climatisation">
+                        <div class="option-label">Climatisation Réversible</div>
+                        <div class="option-description">Système de climatisation avec 1 ou 2 splits (+500€ pour le 2ème split)</div>
+                        <div class="toggle-with-photo">
+                            <div class="toggle-photo-container">
+                                <img class="toggle-photo" src="/assets/configurateur/climatisation/avec.png" alt="Climatisation" onclick="zoomImage(this)">
+                                <div class="zoom-icon">🔍</div>
+                            </div>
+                            <div class="toggle-content">
+                                <div class="toggle-group">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="clim" data-option="ac">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="toggle-label">Avec climatisation</span>
+                                </div>
+                                <div class="option-price" id="price-ac">+1 000 € <small>(+500€ pour 2ème split)</small></div>
+                                <div class="btn-group" id="clim-splits" style="display: none; margin-top: 12px; grid-template-columns: repeat(2, 1fr);">
+                                    <button class="btn-option active" data-option="acSplits" data-value="1">
+                                        <svg class="btn-option-img" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="100" height="60" fill="#1a3a35"/>
+                                            <rect x="30" y="15" width="40" height="30" fill="#4ade80"/>
+                                            <text x="50" y="35" font-family="Arial" font-size="14" fill="#0a0a0a" text-anchor="middle">1</text>
+                                        </svg>
+                                        <span class="btn-option-label">1 Split</span>
+                                    </button>
+                                    <button class="btn-option" data-option="acSplits" data-value="2">
+                                        <svg class="btn-option-img" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="100" height="60" fill="#1a3a35"/>
+                                            <rect x="10" y="15" width="35" height="30" fill="#4ade80"/>
+                                            <rect x="55" y="15" width="35" height="30" fill="#4ade80"/>
+                                            <text x="27" y="35" font-family="Arial" font-size="12" fill="#0a0a0a" text-anchor="middle">1</text>
+                                            <text x="72" y="35" font-family="Arial" font-size="12" fill="#0a0a0a" text-anchor="middle">2</text>
+                                        </svg>
+                                        <span class="btn-option-label">2 Splits<br><small>+500€</small></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panneaux Solaires -->
+                    <div class="option-group" id="option-solar">
+                        <div class="option-header">
+                            <div class="option-label">Panneaux Solaires 5Kw</div>
+                            <button class="view-pack-btn" onclick="openModal('solar')">☀️ Voir le Pack</button>
+                        </div>
+                        <div class="option-description">Installation solaire photovoltaïque complète</div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="solar" data-option="solar">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Installation solaire (+5000€)</span>
+                        </div>
+                        <div class="option-price" id="price-solar">+5 000 €</div>
+                    </div>
+
+                    <!-- Off-Grid -->
+                    <div class="option-group" id="option-offgrid">
+                        <div class="option-header">
+                            <div class="option-label">Off-Grid 10kw - Autonomie Totale</div>
+                            <button class="view-pack-btn" onclick="openModal('offgrid')">🔋 Voir le Pack</button>
+                        </div>
+                        <div class="option-description">Système complet d'autonomie énergétique (disponible uniquement pour 20/30/40 FT)</div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="offgrid" data-option="offgrid" disabled>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Autonomie complète (+8000€)</span>
+                        </div>
+                        <div class="option-price" id="price-offgrid">+8 000 €</div>
+                        <div class="info-box">
+                            <strong>💡 Qu'est-ce que l'Off-Grid ?</strong><br>
+                            Le système Off-Grid vous permet de produire, stocker et gérer votre propre électricité de manière 100% autonome. Parfait pour les zones isolées ou pour une indépendance énergétique totale. Inclut : batteries haute capacité (20kWh), onduleur triphasé 10kW, 20 panneaux solaires 550W et système de gestion intelligente.
+                        </div>
+                    </div>
+
+                    <!-- Sur Remorque -->
+                    <div class="option-group">
+                        <div class="option-header">
+                            <div class="option-label">Remorque Dépliable</div>
+                            <button class="view-pack-btn" onclick="openModal('trailer')">🚛 Voir la Remorque</button>
+                        </div>
+                        <div class="option-description">Avec déport structure, bras support charge lourde (prévoir socle béton pour les bras)</div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="trailer" data-option="trailer">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Sur remorque</span>
+                        </div>
+                        <div class="option-price" id="price-trailer">+3 000 €</div>
+                    </div>
+
+                    <!-- HIGH CUBE -->
+                    <div class="option-group" id="option-highcube">
+                        <div class="option-label">HIGH CUBE (HC) - Hauteur Augmentée</div>
+                        <div class="option-description">Hauteur sous plafond de 2,55 m au lieu de 2,24 m (disponible uniquement pour 20/30/40 FT)</div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="highcube" data-option="highCube" disabled>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Version High Cube</span>
+                        </div>
+                        <div class="option-price" id="price-highcube">Indisponible pour 10FT</div>
+                        <div class="info-box">
+                            <strong>📏 Qu'est-ce que le High Cube ?</strong><br>
+                            Le format High Cube (HC) offre une hauteur sous plafond de <strong>2,55 m</strong> contre 2,24 m pour les modèles standards, soit <strong>31 cm supplémentaires</strong>. Cela apporte plus de volume, une meilleure sensation d'espace et facilite l'installation d'équipements en hauteur.<br>
+                            💰 Prix : +2000€ (20FT) | +3000€ (30FT) | +4000€ (40FT)
+                        </div>
+                    </div>
+
+                    <!-- Forfait Fret -->
+                    <div class="option-group">
+                        <div class="option-header">
+                            <div class="option-label">Forfait Fret + Livraison</div>
+                            <button class="view-pack-btn" onclick="openModal('shipping')">🏗️ Voir le Grutage</button>
+                        </div>
+                        <div class="option-description">Transport et/ou grutage de votre maison modulaire</div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="shipping-transport" data-option="shippingTransport">
+                                <span class="checkbox-label">Transport uniquement</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="shipping-crane" data-option="shippingCrane">
+                                <span class="checkbox-label">Grutage uniquement</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="shipping-both" data-option="shippingBoth">
+                                <span class="checkbox-label">Transport + Grutage (forfait complet)</span>
+                            </label>
+                        </div>
+                        <div class="option-price" id="price-fret">Forfait : 1 000 €</div>
+                    </div>
+
+                    <!-- LIVRAISON POLYNÉSIE -->
+                    <div class="option-group" style="border: 2px solid var(--accent-green); background: rgba(74, 222, 128, 0.05);">
+                        <div class="option-label" style="color: var(--accent-green);">🏝️ Livraison en Polynésie Française</div>
+                        <div class="option-description">Active l'affichage en Francs Pacifique (XPF) avec TVA réduite à 16% et frais d'importation de 26%</div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="polynesia" data-option="polynesia">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Livraison Polynésie</span>
+                        </div>
+                        <div class="info-box">
+                            <strong>🏝️ Spécificités Polynésie :</strong><br>
+                            • <strong>Devise :</strong> Prix affichés en Francs Pacifique (XPF) au lieu d'Euros<br>
+                            • <strong>TVA réduite :</strong> 16% au lieu de 20%<br>
+                            • <strong>Frais d'importation :</strong> +26% sur le total HT<br>
+                            💡 Taux de conversion : 1 EUR = 119,33 XPF
+                        </div>
+                    </div>
+
+                    <!-- Note Options Futures -->
+                    <div class="future-options-note">
+                        <h4>📅 Options Ajoutables Ultérieurement</h4>
+                        <p>
+                            <strong>Certaines options peuvent être ajoutées après l'achat initial :</strong><br>
+                            • <strong>Remorque dépliable</strong> : Peut être commandée plus tard en cas de contraintes administratives (mairie)<br>
+                            • <strong>Toit</strong> : Installation possible après livraison (délai rapide)<br>
+                            • <strong>Terrasse</strong> : Ajout facilité même après installation<br>
+                            • <strong>Panneaux solaires 5Kw</strong> : Pose possible à tout moment<br>
+                            • <strong>Off-Grid 10Kw</strong> : Upgrade énergétique réalisable ultérieurement<br><br>
+                            💡 <em>N'hésitez pas à nous consulter pour planifier vos futurs aménagements.</em>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Sidebar STICKY -->
+            <aside class="summary-sidebar">
+                <h3 class="summary-title">Récapitulatif</h3>
+                
+                <div class="summary-item">
+                    <div class="summary-item-label">Modèle</div>
+                    <div class="summary-item-value" id="summary-size">10 FT</div>
+                </div>
+
+                <div class="summary-item">
+                    <div class="summary-item-label">Surface</div>
+                    <div class="summary-item-value" id="summary-surface">17,6 m²</div>
+                </div>
+
+                <div class="summary-item">
+                    <div class="summary-item-label">Poids estimé</div>
+                    <div class="summary-item-value" id="summary-weight">1,5 T</div>
+                </div>
+
+                <div class="options-list">
+                    <div class="options-list-title">Options actives</div>
+                    <div id="active-options">
+                        <span class="option-tag">Aucune option</span>
+                    </div>
+                </div>
+
+                <div class="price-display">
+                    <div class="price-label">Récapitulatif Tarif</div>
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span style="font-size: 0.85rem; color: var(--text-gray);">Prix HT</span>
+                        <span style="font-size: 1rem; font-weight: 600; color: var(--text-white);" id="price-ht">9 500 €</span>
+                    </div>
+                    <div id="import-fee-row" style="display: none; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span style="font-size: 0.85rem; color: var(--text-gray);">Frais import (26%)</span>
+                        <span style="font-size: 1rem; font-weight: 600; color: var(--accent-green);" id="price-import">0 XPF</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span style="font-size: 0.85rem; color: var(--text-gray);" id="vat-label">TVA (20%)</span>
+                        <span style="font-size: 1rem; font-weight: 600; color: var(--text-white);" id="price-vat">1 900 €</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0; margin-top: 8px;">
+                        <span style="font-size: 1rem; font-weight: 700; color: var(--accent-green);">TOTAL TTC</span>
+                        <span style="font-size: 1.8rem; font-weight: 800; color: var(--accent-green);" id="total-price">11 400 €</span>
+                    </div>
+                    <div class="price-subtitle">* Prix indicatif sous réserve</div>
+                </div>
+
+                <button class="cta-button" onclick="requestQuote()">Demander un Devis</button>
+            </aside>
+        </div>
+
+        <!-- Carrousel Final -->
+        <section class="final-carousel-section">
+            <h2 class="final-carousel-title">Galerie Photos</h2>
+            <div class="carousel-container">
+                <div class="carousel-slides" id="carouselSlides"></div>
+                <button class="carousel-nav carousel-prev" onclick="changeSlide(-1)">‹</button>
+                <button class="carousel-nav carousel-next" onclick="changeSlide(1)">›</button>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <!-- Modal Aménagement -->
+    <div id="modal-amenagement" class="modal" onclick="closeModal('amenagement', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('amenagement')">&times;</button>
+            <h3 class="modal-title">📦 Pack Aménagement Intérieur</h3>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Tout ce dont vous avez besoin pour une maison clé en main :</p>
+            <div class="pack-grid">
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/amenagement/amenage.webp" alt="Aménagement intérieur" onclick="zoomImage(this)">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/amenagement/amenage1.webp" alt="Aménagement intérieur 1" onclick="zoomImage(this)">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/amenagement/amenage2.webp" alt="Aménagement intérieur 2" onclick="zoomImage(this)">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/amenagement/amenage3.webp" alt="Aménagement intérieur 3" onclick="zoomImage(this)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Covering -->
+    <div id="modal-covering" class="modal" onclick="closeModal('covering', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('covering')">&times;</button>
+            <h3 class="modal-title">🎨 Options Covering Extérieur</h3>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Revêtements muraux extérieurs disponibles :</p>
+            <div class="pack-grid">
+                <div class="pack-item">
+                    <img class="pack-item-img" src="assets/configurateur/covering/bardage.webp" alt="Bardage panneaux gris anthracite avec lames bois" onclick="zoomImage(this)">
+                    <div class="pack-item-label">Bardage panneaux gris anthracite avec lames bois</div>
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="assets/configurateur/covering/bardage1.webp" alt="Bardage persienne imitation bois foncé" onclick="zoomImage(this)">
+                    <div class="pack-item-label">Bardage persienne imitation bois foncé</div>
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="assets/configurateur/covering/bardage2.webp" alt="Bardage imitation bois foncé" onclick="zoomImage(this)">
+                    <div class="pack-item-label">Bardage imitation bois foncé</div>
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="assets/configurateur/covering/bardage3.webp" alt="Bardage imitation bois clair naturel" onclick="zoomImage(this)">
+                    <div class="pack-item-label">Bardage imitation bois clair naturel</div>
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="assets/configurateur/covering/bardage4.webp" alt="Bardage imitation bois clair bicolore" onclick="zoomImage(this)">
+                    <div class="pack-item-label">Bardage imitation bois clair bicolore</div>
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="assets/configurateur/covering/bardage5.webp" alt="Bardage tasseaux bois design" onclick="zoomImage(this)">
+                    <div class="pack-item-label">Bardage tasseaux bois design</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Solaire -->
+    <div id="modal-solar" class="modal" onclick="closeModal('solar', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('solar')">&times;</button>
+            <h3 class="modal-title">☀️ Pack Panneaux Solaires 5Kw</h3>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Installation photovoltaïque complète :</p>
+            <div class="pack-grid">
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/solaire/sol5kw.webp" alt="Panneaux Solaires 5Kw" onclick="zoomImage(this)">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/solaire/PJ.webp" alt="Pack Solaire 5Kw" onclick="zoomImage(this)">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/solaire/sol5kw2.webp" alt="Câblage PV 4mm" onclick="zoomImage(this)">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/solaire/sol5kw3.webp" alt="Structure fixation" onclick="zoomImage(this)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Off-Grid -->
+    <div id="modal-offgrid" class="modal" onclick="closeModal('offgrid', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('offgrid')">&times;</button>
+            <h3 class="modal-title">🔋 Pack Off-Grid 10Kw</h3>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Autonomie énergétique complète :</p>
+            <div class="pack-grid">
+                <div class="pack-item">
+                    <img class="pack-item-img" src="assets/sol10kw.webp" alt="Pack Off-Grid 10kW" onclick="zoomImage(this)" style="cursor:pointer; border-radius:8px; object-fit:cover;">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="assets/sol10kw1.webp" alt="Pack Off-Grid 10kW" onclick="zoomImage(this)" style="cursor:pointer; border-radius:8px; object-fit:cover;">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="assets/sol10kw2.webp" alt="Pack Off-Grid 10kW" onclick="zoomImage(this)" style="cursor:pointer; border-radius:8px; object-fit:cover;">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="assets/sol10kw3.webp" alt="Pack Off-Grid 10kW" onclick="zoomImage(this)" style="cursor:pointer; border-radius:8px; object-fit:cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Remorque -->
+    <div id="modal-trailer" class="modal" onclick="closeModal('trailer', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('trailer')">&times;</button>
+            <h3 class="modal-title">🚛 Remorque Dépliable Multi-Angles</h3>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Avec déport structure et bras support charge lourde :</p>
+            <div class="gallery-grid">
+                <img class="gallery-img" src="/assets/configurateur/remorque/maison_remorque_20ft.webp" alt="Maison remorque 20ft" onclick="zoomImage(this)">
+                <img class="gallery-img" src="/assets/configurateur/remorque/remorque2.webp" alt="Remorque vue 2" onclick="zoomImage(this)">
+                <img class="gallery-img" src="/assets/configurateur/remorque/remorque3.webp" alt="Remorque vue 3" onclick="zoomImage(this)">
+                <img class="gallery-img" src="/assets/configurateur/remorque/20ft_remorque.JPG" alt="Remorque 20ft" onclick="zoomImage(this)">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Fret/Grutage -->
+    <div id="modal-shipping" class="modal" onclick="closeModal('shipping', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('shipping')">&times;</button>
+            <h3 class="modal-title">🏗️ Forfait Fret + Grutage</h3>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Photos du grutage et installation :</p>
+            <div class="gallery-grid">
+                <img class="gallery-img" src="/assets/configurateur/grutage/grutage1.webp" alt="Grutage 1" onclick="zoomImage(this)">
+                <img class="gallery-img" src="/assets/configurateur/grutage/grutage2.webp" alt="Grutage 2" onclick="zoomImage(this)">
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Zoom -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+            <img id="lightbox-image" class="lightbox-image" src="" alt="">
+        </div>
+    </div>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/33673300054" class="whatsapp-float" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <script>
+        // Lightbox functions for size galleries
+        function openGalleryLightbox(imageSrc) {
+            const lightbox = document.querySelector('.lightbox-overlay') || createGalleryLightbox();
+            const lightboxImg = lightbox.querySelector('.lightbox-image');
+            lightboxImg.src = imageSrc;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function createGalleryLightbox() {
+            const overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.innerHTML = '<button onclick="closeGalleryLightbox()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); border: none; color: white; font-size: 2rem; cursor: pointer; padding: 10px 20px; border-radius: 50%;">\u00d7</button><img class="lightbox-image" src="" style="max-width: 90vw; max-height: 90vh; border-radius: 8px;">';
+            overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 10000;';
+            overlay.onclick = (e) => { if (e.target === overlay) closeGalleryLightbox(); };
+            document.body.appendChild(overlay);
+            return overlay;
+        }
+
+        function closeGalleryLightbox() {
+            const lightbox = document.querySelector('.lightbox-overlay');
+            if (lightbox) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Carrousel images
+        const carouselImages = [
+            { type: 'img', src: '/assets/configurateur/carrousel/carrousel1.webp', alt: 'Photo 1' },
+            { type: 'img', src: '/assets/configurateur/carrousel/carrousel2.webp', alt: 'Photo 2' },
+            { type: 'img', src: '/assets/configurateur/carrousel/carrousel3.webp', alt: 'Photo 3' },
+            { type: 'img', src: '/assets/configurateur/carrousel/carrousel4.webp', alt: 'Photo 4' },
+            { type: 'img', src: '/assets/configurateur/carrousel/carrousel5.webp', alt: 'Photo 5' },
+            { type: 'img', src: '/assets/configurateur/carrousel/carrousel6.webp', alt: 'Photo 6' },
+            { type: 'img', src: '/assets/configurateur/carrousel/carrousel7.webp', alt: 'Photo 7' },
+            { type: 'img', src: '/assets/configurateur/carrousel/carrousel8.webp', alt: 'Photo 8' },
+            { type: 'img', src: '/assets/configurateur/carrousel/Campagne.webp', alt: 'Campagne' },
+            { type: 'img', src: '/assets/configurateur/carrousel/carrousel5_1.webp', alt: 'Photo 9' },
+            { type: 'img', src: '/assets/configurateur/carrousel/maison30ft.webp', alt: 'Maison 30ft' },
+            { type: 'img', src: '/assets/configurateur/carrousel/maison30ft_1.webp', alt: 'Maison 30ft vue 2' },
+            { type: 'img', src: '/assets/configurateur/carrousel/maison_avec_toit_campagne.webp', alt: 'Maison avec toit campagne' },
+            { type: 'img', src: '/assets/configurateur/carrousel/Quartier.webp', alt: 'Quartier' },
+            { type: 'img', src: '/assets/configurateur/carrousel/toit_uniforme_terrasses.webp', alt: 'Toit uniforme et terrasses' },
+            { type: 'img', src: '/assets/configurateur/carrousel/toit_uniforme_terrasses_1.webp', alt: 'Toit uniforme et terrasses vue 2' },
+            { type: 'img', src: '/assets/configurateur/carrousel/ville_toit.webp', alt: 'Ville avec toit' }
+        ];
+
+        let currentSlide = 0;
+
+        // Initialiser carrousel
+        function initCarousel() {
+            const slidesContainer = document.getElementById('carouselSlides');
+            const dotsContainer = document.getElementById('carouselDots');
+
+            carouselImages.forEach((img, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                if (img.type === 'img') {
+                    const imgEl = document.createElement('img');
+                    imgEl.src = img.src;
+                    imgEl.alt = img.alt || '';
+                    imgEl.style.width = '100%';
+                    imgEl.style.height = '100%';
+                    imgEl.style.objectFit = 'cover';
+                    imgEl.onclick = function() { zoomImage(this); };
+                    slide.appendChild(imgEl);
+                } else {
+                    slide.innerHTML = img.content;
+                    const svgEl = slide.querySelector('svg');
+                    if (svgEl) svgEl.onclick = function() { zoomImage(this); };
+                }
+                slidesContainer.appendChild(slide);
+
+                const dot = document.createElement('button');
+                dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+                dot.onclick = () => goToSlide(index);
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = carouselImages.length - 1;
+            if (currentSlide >= carouselImages.length) currentSlide = 0;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const slidesContainer = document.getElementById('carouselSlides');
+            slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            const dots = document.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Auto-play
+        setInterval(() => changeSlide(1), 5000);
+
+        // Zoom
+        function zoomImage(element) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+
+            if (element.tagName === 'IMG') {
+                lightboxImage.src = element.src;
+            } else if (element.tagName === 'svg' || element.tagName === 'SVG') {
+                const svgData = new XMLSerializer().serializeToString(element);
+                const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+                const svgUrl = URL.createObjectURL(svgBlob);
+                lightboxImage.src = svgUrl;
+            }
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Modals
+        function openModal(type) {
+            document.getElementById(`modal-${type}`).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(type, event) {
+            if (!event || event.target.id === `modal-${type}`) {
+                document.getElementById(`modal-${type}`).classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Configuration
+        const config = {
+            size: '10ft',
+            roof: 'none',
+            terrace: false,
+            furnished: false,
+            gutters: false,
+            covering: false,
+            bayWindow: false,
+            bayWindowCount: 1,
+            longWindow: false,
+            longWindowCount: 1,
+            ac: false,
+            acSplits: 1,
+            solar: false,
+            offgrid: false,
+            trailer: false,
+            highCube: false,
+            shippingTransport: false,
+            shippingCrane: false,
+            shippingBoth: false,
+            polynesia: false
+        };
+
+        // Fonction pour gérer les compteurs
+        function updateCounter(counterId, delta) {
+            const currentValue = config[counterId];
+            const newValue = Math.max(1, Math.min(10, currentValue + delta));
+            config[counterId] = newValue;
+            document.getElementById(counterId).textContent = newValue;
+            updateSummary();
+        }
+
+        // Toggles baies/fenêtres avec affichage compteur
+        document.getElementById('bay-window').addEventListener('change', function() {
+            config.bayWindow = this.checked;
+            document.getElementById('bay-counter').style.display = this.checked ? 'flex' : 'none';
+            updateSummary();
+        });
+
+        document.getElementById('long-window').addEventListener('change', function() {
+            config.longWindow = this.checked;
+            document.getElementById('window-counter').style.display = this.checked ? 'flex' : 'none';
+            updateSummary();
+        });
+
+        // Toggle climatisation avec affichage choix splits
+        document.getElementById('clim').addEventListener('change', function() {
+            config.ac = this.checked;
+            document.getElementById('clim-splits').style.display = this.checked ? 'grid' : 'none';
+            updateSummary();
+        });
+
+        const VAT_RATE_STANDARD = 0.20; // TVA 20% (Europe)
+        const VAT_RATE_POLYNESIA = 0.16; // TVA 16% (Polynésie)
+        const IMPORT_FEE_POLYNESIA = 0.26; // Frais d'importation 26%
+        const EUR_TO_XPF = 119.33; // Taux de conversion EUR → XPF
+
+        const basePrices = {
+            '10ft': 9500,
+            '20ft': 15000,
+            '30ft': 18000,
+            '40ft': 22000
+        };
+
+        const surfaces = {
+            '10ft': '17,6 m²',
+            '20ft': '37 m²',
+            '30ft': '56 m²',
+            '40ft': '72 m²'
+        };
+
+        const weights = {
+            '10ft': '1,5 T',
+            '20ft': '2,9 T',
+            '30ft': '3,5 T',
+            '40ft': '4,6 T'
+        };
+
+        const sizeLabels = {
+            '10ft': '10 FT',
+            '20ft': '20 FT',
+            '30ft': '30 FT',
+            '40ft': '40 FT'
+        };
+
+        const highCubePrices = {
+            '20ft': 2000,
+            '30ft': 3000,
+            '40ft': 4000
+        };
+
+        const roofPrices = {
+            uniform: { '10ft': 1500, '20ft': 2500, '30ft': 3500, '40ft': 4300 },
+            offset: { '10ft': 1700, '20ft': 2800, '30ft': 3800, '40ft': 4600 }
+        };
+
+        const furnishedPrices = { '10ft': 2500, '20ft': 6000, '30ft': 8000, '40ft': 10000 };
+        const guttersPrices = { '10ft': 400, '20ft': 650, '30ft': 800, '40ft': 1000 };
+        const coveringPrices = { '10ft': 500, '20ft': 1000, '30ft': 1500, '40ft': 2000 };
+        const acPrices = { '10ft': 1000, '20ft': 1500, '30ft': 2000, '40ft': 2500 };
+        const trailerPrices = { '10ft': 3000, '20ft': 6000, '30ft': 7500, '40ft': 10000 };
+        const shippingPrices = { '10ft': 1000, '20ft': 1500, '30ft': 2000, '40ft': 2500 };
+
+        const optionPrices = {
+            terrace: 3000, bayWindow: 700, longWindow: 300, solar: 5000, offgrid: 8000
+        };
+
+        const optionLabels = {
+            roof_uniform: 'Toit 2 pentes uniforme',
+            roof_offset: 'Toit 2 pentes décalé',
+            terrace: 'Terrasse',
+            furnished: 'Aménagement complet',
+            gutters: 'Gouttières',
+            covering: 'Covering extérieur',
+            ac: 'Climatisation (1 split)',
+            ac_2splits: 'Climatisation (2 splits)',
+            solar: 'Panneaux solaires 5Kw',
+            offgrid: 'Off-Grid 10kw',
+            trailer: 'Remorque dépliable',
+            highCube: 'High Cube (HC)',
+            shippingTransport: 'Transport',
+            shippingCrane: 'Grutage',
+            shippingBoth: 'Transport + Grutage'
+        };
+
+        // Fonction helper pour afficher les labels avec compteurs
+        function getOptionLabel(optKey) {
+            if (optKey.startsWith('bayWindow_')) {
+                const count = optKey.split('_')[1];
+                return `Baie${count > 1 ? 's' : ''} vitrée${count > 1 ? 's' : ''} (×${count})`;
+            }
+            if (optKey.startsWith('longWindow_')) {
+                const count = optKey.split('_')[1];
+                return `Fenêtre${count > 1 ? 's' : ''} longue${count > 1 ? 's' : ''} (×${count})`;
+            }
+            return optionLabels[optKey] || optKey;
+        }
+
+        // Boutons
+        document.querySelectorAll('.btn-option').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const option = this.dataset.option;
+                const value = this.dataset.value;
+                
+                this.closest('.btn-group').querySelectorAll('.btn-option').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                config[option] = value;
+                
+                // Gestion Off-Grid (seulement 20/30/40)
+                const offgridToggle = document.getElementById('offgrid');
+                const highCubeToggle = document.getElementById('highcube');
+                
+                if (value === '10ft') {
+                    offgridToggle.disabled = true;
+                    offgridToggle.checked = false;
+                    config.offgrid = false;
+                    
+                    highCubeToggle.disabled = true;
+                    highCubeToggle.checked = false;
+                    config.highCube = false;
+                } else {
+                    offgridToggle.disabled = false;
+                    highCubeToggle.disabled = false;
+                }
+                
+                updateSummary();
+            });
+        });
+
+        // Toggles
+        document.querySelectorAll('input[type="checkbox"][data-option]').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const option = this.dataset.option;
+                config[option] = this.checked;
+                
+                // Gestion exclusive fret
+                if (option === 'shippingBoth' && this.checked) {
+                    config.shippingTransport = false;
+                    config.shippingCrane = false;
+                    document.getElementById('shipping-transport').checked = false;
+                    document.getElementById('shipping-crane').checked = false;
+                } else if ((option === 'shippingTransport' || option === 'shippingCrane') && this.checked) {
+                    config.shippingBoth = false;
+                    document.getElementById('shipping-both').checked = false;
+                }
+                
+                updateSummary();
+            });
+        });
+
+        function calculatePrice() {
+            let total = basePrices[config.size];
+            
+            if (config.roof === 'uniform') total += roofPrices.uniform[config.size];
+            if (config.roof === 'offset') total += roofPrices.offset[config.size];
+            
+            if (config.terrace) total += optionPrices.terrace;
+            if (config.bayWindow) total += optionPrices.bayWindow * config.bayWindowCount;
+            if (config.longWindow) total += optionPrices.longWindow * config.longWindowCount;
+            if (config.solar) total += optionPrices.solar;
+            if (config.offgrid) total += optionPrices.offgrid;
+            
+            if (config.furnished) total += furnishedPrices[config.size];
+            if (config.gutters) total += guttersPrices[config.size];
+            if (config.covering) total += coveringPrices[config.size];
+            if (config.trailer) total += trailerPrices[config.size];
+            
+            // Climatisation avec splits
+            if (config.ac) {
+                total += acPrices[config.size];
+                if (config.acSplits === 2) {
+                    total += 500;
+                }
+            }
+            
+            // High Cube (seulement 20/30/40)
+            if (config.highCube && highCubePrices[config.size]) {
+                total += highCubePrices[config.size];
+            }
+            
+            // Fret
+            if (config.shippingBoth) {
+                total += shippingPrices[config.size];
+            } else if (config.shippingTransport || config.shippingCrane) {
+                total += Math.floor(shippingPrices[config.size] * 0.6);
+            }
+            
+            return total;
+        }
+
+        function calculatePriceWithVAT() {
+            const priceHT = calculatePrice();
+            
+            if (config.polynesia) {
+                // Mode Polynésie : HT + Frais import 26% + TVA 16%
+                const importFee = Math.round(priceHT * IMPORT_FEE_POLYNESIA);
+                const htWithImport = priceHT + importFee;
+                const vat = Math.round(htWithImport * VAT_RATE_POLYNESIA);
+                const priceTTC = htWithImport + vat;
+                
+                // Conversion en XPF
+                return {
+                    ht: Math.round(priceHT * EUR_TO_XPF),
+                    importFee: Math.round(importFee * EUR_TO_XPF),
+                    htWithImport: Math.round(htWithImport * EUR_TO_XPF),
+                    vat: Math.round(vat * EUR_TO_XPF),
+                    ttc: Math.round(priceTTC * EUR_TO_XPF),
+                    currency: 'XPF',
+                    isPolynesia: true
+                };
+            } else {
+                // Mode Standard : HT + TVA 20%
+                const vat = Math.round(priceHT * VAT_RATE_STANDARD);
+                const priceTTC = priceHT + vat;
+                
+                return {
+                    ht: priceHT,
+                    vat: vat,
+                    ttc: priceTTC,
+                    currency: 'EUR',
+                    isPolynesia: false
+                };
+            }
+        }
+
+        function getActiveOptions() {
+            const active = [];
+            
+            if (config.roof === 'uniform') active.push('roof_uniform');
+            if (config.roof === 'offset') active.push('roof_offset');
+            if (config.terrace) active.push('terrace');
+            if (config.furnished) active.push('furnished');
+            if (config.gutters) active.push('gutters');
+            if (config.covering) active.push('covering');
+            if (config.bayWindow) active.push(`bayWindow_${config.bayWindowCount}`);
+            if (config.longWindow) active.push(`longWindow_${config.longWindowCount}`);
+            if (config.ac) {
+                if (config.acSplits === 2) {
+                    active.push('ac_2splits');
+                } else {
+                    active.push('ac');
+                }
+            }
+            if (config.solar) active.push('solar');
+            if (config.offgrid) active.push('offgrid');
+            if (config.trailer) active.push('trailer');
+            if (config.highCube) active.push('highCube');
+            if (config.shippingTransport) active.push('shippingTransport');
+            if (config.shippingCrane) active.push('shippingCrane');
+            if (config.shippingBoth) active.push('shippingBoth');
+            
+            return active;
+        }
+
+        function formatPriceForDisplay(amount, isPolynesia) {
+            if (isPolynesia) {
+                const xpf = Math.round(amount * EUR_TO_XPF);
+                return xpf.toLocaleString('fr-FR') + ' XPF';
+            }
+            return amount.toLocaleString('fr-FR') + ' €';
+        }
+
+        function updateOptionPrices() {
+            const size = config.size;
+            const poly = config.polynesia;
+
+            // House base prices
+            ['10ft', '20ft', '30ft', '40ft'].forEach(s => {
+                const el = document.getElementById('price-size-' + s);
+                if (el) el.textContent = formatPriceForDisplay(basePrices[s], poly);
+            });
+
+            // Roof prices
+            const roofNone = document.getElementById('price-roof-none');
+            if (roofNone) roofNone.textContent = 'Inclus';
+
+            const roofUniform = document.getElementById('price-roof-uniform');
+            if (roofUniform) roofUniform.textContent = '+' + formatPriceForDisplay(roofPrices.uniform[size], poly);
+
+            const roofOffset = document.getElementById('price-roof-offset');
+            if (roofOffset) roofOffset.textContent = '+' + formatPriceForDisplay(roofPrices.offset[size], poly);
+
+            // Terrasse (fixed)
+            const terrace = document.getElementById('price-terrace');
+            if (terrace) terrace.textContent = '+' + formatPriceForDisplay(3000, poly);
+
+            // Aménagement (variable)
+            const furnished = document.getElementById('price-furnished');
+            if (furnished) furnished.textContent = '+' + formatPriceForDisplay(furnishedPrices[size], poly);
+
+            // Gouttières (variable)
+            const gutters = document.getElementById('price-gutters');
+            if (gutters) gutters.textContent = '+' + formatPriceForDisplay(guttersPrices[size], poly);
+
+            // Covering (variable)
+            const covering = document.getElementById('price-covering');
+            if (covering) covering.textContent = '+' + formatPriceForDisplay(coveringPrices[size], poly);
+
+            // Baies vitrées (fixed per unit)
+            const baywindow = document.getElementById('price-baywindow');
+            if (baywindow) baywindow.textContent = formatPriceForDisplay(700, poly) + '/unité';
+
+            // Fenêtres longues (fixed per unit)
+            const longwindow = document.getElementById('price-longwindow');
+            if (longwindow) longwindow.textContent = formatPriceForDisplay(300, poly) + '/unité';
+
+            // Climatisation (variable + split mention)
+            const ac = document.getElementById('price-ac');
+            if (ac) ac.innerHTML = '+' + formatPriceForDisplay(acPrices[size], poly) + ' <small>(+' + formatPriceForDisplay(500, poly) + ' pour 2ème split)</small>';
+
+            // Panneaux solaires (fixed)
+            const solar = document.getElementById('price-solar');
+            if (solar) solar.textContent = '+' + formatPriceForDisplay(5000, poly);
+
+            // Off-grid (fixed, indisponible 10ft)
+            const offgrid = document.getElementById('price-offgrid');
+            if (offgrid) {
+                if (size === '10ft') {
+                    offgrid.textContent = 'Indisponible pour 10FT';
+                } else {
+                    offgrid.textContent = '+' + formatPriceForDisplay(8000, poly);
+                }
+            }
+
+            // Remorque (variable)
+            const trailer = document.getElementById('price-trailer');
+            if (trailer) trailer.textContent = '+' + formatPriceForDisplay(trailerPrices[size], poly);
+
+            // High Cube (variable, indisponible 10ft)
+            const highcube = document.getElementById('price-highcube');
+            if (highcube) {
+                if (size === '10ft') {
+                    highcube.textContent = 'Indisponible pour 10FT';
+                } else {
+                    highcube.textContent = '+' + formatPriceForDisplay(highCubePrices[size], poly);
+                }
+            }
+
+            // Fret (variable)
+            const fret = document.getElementById('price-fret');
+            if (fret) fret.textContent = 'Forfait : ' + formatPriceForDisplay(shippingPrices[size], poly);
+        }
+
+        function updateSummary() {
+            updateOptionPrices();
+            const prices = calculatePriceWithVAT();
+            const surface = surfaces[config.size];
+            const weight = weights[config.size];
+            const sizeLabel = sizeLabels[config.size];
+            const activeOptions = getActiveOptions();
+
+            document.getElementById('summary-size').textContent = sizeLabel;
+            document.getElementById('summary-surface').textContent = surface;
+            document.getElementById('summary-weight').textContent = weight;
+            
+            // Format currency
+            const currencySymbol = prices.currency === 'XPF' ? ' XPF' : ' €';
+            const formatPrice = (val) => val.toLocaleString('fr-FR') + currencySymbol;
+            
+            // Afficher HT / TVA / TTC
+            document.getElementById('price-ht').textContent = formatPrice(prices.ht);
+            document.getElementById('price-vat').textContent = formatPrice(prices.vat);
+            document.getElementById('total-price').textContent = formatPrice(prices.ttc);
+            
+            // Afficher/masquer ligne frais import et ajuster label TVA
+            if (prices.isPolynesia) {
+                document.getElementById('import-fee-row').style.display = 'flex';
+                document.getElementById('price-import').textContent = formatPrice(prices.importFee);
+                document.getElementById('vat-label').textContent = 'TVA (16%)';
+            } else {
+                document.getElementById('import-fee-row').style.display = 'none';
+                document.getElementById('vat-label').textContent = 'TVA (20%)';
+            }
+
+            const optionsContainer = document.getElementById('active-options');
+            if (activeOptions.length === 0) {
+                optionsContainer.innerHTML = '<span class="option-tag">Aucune option</span>';
+            } else {
+                optionsContainer.innerHTML = activeOptions
+                    .map(opt => `<span class="option-tag">${getOptionLabel(opt)}</span>`)
+                    .join('');
+            }
+        }
+
+        function requestQuote() {
+            const prices = calculatePriceWithVAT();
+            const activeOptions = getActiveOptions();
+            const currencySymbol = prices.currency === 'XPF' ? ' XPF' : ' €';
+            const formatPrice = (val) => val.toLocaleString('fr-FR') + currencySymbol;
+
+            // Build the full recap message
+            let message = 'DEMANDE DE DEVIS - MAISON MODULAIRE\n\n';
+            message += '--- CONFIGURATION ---\n';
+            message += `Modèle: ${sizeLabels[config.size]}\n`;
+            message += `Dimensions: ${sizeLabels[config.size]} (${surfaces[config.size]})\n`;
+            message += `Surface: ${surfaces[config.size]}\n`;
+            message += `Poids estimé: ${weights[config.size]}\n`;
+
+            message += '\n--- OPTIONS ACTIVES ---\n';
+            if (activeOptions.length === 0) {
+                message += 'Aucune option sélectionnée\n';
+            } else {
+                activeOptions.forEach(opt => {
+                    message += `- ${getOptionLabel(opt)}\n`;
+                });
+            }
+
+            // Detail specific option categories
+            message += '\n--- DÉTAILS DES OPTIONS ---\n';
+            message += `Toiture: ${config.roof === 'none' ? 'Standard (incluse)' : (config.roof === 'uniform' ? optionLabels.roof_uniform : optionLabels.roof_offset)}\n`;
+            message += `Terrasse: ${config.terrace ? 'Oui' : 'Non'}\n`;
+            message += `Aménagement complet: ${config.furnished ? 'Oui' : 'Non'}\n`;
+            message += `Gouttières: ${config.gutters ? 'Oui' : 'Non'}\n`;
+            message += `Covering extérieur: ${config.covering ? 'Oui' : 'Non'}\n`;
+            message += `Baies vitrées: ${config.bayWindow ? 'Oui (×' + config.bayWindowCount + ')' : 'Non'}\n`;
+            message += `Fenêtres longues: ${config.longWindow ? 'Oui (×' + config.longWindowCount + ')' : 'Non'}\n`;
+            message += `Climatisation: ${config.ac ? 'Oui (' + config.acSplits + ' split' + (config.acSplits > 1 ? 's' : '') + ')' : 'Non'}\n`;
+            message += `Panneaux solaires: ${config.solar ? 'Oui' : 'Non'}\n`;
+            message += `Off-Grid: ${config.offgrid ? 'Oui' : 'Non'}\n`;
+            message += `Remorque dépliable: ${config.trailer ? 'Oui' : 'Non'}\n`;
+            message += `High Cube: ${config.highCube ? 'Oui' : 'Non'}\n`;
+
+            message += '\n--- LIVRAISON & TRANSPORT ---\n';
+            message += `Transport: ${config.shippingTransport ? 'Oui' : 'Non'}\n`;
+            message += `Grutage: ${config.shippingCrane ? 'Oui' : 'Non'}\n`;
+            message += `Transport + Grutage: ${config.shippingBoth ? 'Oui' : 'Non'}\n`;
+            message += `Livraison Polynésie: ${config.polynesia ? 'Oui' : 'Non'}\n`;
+
+            message += '\n--- TARIFICATION ---\n';
+            message += `Prix HT: ${formatPrice(prices.ht)}\n`;
+            if (prices.isPolynesia) {
+                message += `Frais d'importation (26%): ${formatPrice(prices.importFee)}\n`;
+                message += `TVA Polynésie (16%): ${formatPrice(prices.vat)}\n`;
+            } else {
+                message += `TVA (20%): ${formatPrice(prices.vat)}\n`;
+            }
+            message += `TOTAL TTC: ${formatPrice(prices.ttc)}\n`;
+            message += '\n* Prix indicatif sous réserve';
+
+            // Build URL parameters for the contact page
+            const params = new URLSearchParams();
+            params.set('modele', sizeLabels[config.size]);
+            params.set('dimensions', `${sizeLabels[config.size]} (${surfaces[config.size]})`);
+            params.set('surface', surfaces[config.size]);
+            params.set('poids', weights[config.size]);
+            params.set('prix_ht', formatPrice(prices.ht));
+            params.set('tva', formatPrice(prices.vat));
+            params.set('total_ttc', formatPrice(prices.ttc));
+            if (prices.isPolynesia) {
+                params.set('frais_import', formatPrice(prices.importFee));
+                params.set('polynesia', 'oui');
+            }
+            params.set('options', activeOptions.map(opt => getOptionLabel(opt)).join(', ') || 'Aucune');
+            params.set('toiture', config.roof === 'none' ? 'Standard' : (config.roof === 'uniform' ? optionLabels.roof_uniform : optionLabels.roof_offset));
+            params.set('terrasse', config.terrace ? 'Oui' : 'Non');
+            params.set('amenagement', config.furnished ? 'Oui' : 'Non');
+            params.set('gouttieres', config.gutters ? 'Oui' : 'Non');
+            params.set('covering', config.covering ? 'Oui' : 'Non');
+            params.set('baies_vitrees', config.bayWindow ? 'Oui (x' + config.bayWindowCount + ')' : 'Non');
+            params.set('fenetres_longues', config.longWindow ? 'Oui (x' + config.longWindowCount + ')' : 'Non');
+            params.set('climatisation', config.ac ? 'Oui (' + config.acSplits + ' split' + (config.acSplits > 1 ? 's' : '') + ')' : 'Non');
+            params.set('solaire', config.solar ? 'Oui' : 'Non');
+            params.set('offgrid', config.offgrid ? 'Oui' : 'Non');
+            params.set('remorque', config.trailer ? 'Oui' : 'Non');
+            params.set('highcube', config.highCube ? 'Oui' : 'Non');
+            params.set('transport', config.shippingTransport ? 'Oui' : 'Non');
+            params.set('grutage', config.shippingCrane ? 'Oui' : 'Non');
+            params.set('transport_grutage', config.shippingBoth ? 'Oui' : 'Non');
+            params.set('message', message);
+
+            // Redirect to external contact page with all data
+            window.location.href = 'https://klglobalimport.com/contact?' + params.toString();
+        }
+
+        // Initialize
+        initCarousel();
+        updateSummary();
+    </script>
+</body>
+</html>
