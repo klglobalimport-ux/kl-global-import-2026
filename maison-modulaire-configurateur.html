@@ -1543,6 +1543,10 @@
                         <span style="font-size: 0.85rem; color: var(--text-gray);">Frais import (26%)</span>
                         <span style="font-size: 1rem; font-weight: 600; color: var(--accent-green);" id="price-import">0 XPF</span>
                     </div>
+                    <div id="split2-row" style="display: none; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span style="font-size: 0.85rem; color: var(--text-gray);">2ème split clim</span>
+                        <span style="font-size: 1rem; font-weight: 600; color: var(--text-white);" id="price-split2">+500 €</span>
+                    </div>
                     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
                         <span style="font-size: 0.85rem; color: var(--text-gray);" id="vat-label">TVA (20%)</span>
                         <span style="font-size: 1rem; font-weight: 600; color: var(--text-white);" id="price-vat">1 900 €</span>
@@ -2298,6 +2302,14 @@
             } else {
                 document.getElementById('import-fee-row').style.display = 'none';
                 document.getElementById('vat-label').textContent = 'TVA (20%)';
+            }
+
+            // Afficher/masquer ligne 2ème split clim
+            if (config.ac && config.acSplits === 2) {
+                document.getElementById('split2-row').style.display = 'flex';
+                document.getElementById('price-split2').textContent = '+' + formatPriceForDisplay(500, config.polynesia);
+            } else {
+                document.getElementById('split2-row').style.display = 'none';
             }
 
             const optionsContainer = document.getElementById('active-options');
