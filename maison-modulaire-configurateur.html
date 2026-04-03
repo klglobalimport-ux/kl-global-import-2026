@@ -572,15 +572,15 @@
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
-            padding: 30px;
+            padding: 26px;
             backdrop-filter: blur(10px);
         }
 
         .summary-title {
-            font-size: 1rem;
+            font-size: 0.875rem;
             font-weight: 700;
             color: var(--text-white);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             text-align: center;
@@ -588,22 +588,22 @@
 
         .summary-item {
             background: rgba(0, 0, 0, 0.3);
-            padding: 16px;
+            padding: 13px;
             border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .summary-item-label {
-            font-size: 0.65rem;
+            font-size: 0.58rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .summary-item-value {
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--text-white);
         }
@@ -1526,14 +1526,15 @@
             <aside class="summary-sidebar">
                 <h3 class="summary-title">Récapitulatif</h3>
                 
-                <div class="summary-item">
-                    <div class="summary-item-label">Modèle</div>
-                    <div class="summary-item-value" id="summary-size">10 FT</div>
-                </div>
-
-                <div class="summary-item">
-                    <div class="summary-item-label">Surface</div>
-                    <div class="summary-item-value" id="summary-surface">17,6 m²</div>
+                <div style="display:flex;justify-content:space-between;gap:12px;margin-bottom:12px;">
+                    <div class="summary-item" style="flex:1;margin-bottom:0;">
+                        <div class="summary-item-label">Modèle</div>
+                        <div class="summary-item-value" id="summary-size">10 FT</div>
+                    </div>
+                    <div class="summary-item" style="flex:1;margin-bottom:0;">
+                        <div class="summary-item-label">Surface</div>
+                        <div class="summary-item-value" id="summary-surface">17,6 m²</div>
+                    </div>
                 </div>
 
                 <div class="summary-item">
