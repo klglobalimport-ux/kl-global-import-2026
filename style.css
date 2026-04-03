@@ -28,6 +28,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  padding-top: 92px;
   font-family: var(--font-main);
   background: radial-gradient(circle at top, #171717 0, #0f0f10 42%, #0a0a0a 100%);
   color: var(--text-main);
@@ -146,8 +147,10 @@ p {
   gap: 36px;
   padding: 6px 6vw;
   background: rgba(10, 10, 12, 0.62);
-  position: sticky;
-  top: 38px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 9998;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(20px);
