@@ -2036,8 +2036,8 @@
                 this.closest('.btn-group').querySelectorAll('.btn-option').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 
-                config[option] = value;
-                
+                config[option] = option === 'acSplits' ? parseInt(value, 10) : value;
+
                 // Gestion Off-Grid (seulement 20/30/40)
                 const offgridToggle = document.getElementById('offgrid');
                 const highCubeToggle = document.getElementById('highcube');
@@ -2307,7 +2307,7 @@
                 const climAmount = splits === 2 ? 1500 : 1000;
                 document.getElementById('clim-row').style.display = 'flex';
                 document.getElementById('clim-row-label').textContent = 'Climatisation ' + splits + ' split' + (splits > 1 ? 's' : '');
-                document.getElementById('price-clim').textContent = '+' + formatPriceForDisplay(climAmount, config.polynesia);
+                document.getElementById('price-clim').textContent = formatPriceForDisplay(climAmount, config.polynesia);
             } else {
                 document.getElementById('clim-row').style.display = 'none';
             }
