@@ -1368,6 +1368,7 @@
                                         <span class="btn-option-label">2 Splits<br><small>+500€</small></span>
                                     </button>
                                 </div>
+                                <div id="badge-2splits" style="display:none;color:#e53e3e;font-size:11px;margin-top:6px;">⚠ Non disponible en 10ft</div>
                             </div>
                         </div>
                     </div>
@@ -1387,6 +1388,7 @@
                             <span class="toggle-label">Installation solaire (+5000€)</span>
                         </div>
                         <div class="option-price" id="price-solar">+5 000 €</div>
+                        <div id="badge-solar" style="display:none;color:#e53e3e;font-size:11px;margin-top:6px;">⚠ Non disponible en 10ft</div>
                     </div>
 
                     <!-- Off-Grid -->
@@ -1404,6 +1406,7 @@
                             <span class="toggle-label">Autonomie complète (+8000€)</span>
                         </div>
                         <div class="option-price" id="price-offgrid">+8 000 €</div>
+                        <div id="badge-offgrid" style="display:none;color:#e53e3e;font-size:11px;margin-top:6px;">⚠ Non disponible en 10ft</div>
                         <div class="info-box">
                             <strong>💡 Qu'est-ce que l'Off-Grid ?</strong><br>
                             Le système Off-Grid vous permet de produire, stocker et gérer votre propre électricité de manière 100% autonome. Parfait pour les zones isolées ou pour une indépendance énergétique totale. Inclut : batteries haute capacité (20kWh), onduleur triphasé 10kW, 20 panneaux solaires 550W et système de gestion intelligente.
@@ -2027,6 +2030,77 @@
             return optionLabels[optKey] || optKey;
         }
 
+        function updateOptionsAvailability() {
+            const is10ft = config.size === '10ft';
+
+            // --- 2 splits button ---
+            const btn2splits = document.querySelector('[data-option="acSplits"][data-value="2"]');
+            const badge2splits = document.getElementById('badge-2splits');
+            if (is10ft) {
+                btn2splits.style.pointerEvents = 'none';
+                btn2splits.style.opacity = '0.35';
+                if (config.acSplits === 2) {
+                    config.acSplits = 1;
+                    btn2splits.classList.remove('active');
+                    const btn1split = document.querySelector('[data-option="acSplits"][data-value="1"]');
+                    if (btn1split) btn1split.classList.add('active');
+                }
+                if (badge2splits) badge2splits.style.display = 'block';
+            } else {
+                btn2splits.style.pointerEvents = '';
+                btn2splits.style.opacity = '';
+                if (badge2splits) badge2splits.style.display = 'none';
+            }
+
+            // --- Solar ---
+            const solarGroup = document.getElementById('option-solar');
+            const solarToggle = document.getElementById('solar');
+            const badgeSolar = document.getElementById('badge-solar');
+            if (is10ft) {
+                solarGroup.style.pointerEvents = 'none';
+                solarGroup.style.opacity = '0.35';
+                if (config.solar) {
+                    solarToggle.checked = false;
+                    config.solar = false;
+                }
+                if (badgeSolar) badgeSolar.style.display = 'block';
+            } else {
+                solarGroup.style.pointerEvents = '';
+                solarGroup.style.opacity = '';
+                if (badgeSolar) badgeSolar.style.display = 'none';
+            }
+
+            // --- Off-Grid ---
+            const offgridGroup = document.getElementById('option-offgrid');
+            const offgridToggle = document.getElementById('offgrid');
+            const badgeOffgrid = document.getElementById('badge-offgrid');
+            if (is10ft) {
+                offgridGroup.style.pointerEvents = 'none';
+                offgridGroup.style.opacity = '0.35';
+                offgridToggle.disabled = true;
+                if (config.offgrid) {
+                    offgridToggle.checked = false;
+                    config.offgrid = false;
+                }
+                if (badgeOffgrid) badgeOffgrid.style.display = 'block';
+            } else {
+                offgridGroup.style.pointerEvents = '';
+                offgridGroup.style.opacity = '';
+                offgridToggle.disabled = false;
+                if (badgeOffgrid) badgeOffgrid.style.display = 'none';
+            }
+
+            // --- High Cube ---
+            const highCubeToggle = document.getElementById('highcube');
+            if (is10ft) {
+                highCubeToggle.disabled = true;
+                highCubeToggle.checked = false;
+                config.highCube = false;
+            } else {
+                highCubeToggle.disabled = false;
+            }
+        }
+
         // Boutons
         document.querySelectorAll('.btn-option').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -2038,23 +2112,10 @@
                 
                 config[option] = option === 'acSplits' ? parseInt(value, 10) : value;
 
-                // Gestion Off-Grid (seulement 20/30/40)
-                const offgridToggle = document.getElementById('offgrid');
-                const highCubeToggle = document.getElementById('highcube');
-                
-                if (value === '10ft') {
-                    offgridToggle.disabled = true;
-                    offgridToggle.checked = false;
-                    config.offgrid = false;
-                    
-                    highCubeToggle.disabled = true;
-                    highCubeToggle.checked = false;
-                    config.highCube = false;
-                } else {
-                    offgridToggle.disabled = false;
-                    highCubeToggle.disabled = false;
+                if (option === 'size') {
+                    updateOptionsAvailability();
                 }
-                
+
                 updateSummary();
             });
         });
@@ -2414,6 +2475,7 @@
 
         // Initialize
         initCarousel();
+        updateOptionsAvailability();
         updateSummary();
     </script>
 <script src="scroll-back-btn.js" defer></script>
