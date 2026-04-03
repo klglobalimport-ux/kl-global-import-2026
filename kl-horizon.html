@@ -1,37 +1,867 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K&L Global Import - Horizon</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K&L Global Import – Gamme KL-Horizon</title>
+  <meta name="description" content="Gamme KL-Horizon : habitats triangulaires premium en 3 modèles – Aube, Zénith et Solstice. Design architectural, autonomie énergétique, livraison France.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Variables locales ── */
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-dim: rgba(201,168,76,0.15);
+      --dark-panel: #0e0e0f;
+      --card-bg: #131315;
+      --card-border: #242428;
+    }
+
+    /* ── Hero ── */
+    .hz-hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hz-hero__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/habitat/horizon/generated-image.webp');
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.04);
+      transition: transform 8s ease-out;
+    }
+    .hz-hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,10,10,0.25) 0%,
+        rgba(10,10,10,0.0) 35%,
+        rgba(10,10,10,0.65) 70%,
+        rgba(10,10,10,0.98) 100%
+      );
+    }
+    .hz-hero__content {
+      position: relative;
+      z-index: 2;
+      padding: 0 6vw 7vh;
+      max-width: 860px;
+    }
+    .hz-hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .hz-hero__eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hz-hero__title {
+      font-size: clamp(2.8rem, 7vw, 6.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin: 0 0 24px;
+      color: #fff;
+    }
+    .hz-hero__title span {
+      color: var(--gold);
+    }
+    .hz-hero__subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: #b0b0b8;
+      max-width: 520px;
+      line-height: 1.7;
+      margin: 0 0 36px;
+    }
+    .hz-hero__badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .hz-badge {
+      padding: 7px 16px;
+      border: 1px solid var(--card-border);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: #ccc;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+    }
+
+    /* ── Intro strip ── */
+    .hz-intro {
+      background: var(--dark-panel);
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      padding: 56px 6vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+    }
+    .hz-intro__stat {
+      padding: 0 40px;
+      border-right: 1px solid var(--card-border);
+      text-align: center;
+    }
+    .hz-intro__stat:first-child { border-left: none; padding-left: 0; }
+    .hz-intro__stat:last-child { border-right: none; padding-right: 0; }
+    .hz-intro__stat-value {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .hz-intro__stat-label {
+      font-size: 0.8rem;
+      color: #777;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    /* ── Section title ── */
+    .hz-section-head {
+      padding: 80px 6vw 48px;
+      max-width: 700px;
+    }
+    .hz-section-head__label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .hz-section-head__title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0;
+    }
+    .hz-section-head__text {
+      font-size: 1rem;
+      color: #888;
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── Model cards ── */
+    .hz-models {
+      padding: 0 4vw 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hz-model {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 560px;
+      transition: border-color 0.3s;
+    }
+    .hz-model:hover { border-color: rgba(201,168,76,0.35); }
+    .hz-model--reverse { direction: rtl; }
+    .hz-model--reverse > * { direction: ltr; }
+
+    .hz-model__visual {
+      position: relative;
+      overflow: hidden;
+      min-height: 480px;
+    }
+    .hz-model__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .hz-model:hover .hz-model__img { transform: scale(1.04); }
+
+    .hz-model__img-secondary {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 42%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-top-left-radius: 12px;
+      border: 2px solid var(--card-bg);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    .hz-model__badge-solar {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, #1a2a1a, #0d1f0d);
+      border: 1px solid #2d5a2d;
+      color: #5fcf5f;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .hz-model__info {
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+    .hz-model__number {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hz-model__name {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.0;
+      margin: 0 0 6px;
+      letter-spacing: -0.02em;
+    }
+    .hz-model__tagline {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
+      margin: 0 0 28px;
+    }
+
+    .hz-model__specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 32px;
+    }
+    .hz-spec {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .hz-spec__label {
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .hz-spec__value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #eee;
+    }
+
+    .hz-model__features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hz-model__features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+    .hz-model__features li::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .hz-model__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+      border-top: 1px solid var(--card-border);
+      margin-top: auto;
+    }
+    .hz-model__price {
+      display: flex;
+      flex-direction: column;
+    }
+    .hz-model__price-from {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #555;
+    }
+    .hz-model__price-value {
+      font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .hz-model__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+      cursor: pointer;
+    }
+    .hz-model__cta:hover {
+      background: var(--gold);
+      color: #000;
+    }
+    .hz-model__cta-arrow {
+      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+    .hz-model__cta:hover .hz-model__cta-arrow { transform: translateX(3px); }
+
+    /* Solstice full-width variant */
+    .hz-model--solstice {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      min-height: unset;
+    }
+    .hz-model--solstice .hz-model__visual {
+      min-height: 500px;
+      grid-column: 1;
+    }
+    .hz-model--solstice .hz-model__gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      height: 260px;
+    }
+    .hz-model--solstice .hz-model__gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .hz-model--solstice .hz-model__gallery img:hover { transform: scale(1.03); }
+    .hz-model--solstice .hz-model__info {
+      padding: 48px 6vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .hz-model--solstice .hz-model__info-left { display: flex; flex-direction: column; gap: 0; }
+    .hz-model--solstice .hz-model__info-right { display: flex; flex-direction: column; gap: 24px; padding-top: 48px; }
+    .hz-model--solstice .hz-model__specs { grid-template-columns: 1fr 1fr 1fr; }
+    .hz-model--solstice .hz-model__footer {
+      grid-column: 1 / -1;
+      margin-top: 0;
+    }
+
+    /* ── Solar callout ── */
+    .hz-solar {
+      background: linear-gradient(135deg, #0d1a0d, #0a1a0a);
+      border: 1px solid #1e3a1e;
+      border-radius: 16px;
+      padding: 28px 32px;
+    }
+    .hz-solar__icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .hz-solar__title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #5fcf5f;
+      margin-bottom: 10px;
+    }
+    .hz-solar__stats {
+      display: flex;
+      gap: 24px;
+    }
+    .hz-solar__stat-v {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #7fff7f;
+    }
+    .hz-solar__stat-l {
+      font-size: 0.7rem;
+      color: #4a8a4a;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── CTA strip ── */
+    .hz-cta-strip {
+      margin: 0 4vw 100px;
+      background: linear-gradient(135deg, #141410, #1a1a10);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 20px;
+      padding: 64px 8vw;
+      text-align: center;
+    }
+    .hz-cta-strip h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      margin: 0 0 16px;
+    }
+    .hz-cta-strip p {
+      color: #888;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+    .hz-cta-strip__actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 32px;
+      background: var(--gold);
+      color: #000;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 32px;
+      border: 1px solid #333;
+      color: #ccc;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-outline-white:hover { border-color: #888; color: #fff; }
+
+    /* ── Footer ── */
+    .hz-footer {
+      border-top: 1px solid var(--card-border);
+      padding: 40px 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #444;
+      font-size: 0.78rem;
+    }
+    .hz-footer a { color: #555; text-decoration: none; }
+    .hz-footer a:hover { color: #999; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .hz-intro {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .hz-intro__stat {
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+        padding: 0 0 32px;
+        text-align: left;
+      }
+      .hz-intro__stat:last-child { border-bottom: none; padding-bottom: 0; }
+
+      .hz-model {
+        grid-template-columns: 1fr;
+        min-height: unset;
+      }
+      .hz-model--reverse { direction: ltr; }
+      .hz-model__visual { min-height: 300px; }
+      .hz-model__info { padding: 36px 28px; }
+      .hz-model__specs { grid-template-columns: 1fr 1fr; }
+
+      .hz-model--solstice .hz-model__info {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .hz-model--solstice .hz-model__info-right { padding-top: 0; }
+      .hz-model--solstice .hz-model__specs { grid-template-columns: 1fr 1fr; }
+      .hz-model--solstice .hz-model__gallery { height: 180px; }
+
+      .hz-section-head { padding: 48px 5vw 32px; }
+      .hz-models { padding: 0 3vw 60px; }
+      .hz-cta-strip { margin: 0 3vw 60px; padding: 48px 6vw; }
+    }
+
+    @media (max-width: 600px) {
+      .hz-hero__content { padding: 0 5vw 8vh; }
+      .hz-model__footer { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .hz-cta-strip__actions { flex-direction: column; align-items: center; }
+    }
+  </style>
 </head>
-<body style="background-color: #000; color: #fff; font-family: Arial, sans-serif;">
-    <header>
-        <nav style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
-            <div class="logo">
-                <img src="assets/header-logo.jpeg" alt="Logo K&L" style="max-height: 70px;">
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="topbar">
+  <div class="logo">
+    <img src="header-logo.jpeg" alt="K&amp;L Global Import" width="640" height="640">
+  </div>
+  <nav class="topnav" aria-label="Navigation principale">
+    <a href="index.html">ACCUEIL</a>
+    <div class="catalogue-item">
+      <a href="index.html#catalogue" class="catalogue-trigger" aria-haspopup="true">CATALOGUE</a>
+      <div class="mega-menu" role="group" aria-label="Catalogue">
+        <div class="mega-menu__grid">
+          <article class="mega-menu__column">
+            <h2>ENGINS RIPPA</h2>
+            <p>Gamme Mini-Pelles</p>
+            <a href="engins-rippa.html">Voir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h2>SPACE CAPSULE</h2>
+            <p>Habitats Futuristes</p>
+            <a href="habitat.html">Voir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h2>LOISIR &amp; HABITAT</h2>
+            <p>Équipements Premium</p>
+            <a href="loisir-habitat.html">Voir</a>
+          </article>
+        </div>
+      </div>
+    </div>
+    <a href="kl-horizon.html" style="color: var(--gold, #c9a84c);">KL-HORIZON</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hz-hero">
+  <div class="hz-hero__bg" id="heroBg"></div>
+  <div class="hz-hero__content">
+    <p class="hz-hero__eyebrow">Gamme exclusive · Importation directe</p>
+    <h1 class="hz-hero__title">KL-<span>HORIZON</span></h1>
+    <p class="hz-hero__subtitle">
+      Architecture triangulaire, lumière naturelle maximale, performances énergétiques inégalées.
+      Trois modèles pour trois modes de vie.
+    </p>
+    <div class="hz-hero__badges">
+      <span class="hz-badge">Structure acier galvanisé</span>
+      <span class="hz-badge">Vitrage triple épaisseur</span>
+      <span class="hz-badge">Isolation renforcée</span>
+      <span class="hz-badge">Livraison France entière</span>
+    </div>
+  </div>
+</section>
+<script>
+  (function(){
+    var bg = document.getElementById('heroBg');
+    setTimeout(function(){ bg.style.transform = 'scale(1)'; }, 100);
+  })();
+</script>
+
+<!-- ══ STATS STRIP ══ -->
+<div class="hz-intro">
+  <div class="hz-intro__stat">
+    <div class="hz-intro__stat-value">3</div>
+    <div class="hz-intro__stat-label">Modèles disponibles</div>
+  </div>
+  <div class="hz-intro__stat">
+    <div class="hz-intro__stat-value">28 → 68 m²</div>
+    <div class="hz-intro__stat-label">Surface habitable</div>
+  </div>
+  <div class="hz-intro__stat">
+    <div class="hz-intro__stat-value">15 kW</div>
+    <div class="hz-intro__stat-label">Production solaire (Solstice)</div>
+  </div>
+</div>
+
+<!-- ══ SECTION HEAD ══ -->
+<div class="hz-section-head" style="padding-left: 6vw; padding-right: 6vw;">
+  <div class="hz-section-head__label">Nos modèles</div>
+  <h2 class="hz-section-head__title">Choisissez votre horizon</h2>
+  <p class="hz-section-head__text">
+    De l'escapade intime au refuge autonome, chaque modèle KL-Horizon conjugue design architectural
+    et confort premium. Prix usine, zéro intermédiaire.
+  </p>
+</div>
+
+<!-- ══ MODELS ══ -->
+<div class="hz-models">
+
+  <!-- ── AUBE ── -->
+  <div class="hz-model">
+    <div class="hz-model__visual">
+      <img
+        class="hz-model__img"
+        src="assets/habitat/horizon/Triangle T3 fôret.webp"
+        alt="KL-Horizon Aube – habitat triangulaire en forêt"
+        loading="eager"
+      >
+      <img
+        class="hz-model__img-secondary"
+        src="assets/habitat/horizon/Intérieur 1.webp"
+        alt="Intérieur KL-Horizon Aube"
+        loading="lazy"
+      >
+    </div>
+    <div class="hz-model__info">
+      <div class="hz-model__number">Modèle 01 · Entrée de gamme</div>
+      <h2 class="hz-model__name">Aube</h2>
+      <p class="hz-model__tagline">L'essentiel, à son plus haut niveau</p>
+
+      <div class="hz-model__specs">
+        <div class="hz-spec">
+          <div class="hz-spec__label">Surface</div>
+          <div class="hz-spec__value">28 m²</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Niveaux</div>
+          <div class="hz-spec__value">1 niveau</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Hauteur faîtage</div>
+          <div class="hz-spec__value">5,2 m</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Capacité</div>
+          <div class="hz-spec__value">2 – 4 pers.</div>
+        </div>
+      </div>
+
+      <ul class="hz-model__features">
+        <li>Structure porteuse acier galvanisé anti-corrosion</li>
+        <li>Façade vitrée triple vitrage côté levant</li>
+        <li>Parquet flottant, isolation 180 mm</li>
+        <li>Cuisine équipée compact 4 éléments</li>
+        <li>Salle de bain intégrée, sanitaires complets</li>
+        <li>Poêle à bois design scandinave inclus</li>
+      </ul>
+
+      <div class="hz-model__footer">
+        <div class="hz-model__price">
+          <span class="hz-model__price-from">À partir de</span>
+          <span class="hz-model__price-value">28 900 €</span>
+        </div>
+        <a href="contact.html?modele=aube" class="hz-model__cta">
+          Demander un devis <span class="hz-model__cta-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ZÉNITH ── -->
+  <div class="hz-model hz-model--reverse" style="margin-top: 3px;">
+    <div class="hz-model__visual">
+      <img
+        class="hz-model__img"
+        src="assets/habitat/horizon/Triangle T1 campagne.webp"
+        alt="KL-Horizon Zénith – habitat triangulaire à la campagne"
+        loading="lazy"
+      >
+    </div>
+    <div class="hz-model__info">
+      <div class="hz-model__number">Modèle 02 · Gamme Intermédiaire</div>
+      <h2 class="hz-model__name">Zénith</h2>
+      <p class="hz-model__tagline">Vivre en hauteur, vivre autrement</p>
+
+      <div class="hz-model__specs">
+        <div class="hz-spec">
+          <div class="hz-spec__label">Surface</div>
+          <div class="hz-spec__value">68 m²</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Niveaux</div>
+          <div class="hz-spec__value">2 niveaux</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Hauteur faîtage</div>
+          <div class="hz-spec__value">7,8 m</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Capacité</div>
+          <div class="hz-spec__value">4 – 6 pers.</div>
+        </div>
+      </div>
+
+      <ul class="hz-model__features">
+        <li>Double niveau avec escalier hélicoïdal acier</li>
+        <li>Séjour ouvert double hauteur, volumes cathédrale</li>
+        <li>2 chambres au second niveau, vue panoramique</li>
+        <li>Cuisine semi-ouverte îlot central</li>
+        <li>Terrasse intégrée en bois composite</li>
+        <li>Pré-câblage domotique et panneau solaire optionnel</li>
+        <li>Double vitrage acoustique, isolation RE2020</li>
+      </ul>
+
+      <div class="hz-model__footer">
+        <div class="hz-model__price">
+          <span class="hz-model__price-from">À partir de</span>
+          <span class="hz-model__price-value">49 900 €</span>
+        </div>
+        <a href="contact.html?modele=zenith" class="hz-model__cta">
+          Demander un devis <span class="hz-model__cta-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SOLSTICE ── -->
+  <div class="hz-model hz-model--solstice" style="margin-top: 3px;">
+    <div class="hz-model__visual">
+      <img
+        class="hz-model__img"
+        src="assets/habitat/horizon/后右斜视图 拷贝.webp"
+        alt="KL-Horizon Solstice – habitat solaire autonome"
+        loading="lazy"
+        onerror="this.src='assets/habitat/horizon/generated-image.webp'"
+      >
+      <span class="hz-model__badge-solar">⬡ Autonomie solaire</span>
+    </div>
+
+    <div class="hz-model__gallery">
+      <img
+        src="assets/habitat/horizon/室内4.webp"
+        alt="Mezzanine intérieure Solstice"
+        loading="lazy"
+      >
+      <img
+        src="assets/habitat/horizon/三角屋.webp"
+        alt="Vue architecturale KL-Horizon Solstice"
+        loading="lazy"
+        onerror="this.src='assets/habitat/horizon/generated-image.webp'"
+      >
+    </div>
+
+    <div class="hz-model__info">
+      <div class="hz-model__info-left">
+        <div class="hz-model__number">Modèle 03 · Prestige &amp; Autonomie</div>
+        <h2 class="hz-model__name">Solstice</h2>
+        <p class="hz-model__tagline">Le sommet. L'indépendance totale.</p>
+
+        <div class="hz-model__specs">
+          <div class="hz-spec">
+            <div class="hz-spec__label">Surface</div>
+            <div class="hz-spec__value">54 m²</div>
+          </div>
+          <div class="hz-spec">
+            <div class="hz-spec__label">Mezzanine</div>
+            <div class="hz-spec__value">+ Mezz. ouverte</div>
+          </div>
+          <div class="hz-spec">
+            <div class="hz-spec__label">Hauteur faîtage</div>
+            <div class="hz-spec__value">8,5 m</div>
+          </div>
+        </div>
+
+        <ul class="hz-model__features">
+          <li>Mezzanine ouverte sur séjour double hauteur</li>
+          <li>Parois vitrées totales, lumière zénithale</li>
+          <li>Chambre principale avec salle de bain attenante</li>
+          <li>Cuisine premium, plan de travail grès cérame</li>
+          <li>Radiants plafond basse consommation</li>
+          <li>Gestion domotique tactile intégrée</li>
+        </ul>
+      </div>
+
+      <div class="hz-model__info-right">
+        <div class="hz-solar">
+          <div class="hz-solar__icon">☀</div>
+          <div class="hz-solar__title">Pack Énergie Solaire Intégré</div>
+          <div class="hz-solar__stats">
+            <div>
+              <div class="hz-solar__stat-v">15 kW</div>
+              <div class="hz-solar__stat-l">Production crête</div>
             </div>
-            <ul style="list-style: none; display: flex; gap: 20px;">
-                <li><a href="index.html" style="color: #fff; text-decoration: none;">Accueil</a></li>
-                <li><a href="kl-horizon.html" style="color: #fff; text-decoration: none; border-bottom: 2px solid #fff;">Horizon</a></li>
-            </ul>
-        </nav>
-    </header>
+            <div>
+              <div class="hz-solar__stat-v">30 kWh</div>
+              <div class="hz-solar__stat-l">Stockage batterie</div>
+            </div>
+          </div>
+        </div>
 
-    <main style="padding: 40px; text-align: center;">
-        <section class="hero">
-            <h1 style="font-size: 3rem; margin-bottom: 20px;">GAMME HORIZON</h1>
-            <p style="font-size: 1.2rem; color: #ccc;">L'excellence de l'importation pour vos projets.</p>
-        </section>
+        <div class="hz-model__footer" style="padding-top: 24px; border-top: 1px solid var(--card-border);">
+          <div class="hz-model__price">
+            <span class="hz-model__price-from">À partir de</span>
+            <span class="hz-model__price-value">69 900 €</span>
+          </div>
+          <a href="contact.html?modele=solstice" class="hz-model__cta">
+            Demander un devis <span class="hz-model__cta-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <section class="gallery" style="margin-top: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-            <img src="assets/habitat/horizon/ta-photo.webp" alt="Produit Horizon" style="width: 100%; border-radius: 10px;" onerror="this.style.display='none'">
-        </section>
-    </main>
+</div><!-- /.hz-models -->
 
-    <footer style="text-align: center; padding: 40px; color: #666;">
-        <p>&copy; 2026 K&L Global Import - Tous droits réservés.</p>
-    </footer>
+<!-- ══ CTA STRIP ══ -->
+<div class="hz-cta-strip">
+  <h2>Votre projet, notre expertise</h2>
+  <p>
+    Étude personnalisée, simulation énergétique, livraison &amp; installation clé en main.
+    Nos conseillers répondent sous 24 h.
+  </p>
+  <div class="hz-cta-strip__actions">
+    <a href="contact.html" class="btn-gold">Prendre rendez-vous</a>
+    <a href="index.html" class="btn-outline-white">Voir tout le catalogue</a>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="hz-footer">
+  <span>&copy; 2026 K&amp;L Global Import · Tous droits réservés</span>
+  <div style="display:flex; gap: 24px;">
+    <a href="index.html">Accueil</a>
+    <a href="contact.html">Contact</a>
+    <a href="mentions-legales.html">Mentions légales</a>
+  </div>
+</footer>
+
 </body>
 </html>
