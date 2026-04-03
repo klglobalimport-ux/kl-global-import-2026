@@ -1543,9 +1543,9 @@
                         <span style="font-size: 0.85rem; color: var(--text-gray);">Frais import (26%)</span>
                         <span style="font-size: 1rem; font-weight: 600; color: var(--accent-green);" id="price-import">0 XPF</span>
                     </div>
-                    <div id="split2-row" style="display: none; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                        <span style="font-size: 0.85rem; color: var(--text-gray);">2ème split clim</span>
-                        <span style="font-size: 1rem; font-weight: 600; color: var(--text-white);" id="price-split2">+500 €</span>
+                    <div id="clim-row" style="display: none; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span style="font-size: 0.85rem; color: var(--text-gray);" id="clim-row-label">Climatisation 1 split</span>
+                        <span style="font-size: 1rem; font-weight: 600; color: var(--text-white);" id="price-clim">+1 000 €</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
                         <span style="font-size: 0.85rem; color: var(--text-gray);" id="vat-label">TVA (20%)</span>
@@ -2097,12 +2097,9 @@
             if (config.covering) total += coveringPrices[config.size];
             if (config.trailer) total += trailerPrices[config.size];
             
-            // Climatisation avec splits
+            // Climatisation : 1000€ pour 1 split, 1500€ pour 2 splits
             if (config.ac) {
-                total += acPrices[config.size];
-                if (config.acSplits === 2) {
-                    total += 500;
-                }
+                total += config.acSplits === 2 ? 1500 : 1000;
             }
             
             // High Cube (seulement 20/30/40)
@@ -2304,12 +2301,15 @@
                 document.getElementById('vat-label').textContent = 'TVA (20%)';
             }
 
-            // Afficher/masquer ligne 2ème split clim
-            if (config.ac && config.acSplits === 2) {
-                document.getElementById('split2-row').style.display = 'flex';
-                document.getElementById('price-split2').textContent = '+' + formatPriceForDisplay(500, config.polynesia);
+            // Afficher/masquer ligne climatisation
+            if (config.ac) {
+                const splits = config.acSplits === 2 ? 2 : 1;
+                const climAmount = splits === 2 ? 1500 : 1000;
+                document.getElementById('clim-row').style.display = 'flex';
+                document.getElementById('clim-row-label').textContent = 'Climatisation ' + splits + ' split' + (splits > 1 ? 's' : '');
+                document.getElementById('price-clim').textContent = '+' + formatPriceForDisplay(climAmount, config.polynesia);
             } else {
-                document.getElementById('split2-row').style.display = 'none';
+                document.getElementById('clim-row').style.display = 'none';
             }
 
             const optionsContainer = document.getElementById('active-options');
