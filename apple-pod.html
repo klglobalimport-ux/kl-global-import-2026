@@ -101,12 +101,14 @@
 
     .pod-visual {
       position: relative;
-      height: 70vh;
+      height: 55vh;
       overflow: hidden;
     }
     .pod-visual img {
       width: 100%; height: 100%;
       object-fit: cover; object-position: center;
+      transform: scale(0.9);
+      transform-origin: center center;
       display: block;
     }
     .pod-visual__overlay {
@@ -318,7 +320,7 @@
       .pod-spec { flex: 1 1 45%; }
     }
     @media (max-width: 600px) {
-      .pod-visual { height: 55vh; }
+      .pod-visual { height: 45vh; }
       .pod-model-name { font-size: 3rem; }
       .pod-intro__title { font-size: 3rem; }
       .pod-cta-strip__actions { flex-direction: column; align-items: center; }
@@ -447,7 +449,7 @@
 <!-- ══ S ══ -->
 <section class="pod-section">
   <div class="pod-visual">
-    <img src="assets/apple-pod/KL-pod-S.webp" alt="KL·Pod S" loading="lazy">
+    <img src="assets/apple-pod/KL-pod-M-1.webp" alt="KL·Pod S" loading="lazy">
     <div class="pod-visual__overlay">
       <span class="pod-model-label">Modèle 02 · Jardin &amp; Locatif</span>
       <h2 class="pod-model-name">KL·Pod S</h2>
