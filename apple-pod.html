@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KL · Pod – K&amp;L Global Import</title>
+  <meta name="description" content="KL·Pod : lodges mobiles CFRP en 5 tailles XS à XL. Posez-les partout, sans permis de construire. Idéal Airbnb, résidence secondaire, habitation principale.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Variables locales ── */
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-dim: rgba(201,168,76,0.15);
+      --dark-panel: #0e0e0f;
+      --card-bg: #131315;
+      --card-border: #242428;
+    }
+
+    /* ── Hero ── */
+    .hz-hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hz-hero__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/apple-pod/pod-xl-1.webp');
+      background-size: cover;
+      background-position: center 40%;
+      transform: scale(1.04);
+      transition: transform 8s ease-out;
+    }
+    .hz-hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,10,10,0.25) 0%,
+        rgba(10,10,10,0.0) 35%,
+        rgba(10,10,10,0.65) 70%,
+        rgba(10,10,10,0.98) 100%
+      );
+    }
+    .hz-hero__content {
+      position: relative;
+      z-index: 2;
+      padding: 0 6vw 7vh;
+      max-width: 860px;
+    }
+    .hz-hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .hz-hero__eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hz-hero__title {
+      font-size: clamp(2.8rem, 7vw, 6.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin: 0 0 24px;
+      color: #fff;
+    }
+    .hz-hero__title span { color: var(--gold); }
+    .hz-hero__subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: #b0b0b8;
+      max-width: 520px;
+      line-height: 1.7;
+      margin: 0 0 36px;
+    }
+    .hz-hero__badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .hz-badge {
+      padding: 7px 16px;
+      border: 1px solid var(--card-border);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: #ccc;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+    }
+
+    /* ── Intro strip ── */
+    .hz-intro {
+      background: var(--dark-panel);
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      padding: 56px 6vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+    }
+    .hz-intro__stat {
+      padding: 0 40px;
+      border-right: 1px solid var(--card-border);
+      text-align: center;
+    }
+    .hz-intro__stat:first-child { border-left: none; padding-left: 0; }
+    .hz-intro__stat:last-child { border-right: none; padding-right: 0; }
+    .hz-intro__stat-value {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .hz-intro__stat-label {
+      font-size: 0.8rem;
+      color: #777;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    /* ── Section title ── */
+    .hz-section-head {
+      padding: 80px 6vw 48px;
+      max-width: 700px;
+    }
+    .hz-section-head__label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .hz-section-head__title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0;
+    }
+    .hz-section-head__text {
+      font-size: 1rem;
+      color: #888;
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── Model cards ── */
+    .hz-models {
+      padding: 0 4vw 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hz-model {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 560px;
+      transition: border-color 0.3s;
+    }
+    .hz-model:hover { border-color: rgba(201,168,76,0.35); }
+    .hz-model--reverse { direction: rtl; }
+    .hz-model--reverse > * { direction: ltr; }
+
+    .hz-model__visual {
+      position: relative;
+      overflow: hidden;
+      min-height: 480px;
+    }
+    .hz-model__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .hz-model:hover .hz-model__img { transform: scale(1.04); }
+
+    .hz-model__img-secondary {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 42%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-top-left-radius: 12px;
+      border: 2px solid var(--card-bg);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    .hz-model__badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, #1a1a2a, #0d0d1f);
+      border: 1px solid #2d2d5a;
+      color: #7f9fff;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .hz-model__info {
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+    .hz-model__number {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hz-model__name {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.0;
+      margin: 0 0 6px;
+      letter-spacing: -0.02em;
+    }
+    .hz-model__tagline {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
+      margin: 0 0 28px;
+    }
+
+    .hz-model__specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 32px;
+    }
+    .hz-spec {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .hz-spec__label {
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .hz-spec__value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #eee;
+    }
+
+    .hz-model__features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hz-model__features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+    .hz-model__features li::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .hz-model__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+      border-top: 1px solid var(--card-border);
+      margin-top: auto;
+    }
+    .hz-model__price {
+      display: flex;
+      flex-direction: column;
+    }
+    .hz-model__price-from {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #555;
+    }
+    .hz-model__price-value {
+      font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .hz-model__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+      cursor: pointer;
+    }
+    .hz-model__cta:hover {
+      background: var(--gold);
+      color: #000;
+    }
+    .hz-model__cta-arrow {
+      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+    .hz-model__cta:hover .hz-model__cta-arrow { transform: translateX(3px); }
+
+    /* XL full-width variant */
+    .hz-model--xl {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      min-height: unset;
+    }
+    .hz-model--xl .hz-model__visual {
+      min-height: 500px;
+      grid-column: 1;
+    }
+    .hz-model--xl .hz-model__gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      height: 260px;
+    }
+    .hz-model--xl .hz-model__gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .hz-model--xl .hz-model__gallery img:hover { transform: scale(1.03); }
+    .hz-model--xl .hz-model__info {
+      padding: 48px 6vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .hz-model--xl .hz-model__info-left { display: flex; flex-direction: column; gap: 0; }
+    .hz-model--xl .hz-model__info-right { display: flex; flex-direction: column; gap: 24px; padding-top: 48px; }
+    .hz-model--xl .hz-model__specs { grid-template-columns: 1fr 1fr 1fr; }
+    .hz-model--xl .hz-model__footer {
+      grid-column: 1 / -1;
+      margin-top: 0;
+    }
+
+    /* ── Callout mobilité ── */
+    .hz-mobility {
+      background: linear-gradient(135deg, #0d0d1a, #0a0a1a);
+      border: 1px solid #1e1e3a;
+      border-radius: 16px;
+      padding: 28px 32px;
+    }
+    .hz-mobility__icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .hz-mobility__title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #7f9fff;
+      margin-bottom: 10px;
+    }
+    .hz-mobility__stats {
+      display: flex;
+      gap: 24px;
+    }
+    .hz-mobility__stat-v {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #aabfff;
+    }
+    .hz-mobility__stat-l {
+      font-size: 0.7rem;
+      color: #4a4a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── CTA strip ── */
+    .hz-cta-strip {
+      margin: 0 4vw 100px;
+      background: linear-gradient(135deg, #141410, #1a1a10);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 20px;
+      padding: 64px 8vw;
+      text-align: center;
+    }
+    .hz-cta-strip h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      margin: 0 0 16px;
+    }
+    .hz-cta-strip p {
+      color: #888;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+    .hz-cta-strip__actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 32px;
+      background: var(--gold);
+      color: #000;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 32px;
+      border: 1px solid #333;
+      color: #ccc;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-outline-white:hover { border-color: #888; color: #fff; }
+
+    /* ── Footer ── */
+    .hz-footer {
+      border-top: 1px solid var(--card-border);
+      padding: 40px 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #444;
+      font-size: 0.78rem;
+    }
+    .hz-footer a { color: #555; text-decoration: none; }
+    .hz-footer a:hover { color: #999; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .hz-intro {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .hz-intro__stat {
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+        padding: 0 0 32px;
+        text-align: left;
+      }
+      .hz-intro__stat:last-child { border-bottom: none; padding-bottom: 0; }
+
+      .hz-model {
+        grid-template-columns: 1fr;
+        min-height: unset;
+      }
+      .hz-model--reverse { direction: ltr; }
+      .hz-model__visual { min-height: 300px; }
+      .hz-model__info { padding: 36px 28px; }
+      .hz-model__specs { grid-template-columns: 1fr 1fr; }
+
+      .hz-model--xl .hz-model__info {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .hz-model--xl .hz-model__info-right { padding-top: 0; }
+      .hz-model--xl .hz-model__specs { grid-template-columns: 1fr 1fr; }
+      .hz-model--xl .hz-model__gallery { height: 180px; }
+
+      .hz-section-head { padding: 48px 5vw 32px; }
+      .hz-models { padding: 0 3vw 60px; }
+      .hz-cta-strip { margin: 0 3vw 60px; padding: 48px 6vw; }
+    }
+
+    @media (max-width: 600px) {
+      .hz-hero__content { padding: 0 5vw 8vh; }
+      .hz-model__footer { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .hz-cta-strip__actions { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="topbar">
+  <div class="logo">
+    <img src="header-logo.jpeg" alt="K&amp;L Global Import" width="640" height="640">
+  </div>
+  <nav class="topnav" aria-label="Navigation principale">
+    <a href="index.html">ACCUEIL</a>
+    <div class="catalogue-item">
+      <a href="index.html#catalogue" class="catalogue-trigger" aria-haspopup="true">CATALOGUE</a>
+      <div class="mega-menu" role="group" aria-label="Catalogue">
+        <div class="mega-menu__grid">
+          <article class="mega-menu__column">
+            <h2>ENGINS RIPPA</h2>
+            <p>Gamme Mini-Pelles</p>
+            <a href="engins-rippa.html">Voir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h2>SPACE CAPSULE</h2>
+            <p>Habitats Futuristes</p>
+            <a href="habitat.html">Voir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h2>LOISIR &amp; HABITAT</h2>
+            <p>Équipements Premium</p>
+            <a href="loisir-habitat.html">Voir</a>
+          </article>
+        </div>
+      </div>
+    </div>
+    <a href="kl-horizon.html">KL-HORIZON</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
+</header>
+
+<a href="habitat.html" style="position:fixed;left:24px;top:116px;z-index:10001;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:1px solid rgba(201,168,76,0.4);background:rgba(10,10,12,0.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--gold,#c9a84c);text-decoration:none;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">← Retour au menu précédent</a>
+
+<!-- ══ HERO ══ -->
+<section class="hz-hero">
+  <div class="hz-hero__bg" id="heroBg"></div>
+  <div class="hz-hero__content">
+    <p class="hz-hero__eyebrow">Gamme exclusive · Lodge &amp; Mobilité</p>
+    <h1 class="hz-hero__title">KL·<span>POD</span></h1>
+    <p class="hz-hero__subtitle">
+      Le lodge mobile — posez-le partout, vivez-le pleinement.
+    </p>
+    <div class="hz-hero__badges">
+      <span class="hz-badge">Structure CFRP brevetée</span>
+      <span class="hz-badge">Sans permis de construire</span>
+      <span class="hz-badge">Mobilité sur remorque</span>
+      <span class="hz-badge">Design primé</span>
+      <span class="hz-badge">Isolation U 0.024 W/m·K</span>
+    </div>
+  </div>
+</section>
+<script>
+  (function(){
+    var bg = document.getElementById('heroBg');
+    setTimeout(function(){ bg.style.transform = 'scale(1)'; }, 100);
+  })();
+</script>
+
+<!-- ══ STATS STRIP ══ -->
+<div class="hz-intro">
+  <div class="hz-intro__stat">
+    <div class="hz-intro__stat-value">5</div>
+    <div class="hz-intro__stat-label">Modèles XS → XL</div>
+  </div>
+  <div class="hz-intro__stat">
+    <div class="hz-intro__stat-value">CFRP</div>
+    <div class="hz-intro__stat-label">Matériau carbone ultra-léger</div>
+  </div>
+  <div class="hz-intro__stat">
+    <div class="hz-intro__stat-value">0 permis</div>
+    <div class="hz-intro__stat-label">Aucun permis de construire requis</div>
+  </div>
+</div>
+
+<!-- ══ SECTION HEAD ══ -->
+<div class="hz-section-head" style="padding-left: 6vw; padding-right: 6vw;">
+  <div class="hz-section-head__label">Nos modèles</div>
+  <h2 class="hz-section-head__title">Choisissez votre Pod</h2>
+  <p class="hz-section-head__text">
+    Du bureau solo au lodge resort, chaque KL·Pod est conçu pour être posé en quelques heures, sans fondations,
+    sans permis de construire. Structure CFRP, isolation record, vitrage trempé intimité — posez-le partout, vivez-le pleinement.
+  </p>
+</div>
+
+<!-- ══ MODELS ══ -->
+<div class="hz-models">
+
+  <!-- ── XS ── -->
+  <div class="hz-model">
+    <div class="hz-model__visual">
+      <img
+        class="hz-model__img"
+        src="assets/apple-pod/pod-xs-1.webp"
+        alt="KL·Pod XS – bureau ou chambre solo"
+        loading="eager"
+      >
+      <img
+        class="hz-model__img-secondary"
+        src="assets/apple-pod/pod-xs-2.webp"
+        alt="KL·Pod XS intérieur"
+        loading="lazy"
+      >
+    </div>
+    <div class="hz-model__info">
+      <div class="hz-model__number">Modèle 01 · Entrée de gamme</div>
+      <h2 class="hz-model__name">KL·Pod XS</h2>
+      <p class="hz-model__tagline">Bureau ou chambre solo — compact, posé en une journée</p>
+
+      <div class="hz-model__specs">
+        <div class="hz-spec">
+          <div class="hz-spec__label">Dimensions</div>
+          <div class="hz-spec__value">2,2 × 2,2 m</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Matériau</div>
+          <div class="hz-spec__value">CFRP</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Isolation</div>
+          <div class="hz-spec__value">U 0.024 W/m·K</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Mobilité</div>
+          <div class="hz-spec__value">Sur remorque</div>
+        </div>
+      </div>
+
+      <ul class="hz-model__features">
+        <li>Structure CFRP brevetée — ultra-légère et indestructible</li>
+        <li>Isolation thermique record U 0.024 W/m·K</li>
+        <li>Vitrage trempé intimité — lumineux sans vis-à-vis</li>
+        <li>Posable sans fondations, sans travaux</li>
+        <li>Aucun permis de construire requis</li>
+        <li>Livraison et pose clé en main en option</li>
+      </ul>
+
+      <div class="hz-model__footer">
+        <div class="hz-model__price">
+          <span class="hz-model__price-from">Prix</span>
+          <span class="hz-model__price-value">Sur devis</span>
+        </div>
+        <a href="contact.html?modele=pod-xs" class="hz-model__cta">
+          Demander un devis <span class="hz-model__cta-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── S ── -->
+  <div class="hz-model hz-model--reverse" style="margin-top: 3px;">
+    <div class="hz-model__visual">
+      <img
+        class="hz-model__img"
+        src="assets/apple-pod/pod-s-1.webp"
+        alt="KL·Pod S – chambre cosy dans votre jardin"
+        loading="lazy"
+      >
+      <span class="hz-model__badge">⬡ Jardin &amp; Airbnb</span>
+    </div>
+    <div class="hz-model__info">
+      <div class="hz-model__number">Modèle 02 · Jardin &amp; Locatif</div>
+      <h2 class="hz-model__name">KL·Pod S</h2>
+      <p class="hz-model__tagline">Chambre cosy dans votre jardin — rentabilisez votre terrain</p>
+
+      <div class="hz-model__specs">
+        <div class="hz-spec">
+          <div class="hz-spec__label">Dimensions</div>
+          <div class="hz-spec__value">2,8 × 2,2 m</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Matériau</div>
+          <div class="hz-spec__value">CFRP</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Isolation</div>
+          <div class="hz-spec__value">U 0.024 W/m·K</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Mobilité</div>
+          <div class="hz-spec__value">Sur remorque</div>
+        </div>
+      </div>
+
+      <ul class="hz-model__features">
+        <li>Chambre indépendante dans votre jardin dès le premier week-end</li>
+        <li>Idéal location Airbnb — retour sur investissement rapide</li>
+        <li>CFRP résistant aux intempéries, entretien zéro</li>
+        <li>Porte et fenêtres à vitrage trempé intimité</li>
+        <li>Installation sans fondations ni déclaration préalable</li>
+        <li>Déplaçable en 1h sur remorque homologuée</li>
+      </ul>
+
+      <div class="hz-model__footer">
+        <div class="hz-model__price">
+          <span class="hz-model__price-from">Prix</span>
+          <span class="hz-model__price-value">Sur devis</span>
+        </div>
+        <a href="contact.html?modele=pod-s" class="hz-model__cta">
+          Demander un devis <span class="hz-model__cta-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── M ── -->
+  <div class="hz-model" style="margin-top: 3px;">
+    <div class="hz-model__visual">
+      <img
+        class="hz-model__img"
+        src="assets/apple-pod/pod-m-1.webp"
+        alt="KL·Pod M – studio lodge Airbnb clé en main"
+        loading="lazy"
+      >
+      <img
+        class="hz-model__img-secondary"
+        src="assets/apple-pod/pod-m-2.webp"
+        alt="KL·Pod M intérieur"
+        loading="lazy"
+      >
+    </div>
+    <div class="hz-model__info">
+      <div class="hz-model__number">Modèle 03 · Studio Lodge</div>
+      <h2 class="hz-model__name">KL·Pod M</h2>
+      <p class="hz-model__tagline">Studio lodge Airbnb clé en main — design primé, rentabilité prouvée</p>
+
+      <div class="hz-model__specs">
+        <div class="hz-spec">
+          <div class="hz-spec__label">Dimensions</div>
+          <div class="hz-spec__value">3,8 × 2,2 m</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Matériau</div>
+          <div class="hz-spec__value">CFRP</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Isolation</div>
+          <div class="hz-spec__value">U 0.024 W/m·K</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Mobilité</div>
+          <div class="hz-spec__value">Sur remorque</div>
+        </div>
+      </div>
+
+      <ul class="hz-model__features">
+        <li>Studio complet : coin nuit, coin salon, kitchenette</li>
+        <li>Design primé — expérience hôte 5 étoiles garantie</li>
+        <li>Coque CFRP — 3× plus légère que l'acier, 10× plus résistante</li>
+        <li>Vitrage trempé intimité grand format, lumière naturelle maximale</li>
+        <li>Aucun permis de construire — posable sur n'importe quelle parcelle</li>
+        <li>Climatisation &amp; chauffage en option, prêt en 48h</li>
+      </ul>
+
+      <div class="hz-model__footer">
+        <div class="hz-model__price">
+          <span class="hz-model__price-from">Prix</span>
+          <span class="hz-model__price-value">Sur devis</span>
+        </div>
+        <a href="contact.html?modele=pod-m" class="hz-model__cta">
+          Demander un devis <span class="hz-model__cta-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── L ── -->
+  <div class="hz-model hz-model--reverse" style="margin-top: 3px;">
+    <div class="hz-model__visual">
+      <img
+        class="hz-model__img"
+        src="assets/apple-pod/pod-l-1.webp"
+        alt="KL·Pod L – logement complet lumière et espace"
+        loading="lazy"
+      >
+      <img
+        class="hz-model__img-secondary"
+        src="assets/apple-pod/pod-l-2.webp"
+        alt="KL·Pod L vue secondaire"
+        loading="lazy"
+      >
+    </div>
+    <div class="hz-model__info">
+      <div class="hz-model__number">Modèle 04 · Logement Complet</div>
+      <h2 class="hz-model__name">KL·Pod L</h2>
+      <p class="hz-model__tagline">Logement complet — lumière, espace, liberté totale</p>
+
+      <div class="hz-model__specs">
+        <div class="hz-spec">
+          <div class="hz-spec__label">Dimensions</div>
+          <div class="hz-spec__value">5,9 × 2,2 m</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Matériau</div>
+          <div class="hz-spec__value">CFRP</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Isolation</div>
+          <div class="hz-spec__value">U 0.024 W/m·K</div>
+        </div>
+        <div class="hz-spec">
+          <div class="hz-spec__label">Mobilité</div>
+          <div class="hz-spec__value">Sur remorque</div>
+        </div>
+      </div>
+
+      <ul class="hz-model__features">
+        <li>Logement tout confort : salon, chambre, cuisine, salle de bain</li>
+        <li>Grandes ouvertures vitrées, sensation d'espace maximale</li>
+        <li>Idéal résidence secondaire, locatif ou habitation principale</li>
+        <li>Mobilité sur remorque double essieu homologuée</li>
+        <li>Raccordement eau, électricité, fibre en option</li>
+        <li>Durée de vie CFRP : 50 ans garantis, entretien minimal</li>
+      </ul>
+
+      <div class="hz-model__footer">
+        <div class="hz-model__price">
+          <span class="hz-model__price-from">Prix</span>
+          <span class="hz-model__price-value">Sur devis</span>
+        </div>
+        <a href="contact.html?modele=pod-l" class="hz-model__cta">
+          Demander un devis <span class="hz-model__cta-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── XL ── -->
+  <div class="hz-model hz-model--xl" style="margin-top: 3px;">
+    <div class="hz-model__visual">
+      <img
+        class="hz-model__img"
+        src="assets/apple-pod/pod-xl-1.webp"
+        alt="KL·Pod XL – grand lodge resort ou habitation principale"
+        loading="lazy"
+      >
+      <span class="hz-model__badge">⬡ Grand lodge &amp; Resort</span>
+    </div>
+
+    <div class="hz-model__gallery">
+      <img
+        src="assets/apple-pod/pod-xl-2.webp"
+        alt="KL·Pod XL vue 2"
+        loading="lazy"
+      >
+      <img
+        src="assets/apple-pod/pod-xl-3.webp"
+        alt="KL·Pod XL vue 3"
+        loading="lazy"
+      >
+    </div>
+
+    <div class="hz-model__info">
+      <div class="hz-model__info-left">
+        <div class="hz-model__number">Modèle 05 · Prestige &amp; Resort</div>
+        <h2 class="hz-model__name">KL·Pod XL</h2>
+        <p class="hz-model__tagline">Grand lodge resort ou habitation principale — l'expérience ultime.</p>
+
+        <div class="hz-model__specs">
+          <div class="hz-spec">
+            <div class="hz-spec__label">Dimensions</div>
+            <div class="hz-spec__value">11,6 × 2,2 m</div>
+          </div>
+          <div class="hz-spec">
+            <div class="hz-spec__label">Matériau</div>
+            <div class="hz-spec__value">CFRP</div>
+          </div>
+          <div class="hz-spec">
+            <div class="hz-spec__label">Isolation</div>
+            <div class="hz-spec__value">U 0.024 W/m·K</div>
+          </div>
+        </div>
+
+        <ul class="hz-model__features">
+          <li>Grand lodge : séjour, chambre, cuisine équipée, salle de bain</li>
+          <li>Agencement libre sur commande — intérieur entièrement personnalisable</li>
+          <li>Potentiel locatif resort haut de gamme, ROI exceptionnel</li>
+          <li>Structure CFRP brevetée, durée de vie 50 ans</li>
+          <li>Compatible raccordement eau, électricité et fibre permanents</li>
+          <li>Vitrage trempé intimité pleine longueur, lumière zénithale</li>
+        </ul>
+      </div>
+
+      <div class="hz-model__info-right">
+        <div class="hz-mobility">
+          <div class="hz-mobility__icon">🚛</div>
+          <div class="hz-mobility__title">Mobilité Totale Sur Remorque</div>
+          <div class="hz-mobility__stats">
+            <div>
+              <div class="hz-mobility__stat-v">1h</div>
+              <div class="hz-mobility__stat-l">Pose &amp; dépose</div>
+            </div>
+            <div>
+              <div class="hz-mobility__stat-v">0 permis</div>
+              <div class="hz-mobility__stat-l">Aucune démarche</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hz-model__footer" style="padding-top: 24px; border-top: 1px solid var(--card-border);">
+          <div class="hz-model__price">
+            <span class="hz-model__price-from">Prix</span>
+            <span class="hz-model__price-value">Sur devis</span>
+          </div>
+          <a href="contact.html?modele=pod-xl" class="hz-model__cta">
+            Demander un devis <span class="hz-model__cta-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.hz-models -->
+
+<!-- ══ CTA STRIP ══ -->
+<div class="hz-cta-strip">
+  <h2>Votre projet, notre expertise</h2>
+  <p>
+    Étude personnalisée, simulation de rentabilité Airbnb, livraison &amp; pose clé en main.
+    Nos conseillers répondent sous 24h.
+  </p>
+  <div class="hz-cta-strip__actions">
+    <a href="contact.html" class="btn-gold">Prendre rendez-vous</a>
+    <a href="habitat.html" class="btn-outline-white">Voir tout le catalogue</a>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="hz-footer">
+  <span>&copy; 2026 K&amp;L Global Import · Tous droits réservés</span>
+  <div style="display:flex; gap: 24px;">
+    <a href="index.html">Accueil</a>
+    <a href="contact.html">Contact</a>
+    <a href="mentions-legales.html">Mentions légales</a>
+  </div>
+</footer>
+
+<script src="scroll-back-btn.js" defer></script>
+</body>
+</html>
