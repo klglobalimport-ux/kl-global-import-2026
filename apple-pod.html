@@ -101,14 +101,13 @@
 
     .pod-visual {
       position: relative;
-      height: 55vh;
+      height: 60vh;
       overflow: hidden;
+      background: #000;
     }
     .pod-visual img {
       width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
-      transform: scale(0.9);
-      transform-origin: center center;
+      object-fit: contain; object-position: center;
       display: block;
     }
     .pod-visual__overlay {
@@ -320,7 +319,7 @@
       .pod-spec { flex: 1 1 45%; }
     }
     @media (max-width: 600px) {
-      .pod-visual { height: 45vh; }
+      .pod-visual { height: 50vh; }
       .pod-model-name { font-size: 3rem; }
       .pod-intro__title { font-size: 3rem; }
       .pod-cta-strip__actions { flex-direction: column; align-items: center; }
