@@ -2127,12 +2127,33 @@
                 config[option] = this.checked;
                 
                 // Gestion exclusive fret
-                if (option === 'shippingBoth' && this.checked) {
-                    config.shippingTransport = false;
-                    config.shippingCrane = false;
-                    document.getElementById('shipping-transport').checked = false;
-                    document.getElementById('shipping-crane').checked = false;
+                if (option === 'shippingBoth') {
+                    const elTransport = document.getElementById('shipping-transport');
+                    const elCrane = document.getElementById('shipping-crane');
+                    if (this.checked) {
+                        // forfait complet : désélectionner et griser les deux options individuelles
+                        config.shippingTransport = false;
+                        config.shippingCrane = false;
+                        elTransport.checked = false;
+                        elCrane.checked = false;
+                        elTransport.closest('label').style.pointerEvents = 'none';
+                        elTransport.closest('label').style.opacity = '0.35';
+                        elCrane.closest('label').style.pointerEvents = 'none';
+                        elCrane.closest('label').style.opacity = '0.35';
+                    } else {
+                        // réactiver les options individuelles
+                        elTransport.closest('label').style.pointerEvents = '';
+                        elTransport.closest('label').style.opacity = '';
+                        elCrane.closest('label').style.pointerEvents = '';
+                        elCrane.closest('label').style.opacity = '';
+                    }
                 } else if ((option === 'shippingTransport' || option === 'shippingCrane') && this.checked) {
+                    // transport et grutage seuls sont mutuellement exclusifs
+                    const other = option === 'shippingTransport' ? 'shippingCrane' : 'shippingTransport';
+                    const otherId = option === 'shippingTransport' ? 'shipping-crane' : 'shipping-transport';
+                    config[other] = false;
+                    document.getElementById(otherId).checked = false;
+                    // désélectionner le forfait complet si actif
                     config.shippingBoth = false;
                     document.getElementById('shipping-both').checked = false;
                 }
