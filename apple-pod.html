@@ -396,6 +396,22 @@
       margin-top: 0;
     }
 
+    /* ── Photo strip (galerie basse multi-images) ── */
+    .hz-model__photo-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 3px;
+      height: 150px;
+      grid-column: 1 / -1;
+      border-top: 3px solid rgba(0,0,0,0.5);
+    }
+    .hz-model__photo-strip img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .hz-model__photo-strip img:hover { transform: scale(1.04); }
+
     /* ── Callout mobilité ── */
     .hz-mobility {
       background: linear-gradient(135deg, #0d0d1a, #0a0a1a);
@@ -701,8 +717,14 @@
     <div class="hz-model__visual">
       <img
         class="hz-model__img"
-        src="assets/apple-pod/pod-s-1.webp"
+        src="assets/apple-pod/KL-pod-S.webp"
         alt="KL·Pod S – chambre cosy dans votre jardin"
+        loading="lazy"
+      >
+      <img
+        class="hz-model__img-secondary"
+        src="assets/apple-pod/pod-s-1.webp"
+        alt="KL·Pod S vue secondaire"
         loading="lazy"
       >
       <span class="hz-model__badge">⬡ Jardin &amp; Airbnb</span>
@@ -757,13 +779,13 @@
     <div class="hz-model__visual">
       <img
         class="hz-model__img"
-        src="assets/apple-pod/pod-m-1.webp"
+        src="assets/apple-pod/KL-pod-M-1.webp"
         alt="KL·Pod M – studio lodge Airbnb clé en main"
         loading="lazy"
       >
       <img
         class="hz-model__img-secondary"
-        src="assets/apple-pod/pod-m-2.webp"
+        src="assets/apple-pod/KL-pod-M-2.webp"
         alt="KL·Pod M intérieur"
         loading="lazy"
       >
@@ -810,6 +832,13 @@
           Demander un devis <span class="hz-model__cta-arrow">→</span>
         </a>
       </div>
+    </div>
+    <div class="hz-model__photo-strip">
+      <img src="assets/apple-pod/KL-pod-M-3.webp" alt="KL·Pod M vue 3" loading="lazy">
+      <img src="assets/apple-pod/KL-pod-M-4.webp" alt="KL·Pod M vue 4" loading="lazy">
+      <img src="assets/apple-pod/KL-pod-M-5.webp" alt="KL·Pod M vue 5" loading="lazy">
+      <img src="assets/apple-pod/KL-pod-M-6.webp" alt="KL·Pod M vue 6" loading="lazy">
+      <img src="assets/apple-pod/kl-pod-M.webp" alt="KL·Pod M vue 7" loading="lazy">
     </div>
   </div>
 
@@ -879,24 +908,26 @@
     <div class="hz-model__visual">
       <img
         class="hz-model__img"
-        src="assets/apple-pod/pod-xl-1.webp"
+        src="assets/apple-pod/KL-pod-XL.webp"
         alt="KL·Pod XL – grand lodge resort ou habitation principale"
         loading="lazy"
       >
       <span class="hz-model__badge">⬡ Grand lodge &amp; Resort</span>
     </div>
 
-    <div class="hz-model__gallery">
-      <img
-        src="assets/apple-pod/pod-xl-2.webp"
-        alt="KL·Pod XL vue 2"
-        loading="lazy"
-      >
-      <img
-        src="assets/apple-pod/pod-xl-3.webp"
-        alt="KL·Pod XL vue 3"
-        loading="lazy"
-      >
+    <div class="hz-model__gallery" style="grid-template-columns: 1fr 1fr 1fr 1fr; height: 220px;">
+      <img src="assets/apple-pod/KL-pod-XL-1.webp" alt="KL·Pod XL vue 1" loading="lazy">
+      <img src="assets/apple-pod/KL-pod-XL-2.webp" alt="KL·Pod XL vue 2" loading="lazy">
+      <img src="assets/apple-pod/KL-pod-XL-3.webp" alt="KL·Pod XL vue 3" loading="lazy">
+      <img src="assets/apple-pod/KL-pod-XL-4.webp" alt="KL·Pod XL vue 4" loading="lazy">
+    </div>
+
+    <div class="hz-model__photo-strip">
+      <img src="assets/apple-pod/KL-pod-XL-5.webp" alt="KL·Pod XL vue 5" loading="lazy">
+      <img src="assets/apple-pod/KL-pod-XL-6.webp" alt="KL·Pod XL vue 6" loading="lazy">
+      <img src="assets/apple-pod/KL-pod-XL-7.webp" alt="KL·Pod XL vue 7" loading="lazy">
+      <img src="assets/apple-pod/KL-pod-XL-8.webp" alt="KL·Pod XL vue 8" loading="lazy">
+      <img src="assets/apple-pod/KL-pod-XL-9.webp" alt="KL·Pod XL vue 9" loading="lazy">
     </div>
 
     <div class="hz-model__info">
