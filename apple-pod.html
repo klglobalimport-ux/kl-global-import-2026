@@ -575,6 +575,81 @@
       .hz-model__footer { flex-direction: column; align-items: flex-start; gap: 20px; }
       .hz-cta-strip__actions { flex-direction: column; align-items: center; }
     }
+
+    /* ── Thumbnails ── */
+    .pod-thumbnails {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px 20px;
+      background: rgba(0,0,0,0.25);
+      border-top: 1px solid var(--card-border);
+      grid-column: 1 / -1;
+    }
+    .pod-thumb {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.2s, transform 0.18s;
+      display: block;
+    }
+    .pod-thumb:hover {
+      border-color: var(--gold);
+      transform: scale(1.07);
+    }
+
+    /* ── Lightbox ── */
+    .pod-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(0,0,0,0.94);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .pod-lightbox.is-open { display: flex; }
+    .pod-lightbox__img {
+      max-width: 90vw;
+      max-height: 86vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.8);
+      display: block;
+    }
+    .pod-lightbox__close {
+      position: absolute;
+      top: 20px; right: 28px;
+      background: none; border: none;
+      color: #fff; font-size: 2.2rem; line-height: 1;
+      cursor: pointer; opacity: 0.65;
+      transition: opacity 0.18s;
+    }
+    .pod-lightbox__close:hover { opacity: 1; }
+    .pod-lightbox__nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff; font-size: 1.8rem;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .pod-lightbox__nav:hover { background: rgba(255,255,255,0.22); }
+    .pod-lightbox__prev { left: 20px; }
+    .pod-lightbox__next { right: 20px; }
+    .pod-lightbox__counter {
+      position: absolute;
+      bottom: 22px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.45);
+      font-size: 0.78rem; letter-spacing: 0.12em;
+    }
   </style>
 </head>
 <body>
@@ -729,6 +804,10 @@
         </a>
       </div>
     </div>
+    <div class="pod-thumbnails">
+      <img class="pod-thumb" src="assets/apple-pod/pod-xs-1.webp" alt="KL·Pod XS vue 1" onclick="openLightbox('xs',0)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/pod-xs-2.webp" alt="KL·Pod XS vue 2" onclick="openLightbox('xs',1)" loading="lazy">
+    </div>
   </div>
 
   <!-- ── S ── -->
@@ -784,6 +863,9 @@
           Demander un devis <span class="hz-model__cta-arrow">→</span>
         </a>
       </div>
+    </div>
+    <div class="pod-thumbnails">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-S.webp" alt="KL·Pod S" onclick="openLightbox('s',0)" loading="lazy">
     </div>
   </div>
 
@@ -846,12 +928,11 @@
         </a>
       </div>
     </div>
-    <div class="hz-model__photo-strip">
-      <img src="assets/apple-pod/KL-pod-M-2.webp" alt="KL·Pod M vue 2" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-M-3.webp" alt="KL·Pod M vue 3" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-M-4.webp" alt="KL·Pod M vue 4" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-M-5.webp" alt="KL·Pod M vue 5" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-M-6.webp" alt="KL·Pod M vue 6" loading="lazy">
+    <div class="pod-thumbnails">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-M-1.webp" alt="KL·Pod M vue 1" onclick="openLightbox('m',0)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-M-2.webp" alt="KL·Pod M vue 2" onclick="openLightbox('m',1)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-M-3.webp" alt="KL·Pod M vue 3" onclick="openLightbox('m',2)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-M-4.webp" alt="KL·Pod M vue 4" onclick="openLightbox('m',3)" loading="lazy">
     </div>
   </div>
 
@@ -914,6 +995,10 @@
         </a>
       </div>
     </div>
+    <div class="pod-thumbnails">
+      <img class="pod-thumb" src="assets/apple-pod/pod-l-1.webp" alt="KL·Pod L vue 1" onclick="openLightbox('l',0)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/pod-l-2.webp" alt="KL·Pod L vue 2" onclick="openLightbox('l',1)" loading="lazy">
+    </div>
   </div>
 
   <!-- ── XL ── -->
@@ -928,16 +1013,16 @@
       <span class="hz-model__badge">⬡ Grand lodge &amp; Resort</span>
     </div>
 
-    <div class="hz-pod-xl-gallery">
-      <img src="assets/apple-pod/KL-pod-XL-1.webp" alt="KL·Pod XL vue 1" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-XL-2.webp" alt="KL·Pod XL vue 2" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-XL-3.webp" alt="KL·Pod XL vue 3" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-XL-4.webp" alt="KL·Pod XL vue 4" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-XL-5.webp" alt="KL·Pod XL vue 5" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-XL-6.webp" alt="KL·Pod XL vue 6" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-XL-7.webp" alt="KL·Pod XL vue 7" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-XL-8.webp" alt="KL·Pod XL vue 8" loading="lazy">
-      <img src="assets/apple-pod/KL-pod-XL-9.webp" alt="KL·Pod XL vue 9" loading="lazy">
+    <div class="pod-thumbnails" style="grid-column: 1;">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-1.webp" alt="KL·Pod XL vue 1" onclick="openLightbox('xl',0)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-2.webp" alt="KL·Pod XL vue 2" onclick="openLightbox('xl',1)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-3.webp" alt="KL·Pod XL vue 3" onclick="openLightbox('xl',2)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-4.webp" alt="KL·Pod XL vue 4" onclick="openLightbox('xl',3)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-5.webp" alt="KL·Pod XL vue 5" onclick="openLightbox('xl',4)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-6.webp" alt="KL·Pod XL vue 6" onclick="openLightbox('xl',5)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-7.webp" alt="KL·Pod XL vue 7" onclick="openLightbox('xl',6)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-8.webp" alt="KL·Pod XL vue 8" onclick="openLightbox('xl',7)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-9.webp" alt="KL·Pod XL vue 9" onclick="openLightbox('xl',8)" loading="lazy">
     </div>
 
     <div class="hz-model__info">
@@ -1026,5 +1111,86 @@
 </footer>
 
 <script src="scroll-back-btn.js" defer></script>
+
+<!-- ══ LIGHTBOX ══ -->
+<div class="pod-lightbox" id="pod-lightbox" role="dialog" aria-modal="true" aria-label="Galerie photos">
+  <button class="pod-lightbox__close" id="pod-lightbox-close" aria-label="Fermer">&times;</button>
+  <button class="pod-lightbox__nav pod-lightbox__prev" id="pod-lightbox-prev" aria-label="Photo précédente">&#8249;</button>
+  <img class="pod-lightbox__img" id="pod-lightbox-img" src="" alt="">
+  <button class="pod-lightbox__nav pod-lightbox__next" id="pod-lightbox-next" aria-label="Photo suivante">&#8250;</button>
+  <div class="pod-lightbox__counter" id="pod-lightbox-counter"></div>
+</div>
+
+<script>
+(function () {
+  var galleries = {
+    xs: [
+      'assets/apple-pod/pod-xs-1.webp',
+      'assets/apple-pod/pod-xs-2.webp'
+    ],
+    s: [
+      'assets/apple-pod/KL-pod-S.webp'
+    ],
+    m: [
+      'assets/apple-pod/KL-pod-M-1.webp',
+      'assets/apple-pod/KL-pod-M-2.webp',
+      'assets/apple-pod/KL-pod-M-3.webp',
+      'assets/apple-pod/KL-pod-M-4.webp',
+      'assets/apple-pod/KL-pod-M-5.webp',
+      'assets/apple-pod/KL-pod-M-6.webp'
+    ],
+    l: [
+      'assets/apple-pod/pod-l-1.webp',
+      'assets/apple-pod/pod-l-2.webp'
+    ],
+    xl: [
+      'assets/apple-pod/KL-pod-XL-1.webp',
+      'assets/apple-pod/KL-pod-XL-2.webp',
+      'assets/apple-pod/KL-pod-XL-3.webp',
+      'assets/apple-pod/KL-pod-XL-4.webp',
+      'assets/apple-pod/KL-pod-XL-5.webp',
+      'assets/apple-pod/KL-pod-XL-6.webp',
+      'assets/apple-pod/KL-pod-XL-7.webp',
+      'assets/apple-pod/KL-pod-XL-8.webp',
+      'assets/apple-pod/KL-pod-XL-9.webp'
+    ]
+  };
+
+  var lightbox   = document.getElementById('pod-lightbox');
+  var lbImg      = document.getElementById('pod-lightbox-img');
+  var lbCounter  = document.getElementById('pod-lightbox-counter');
+  var lbClose    = document.getElementById('pod-lightbox-close');
+  var lbPrev     = document.getElementById('pod-lightbox-prev');
+  var lbNext     = document.getElementById('pod-lightbox-next');
+  var current    = [];
+  var idx        = 0;
+
+  function show(i) {
+    idx = (i + current.length) % current.length;
+    lbImg.src = current[idx];
+    lbCounter.textContent = (idx + 1) + ' / ' + current.length;
+  }
+
+  function close() { lightbox.classList.remove('is-open'); lbImg.src = ''; }
+
+  window.openLightbox = function (key, startIndex) {
+    current = galleries[key] || [];
+    if (!current.length) return;
+    lightbox.classList.add('is-open');
+    show(startIndex || 0);
+  };
+
+  lbClose.addEventListener('click', close);
+  lbPrev.addEventListener('click', function () { show(idx - 1); });
+  lbNext.addEventListener('click', function () { show(idx + 1); });
+  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('is-open')) return;
+    if (e.key === 'ArrowLeft')  show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+    if (e.key === 'Escape')     close();
+  });
+})();
+</script>
 </body>
 </html>
