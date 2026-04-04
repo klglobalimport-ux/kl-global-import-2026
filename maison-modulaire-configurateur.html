@@ -1155,6 +1155,16 @@
                                 </button>
                                 <div class="size-gallery" data-size="40ft"></div>
                             </div>
+                            <div class="size-option-wrapper">
+                                <button class="btn-option" data-option="size" data-value="double-deck" style="position:relative;">
+                                    <img class="btn-option-img" src="/assets/configurateur/double-deck2.webp" alt="Double Deck 2 étages" onclick="event.stopPropagation(); openGalleryLightbox(['/assets/configurateur/double-deck2.webp','/assets/configurateur/double-deck3.webp','/assets/configurateur/double-deck1.webp','/assets/configurateur/double-deck-plans.webp','/assets/configurateur/double-deck-fiche.webp'], 0)">
+                                    <div class="zoom-icon">🔍</div>
+                                    <span class="btn-option-label">Double Deck<br>2 étages<br>33,75 m²</span>
+                                    <div class="option-price" id="price-size-double-deck">29 500 €</div>
+                                    <div style="position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.65);color:#fff;font-size:11px;padding:4px 10px;border-radius:4px;">5 photos ▶</div>
+                                </button>
+                                <div class="size-gallery" data-size="double-deck"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -1951,28 +1961,32 @@
             '10ft': 9500,
             '20ft': 15000,
             '30ft': 18000,
-            '40ft': 22000
+            '40ft': 22000,
+            'double-deck': 29500
         };
 
         const surfaces = {
             '10ft': '17,6 m²',
             '20ft': '37 m²',
             '30ft': '56 m²',
-            '40ft': '72 m²'
+            '40ft': '72 m²',
+            'double-deck': '33,75 m²'
         };
 
         const weights = {
             '10ft': '1,5 T',
             '20ft': '2,9 T',
             '30ft': '3,5 T',
-            '40ft': '4,6 T'
+            '40ft': '4,6 T',
+            'double-deck': '3,5 T'
         };
 
         const sizeLabels = {
             '10ft': '10 FT',
             '20ft': '20 FT',
             '30ft': '30 FT',
-            '40ft': '40 FT'
+            '40ft': '40 FT',
+            'double-deck': 'Double Deck'
         };
 
         const highCubePrices = {
@@ -1982,16 +1996,16 @@
         };
 
         const roofPrices = {
-            uniform: { '10ft': 1500, '20ft': 2500, '30ft': 3500, '40ft': 4300 },
-            offset: { '10ft': 1700, '20ft': 2800, '30ft': 3800, '40ft': 4600 }
+            uniform: { '10ft': 1500, '20ft': 2500, '30ft': 3500, '40ft': 4300, 'double-deck': 3500 },
+            offset: { '10ft': 1700, '20ft': 2800, '30ft': 3800, '40ft': 4600, 'double-deck': 3800 }
         };
 
-        const furnishedPrices = { '10ft': 2500, '20ft': 6000, '30ft': 8000, '40ft': 10000 };
-        const guttersPrices = { '10ft': 400, '20ft': 650, '30ft': 800, '40ft': 1000 };
-        const coveringPrices = { '10ft': 500, '20ft': 1000, '30ft': 1500, '40ft': 2000 };
-        const acPrices = { '10ft': 1000, '20ft': 1500, '30ft': 2000, '40ft': 2500 };
-        const trailerPrices = { '10ft': 3000, '20ft': 6000, '30ft': 7500, '40ft': 10000 };
-        const shippingPrices = { '10ft': 1000, '20ft': 1500, '30ft': 2000, '40ft': 2500 };
+        const furnishedPrices = { '10ft': 2500, '20ft': 6000, '30ft': 8000, '40ft': 10000, 'double-deck': 8000 };
+        const guttersPrices = { '10ft': 400, '20ft': 650, '30ft': 800, '40ft': 1000, 'double-deck': 800 };
+        const coveringPrices = { '10ft': 500, '20ft': 1000, '30ft': 1500, '40ft': 2000, 'double-deck': 1500 };
+        const acPrices = { '10ft': 1000, '20ft': 1500, '30ft': 2000, '40ft': 2500, 'double-deck': 2000 };
+        const trailerPrices = { '10ft': 3000, '20ft': 6000, '30ft': 7500, '40ft': 10000, 'double-deck': 7500 };
+        const shippingPrices = { '10ft': 1000, '20ft': 1500, '30ft': 2000, '40ft': 2500, 'double-deck': 2000 };
 
         const optionPrices = {
             terrace: 3000, bayWindow: 700, longWindow: 300, solar: 5000, offgrid: 8000
@@ -2274,7 +2288,7 @@
             const poly = config.polynesia;
 
             // House base prices
-            ['10ft', '20ft', '30ft', '40ft'].forEach(s => {
+            ['10ft', '20ft', '30ft', '40ft', 'double-deck'].forEach(s => {
                 const el = document.getElementById('price-size-' + s);
                 if (el) el.textContent = formatPriceForDisplay(basePrices[s], poly);
             });
@@ -2335,11 +2349,11 @@
             const trailer = document.getElementById('price-trailer');
             if (trailer) trailer.textContent = '+' + formatPriceForDisplay(trailerPrices[size], poly);
 
-            // High Cube (variable, indisponible 10ft)
+            // High Cube (variable, indisponible 10ft et double-deck)
             const highcube = document.getElementById('price-highcube');
             if (highcube) {
-                if (size === '10ft') {
-                    highcube.textContent = 'Indisponible pour 10FT';
+                if (size === '10ft' || size === 'double-deck') {
+                    highcube.textContent = 'Indisponible pour ce modèle';
                 } else {
                     highcube.textContent = '+' + formatPriceForDisplay(highCubePrices[size], poly);
                 }
