@@ -1423,6 +1423,24 @@
                         </div>
                     </div>
 
+                    <!-- Escalier Double Deck -->
+                    <div class="option-group" id="option-staircase" style="display:none;">
+                        <div class="option-label">Escalier</div>
+                        <div class="option-description">Position de l'escalier d'accès au 2ème étage</div>
+                        <div class="btn-group" style="grid-template-columns: repeat(3, 1fr);">
+                            <button class="btn-option active" data-option="staircase" data-value="ext">
+                                <span class="btn-option-label">Extérieur<br><small>Inclus</small></span>
+                            </button>
+                            <button class="btn-option" data-option="staircase" data-value="int">
+                                <span class="btn-option-label">Intérieur<br><small>Inclus</small></span>
+                            </button>
+                            <button class="btn-option" data-option="staircase" data-value="both">
+                                <span class="btn-option-label">Les deux<br><small>+3 000 €</small></span>
+                            </button>
+                        </div>
+                        <div class="option-price" id="price-staircase">Inclus</div>
+                    </div>
+
                     <!-- Sur Remorque -->
                     <div class="option-group">
                         <div class="option-header">
@@ -1559,6 +1577,10 @@
                     <div id="clim-row" style="display: none; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
                         <span style="font-size: 0.85rem; color: var(--text-gray);" id="clim-row-label">Climatisation 1 split</span>
                         <span style="font-size: 1rem; font-weight: 600; color: var(--text-white);" id="price-clim">+1 000 €</span>
+                    </div>
+                    <div id="staircase-row" style="display: none; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span style="font-size: 0.85rem; color: var(--text-gray);">Escalier — Les deux</span>
+                        <span style="font-size: 1rem; font-weight: 600; color: var(--text-white);" id="price-staircase-row">+3 000 €</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
                         <span style="font-size: 0.85rem; color: var(--text-gray);" id="vat-label">TVA (20%)</span>
@@ -1920,7 +1942,8 @@
             shippingTransport: false,
             shippingCrane: false,
             shippingBoth: false,
-            polynesia: false
+            polynesia: false,
+            staircase: 'ext'
         };
 
         // Fonction pour gérer les compteurs
@@ -2000,12 +2023,12 @@
             offset: { '10ft': 1700, '20ft': 2800, '30ft': 3800, '40ft': 4600, 'double-deck': 3800 }
         };
 
-        const furnishedPrices = { '10ft': 2500, '20ft': 6000, '30ft': 8000, '40ft': 10000, 'double-deck': 8000 };
+        const furnishedPrices = { '10ft': 2500, '20ft': 6000, '30ft': 8000, '40ft': 10000, 'double-deck': 10000 };
         const guttersPrices = { '10ft': 400, '20ft': 650, '30ft': 800, '40ft': 1000, 'double-deck': 800 };
-        const coveringPrices = { '10ft': 500, '20ft': 1000, '30ft': 1500, '40ft': 2000, 'double-deck': 1500 };
+        const coveringPrices = { '10ft': 500, '20ft': 1000, '30ft': 1500, '40ft': 2000, 'double-deck': 3000 };
         const acPrices = { '10ft': 1000, '20ft': 1500, '30ft': 2000, '40ft': 2500, 'double-deck': 2000 };
         const trailerPrices = { '10ft': 3000, '20ft': 6000, '30ft': 7500, '40ft': 10000, 'double-deck': 7500 };
-        const shippingPrices = { '10ft': 1000, '20ft': 1500, '30ft': 2000, '40ft': 2500, 'double-deck': 2000 };
+        const shippingPrices = { '10ft': 1000, '20ft': 1500, '30ft': 2000, '40ft': 2500, 'double-deck': 5834 };
 
         const optionPrices = {
             terrace: 3000, bayWindow: 700, longWindow: 300, solar: 5000, offgrid: 8000
@@ -2044,6 +2067,7 @@
 
         function updateOptionsAvailability() {
             const is10ft = config.size === '10ft';
+            const isDoubleDeck = config.size === 'double-deck';
 
             // --- 2 splits button ---
             const btn2splits = document.querySelector('[data-option="acSplits"][data-value="2"]');
@@ -2102,14 +2126,53 @@
                 if (badgeOffgrid) badgeOffgrid.style.display = 'none';
             }
 
-            // --- High Cube ---
+            // --- High Cube (désactivé 10ft ET double-deck) ---
+            const highCubeGroup = document.getElementById('option-highcube');
             const highCubeToggle = document.getElementById('highcube');
-            if (is10ft) {
+            if (is10ft || isDoubleDeck) {
+                highCubeGroup.style.pointerEvents = 'none';
+                highCubeGroup.style.opacity = '0.35';
                 highCubeToggle.disabled = true;
                 highCubeToggle.checked = false;
                 config.highCube = false;
             } else {
+                highCubeGroup.style.pointerEvents = '';
+                highCubeGroup.style.opacity = '';
                 highCubeToggle.disabled = false;
+            }
+
+            // --- Remorque (désactivée pour double-deck) ---
+            const trailerToggle = document.getElementById('trailer');
+            const trailerGroup = trailerToggle ? trailerToggle.closest('.option-group') : null;
+            if (isDoubleDeck) {
+                if (trailerGroup) {
+                    trailerGroup.style.pointerEvents = 'none';
+                    trailerGroup.style.opacity = '0.35';
+                }
+                if (config.trailer) {
+                    trailerToggle.checked = false;
+                    config.trailer = false;
+                }
+            } else {
+                if (trailerGroup) {
+                    trailerGroup.style.pointerEvents = '';
+                    trailerGroup.style.opacity = '';
+                }
+            }
+
+            // --- Escalier (visible uniquement pour double-deck) ---
+            const staircaseGroup = document.getElementById('option-staircase');
+            if (isDoubleDeck) {
+                staircaseGroup.style.display = 'block';
+            } else {
+                staircaseGroup.style.display = 'none';
+                // Réinitialiser escalier
+                config.staircase = 'ext';
+                const btnExt = document.querySelector('[data-option="staircase"][data-value="ext"]');
+                if (btnExt) {
+                    btnExt.closest('.btn-group').querySelectorAll('.btn-option').forEach(b => b.classList.remove('active'));
+                    btnExt.classList.add('active');
+                }
             }
         }
 
@@ -2199,6 +2262,11 @@
             // High Cube (seulement 20/30/40)
             if (config.highCube && highCubePrices[config.size]) {
                 total += highCubePrices[config.size];
+            }
+
+            // Escalier double-deck
+            if (config.size === 'double-deck' && config.staircase === 'both') {
+                total += 3000;
             }
             
             // Fret
@@ -2393,6 +2461,15 @@
             } else {
                 document.getElementById('import-fee-row').style.display = 'none';
                 document.getElementById('vat-label').textContent = 'TVA (20%)';
+            }
+
+            // Afficher/masquer ligne escalier double-deck
+            const staircaseRow = document.getElementById('staircase-row');
+            if (config.size === 'double-deck' && config.staircase === 'both') {
+                staircaseRow.style.display = 'flex';
+                document.getElementById('price-staircase-row').textContent = formatPriceForDisplay(3000, config.polynesia);
+            } else {
+                staircaseRow.style.display = 'none';
             }
 
             // Afficher/masquer ligne climatisation
