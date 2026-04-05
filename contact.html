@@ -66,15 +66,12 @@
   <div class="contact-layout">
     
     <!-- Récapitulatif modèle (affiché si ?modele= présent dans l'URL) -->
-    <div id="modele-recap" style="display:none; margin-bottom:28px; padding:20px 24px; border-radius:12px; background:#f0f7ff; border:1px solid #bcd4f0;">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
-        <span style="font-size:1.3rem;">🏠</span>
-        <strong id="recap-titre" style="font-size:1.1rem; color:#0a2540;"></strong>
+    <div id="modele-recap" style="display:none; margin-bottom:28px; padding:20px 24px; border-radius:12px; background:linear-gradient(135deg,#1a1500,#201800); border:1px solid #c9a22755;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:6px;">
+        <span style="font-size:1.2rem;">✦</span>
+        <strong id="recap-titre" style="font-size:1rem; color:#c9a227; letter-spacing:0.04em;"></strong>
       </div>
-      <div style="font-size:0.9rem; color:#334e68; line-height:1.6;">
-        <span id="recap-dims" style="font-weight:600;"></span> &nbsp;·&nbsp;
-        <span id="recap-desc"></span>
-      </div>
+      <div id="recap-extra" style="font-size:0.85rem; color:#a08040; line-height:1.6;"></div>
     </div>
 
     <!-- Contact Form -->
@@ -170,20 +167,53 @@
 <script>
 (function () {
   var modeles = {
-    'KL-Pod-XS': { titre: 'KL·Pod XS', dims: '2,2 × 2,2 m', desc: 'Bureau ou chambre solo — compact, posé en une journée.' },
-    'KL-Pod-S':  { titre: 'KL·Pod S',  dims: '2,8 × 2,2 m', desc: 'Chambre cosy dans votre jardin — rentabilisez votre terrain dès le premier week-end.' },
-    'KL-Pod-M':  { titre: 'KL·Pod M',  dims: '3,8 × 2,2 m', desc: 'Studio lodge Airbnb clé en main — design primé, rentabilité prouvée.' },
-    'KL-Pod-L':  { titre: 'KL·Pod L',  dims: '5,9 × 2,2 m', desc: 'Logement complet — lumière, espace, liberté totale.' },
-    'KL-Pod-XL': { titre: 'KL·Pod XL', dims: '11,6 × 2,2 m', desc: 'Grand lodge resort ou habitation principale — l\'expérience ultime.' }
+    /* KL·Pod */
+    'KL-Pod-XS':     { nom: 'KL·Pod XS',          info: '2,2 × 2,2 m · Bureau ou chambre solo' },
+    'KL-Pod-S':      { nom: 'KL·Pod S',            info: '2,8 × 2,2 m · Chambre jardin / Airbnb' },
+    'KL-Pod-M':      { nom: 'KL·Pod M',            info: '3,8 × 2,2 m · Studio lodge Airbnb' },
+    'KL-Pod-L':      { nom: 'KL·Pod L',            info: '5,9 × 2,2 m · Logement complet' },
+    'KL-Pod-XL':     { nom: 'KL·Pod XL',           info: '11,6 × 2,2 m · Grand lodge resort' },
+    /* KL·Dérive */
+    'KL-Derive':     { nom: 'KL · Dérive',         info: 'Capsule voûtée 3,6 → 6,6 m · Alu 6063' },
+    /* KL·Horizon */
+    'aube':          { nom: 'KL·Horizon Aube',     info: 'Modèle compact · Triangle habitable' },
+    'zenith':        { nom: 'KL·Horizon Zénith',   info: 'Modèle standard · Triangle habitable' },
+    'solstice':      { nom: 'KL·Horizon Solstice', info: 'Modèle prestige · Triangle habitable' },
+    /* Capsules */
+    'capsule-65m':   { nom: 'Capsule 6,5 M',       info: '21 m² · Compacte · Acier T88' },
+    'capsule-85m':   { nom: 'Capsule 8,5 M',       info: '28 m² · Moyenne · Acier T88' },
+    'capsule-115m':  { nom: 'Capsule 11,5 M',      info: '38 m² · Grande · Acier T88' },
+    /* Engins Rippa */
+    'Rippa-R06-ECO': { nom: 'Rippa R06-ECO',       info: 'Mini-pelle · Moteur Kubota' },
+    'Rippa-R10':     { nom: 'Rippa R10 ECO',       info: 'Mini-pelle 1T · Moteur Kubota' },
+    'Rippa-R13':     { nom: 'Rippa R13-3 PRO',     info: 'Mini-pelle 1,3T · Accès difficiles' },
+    'Rippa-R15':     { nom: 'Rippa R15',           info: 'Mini-pelle 1,5T · Certifiée CE' },
+    'Rippa-R18':     { nom: 'Rippa R18',           info: 'Mini-pelle 1,8T · Certifiée CE' },
+    'Rippa-R22':     { nom: 'Rippa R22',           info: 'Mini-pelle 2,2T · Certifiée CE' },
+    'Rippa-R32':     { nom: 'Rippa R32',           info: 'Mini-pelle 3,2T · Certifiée CE' },
+    'Rippa-R57':     { nom: 'Rippa R57',           info: 'Mini-pelle 5,7T · Certifiée CE' },
+    'Rippa-RL10':    { nom: 'Rippa RL10',          info: 'Chargeuse compacte · Polyvalente' },
+    'Rippa-RS03':    { nom: 'Rippa RS03',          info: 'Chargeuse sur chenilles' },
+    'Rippa-RS04':    { nom: 'Rippa RS04',          info: 'Chargeuse sur chenilles' },
+    'Rippa-RS06':    { nom: 'Rippa RS06',          info: 'Chargeuse sur chenilles' }
   };
+
   var params = new URLSearchParams(window.location.search);
   var key = params.get('modele');
-  if (key && modeles[key]) {
-    var m = modeles[key];
-    document.getElementById('recap-titre').textContent = 'Modèle sélectionné : ' + m.titre;
-    document.getElementById('recap-dims').textContent = m.dims;
-    document.getElementById('recap-desc').textContent = m.desc;
-    document.getElementById('modele-recap').style.display = 'block';
+  if (!key) return;
+
+  /* Lookup ou fallback générique */
+  var m = modeles[key] || { nom: key.replace(/-/g, ' '), info: '' };
+
+  /* Encadré doré */
+  document.getElementById('recap-titre').textContent = 'Produit sélectionné : ' + m.nom;
+  if (m.info) document.getElementById('recap-extra').textContent = m.info;
+  document.getElementById('modele-recap').style.display = 'block';
+
+  /* Pré-remplissage message */
+  var msg = document.getElementById('message');
+  if (msg && !msg.value) {
+    msg.value = 'Bonjour, je suis intéressé(e) par le modèle ' + m.nom + '. Merci de me recontacter.';
   }
 })();
 </script>
