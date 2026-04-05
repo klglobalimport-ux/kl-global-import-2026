@@ -204,6 +204,9 @@ p {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
+/* Trigger mobile catalogue : caché sur desktop */
+.catalogue-mobile-trigger { display: none; }
+
 .topnav > a,
 .catalogue-trigger {
   display: inline-flex;
@@ -1268,9 +1271,14 @@ body.has-scrolled a[class*="-back-link"] {
     min-width: 0;
   }
 
-  /* Masquer CATALOGUE et son dropdown sur mobile */
+  /* Masquer le dropdown desktop CATALOGUE sur mobile */
   .catalogue-item {
     display: none;
+  }
+
+  /* Afficher le trigger mobile CATALOGUE */
+  .catalogue-mobile-trigger {
+    display: inline-flex;
   }
 
   /* Mobile mega-menu : overlay plein écran */
