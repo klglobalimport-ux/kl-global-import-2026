@@ -207,9 +207,11 @@
       object-fit: cover;
       object-position: center;
       display: block;
+      background-size: contain;
+      transform: scale(0.7);
       transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
     }
-    .ch-model:hover .ch-model__img { transform: scale(1.04); }
+    .ch-model:hover .ch-model__img { transform: scale(0.7); }
 
     .ch-model__info {
       padding: 48px 44px;
