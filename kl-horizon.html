@@ -633,16 +633,27 @@
         text-transform: uppercase;
       }
 
-      /* Images modèles : cover + center */
+      /* Toutes les images : width 100%, cover + center */
+      img {
+        width: 100%;
+        object-fit: cover;
+        object-position: center center;
+      }
+
       .hz-model__img,
       .hz-model__img-secondary,
       .hz-model--solstice .hz-model__gallery img {
+        width: 100%;
         object-fit: cover !important;
-        object-position: center !important;
+        object-position: center center !important;
       }
 
-      /* Hero background center */
-      .hz-hero__bg { background-position: center center; }
+      /* Conteneurs background-image : cover + center */
+      .hz-hero__bg,
+      [style*="background-image"] {
+        background-size: cover;
+        background-position: center center;
+      }
     }
   </style>
 </head>
