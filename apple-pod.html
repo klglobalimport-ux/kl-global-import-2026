@@ -219,15 +219,21 @@
       align-items: center;
       gap: 6px;
       margin-top: 40px;
-      font-size: 0.85rem;
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 16px;
       font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
       text-decoration: none;
-      color: #0071e3;
-      transition: color 0.18s;
+      background: #c9a227;
+      color: #000;
+      transition: all 0.3s ease;
     }
-    .pod-cta-link:hover { color: #2997ff; }
+    .pod-cta-link:hover {
+      transform: scale(1.05);
+      background: #e8b830;
+      box-shadow: 0 4px 20px rgba(201,162,39,0.5);
+    }
     .pod-cta-link::after { content: '→'; }
 
     /* ── CTA strip ── */
