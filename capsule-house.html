@@ -121,6 +121,269 @@
     .hz-footer a { color: #555; text-decoration: none; }
     .hz-footer a:hover { color: #999; }
 
+    /* ── Stats strip ── */
+    .ch-intro {
+      background: var(--dark-panel);
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      padding: 48px 6vw;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .ch-intro__stat {
+      padding: 0 32px;
+      border-right: 1px solid var(--card-border);
+      text-align: center;
+    }
+    .ch-intro__stat:first-child { border-left: none; padding-left: 0; text-align: left; }
+    .ch-intro__stat:last-child { border-right: none; padding-right: 0; }
+    .ch-intro__stat-value {
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .ch-intro__stat-label {
+      font-size: 0.78rem;
+      color: #777;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* ── Section head ── */
+    .ch-section-head {
+      padding: 72px 6vw 40px;
+      max-width: 700px;
+    }
+    .ch-section-head__label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .ch-section-head__title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    /* ── Models ── */
+    .ch-models {
+      padding: 0 4vw 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .ch-model {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+      transition: border-color 0.3s;
+    }
+    .ch-model:hover { border-color: rgba(201,168,76,0.35); }
+    .ch-model--reverse { direction: rtl; }
+    .ch-model--reverse > * { direction: ltr; }
+
+    .ch-model__visual {
+      position: relative;
+      overflow: hidden;
+      min-height: 440px;
+      background: #0a0a0a;
+    }
+    .ch-model__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .ch-model:hover .ch-model__img { transform: scale(1.04); }
+
+    .ch-model__info {
+      padding: 48px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+    .ch-model__number {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .ch-model__name {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.0;
+      margin: 0 0 6px;
+      letter-spacing: -0.02em;
+    }
+    .ch-model__tagline {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
+      margin: 0 0 24px;
+    }
+    .ch-model__specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 24px;
+    }
+    .ch-spec {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .ch-spec__label {
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .ch-spec__value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #eee;
+    }
+    .ch-model__features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .ch-model__features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.83rem;
+      color: #aaa;
+    }
+    .ch-model__features li::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .ch-model__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid var(--card-border);
+      margin-top: auto;
+    }
+    .ch-model__price {
+      display: flex;
+      flex-direction: column;
+    }
+    .ch-model__price-from {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #555;
+    }
+    .ch-model__price-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .ch-model__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+    }
+    .ch-model__cta:hover { background: var(--gold); color: #000; }
+
+    /* ── CTA strip ── */
+    .ch-cta-strip {
+      margin: 0 4vw 80px;
+      background: linear-gradient(135deg, #141410, #1a1a10);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 20px;
+      padding: 56px 8vw;
+      text-align: center;
+    }
+    .ch-cta-strip h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      margin: 0 0 14px;
+    }
+    .ch-cta-strip p { color: #888; max-width: 460px; margin: 0 auto 28px; }
+    .ch-cta-strip__actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 32px;
+      background: var(--gold);
+      color: #000;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .ch-intro { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .ch-intro__stat { border-right: none; border-bottom: 1px solid var(--card-border); padding: 0 0 24px; text-align: left; }
+      .ch-intro__stat:last-child { border-bottom: none; }
+      .ch-model { grid-template-columns: 1fr; min-height: unset; }
+      .ch-model--reverse { direction: ltr; }
+      .ch-model__visual { min-height: 280px; }
+      .ch-model__info { padding: 32px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .ch-model__footer { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .ch-cta-strip__actions { flex-direction: column; align-items: center; }
+      .ch-intro { grid-template-columns: 1fr 1fr; }
+    }
+
     /* ── Burger button ── */
     .hz-burger {
       display: none;
@@ -280,6 +543,179 @@
     setTimeout(function(){ bg.style.transform = 'scale(1)'; }, 100);
   })();
 </script>
+
+<!-- ══ STATS STRIP ══ -->
+<div class="ch-intro">
+  <div class="ch-intro__stat">
+    <div class="ch-intro__stat-value">3</div>
+    <div class="ch-intro__stat-label">Modèles disponibles</div>
+  </div>
+  <div class="ch-intro__stat">
+    <div class="ch-intro__stat-value">6,5 m</div>
+    <div class="ch-intro__stat-label">Modèle compact</div>
+  </div>
+  <div class="ch-intro__stat">
+    <div class="ch-intro__stat-value">11,5 m</div>
+    <div class="ch-intro__stat-label">Grand modèle</div>
+  </div>
+  <div class="ch-intro__stat">
+    <div class="ch-intro__stat-value">30 j</div>
+    <div class="ch-intro__stat-label">Délai de livraison</div>
+  </div>
+</div>
+
+<!-- ══ SECTION HEAD ══ -->
+<div class="ch-section-head" style="padding-left:6vw; padding-right:6vw;">
+  <div class="ch-section-head__label">Nos modèles</div>
+  <h2 class="ch-section-head__title">Choisissez votre capsule</h2>
+</div>
+
+<!-- ══ MODELS ══ -->
+<div class="ch-models">
+
+  <!-- ── CAPSULE 6,5M ── -->
+  <div class="ch-model">
+    <div class="ch-model__visual">
+      <img class="ch-model__img" src="assets/habitat/capsule-house/capsule-9-5m.png" alt="KL Capsule House 6,5m" loading="eager">
+    </div>
+    <div class="ch-model__info">
+      <div class="ch-model__number">Modèle 01 · Compact</div>
+      <h2 class="ch-model__name">Capsule 6,5 m</h2>
+      <p class="ch-model__tagline">L'essentiel, livré clé en main</p>
+      <div class="ch-model__specs">
+        <div class="ch-spec">
+          <div class="ch-spec__label">Longueur</div>
+          <div class="ch-spec__value">6,5 m</div>
+        </div>
+        <div class="ch-spec">
+          <div class="ch-spec__label">Surface</div>
+          <div class="ch-spec__value">~21 m²</div>
+        </div>
+        <div class="ch-spec">
+          <div class="ch-spec__label">Structure</div>
+          <div class="ch-spec__value">Acier T88</div>
+        </div>
+        <div class="ch-spec">
+          <div class="ch-spec__label">Capacité</div>
+          <div class="ch-spec__value">1 – 2 pers.</div>
+        </div>
+      </div>
+      <ul class="ch-model__features">
+        <li>Structure acier galvanisé haute résistance</li>
+        <li>Isolation thermique et phonique intégrée</li>
+        <li>Fenêtres double vitrage, porte sécurisée</li>
+        <li>Raccordements eau, électricité, plomberie</li>
+        <li>Finitions intérieures contemporaines</li>
+      </ul>
+      <div class="ch-model__footer">
+        <div class="ch-model__price">
+          <span class="ch-model__price-from">Prix</span>
+          <span class="ch-model__price-value">Sur demande</span>
+        </div>
+        <a href="contact.html?modele=KL-Capsule-6.5m" class="ch-model__cta">Demander un devis →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CAPSULE 8,5M ── -->
+  <div class="ch-model ch-model--reverse" style="margin-top:3px;">
+    <div class="ch-model__visual">
+      <img class="ch-model__img" src="assets/habitat/capsule-house/capsule-11-5m.png" alt="KL Capsule House 8,5m" loading="lazy">
+    </div>
+    <div class="ch-model__info">
+      <div class="ch-model__number">Modèle 02 · Intermédiaire</div>
+      <h2 class="ch-model__name">Capsule 8,5 m</h2>
+      <p class="ch-model__tagline">Confort et polyvalence</p>
+      <div class="ch-model__specs">
+        <div class="ch-spec">
+          <div class="ch-spec__label">Longueur</div>
+          <div class="ch-spec__value">8,5 m</div>
+        </div>
+        <div class="ch-spec">
+          <div class="ch-spec__label">Surface</div>
+          <div class="ch-spec__value">~28 m²</div>
+        </div>
+        <div class="ch-spec">
+          <div class="ch-spec__label">Structure</div>
+          <div class="ch-spec__value">Acier T88</div>
+        </div>
+        <div class="ch-spec">
+          <div class="ch-spec__label">Capacité</div>
+          <div class="ch-spec__value">2 – 4 pers.</div>
+        </div>
+      </div>
+      <ul class="ch-model__features">
+        <li>Structure acier galvanisé haute résistance</li>
+        <li>Cuisine équipée compacte intégrée</li>
+        <li>Salle de bain avec sanitaires complets</li>
+        <li>Terrasse bois en option</li>
+        <li>Pré-câblage domotique disponible</li>
+      </ul>
+      <div class="ch-model__footer">
+        <div class="ch-model__price">
+          <span class="ch-model__price-from">Prix</span>
+          <span class="ch-model__price-value">Sur demande</span>
+        </div>
+        <a href="contact.html?modele=KL-Capsule-8.5m" class="ch-model__cta">Demander un devis →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CAPSULE 11,5M ── -->
+  <div class="ch-model" style="margin-top:3px;">
+    <div class="ch-model__visual">
+      <img class="ch-model__img" src="assets/habitat/capsule-house/capsule-compacte.png" alt="KL Capsule House 11,5m" loading="lazy">
+    </div>
+    <div class="ch-model__info">
+      <div class="ch-model__number">Modèle 03 · Grand format</div>
+      <h2 class="ch-model__name">Capsule 11,5 m</h2>
+      <p class="ch-model__tagline">Espace, lumière, prestige</p>
+      <div class="ch-model__specs">
+        <div class="ch-spec">
+          <div class="ch-spec__label">Longueur</div>
+          <div class="ch-spec__value">11,5 m</div>
+        </div>
+        <div class="ch-spec">
+          <div class="ch-spec__label">Surface</div>
+          <div class="ch-spec__value">~38 m²</div>
+        </div>
+        <div class="ch-spec">
+          <div class="ch-spec__label">Structure</div>
+          <div class="ch-spec__value">Acier T88</div>
+        </div>
+        <div class="ch-spec">
+          <div class="ch-spec__label">Capacité</div>
+          <div class="ch-spec__value">4 – 6 pers.</div>
+        </div>
+      </div>
+      <ul class="ch-model__features">
+        <li>Grand séjour ouvert, volumes généreux</li>
+        <li>2 espaces nuit séparés</li>
+        <li>Cuisine ouverte îlot central</li>
+        <li>Salle de bain premium, double vasque</li>
+        <li>Grandes baies vitrées panoramiques</li>
+        <li>Isolation RE2020, haute performance</li>
+      </ul>
+      <div class="ch-model__footer">
+        <div class="ch-model__price">
+          <span class="ch-model__price-from">Prix</span>
+          <span class="ch-model__price-value">Sur demande</span>
+        </div>
+        <a href="contact.html?modele=KL-Capsule-11.5m" class="ch-model__cta">Demander un devis →</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.ch-models -->
+
+<!-- ══ CTA STRIP ══ -->
+<div class="ch-cta-strip">
+  <h2>Votre projet, notre expertise</h2>
+  <p>Étude personnalisée, livraison &amp; installation clé en main. Nos conseillers répondent sous 24h.</p>
+  <div class="ch-cta-strip__actions">
+    <a href="contact.html" class="btn-gold">Demander un devis</a>
+  </div>
+</div>
 
 <!-- ══ FOOTER ══ -->
 <footer class="hz-footer">
