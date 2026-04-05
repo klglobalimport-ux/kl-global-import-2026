@@ -180,8 +180,8 @@
     .ch-model--reverse { direction: rtl; }
     .ch-model--reverse > * { direction: ltr; }
 
-    .ch-model__visual { position:relative; overflow:hidden; background:#0a0a0a; display:flex; align-items:center; justify-content:center; min-height:500px; }
-    .ch-model__img { width:85%; height:auto; object-fit:contain; display:block; transform:none; transition:transform 0.8s ease; }
+    .ch-model__visual { position:relative; overflow:hidden; background:#0a0a0a; display:flex; align-items:center; justify-content:center; min-height:520px; width:100%; }
+    .ch-model__img { width:90%; height:400px; object-fit:contain; display:block; transform:none; transition:transform 0.8s ease; }
     .ch-model:hover .ch-model__img { transform:scale(1.05); }
 
     .ch-model__info {
@@ -693,19 +693,19 @@
 
 <!-- ══ GALERIE ══ -->
 <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px; padding:0 4vw 6px;">
-  <img src="assets/habitat/capsule-house/Camping-3.webp"         alt="Capsule House camping"         loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/Camping-4.webp"         alt="Capsule House camping 4"        loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/caomping-moderne-2.webp"  alt="Capsule House camping moderne"  loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/habitation.webp"          alt="Capsule House habitation"       loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/Jardin-2.webp"           alt="Capsule House jardin"           loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/Montagne.webp"           alt="Capsule House montagne"         loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/Nature.webp"             alt="Capsule House nature"           loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/Campagne-3.webp"                                alt="Capsule House campagne"         loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/kl-30-2.webp"                                  alt="K&L Capsule 30"                 loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/kl-50.webp"                                    alt="K&L Capsule 50"                 loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/kl-70.webp"                                    alt="K&L Capsule 70"                 loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/capsule-rendu-3d.webp"                          alt="Capsule House rendu 3D"          loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
-  <img src="assets/habitat/capsule-house/capsule-apercu.webp"                            alt="Capsule House aperçu"           loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;">
+  <img src="assets/habitat/capsule-house/Camping-3.webp"          alt="Capsule House camping"          loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/Camping-4.webp"          alt="Capsule House camping 4"        loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/caomping-moderne-2.webp" alt="Capsule House camping moderne"  loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/habitation.webp"         alt="Capsule House habitation"       loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/Jardin-2.webp"           alt="Capsule House jardin"           loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/Montagne.webp"           alt="Capsule House montagne"         loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/Nature.webp"             alt="Capsule House nature"           loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/Campagne-3.webp"         alt="Capsule House campagne"         loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/kl-30-2.webp"            alt="K&L Capsule 30"                 loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/kl-50.webp"              alt="K&L Capsule 50"                 loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/kl-70.webp"              alt="K&L Capsule 70"                 loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/capsule-rendu-3d.webp"   alt="Capsule House rendu 3D"         loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
+  <img src="assets/habitat/capsule-house/capsule-apercu.webp"     alt="Capsule House aperçu"           loading="lazy" style="width:100%;height:220px;object-fit:cover;display:block;cursor:pointer;" onclick="this.requestFullscreen()">
 </div>
 
 <!-- ══ BANDEAU FICHES TECHNIQUES ══ -->
