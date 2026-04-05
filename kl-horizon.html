@@ -501,6 +501,20 @@
     .hz-footer a { color: #555; text-decoration: none; }
     .hz-footer a:hover { color: #999; }
 
+    /* ── Extra gallery ── */
+    .hz-extra-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .hz-extra-gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 900px) {
       .hz-intro {
@@ -631,6 +645,11 @@
         text-decoration: none;
         letter-spacing: 0.05em;
         text-transform: uppercase;
+      }
+
+      /* Extra gallery : 1 colonne sur mobile */
+      .hz-extra-gallery {
+        grid-template-columns: 1fr;
       }
 
       /* Modèles : colonne pleine largeur */
@@ -797,10 +816,6 @@
         loading="lazy"
       >
     </div>
-    <div class="hz-model__gallery">
-      <img src="assets/habitat/horizon/Triangle T3 camping.webp" alt="KL-Horizon Aube camping" loading="lazy">
-      <img src="assets/habitat/horizon/三角屋-未命名 1-20241226-161337.webp" alt="Intérieur Aube" loading="lazy">
-    </div>
     <div class="hz-model__info">
       <div class="hz-model__number">Modèle 01 · Entrée de gamme</div>
       <h2 class="hz-model__name">Aube</h2>
@@ -845,6 +860,11 @@
       </div>
     </div>
   </div>
+  <div class="hz-extra-gallery">
+    <img src="assets/habitat/horizon/Triangle T3 camping.webp" alt="KL-Horizon Aube camping" loading="lazy">
+    <img src="assets/habitat/horizon/三角屋-未命名 1-20241226-161337.webp" alt="Intérieur Aube" loading="lazy">
+    <img src="assets/habitat/horizon/Intérieur 1.webp" alt="Intérieur KL-Horizon Aube" loading="lazy">
+  </div>
 
   <!-- ── ZÉNITH ── -->
   <div class="hz-model hz-model--reverse" style="margin-top: 3px;">
@@ -855,10 +875,6 @@
         alt="KL-Horizon Zénith – habitat triangulaire à la campagne"
         loading="lazy"
       >
-    </div>
-    <div class="hz-model__gallery">
-      <img src="assets/habitat/horizon/Triangle T1 camping.webp" alt="KL-Horizon Zénith camping" loading="lazy">
-      <img src="assets/habitat/horizon/三角屋-未命名 5-20241226-161338.webp" alt="Intérieur Zénith" loading="lazy">
     </div>
     <div class="hz-model__info">
       <div class="hz-model__number">Modèle 02 · Gamme Intermédiaire</div>
@@ -904,6 +920,11 @@
         </a>
       </div>
     </div>
+  </div>
+  <div class="hz-extra-gallery">
+    <img src="assets/habitat/horizon/Triangle T1 camping.webp" alt="KL-Horizon Zénith camping" loading="lazy">
+    <img src="assets/habitat/horizon/三角屋-未命名 5-20241226-161338.webp" alt="Intérieur Zénith" loading="lazy">
+    <img src="assets/habitat/horizon/Triangle T1 campagne.webp" alt="KL-Horizon Zénith campagne" loading="lazy">
   </div>
 
   <!-- ── SOLSTICE ── -->
