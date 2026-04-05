@@ -1268,6 +1268,11 @@ body.has-scrolled a[class*="-back-link"] {
     min-width: 0;
   }
 
+  /* Masquer CATALOGUE et son dropdown sur mobile */
+  .catalogue-item {
+    display: none;
+  }
+
   /* Mobile mega-menu : overlay plein écran */
   .mega-menu {
     position: fixed;
