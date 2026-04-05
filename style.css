@@ -1306,7 +1306,7 @@ body.has-scrolled a[class*="-back-link"] {
 
   .mega-menu__column {
     position: relative;
-    padding: 16px 48px 16px 20px;
+    padding: 14px 16px;
     border-bottom: 1px solid #333;
     overflow: visible;
   }
@@ -1322,16 +1322,15 @@ body.has-scrolled a[class*="-back-link"] {
   .mega-menu__column h3,
   .mega-menu__column h2 {
     color: #ffffff;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
-    margin: 0 0 3px;
+    margin: 0;
     letter-spacing: 0.02em;
   }
 
+  /* Masquer les descriptions sur mobile */
   .mega-menu__column p {
-    color: #888;
-    font-size: 13px;
-    margin: 0;
+    display: none;
   }
 
   /* Lien "Voir"/"Découvrir" : flèche dorée à droite, texte masqué */
