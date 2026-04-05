@@ -145,126 +145,105 @@
     .hz-section-head__title { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; line-height: 1.1; margin: 0; }
     .hz-section-head__text { font-size: 1rem; color: #888; margin-top: 16px; line-height: 1.7; }
 
-    /* ── Model cards ── */
-    .hz-models { padding: 0 4vw 100px; display: flex; flex-direction: column; gap: 3px; }
+    /* ── Body background ── */
+    body { background: #000; color: #f5f5f7; }
 
-    .hz-model {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 560px;
-      transition: border-color 0.3s;
+    /* ── Model sections (new) ── */
+    .drv-section {
+      border-top: 1px solid #1d1d1f;
+      padding-bottom: 100px;
     }
-    .hz-model:hover { border-color: rgba(201,168,76,0.35); }
-    .hz-model--reverse { direction: rtl; }
-    .hz-model--reverse > * { direction: ltr; }
 
-    .hz-model__visual { position: relative; overflow: hidden; min-height: 480px; }
-    .hz-model__img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
+    .drv-hero-model {
+      position: relative;
+      overflow: hidden;
+    }
+    .drv-hero-model img {
+      width: 100%; height: auto;
       display: block;
-      transform: scale(1.3);
+      transform: scale(1.08);
       transition: transform 0.6s ease;
     }
-    .hz-model:hover .hz-model__img { transform: scale(1.0); }
-    .hz-model__img-secondary {
-      position: absolute; bottom: 0; right: 0;
-      width: 42%; aspect-ratio: 4/3;
-      object-fit: cover;
-      overflow: hidden;
-      border-top-left-radius: 12px;
-      border: 2px solid var(--card-bg);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-      transform: scale(1.3);
-      transition: transform 0.6s ease;
+    .drv-hero-model:hover img { transform: scale(1.0); }
+    .drv-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 56px;
+      gap: 10px;
     }
-    .hz-model:hover .hz-model__img-secondary { transform: scale(1.0); }
+    .drv-model-label {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em;
+      text-transform: uppercase; color: rgba(255,255,255,0.6);
+    }
+    .drv-model-name {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 700; letter-spacing: -0.04em;
+      color: #fff; margin: 0; line-height: 1; text-align: center;
+    }
 
-    /* Solstice/full-width variant */
-    .hz-model--solstice {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto;
-      min-height: unset;
+    .drv-details {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 6vw 0;
+      text-align: center;
     }
-    .hz-model--solstice .hz-model__visual { min-height: 500px; grid-column: 1; }
-    .hz-model--solstice .hz-model__gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      height: auto;
+    .drv-tagline {
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      color: #a1a1a6; line-height: 1.6; margin: 0 0 48px;
     }
-    .hz-model--solstice .hz-model__gallery img {
-      aspect-ratio: 4 / 3;
+    .drv-specs {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px; margin-bottom: 32px;
     }
-    .hz-model--solstice .hz-model__gallery img {
-      width: 100%; height: 100%;
+    .drv-spec {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid #1d1d1f; border-radius: 10px; padding: 16px 12px;
+    }
+    .drv-spec__label { font-size: 0.63rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #555; margin-bottom: 6px; }
+    .drv-spec__value { font-size: 0.95rem; font-weight: 700; color: #eee; }
+
+    .drv-features { list-style: none; padding: 0; margin: 0 0 40px; display: flex; flex-direction: column; gap: 8px; text-align: left; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .drv-features li { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #aaa; }
+    .drv-features li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+    .drv-footer { display: flex; align-items: center; justify-content: center; gap: 28px; padding-top: 8px; flex-wrap: wrap; }
+    .drv-price { display: flex; flex-direction: column; align-items: center; }
+    .drv-price__from { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #555; }
+    .drv-price__value { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 800; color: var(--gold); letter-spacing: -0.02em; line-height: 1.1; }
+    .drv-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 30px;
+      font-size: 16px; font-weight: 600; letter-spacing: 0.04em;
+      text-decoration: none; background: #c9a227; color: #000;
+      transition: all 0.3s ease;
+    }
+    .drv-cta:hover { transform: scale(1.05); background: #e8b830; box-shadow: 0 4px 20px rgba(201,162,39,0.5); }
+
+    .drv-gallery {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 3px; margin-top: 56px;
+    }
+    .drv-gallery img {
+      width: 100%; aspect-ratio: 4/3;
       object-fit: cover; display: block;
-      transform: scale(1.3);
+      transform: scale(1.08);
       transition: transform 0.6s ease;
       clip-path: inset(0);
     }
-    .hz-model--solstice .hz-model__gallery img:hover { transform: scale(1.0); }
-    .hz-model--solstice .hz-model__info {
-      padding: 48px 6vw;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
+    .drv-gallery img:hover { transform: scale(1.0); }
+
+    @media (max-width: 900px) {
+      .drv-specs { grid-template-columns: 1fr 1fr; }
+      .drv-gallery { grid-template-columns: 1fr 1fr; }
     }
-    .hz-model--solstice .hz-model__info-left { display: flex; flex-direction: column; gap: 0; }
-    .hz-model--solstice .hz-model__info-right { display: flex; flex-direction: column; gap: 24px; padding-top: 48px; }
-    .hz-model--solstice .hz-model__specs { grid-template-columns: 1fr 1fr 1fr; }
-    .hz-model--solstice .hz-model__footer { grid-column: 1 / -1; margin-top: 0; }
-
-    .hz-model__info { padding: 52px 48px; display: flex; flex-direction: column; justify-content: center; gap: 0; }
-    .hz-model__number { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
-    .hz-model__name { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; line-height: 1.0; margin: 0 0 6px; letter-spacing: -0.02em; }
-    .hz-model__tagline { font-size: 0.9rem; color: #666; font-style: italic; margin: 0 0 28px; }
-
-    .hz-model__specs { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 32px; }
-    .hz-spec { background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); border-radius: 10px; padding: 14px 16px; }
-    .hz-spec__label { font-size: 0.63rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #555; margin-bottom: 4px; }
-    .hz-spec__value { font-size: 1rem; font-weight: 700; color: #eee; }
-
-    .hz-model__features { list-style: none; padding: 0; margin: 0 0 36px; display: flex; flex-direction: column; gap: 8px; }
-    .hz-model__features li { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #aaa; }
-    .hz-model__features li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-
-    .hz-model__footer { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; border-top: 1px solid var(--card-border); margin-top: auto; }
-    .hz-model__price { display: flex; flex-direction: column; }
-    .hz-model__price-from { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #555; }
-    .hz-model__price-value { font-size: clamp(1.6rem, 2.5vw, 2.1rem); font-weight: 800; color: var(--gold); letter-spacing: -0.02em; line-height: 1.1; }
-    .hz-model__cta {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 24px;
-      background: transparent; border: 1px solid var(--gold); color: var(--gold);
-      border-radius: 10px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; text-decoration: none;
-      transition: background 0.25s, color 0.25s;
+    @media (max-width: 600px) {
+      .drv-gallery { grid-template-columns: 1fr; }
+      .drv-footer { flex-direction: column; }
     }
-    .hz-model__cta:hover { background: var(--gold); color: #000; }
-    .hz-model__cta-arrow { font-size: 1rem; transition: transform 0.2s; }
-    .hz-model__cta:hover .hz-model__cta-arrow { transform: translateX(3px); }
-
-    /* ── Callout certifications ── */
-    .hz-certif {
-      background: linear-gradient(135deg, #0d1219, #0a0f1a);
-      border: 1px solid #1e2a3a;
-      border-radius: 16px;
-      padding: 28px 32px;
-    }
-    .hz-certif__icon { font-size: 1.8rem; margin-bottom: 8px; }
-    .hz-certif__title {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: #7fbfff; margin-bottom: 10px;
-    }
-    .hz-certif__stats { display: flex; gap: 24px; }
-    .hz-certif__stat-v { font-size: 1.4rem; font-weight: 800; color: #aad4ff; }
-    .hz-certif__stat-l { font-size: 0.7rem; color: #3a5a7a; text-transform: uppercase; letter-spacing: 0.1em; }
 
     /* ── CTA strip ── */
     .hz-cta-strip {
@@ -291,22 +270,11 @@
       .hz-intro { grid-template-columns: 1fr; gap: 32px; }
       .hz-intro__stat { border-right: none; border-bottom: 1px solid var(--card-border); padding: 0 0 32px; text-align: left; }
       .hz-intro__stat:last-child { border-bottom: none; padding-bottom: 0; }
-      .hz-model { grid-template-columns: 1fr; min-height: unset; }
-      .hz-model--reverse { direction: ltr; }
-      .hz-model__visual { min-height: 300px; }
-      .hz-model__info { padding: 36px 28px; }
-      .hz-model__specs { grid-template-columns: 1fr 1fr; }
-      .hz-model--solstice .hz-model__info { grid-template-columns: 1fr; gap: 24px; }
-      .hz-model--solstice .hz-model__info-right { padding-top: 0; }
-      .hz-model--solstice .hz-model__specs { grid-template-columns: 1fr 1fr; }
-      .hz-model--solstice .hz-model__gallery { grid-template-columns: 1fr 1fr; }
       .hz-section-head { padding: 48px 5vw 32px; }
-      .hz-models { padding: 0 3vw 60px; }
       .hz-cta-strip { margin: 0 3vw 60px; padding: 48px 6vw; }
     }
     @media (max-width: 600px) {
       .hz-hero__content { padding: 0 5vw 8vh; }
-      .hz-model__footer { flex-direction: column; align-items: flex-start; gap: 20px; }
       .hz-cta-strip__actions { flex-direction: column; align-items: center; }
     }
   </style>
@@ -402,210 +370,125 @@
   </p>
 </div>
 
-<!-- ══ MODELS ══ -->
-<div class="hz-models">
-
-  <!-- ── MODÈLE 3,6 M ── -->
-  <div class="hz-model">
-    <div class="hz-model__visual">
-      <img
-        class="hz-model__img"
-        src="assets/habitat/KL-TIPI.webp"
-        alt="KL · Dérive 3,6 M"
-        loading="eager"
-      >
-      <img
-        class="hz-model__img-secondary"
-        src="assets/habitat/KL-TIPI-1.webp"
-        alt="KL · Dérive intérieur"
-        loading="lazy"
-      >
-    </div>
-    <div class="hz-model__info">
-      <div class="hz-model__number">Modèle 01 · Compact</div>
-      <h2 class="hz-model__name">Dérive 3,6 M</h2>
-      <p class="hz-model__tagline">L'escapade intime — posée en une journée, vécue une vie</p>
-
-      <div class="hz-model__specs">
-        <div class="hz-spec">
-          <div class="hz-spec__label">Longueur</div>
-          <div class="hz-spec__value">3,6 m</div>
-        </div>
-        <div class="hz-spec">
-          <div class="hz-spec__label">Structure</div>
-          <div class="hz-spec__value">Alu 6063</div>
-        </div>
-        <div class="hz-spec">
-          <div class="hz-spec__label">Parois</div>
-          <div class="hz-spec__value">PC 16 mm</div>
-        </div>
-        <div class="hz-spec">
-          <div class="hz-spec__label">Durée de vie</div>
-          <div class="hz-spec__value">30 ans</div>
-        </div>
-      </div>
-
-      <ul class="hz-model__features">
-        <li>Structure voûtée aluminium aéronautique 6063 anti-corrosion</li>
-        <li>Parois polycarbonate 16 mm — isolation thermique K 2,1</li>
-        <li>Chambre, salle de bain et cuisine personnalisables</li>
-        <li>Bureau intégrable sur demande</li>
-        <li>Posable sans fondations, sans permis de construire</li>
-        <li>Certifiée CE et ISO 9001</li>
-        <li>Idéal Airbnb, camping, gîte — retour sur investissement rapide</li>
-      </ul>
-
-      <div class="hz-model__footer">
-        <div class="hz-model__price">
-          <span class="hz-model__price-from">Prix</span>
-          <span class="hz-model__price-value">Sur demande</span>
-        </div>
-        <a href="contact.html?modele=derive-36m" class="hz-model__cta">
-          Demander un devis <span class="hz-model__cta-arrow">→</span>
-        </a>
-      </div>
+<!-- ══ MODÈLE 3,6 M ══ -->
+<section class="drv-section">
+  <div class="drv-hero-model">
+    <img src="assets/habitat/KL-TIPI.webp" alt="KL · Dérive 3,6 M" loading="eager">
+    <div class="drv-hero-overlay">
+      <span class="drv-model-label">Modèle 01 · Compact</span>
+      <h2 class="drv-model-name">Dérive 3,6 M</h2>
     </div>
   </div>
-
-  <!-- ── MODÈLE 4,8 M ── -->
-  <div class="hz-model hz-model--reverse" style="margin-top: 3px;">
-    <div class="hz-model__visual">
-      <img
-        class="hz-model__img"
-        src="assets/habitat/KL-tipi-2.webp"
-        alt="KL · Dérive 4,8 M"
-        loading="lazy"
-      >
+  <div class="drv-details">
+    <p class="drv-tagline">L'escapade intime — posée en une journée, vécue une vie entière.</p>
+    <div class="drv-specs">
+      <div class="drv-spec"><div class="drv-spec__label">Longueur</div><div class="drv-spec__value">3,6 m</div></div>
+      <div class="drv-spec"><div class="drv-spec__label">Structure</div><div class="drv-spec__value">Alu 6063</div></div>
+      <div class="drv-spec"><div class="drv-spec__label">Parois</div><div class="drv-spec__value">PC 16 mm</div></div>
+      <div class="drv-spec"><div class="drv-spec__label">Durée de vie</div><div class="drv-spec__value">30 ans</div></div>
     </div>
-    <div class="hz-model__info">
-      <div class="hz-model__number">Modèle 02 · Standard</div>
-      <h2 class="hz-model__name">Dérive 4,8 M</h2>
-      <p class="hz-model__tagline">Le studio de plein air — espace, lumière, liberté</p>
-
-      <div class="hz-model__specs">
-        <div class="hz-spec">
-          <div class="hz-spec__label">Longueur</div>
-          <div class="hz-spec__value">4,8 m</div>
-        </div>
-        <div class="hz-spec">
-          <div class="hz-spec__label">Structure</div>
-          <div class="hz-spec__value">Alu 6063</div>
-        </div>
-        <div class="hz-spec">
-          <div class="hz-spec__label">Parois</div>
-          <div class="hz-spec__value">PC 16 mm</div>
-        </div>
-        <div class="hz-spec">
-          <div class="hz-spec__label">Durée de vie</div>
-          <div class="hz-spec__value">30 ans</div>
-        </div>
+    <ul class="drv-features">
+      <li>Structure voûtée aluminium aéronautique 6063 anti-corrosion</li>
+      <li>Parois polycarbonate 16 mm — isolation thermique K 2,1</li>
+      <li>Chambre, salle de bain et cuisine personnalisables</li>
+      <li>Posable sans fondations, sans permis de construire</li>
+      <li>Certifiée CE et ISO 9001</li>
+      <li>Idéal Airbnb, camping, gîte — retour sur investissement rapide</li>
+    </ul>
+    <div class="drv-footer">
+      <div class="drv-price">
+        <span class="drv-price__from">Prix</span>
+        <span class="drv-price__value">Sur demande</span>
       </div>
-
-      <ul class="hz-model__features">
-        <li>Structure voûtée aluminium aéronautique 6063 anti-corrosion</li>
-        <li>Parois polycarbonate 16 mm — isolation thermique K 2,1</li>
-        <li>Chambre, salle de bain et cuisine personnalisables</li>
-        <li>Bureau intégrable sur demande</li>
-        <li>Posable sans fondations, sans permis de construire</li>
-        <li>Certifiée CE et ISO 9001</li>
-        <li>Idéal Airbnb, camping, gîte — retour sur investissement rapide</li>
-      </ul>
-
-      <div class="hz-model__footer">
-        <div class="hz-model__price">
-          <span class="hz-model__price-from">Prix</span>
-          <span class="hz-model__price-value">Sur demande</span>
-        </div>
-        <a href="contact.html?modele=derive-48m" class="hz-model__cta">
-          Demander un devis <span class="hz-model__cta-arrow">→</span>
-        </a>
-      </div>
+      <a href="contact.html?modele=derive-36m" class="drv-cta">Demander un devis →</a>
     </div>
   </div>
+  <div class="drv-gallery">
+    <img src="assets/habitat/KL-tipi-3.webp" alt="KL · Dérive 3,6 M vue 2" loading="lazy">
+    <img src="assets/habitat/KL-tipi-4.webp" alt="KL · Dérive 3,6 M vue 3" loading="lazy">
+  </div>
+</section>
 
-  <!-- ── MODÈLE 6,6 M (prestige, pleine largeur) ── -->
-  <div class="hz-model hz-model--solstice" style="margin-top: 3px;">
-    <div class="hz-model__visual">
-      <img
-        class="hz-model__img"
-        src="assets/habitat/KL-tipi-3.webp"
-        alt="KL · Dérive 6,6 M – modèle prestige"
-        loading="lazy"
-      >
-    </div>
-
-    <div class="hz-model__gallery">
-      <img src="assets/habitat/KL-TIPI.webp" alt="KL · Dérive extérieur" loading="lazy">
-      <img src="assets/habitat/KL-TIPI-1.webp" alt="KL · Dérive intérieur" loading="lazy">
-      <img src="assets/habitat/KL-tipi-4.webp" alt="KL · Dérive vue 4" loading="lazy">
-      <img src="assets/habitat/KL-tipi-5.webp" alt="KL · Dérive vue 5" loading="lazy">
-      <img src="assets/habitat/KL-tipi-6.webp" alt="KL · Dérive vue 6" loading="lazy">
-      <img src="assets/habitat/KL-tipi-7.webp" alt="KL · Dérive vue 7" loading="lazy">
-      <img src="assets/habitat/KL-tipi-8.webp" alt="KL · Dérive vue 8" loading="lazy">
-    </div>
-
-    <div class="hz-model__info">
-      <div class="hz-model__info-left">
-        <div class="hz-model__number">Modèle 03 · Prestige</div>
-        <h2 class="hz-model__name">Dérive 6,6 M</h2>
-        <p class="hz-model__tagline">Le logement complet — volumes, lumière et durabilité maximale.</p>
-
-        <div class="hz-model__specs">
-          <div class="hz-spec">
-            <div class="hz-spec__label">Longueur</div>
-            <div class="hz-spec__value">6,6 m</div>
-          </div>
-          <div class="hz-spec">
-            <div class="hz-spec__label">Structure</div>
-            <div class="hz-spec__value">Alu 6063</div>
-          </div>
-          <div class="hz-spec">
-            <div class="hz-spec__label">Parois</div>
-            <div class="hz-spec__value">PC 16 mm</div>
-          </div>
-        </div>
-
-        <ul class="hz-model__features">
-          <li>Structure voûtée aluminium aéronautique 6063 anti-corrosion</li>
-          <li>Parois polycarbonate 16 mm — isolation thermique K 2,1</li>
-          <li>Chambre, salle de bain et cuisine entièrement personnalisables</li>
-          <li>Bureau intégrable sur demande</li>
-          <li>Posable sans fondations, sans permis de construire</li>
-          <li>Certifiée CE et ISO 9001 — qualité industrielle garantie</li>
-          <li>Idéal Airbnb, camping, gîte, résidence principale ou secondaire</li>
-        </ul>
-      </div>
-
-      <div class="hz-model__info-right">
-        <div class="hz-certif">
-          <div class="hz-certif__icon">🏅</div>
-          <div class="hz-certif__title">Qualité Certifiée</div>
-          <div class="hz-certif__stats">
-            <div>
-              <div class="hz-certif__stat-v">CE</div>
-              <div class="hz-certif__stat-l">Conformité européenne</div>
-            </div>
-            <div>
-              <div class="hz-certif__stat-v">ISO 9001</div>
-              <div class="hz-certif__stat-l">Management qualité</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="hz-model__footer" style="padding-top: 24px; border-top: 1px solid var(--card-border);">
-          <div class="hz-model__price">
-            <span class="hz-model__price-from">Prix</span>
-            <span class="hz-model__price-value">Sur demande</span>
-          </div>
-          <a href="contact.html?modele=derive-66m" class="hz-model__cta">
-            Demander un devis <span class="hz-model__cta-arrow">→</span>
-          </a>
-        </div>
-      </div>
+<!-- ══ MODÈLE 4,8 M ══ -->
+<section class="drv-section">
+  <div class="drv-hero-model">
+    <img src="assets/habitat/KL-TIPI-1.webp" alt="KL · Dérive 4,8 M" loading="lazy">
+    <div class="drv-hero-overlay">
+      <span class="drv-model-label">Modèle 02 · Standard</span>
+      <h2 class="drv-model-name">Dérive 4,8 M</h2>
     </div>
   </div>
+  <div class="drv-details">
+    <p class="drv-tagline">Le studio de plein air — espace, lumière, liberté totale.</p>
+    <div class="drv-specs">
+      <div class="drv-spec"><div class="drv-spec__label">Longueur</div><div class="drv-spec__value">4,8 m</div></div>
+      <div class="drv-spec"><div class="drv-spec__label">Structure</div><div class="drv-spec__value">Alu 6063</div></div>
+      <div class="drv-spec"><div class="drv-spec__label">Parois</div><div class="drv-spec__value">PC 16 mm</div></div>
+      <div class="drv-spec"><div class="drv-spec__label">Durée de vie</div><div class="drv-spec__value">30 ans</div></div>
+    </div>
+    <ul class="drv-features">
+      <li>Structure voûtée aluminium aéronautique 6063 anti-corrosion</li>
+      <li>Parois polycarbonate 16 mm — isolation thermique K 2,1</li>
+      <li>Chambre, salle de bain et cuisine entièrement personnalisables</li>
+      <li>Bureau intégrable sur demande</li>
+      <li>Posable sans fondations, sans permis de construire</li>
+      <li>Certifiée CE et ISO 9001</li>
+      <li>Idéal Airbnb, camping, gîte — retour sur investissement rapide</li>
+    </ul>
+    <div class="drv-footer">
+      <div class="drv-price">
+        <span class="drv-price__from">Prix</span>
+        <span class="drv-price__value">Sur demande</span>
+      </div>
+      <a href="contact.html?modele=derive-48m" class="drv-cta">Demander un devis →</a>
+    </div>
+  </div>
+  <div class="drv-gallery">
+    <img src="assets/habitat/KL-tipi-5.webp" alt="KL · Dérive 4,8 M vue 2" loading="lazy">
+    <img src="assets/habitat/KL-tipi-6.webp" alt="KL · Dérive 4,8 M vue 3" loading="lazy">
+  </div>
+</section>
 
-</div><!-- /.hz-models -->
+<!-- ══ MODÈLE 6,6 M ══ -->
+<section class="drv-section">
+  <div class="drv-hero-model">
+    <img src="assets/habitat/KL-tipi-2.webp" alt="KL · Dérive 6,6 M" loading="lazy">
+    <div class="drv-hero-overlay">
+      <span class="drv-model-label">Modèle 03 · Prestige</span>
+      <h2 class="drv-model-name">Dérive 6,6 M</h2>
+    </div>
+  </div>
+  <div class="drv-details">
+    <p class="drv-tagline">Le logement complet — volumes, lumière et durabilité maximale.</p>
+    <div class="drv-specs">
+      <div class="drv-spec"><div class="drv-spec__label">Longueur</div><div class="drv-spec__value">6,6 m</div></div>
+      <div class="drv-spec"><div class="drv-spec__label">Structure</div><div class="drv-spec__value">Alu 6063</div></div>
+      <div class="drv-spec"><div class="drv-spec__label">Parois</div><div class="drv-spec__value">PC 16 mm</div></div>
+      <div class="drv-spec"><div class="drv-spec__label">Durée de vie</div><div class="drv-spec__value">30 ans</div></div>
+    </div>
+    <ul class="drv-features">
+      <li>Structure voûtée aluminium aéronautique 6063 anti-corrosion</li>
+      <li>Parois polycarbonate 16 mm — isolation thermique K 2,1</li>
+      <li>Chambre, salle de bain et cuisine entièrement personnalisables</li>
+      <li>Bureau intégrable sur demande</li>
+      <li>Posable sans fondations, sans permis de construire</li>
+      <li>Certifiée CE et ISO 9001 — qualité industrielle garantie</li>
+      <li>Idéal Airbnb, camping, gîte, résidence principale ou secondaire</li>
+    </ul>
+    <div class="drv-footer">
+      <div class="drv-price">
+        <span class="drv-price__from">Prix</span>
+        <span class="drv-price__value">Sur demande</span>
+      </div>
+      <a href="contact.html?modele=derive-66m" class="drv-cta">Demander un devis →</a>
+    </div>
+  </div>
+  <div class="drv-gallery">
+    <img src="assets/habitat/KL-tipi-7.webp" alt="KL · Dérive 6,6 M vue 2" loading="lazy">
+    <img src="assets/habitat/KL-tipi-8.webp" alt="KL · Dérive 6,6 M vue 3" loading="lazy">
+    <img src="assets/habitat/KL-TIPI.webp" alt="KL · Dérive extérieur" loading="lazy">
+  </div>
+</section>
 
 <!-- ══ CTA STRIP ══ -->
 <div class="hz-cta-strip">
