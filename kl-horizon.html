@@ -369,20 +369,21 @@
       min-height: 500px;
       grid-column: 1;
     }
-    .hz-model--solstice .hz-model__gallery {
+    .hz-model__gallery {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3px;
-      height: 260px;
-    }
-    .hz-model--solstice .hz-model__gallery img {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 16px 0;
       width: 100%;
-      height: 100%;
+    }
+    .hz-model__gallery img {
+      width: 100%;
+      height: 220px;
       object-fit: cover;
       display: block;
       transition: transform 0.6s ease;
     }
-    .hz-model--solstice .hz-model__gallery img:hover { transform: scale(1.03); }
+    .hz-model__gallery img:hover { transform: scale(1.03); }
     .hz-model--solstice .hz-model__info {
       padding: 48px 6vw;
       display: grid;
@@ -546,7 +547,6 @@
       }
       .hz-model--solstice .hz-model__info-right { padding-top: 0; }
       .hz-model--solstice .hz-model__specs { grid-template-columns: 1fr 1fr; }
-      .hz-model--solstice .hz-model__gallery { height: 180px; }
 
       .hz-section-head { padding: 48px 5vw 32px; }
       .hz-models { padding: 0 3vw 60px; }
@@ -686,12 +686,20 @@
       }
 
       .hz-model__img,
-      .hz-model__img-secondary,
-      .hz-model--solstice .hz-model__gallery img {
+      .hz-model__img-secondary {
         width: 100%;
         height: 280px;
         object-fit: cover !important;
         object-position: center !important;
+      }
+
+      .hz-model__gallery {
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        margin: 0;
+      }
+      .hz-model__gallery img {
+        height: 160px;
       }
 
       /* Conteneurs background-image */
