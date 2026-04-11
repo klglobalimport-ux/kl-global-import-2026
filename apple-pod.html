@@ -1,5 +1,871 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-N6DJGLCH77"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-N6DJGLCH77');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KL · Pod – K&amp;L Global Import</title>
+  <meta name="description" content="KL·Pod : lodges mobiles CFRP en 5 tailles XS à XL. Posez-les partout, sans permis de construire. Idéal Airbnb, résidence secondaire, habitation principale.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #f5f5f7;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Page intro ── */
+    .pod-intro {
+      background: #000;
+      text-align: center;
+      padding: 120px 6vw 80px;
+    }
+    .pod-intro__eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+      margin-bottom: 24px;
+    }
+    .pod-intro__title {
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin: 0 0 28px;
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+    }
+    .pod-intro__subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+      max-width: 560px;
+      margin: 0 auto 56px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+    .pod-intro__badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .pod-badge {
+      padding: 7px 18px;
+      border: 1px solid #2d2d2d;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: #a1a1a6;
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* ── Stats strip ── */
+    .pod-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-top: 1px solid #1d1d1f;
+      border-bottom: 1px solid #1d1d1f;
+    }
+    .pod-stat {
+      text-align: center;
+      padding: 40px 20px;
+      border-right: 1px solid #1d1d1f;
+    }
+    .pod-stat:last-child { border-right: none; }
+    .pod-stat__value {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #f5f5f7;
+      line-height: 1;
+    }
+    .pod-stat__label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6e6e73;
+      margin-top: 8px;
+    }
+
+    /* ── Model section ── */
+    .pod-section {
+      padding-bottom: 120px;
+      border-top: 1px solid #1d1d1f;
+    }
+
+    .pod-visual {
+      position: relative;
+      background: #000;
+      overflow: hidden;
+    }
+    .pod-visual img {
+      width: 100%; height: auto;
+      display: block;
+      transform: scale(1.3);
+      transition: transform 0.8s ease;
+    }
+    .pod-visual:hover img {
+      transform: scale(1.0);
+    }
+    .pod-visual__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.88) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 64px;
+      gap: 12px;
+    }
+    .pod-model-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .pod-model-name {
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #fff;
+      margin: 0;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .pod-details {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 72px 6vw 0;
+      text-align: center;
+    }
+    .pod-tagline {
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      color: #a1a1a6;
+      font-weight: 400;
+      line-height: 1.55;
+      margin: 0 0 56px;
+    }
+
+    .pod-specs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 52px;
+      border-top: 1px solid #1d1d1f;
+      border-bottom: 1px solid #1d1d1f;
+    }
+    .pod-spec {
+      flex: 1;
+      padding: 28px 16px;
+      border-right: 1px solid #1d1d1f;
+      min-width: 0;
+    }
+    .pod-spec:last-child { border-right: none; }
+    .pod-spec__label {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6e6e73;
+      margin-bottom: 6px;
+    }
+    .pod-spec__value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #f5f5f7;
+      line-height: 1.3;
+    }
+
+    .pod-features {
+      list-style: none;
+      padding: 0; margin: 0 0 56px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .pod-features li {
+      font-size: 0.88rem;
+      color: #a1a1a6;
+      line-height: 1.5;
+    }
+    .pod-features li::before {
+      content: '— ';
+      color: #3a3a3c;
+    }
+
+    .pod-thumbs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .pod-thumb {
+      width: 192px;
+      height: 136px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      display: block;
+      opacity: 0.72;
+      transition: opacity 0.2s, transform 0.2s;
+      border: 1px solid #2d2d2d;
+    }
+    .pod-thumb:hover { opacity: 1; transform: scale(1.06); }
+
+    .pod-cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 40px;
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      background: #c9a227;
+      color: #000;
+      transition: all 0.3s ease;
+    }
+    .pod-cta-link:hover {
+      transform: scale(1.05);
+      background: #e8b830;
+      box-shadow: 0 4px 20px rgba(201,162,39,0.5);
+    }
+    .pod-cta-link::after { content: '→'; }
+
+    /* ── CTA strip ── */
+    .pod-cta-strip {
+      margin: 0 4vw 100px;
+      background: #111;
+      border: 1px solid #1d1d1f;
+      border-radius: 20px;
+      padding: 80px 8vw;
+      text-align: center;
+    }
+    .pod-cta-strip h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 16px;
+      color: #f5f5f7;
+    }
+    .pod-cta-strip p { color: #6e6e73; max-width: 480px; margin: 0 auto 36px; line-height: 1.6; }
+    .pod-cta-strip__actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .btn-apple-primary {
+      display: inline-flex; align-items: center; padding: 14px 32px;
+      background: #0071e3; color: #fff; border-radius: 980px;
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 0.02em;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .btn-apple-primary:hover { background: #0077ed; }
+    .btn-apple-secondary {
+      display: inline-flex; align-items: center; padding: 14px 32px;
+      background: #1d1d1f; color: #f5f5f7; border-radius: 980px;
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 0.02em;
+      text-decoration: none; transition: background 0.2s;
+      border: 1px solid #3a3a3c;
+    }
+    .btn-apple-secondary:hover { background: #2d2d2f; }
+
+    /* ── Footer ── */
+    .pod-footer {
+      border-top: 1px solid #1d1d1f;
+      padding: 40px 6vw;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+      color: #6e6e73; font-size: 0.78rem;
+    }
+    .pod-footer a { color: #6e6e73; text-decoration: none; }
+    .pod-footer a:hover { color: #a1a1a6; }
+
+    /* ── Lightbox ── */
+    .pod-lightbox {
+      position: fixed; inset: 0; z-index: 99999;
+      background: rgba(0,0,0,0.96);
+      display: none; align-items: center; justify-content: center;
+    }
+    .pod-lightbox.is-open { display: flex; }
+    .pod-lightbox__img {
+      max-width: 90vw; max-height: 86vh;
+      object-fit: contain; border-radius: 10px;
+      display: block;
+    }
+    .pod-lightbox__close {
+      position: absolute; top: 20px; right: 28px;
+      background: none; border: none; color: #fff;
+      font-size: 2.2rem; line-height: 1; cursor: pointer;
+      opacity: 0.55; transition: opacity 0.18s;
+    }
+    .pod-lightbox__close:hover { opacity: 1; }
+    .pod-lightbox__nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
+      color: #fff; font-size: 1.8rem; width: 48px; height: 48px;
+      border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .pod-lightbox__nav:hover { background: rgba(255,255,255,0.18); }
+    .pod-lightbox__prev { left: 20px; }
+    .pod-lightbox__next { right: 20px; }
+    .pod-lightbox__counter {
+      position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.35); font-size: 0.75rem; letter-spacing: 0.12em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .pod-stats { grid-template-columns: 1fr; }
+      .pod-stat { border-right: none; border-bottom: 1px solid #1d1d1f; }
+      .pod-stat:last-child { border-bottom: none; }
+      .pod-specs { flex-wrap: wrap; }
+      .pod-spec { flex: 1 1 45%; }
+    }
+    @media (max-width: 600px) {
+
+      .pod-model-name { font-size: 3rem; }
+      .pod-intro__title { font-size: 3rem; }
+      .pod-cta-strip__actions { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="topbar">
+  <div class="logo">
+    <img src="header-logo.jpeg" alt="K&amp;L Global Import" width="640" height="640">
+  </div>
+  <nav class="topnav" aria-label="Navigation principale">
+    <a href="index.html">ACCUEIL</a>
+    <div class="catalogue-item">
+      <a href="index.html#catalogue" class="catalogue-trigger" aria-haspopup="true">CATALOGUE</a>
+      <div class="mega-menu" role="group" aria-label="Catalogue">
+        <div class="mega-menu__grid">
+          <article class="mega-menu__column">
+            <h3>ENGINS RIPPA</h3>
+            <p>Mini-pelles, chargeuses et machines de chantier compactes pour les usages intensifs.</p>
+            <a href="engins-rippa.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>SPACE CAPSULE &amp; HABITAT</h3>
+            <p>Modules habitables innovants pensés pour l'hébergement, l'accueil et les projets modernes.</p>
+            <a href="habitat.html">Découvrir</a>
+          </article>
+          <article class="mega-menu__column">
+            <h3>LOISIR ET HABITAT</h3>
+            <p>Équipements de confort et d'extérieur pour enrichir l'expérience résidentielle.</p>
+            <a href="loisir-habitat.html">Découvrir</a>
+          </article>
+        </div>
+      </div>
+    </div>
+    <a href="javascript:void(0)" style="opacity:0.45;cursor:default;">TARIFS</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
+</header>
+
+<a href="habitat.html" style="position:fixed;left:24px;top:116px;z-index:10001;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);background:rgba(0,0,0,0.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:rgba(255,255,255,0.7);text-decoration:none;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">← Retour</a>
+
+<!-- ══ INTRO ══ -->
+<div class="pod-intro" style="position:relative; background-image:url('assets/apple-pod/KL-pod-L-6.webp'); background-size:cover; background-position:center 60%;">
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);"></div>
+  <div style="position:relative;z-index:1;">
+  <p class="pod-intro__eyebrow">Gamme exclusive · Lodge &amp; Mobilité</p>
+  <h1 class="pod-intro__title">KL·Pod</h1>
+  <p class="pod-intro__subtitle">Le lodge mobile. Posez-le partout, vivez-le pleinement.</p>
+  <div class="pod-intro__badges">
+    <span class="pod-badge">Structure CFRP brevetée</span>
+    <span class="pod-badge">Sans permis de construire</span>
+    <span class="pod-badge">Mobilité sur remorque</span>
+    <span class="pod-badge">Isolation U 0.024 W/m·K</span>
+    <span class="pod-badge">Livraison France entière</span>
+  </div>
+  </div>
+</div>
+
+<!-- ══ STATS ══ -->
+<div class="pod-stats">
+  <div class="pod-stat">
+    <div class="pod-stat__value">5</div>
+    <div class="pod-stat__label">Modèles XS → XL</div>
+  </div>
+  <div class="pod-stat">
+    <div class="pod-stat__value">CFRP</div>
+    <div class="pod-stat__label">Matériau carbone ultra-léger</div>
+  </div>
+  <div class="pod-stat">
+    <div class="pod-stat__value">0 permis</div>
+    <div class="pod-stat__label">Aucun permis requis</div>
+  </div>
+</div>
+
+
+<!-- ══ XS ══ -->
+<section class="pod-section">
+  <div class="pod-visual">
+    <img src="assets/apple-pod/KL-pod-XS-2.webp" alt="KL·Pod XS" loading="eager">
+    <div class="pod-visual__overlay">
+      <span class="pod-model-label">Modèle 01</span>
+      <h2 class="pod-model-name">KL·Pod XS</h2>
+    </div>
+  </div>
+  <div class="pod-details">
+    <p class="pod-tagline">Bureau ou chambre solo — compact, posé en une journée.</p>
+
+    <div class="pod-specs">
+      <div class="pod-spec">
+        <div class="pod-spec__label">Dimensions</div>
+        <div class="pod-spec__value">2,2 × 2,2 m</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Matériau</div>
+        <div class="pod-spec__value">CFRP</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Isolation</div>
+        <div class="pod-spec__value">U 0.024 W/m·K</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Mobilité</div>
+        <div class="pod-spec__value">Sur remorque</div>
+      </div>
+    </div>
+
+    <ul class="pod-features">
+      <li>Structure CFRP brevetée — ultra-légère et indestructible</li>
+      <li>Isolation thermique record, confort toute saison</li>
+      <li>Vitrage trempé intimité, lumineux sans vis-à-vis</li>
+      <li>Posable sans fondations ni permis de construire</li>
+      <li>Livraison et pose clé en main en option</li>
+    </ul>
+
+    <div class="pod-thumbs">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XS-2.webp" alt="KL·Pod XS vue 1" onclick="openLightbox('xs',0)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XS-1.webp" alt="KL·Pod XS vue 2" onclick="openLightbox('xs',1)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XS-.webp" alt="KL·Pod XS vue 3" onclick="openLightbox('xs',2)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XS-3.webp" alt="KL·Pod XS vue 4" onclick="openLightbox('xs',3)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XS-4.webp" alt="KL·Pod XS vue 5" onclick="openLightbox('xs',4)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XS-5.webp" alt="KL·Pod XS vue 6" onclick="openLightbox('xs',5)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XS-6.webp" alt="KL·Pod XS vue 7" onclick="openLightbox('xs',6)" loading="lazy">
+    </div>
+
+    <a href="contact.html?modele=KL-Pod-XS" class="pod-cta-link">Demander un devis</a>
+  </div>
+</section>
+
+
+<!-- ══ S ══ -->
+<section class="pod-section">
+  <div class="pod-visual">
+    <img src="assets/apple-pod/KL-pod-S-5.webp" alt="KL·Pod S" loading="lazy">
+    <div class="pod-visual__overlay">
+      <span class="pod-model-label">Modèle 02 · Jardin &amp; Locatif</span>
+      <h2 class="pod-model-name">KL·Pod S</h2>
+    </div>
+  </div>
+  <div class="pod-details">
+    <p class="pod-tagline">Chambre cosy dans votre jardin — rentabilisez votre terrain dès le premier week-end.</p>
+
+    <div class="pod-specs">
+      <div class="pod-spec">
+        <div class="pod-spec__label">Dimensions</div>
+        <div class="pod-spec__value">2,8 × 2,2 m</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Matériau</div>
+        <div class="pod-spec__value">CFRP</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Isolation</div>
+        <div class="pod-spec__value">U 0.024 W/m·K</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Mobilité</div>
+        <div class="pod-spec__value">Sur remorque</div>
+      </div>
+    </div>
+
+    <ul class="pod-features">
+      <li>Chambre indépendante opérationnelle en 1 journée</li>
+      <li>Idéal location Airbnb — ROI rapide</li>
+      <li>CFRP résistant aux intempéries, entretien zéro</li>
+      <li>Déplaçable en 1h sur remorque homologuée</li>
+      <li>Installation sans déclaration préalable</li>
+    </ul>
+
+    <div class="pod-thumbs">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-S-3.webp" alt="KL·Pod S vue 1" onclick="openLightbox('s',0)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-S-4.webp" alt="KL·Pod S vue 2" onclick="openLightbox('s',1)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-S-5.webp" alt="KL·Pod S vue 3" onclick="openLightbox('s',2)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-S-6.webp" alt="KL·Pod S vue 4" onclick="openLightbox('s',3)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-S.webp" alt="KL·Pod S vue 5" onclick="openLightbox('s',4)" loading="lazy">
+    </div>
+
+    <a href="contact.html?modele=KL-Pod-S" class="pod-cta-link">Demander un devis</a>
+  </div>
+</section>
+
+
+<!-- ══ M ══ -->
+<section class="pod-section">
+  <div class="pod-visual">
+    <img src="assets/apple-pod/KL-pod-M-1.webp" alt="KL·Pod M" loading="lazy">
+    <div class="pod-visual__overlay">
+      <span class="pod-model-label">Modèle 03 · Studio Lodge</span>
+      <h2 class="pod-model-name">KL·Pod M</h2>
+    </div>
+  </div>
+  <div class="pod-details">
+    <p class="pod-tagline">Studio lodge Airbnb clé en main — design primé, rentabilité prouvée.</p>
+
+    <div class="pod-specs">
+      <div class="pod-spec">
+        <div class="pod-spec__label">Dimensions</div>
+        <div class="pod-spec__value">3,8 × 2,2 m</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Matériau</div>
+        <div class="pod-spec__value">CFRP</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Isolation</div>
+        <div class="pod-spec__value">U 0.024 W/m·K</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Mobilité</div>
+        <div class="pod-spec__value">Sur remorque</div>
+      </div>
+    </div>
+
+    <ul class="pod-features">
+      <li>Studio complet : coin nuit, salon, kitchenette</li>
+      <li>Coque CFRP — 3× plus légère que l'acier, 10× plus résistante</li>
+      <li>Vitrage trempé intimité grand format, lumière naturelle maximale</li>
+      <li>Posable sur n'importe quelle parcelle, sans permis</li>
+      <li>Climatisation &amp; chauffage en option, prêt en 48h</li>
+    </ul>
+
+    <div class="pod-thumbs">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-M-3.webp" alt="KL·Pod M vue 1" onclick="openLightbox('m',0)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-M-11.webp" alt="KL·Pod M vue 2" onclick="openLightbox('m',1)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-M-12.webp" alt="KL·Pod M vue 3" onclick="openLightbox('m',2)" loading="lazy">
+    </div>
+
+    <a href="contact.html?modele=KL-Pod-M" class="pod-cta-link">Demander un devis</a>
+  </div>
+</section>
+
+
+<!-- ══ L ══ -->
+<section class="pod-section">
+  <div class="pod-visual">
+    <img src="assets/apple-pod/kl-pod-L-2.webp" alt="KL·Pod L" loading="lazy">
+    <div class="pod-visual__overlay">
+      <span class="pod-model-label">Modèle 04 · Logement Complet</span>
+      <h2 class="pod-model-name">KL·Pod L</h2>
+    </div>
+  </div>
+  <div class="pod-details">
+    <p class="pod-tagline">Logement complet — lumière, espace, liberté totale.</p>
+
+    <div class="pod-specs">
+      <div class="pod-spec">
+        <div class="pod-spec__label">Dimensions</div>
+        <div class="pod-spec__value">5,9 × 2,2 m</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Matériau</div>
+        <div class="pod-spec__value">CFRP</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Isolation</div>
+        <div class="pod-spec__value">U 0.024 W/m·K</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Durée de vie</div>
+        <div class="pod-spec__value">50 ans</div>
+      </div>
+    </div>
+
+    <ul class="pod-features">
+      <li>Logement tout confort : salon, chambre, cuisine, salle de bain</li>
+      <li>Grandes ouvertures vitrées, sensation d'espace maximale</li>
+      <li>Idéal résidence secondaire, locatif ou habitation principale</li>
+      <li>Mobilité sur remorque double essieu homologuée</li>
+      <li>Raccordement eau, électricité, fibre en option</li>
+    </ul>
+
+    <div class="pod-thumbs">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-L-1.webp" alt="KL·Pod L vue 1" onclick="openLightbox('l',0)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/kl-pod-L-2.webp" alt="KL·Pod L vue 2" onclick="openLightbox('l',1)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-L-3.webp" alt="KL·Pod L vue 3" onclick="openLightbox('l',2)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-L-4.webp" alt="KL·Pod L vue 4" onclick="openLightbox('l',3)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-L-5.webp" alt="KL·Pod L vue 5" onclick="openLightbox('l',4)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-L-6.webp" alt="KL·Pod L vue 6" onclick="openLightbox('l',5)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-L-.webp" alt="KL·Pod L vue 7" onclick="openLightbox('l',6)" loading="lazy">
+    </div>
+
+    <a href="contact.html?modele=KL-Pod-L" class="pod-cta-link">Demander un devis</a>
+  </div>
+</section>
+
+
+<!-- ══ XL ══ -->
+<section class="pod-section">
+  <div class="pod-visual">
+    <img src="assets/apple-pod/KL-pod-XL-10.webp" alt="KL·Pod XL" loading="lazy">
+    <div class="pod-visual__overlay">
+      <span class="pod-model-label">Modèle 05 · Prestige &amp; Resort</span>
+      <h2 class="pod-model-name">KL·Pod XL</h2>
+    </div>
+  </div>
+  <div class="pod-details">
+    <p class="pod-tagline">Grand lodge resort ou habitation principale — l'expérience ultime.</p>
+
+    <div class="pod-specs">
+      <div class="pod-spec">
+        <div class="pod-spec__label">Dimensions</div>
+        <div class="pod-spec__value">11,6 × 2,2 m</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Matériau</div>
+        <div class="pod-spec__value">CFRP</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Isolation</div>
+        <div class="pod-spec__value">U 0.024 W/m·K</div>
+      </div>
+      <div class="pod-spec">
+        <div class="pod-spec__label">Durée de vie</div>
+        <div class="pod-spec__value">50 ans</div>
+      </div>
+    </div>
+
+    <ul class="pod-features">
+      <li>Grand lodge : séjour, chambre, cuisine équipée, salle de bain</li>
+      <li>Agencement libre sur commande — intérieur entièrement personnalisable</li>
+      <li>Potentiel locatif resort haut de gamme, ROI exceptionnel</li>
+      <li>Vitrage trempé intimité pleine longueur, lumière zénithale</li>
+      <li>Pose &amp; dépose en 1h, 0 permis, 0 fondation</li>
+    </ul>
+
+    <div class="pod-thumbs">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL.webp" alt="KL·Pod XL vue 0" onclick="openLightbox('xl',0)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-1.webp" alt="KL·Pod XL vue 1" onclick="openLightbox('xl',1)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-2.webp" alt="KL·Pod XL vue 2" onclick="openLightbox('xl',2)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-3.webp" alt="KL·Pod XL vue 3" onclick="openLightbox('xl',3)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-4.webp" alt="KL·Pod XL vue 4" onclick="openLightbox('xl',4)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-5.webp" alt="KL·Pod XL vue 5" onclick="openLightbox('xl',5)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-6.webp" alt="KL·Pod XL vue 6" onclick="openLightbox('xl',6)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-7.webp" alt="KL·Pod XL vue 7" onclick="openLightbox('xl',7)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-8.webp" alt="KL·Pod XL vue 8" onclick="openLightbox('xl',8)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-9.webp" alt="KL·Pod XL vue 9" onclick="openLightbox('xl',9)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-10.webp" alt="KL·Pod XL vue 10" onclick="openLightbox('xl',10)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-11.webp" alt="KL·Pod XL vue 11" onclick="openLightbox('xl',11)" loading="lazy">
+      <img class="pod-thumb" src="assets/apple-pod/KL-pod-XL-12.webp" alt="KL·Pod XL vue 12" onclick="openLightbox('xl',12)" loading="lazy">
+    </div>
+
+    <a href="contact.html?modele=KL-Pod-XL" class="pod-cta-link">Demander un devis</a>
+  </div>
+</section>
+
+
+<!-- ══ CTA STRIP ══ -->
+<div class="pod-cta-strip">
+  <h2>Votre projet, notre expertise</h2>
+  <p>Étude personnalisée, simulation de rentabilité Airbnb, livraison &amp; pose clé en main. Réponse sous 24h.</p>
+  <div class="pod-cta-strip__actions">
+    <a href="contact.html" class="btn-apple-primary">Prendre rendez-vous</a>
+    <a href="habitat.html" class="btn-apple-secondary">Voir tout le catalogue</a>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="pod-footer">
+  <span>&copy; 2026 K&amp;L Global Import · Tous droits réservés</span>
+  <div style="display:flex; gap: 24px;">
+    <a href="index.html">Accueil</a>
+    <a href="contact.html">Contact</a>
+    <a href="mentions-legales.html">Mentions légales</a>
+  </div>
+</footer>
+
+<!-- ══ LIGHTBOX ══ -->
+<div class="pod-lightbox" id="pod-lightbox" role="dialog" aria-modal="true" aria-label="Galerie photos">
+  <button class="pod-lightbox__close" id="pod-lightbox-close" aria-label="Fermer">&times;</button>
+  <button class="pod-lightbox__nav pod-lightbox__prev" id="pod-lightbox-prev" aria-label="Photo précédente">&#8249;</button>
+  <img class="pod-lightbox__img" id="pod-lightbox-img" src="" alt="">
+  <button class="pod-lightbox__nav pod-lightbox__next" id="pod-lightbox-next" aria-label="Photo suivante">&#8250;</button>
+  <div class="pod-lightbox__counter" id="pod-lightbox-counter"></div>
+</div>
+
+<script>
+(function () {
+  var galleries = {
+    xs: ['assets/apple-pod/KL-pod-XS-2.webp','assets/apple-pod/KL-pod-XS-1.webp','assets/apple-pod/KL-pod-XS-.webp','assets/apple-pod/KL-pod-XS-3.webp','assets/apple-pod/KL-pod-XS-4.webp','assets/apple-pod/KL-pod-XS-5.webp','assets/apple-pod/KL-pod-XS-6.webp'],
+    s:  ['assets/apple-pod/KL-pod-S-3.webp','assets/apple-pod/KL-pod-S-4.webp','assets/apple-pod/KL-pod-S-5.webp','assets/apple-pod/KL-pod-S-6.webp','assets/apple-pod/KL-pod-S.webp'],
+    m:  ['assets/apple-pod/KL-pod-M-3.webp','assets/apple-pod/KL-pod-M-11.webp','assets/apple-pod/KL-pod-M-12.webp'],
+    l:  ['assets/apple-pod/KL-pod-L-1.webp','assets/apple-pod/kl-pod-L-2.webp','assets/apple-pod/KL-pod-L-3.webp','assets/apple-pod/KL-pod-L-4.webp','assets/apple-pod/KL-pod-L-5.webp','assets/apple-pod/KL-pod-L-6.webp','assets/apple-pod/KL-pod-L-.webp'],
+    xl: ['assets/apple-pod/KL-pod-XL.webp','assets/apple-pod/KL-pod-XL-1.webp','assets/apple-pod/KL-pod-XL-2.webp','assets/apple-pod/KL-pod-XL-3.webp','assets/apple-pod/KL-pod-XL-4.webp','assets/apple-pod/KL-pod-XL-5.webp','assets/apple-pod/KL-pod-XL-6.webp','assets/apple-pod/KL-pod-XL-7.webp','assets/apple-pod/KL-pod-XL-8.webp','assets/apple-pod/KL-pod-XL-9.webp','assets/apple-pod/KL-pod-XL-10.webp','assets/apple-pod/KL-pod-XL-11.webp','assets/apple-pod/KL-pod-XL-12.webp']
+  };
+  var lb      = document.getElementById('pod-lightbox');
+  var lbImg   = document.getElementById('pod-lightbox-img');
+  var lbCount = document.getElementById('pod-lightbox-counter');
+  var cur = [], idx = 0;
+
+  function show(i) {
+    idx = (i + cur.length) % cur.length;
+    lbImg.src = cur[idx];
+    lbCount.textContent = (idx + 1) + ' / ' + cur.length;
+  }
+  function close() { lb.classList.remove('is-open'); lbImg.src = ''; }
+
+  window.openLightbox = function (key, start) {
+    cur = galleries[key] || [];
+    if (!cur.length) return;
+    lb.classList.add('is-open');
+    show(start || 0);
+  };
+
+  document.getElementById('pod-lightbox-close').addEventListener('click', close);
+  document.getElementById('pod-lightbox-prev').addEventListener('click', function(){ show(idx-1); });
+  document.getElementById('pod-lightbox-next').addEventListener('click', function(){ show(idx+1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'ArrowLeft')  show(idx-1);
+    if (e.key === 'ArrowRight') show(idx+1);
+    if (e.key === 'Escape')     close();
+  });
+})();
+</script>
+
+<script src="scroll-back-btn.js" defer></script>
+<!-- DÉBUT SECTION SEO APPLE-POD -->
+<section style="background: #0a0a0a; padding: 80px 20px; margin-top: 0;">
+  <div style="max-width: 1200px; margin: 0 auto; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.8;">
+    
+    <h1 style="font-size: 2.5em; margin-bottom: 20px; color: #ffffff; font-weight: 600; text-align: left;">KL·Pod M : Le Studio Lodge Clé en Main</h1>
+    
+    <p style="font-size: 1.2em; color: #b8b8b8; margin-bottom: 40px;">
+      Le KL·Pod M révolutionne l'hébergement touristique et le logement temporaire. Studio lodge Airbnb clé en main avec design primé, rentabilité prouvée et mobilité sur remorque. Structure CFRP 3× plus légère que l'acier, isolation U 0.024 W/m·K, installation en quelques heures sans fondations lourdes.
+    </p>
+
+    <h2 style="font-size: 2em; margin: 50px 0 25px 0; color: #ffffff; font-weight: 600;">Qu'est-ce que le KL·Pod M ?</h2>
+    
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Le KL·Pod M est un studio lodge mobile haut de gamme développé par K&L Global Import pour les propriétaires et exploitants cherchant une solution d'hébergement rentable et clé en main. Inspiré des meilleures pratiques Airbnb et du glamping premium, le KL·Pod M combine innovation technologique, design primé et performance énergétique exceptionnelle.
+    </p>
+
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Dimensions 3,8 × 2,2 m pour un studio complet avec coin nuit, salon et kitchenette. La coque CFRP brevetée offre une légèreté inégalée (3× plus légère que l'acier) et une résistance 10× supérieure aux matériaux traditionnels. Mobilité totale sur remorque pour adapter votre offre selon les saisons et opportunités.
+    </p>
+
+    <h2 style="font-size: 2em; margin: 50px 0 25px 0; color: #ffffff; font-weight: 600;">Caractéristiques Techniques du KL·Pod M</h2>
+
+    <ul style="list-style: none; padding: 0; margin: 30px 0;">
+      <li style="margin-bottom: 20px; padding-left: 0;">
+        <strong style="color: #ffffff; font-size: 1.15em; display: block; margin-bottom: 8px;">Dimensions : 3,8 × 2,2 m</strong>
+        <span style="color: #a0a0a0; display: block;">Surface optimisée pour studio complet avec coin nuit, salon et kitchenette équipée.</span>
+      </li>
+      <li style="margin-bottom: 20px; padding-left: 0;">
+        <strong style="color: #ffffff; font-size: 1.15em; display: block; margin-bottom: 8px;">Matériau : Coque CFRP brevetée</strong>
+        <span style="color: #a0a0a0; display: block;">Composite à Fibres Renforcées de Polymère, 3× plus légère que l'acier et 10× plus résistante aux chocs et intempéries.</span>
+      </li>
+      <li style="margin-bottom: 20px; padding-left: 0;">
+        <strong style="color: #ffffff; font-size: 1.15em; display: block; margin-bottom: 8px;">Isolation : U 0.024 W/m·K</strong>
+        <span style="color: #a0a0a0; display: block;">Performance thermique exceptionnelle garantissant confort été/hiver et réduction drastique des coûts énergétiques.</span>
+      </li>
+      <li style="margin-bottom: 20px; padding-left: 0;">
+        <strong style="color: #ffffff; font-size: 1.15em; display: block; margin-bottom: 8px;">Mobilité : Sur remorque</strong>
+        <span style="color: #a0a0a0; display: block;">Transportable facilement sans grue, installation rapide sur n'importe quel terrain en quelques heures.</span>
+      </li>
+      <li style="margin-bottom: 20px; padding-left: 0;">
+        <strong style="color: #ffffff; font-size: 1.15em; display: block; margin-bottom: 8px;">Livraison : France entière</strong>
+        <span style="color: #a0a0a0; display: block;">K&L Global Import assure livraison clé en main partout en France métropolitaine avec installation incluse.</span>
+      </li>
+    </ul>
+
+    <h2 style="font-size: 2em; margin: 50px 0 25px 0; color: #ffffff; font-weight: 600;">Les Avantages du KL·Pod M</h2>
+
+    <h3 style="font-size: 1.5em; margin: 35px 0 15px 0; color: #f0f0f0; font-weight: 500;">1. Rentabilité Airbnb Prouvée</h3>
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Design primé et expérience haut de gamme attirant les voyageurs recherchant hébergement unique. Taux d'occupation élevés grâce au concept studio lodge différenciant. Investissement rentabilisé rapidement comparé aux constructions traditionnelles.
+    </p>
+
+    <h3 style="font-size: 1.5em; margin: 35px 0 15px 0; color: #f0f0f0; font-weight: 500;">2. Installation Rapide et Sans Permis</h3>
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Installation en quelques heures contre plusieurs mois pour construction classique. Nature mobile exemptant souvent de permis de construire selon réglementations locales. Réduction drastique des coûts et délais de mise en service.
+    </p>
+
+    <h3 style="font-size: 1.5em; margin: 35px 0 15px 0; color: #f0f0f0; font-weight: 500;">3. Performance Énergétique Exceptionnelle</h3>
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Isolation U 0.024 W/m·K assurant confort thermique optimal été comme hiver. Réduction importante des dépenses chauffage et climatisation. Valorisation écologique auprès clientèle sensible développement durable.
+    </p>
+
+    <h3 style="font-size: 1.5em; margin: 35px 0 15px 0; color: #f0f0f0; font-weight: 500;">4. Mobilité et Flexibilité Totale</h3>
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Déplacement facile sur remorque permettant changement emplacement selon saisons et opportunités. Idéal exploitants touristiques multi-sites ou projets évolutifs. Pas d'investissement immobilier figé.
+    </p>
+
+    <h3 style="font-size: 1.5em; margin: 35px 0 15px 0; color: #f0f0f0; font-weight: 500;">5. Durabilité et Faible Entretien</h3>
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Coque CFRP résistant intempéries, corrosion et vieillissement. Maintenance réduite comparé bois ou métal. Installation légère préservant sols et végétation, minimisant empreinte écologique.
+    </p>
+
+    <h2 style="font-size: 2em; margin: 50px 0 25px 0; color: #ffffff; font-weight: 600;">Applications et Cas d'Usage</h2>
+
+    <h3 style="font-size: 1.5em; margin: 35px 0 15px 0; color: #f0f0f0; font-weight: 500;">Hébergement Airbnb et Location Courte Durée</h3>
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Solution clé en main pour propriétaires souhaitant monétiser terrain via Airbnb, Booking ou Abritel. Design moderne attractif, équipement complet, rentabilité rapide. Parfait complément propriété existante ou projet standalone.
+    </p>
+
+    <h3 style="font-size: 1.5em; margin: 35px 0 15px 0; color: #f0f0f0; font-weight: 500;">Camping et Glamping Haut de Gamme</h3>
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Éco-lodges, campings étoilés, villages vacances premium : le KL·Pod M offre expérience hébergement unique. Clientèle recherchant confort et authenticité dans lieux d'exception. Différenciation forte face offre traditionnelle.
+    </p>
+
+    <h3 style="font-size: 1.5em; margin: 35px 0 15px 0; color: #f0f0f0; font-weight: 500;">Bureau Mobile ou Espace de Travail</h3>
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Transformation en bureau isolé, atelier créatif, showroom temporaire ou espace coworking. Environnement travail fonctionnel, modulable et inspirant. Solution nomade pour professionnels itinérants.
+    </p>
+
+    <h3 style="font-size: 1.5em; margin: 35px 0 15px 0; color: #f0f0f0; font-weight: 500;">Résidence Secondaire ou Studio Invités</h3>
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Complément propriété avec espace vie indépendant pour invités. Studio jardin, retraite personnelle au calme ou logement adolescents/jeunes adultes. Installation rapide sans travaux lourds.
+    </p>
+
+    <h3 style="font-size: 1.5em; margin: 35px 0 15px 0; color: #f0f0f0; font-weight: 500;">Logement Temporaire Chantier ou Événementiel</h3>
+    <p style="font-size: 1.1em; color: #c0c0c0; margin-bottom: 25px;">
+      Hébergement équipes chantier, personnel événementiel, bases vie temporaires. Confort supérieur containers classiques, mobilité facilitant logistique. Solution professionnelle valorisante.
+    </p>
+
+    <div style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: 15px; margin: 60px 0 20px 0; text-align: center; border: 1px solid rgba(255,255,255,0.1);">
+      <h2 style="font-size: 1.8em; margin-bottom: 15px; color: #ffffff; font-weight: 600;">Demandez Votre Devis Gratuit</h2>
+      <p style="font-size: 1.1em; color: #b8b8b8; margin-bottom: 25px;">
+        Contactez K&L Global Import pour recevoir documentation complète, tarifs et disponibilités. Nos experts vous accompagnent dans votre projet de A à Z.
+      </p>
+      <p style="font-size: 1em; color: #999999;">
+        <strong style="color: #ffffff;">Téléphone :</strong> +33 (0)X XX XX XX XX<br>
+        <strong style="color: #ffffff;">Email :</strong> contact@klglobalimport.com<br>
+        <strong style="color: #ffffff;">Livraison :</strong> France métropolitaine entière
+      </p>
+    </div>
+
+  </div>
+</section>
+<!-- FIN SECTION SEO APPLE-POD -->
+
 </body>
 </html>
