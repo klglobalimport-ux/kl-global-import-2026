@@ -1,3 +1,13 @@
 User-agent: *
 Allow: /
+
+# Pages utilitaires
+Disallow: /netlify-forms
+Disallow: /contact-success
+
+# Pages en double (canonical pointe vers la version principale)
+Disallow: /capsule-8-5m
+Disallow: /capsule-11-5m
+Disallow: /RS06
+
 Sitemap: https://klglobalimport.com/sitemap.xml
