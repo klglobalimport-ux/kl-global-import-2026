@@ -204,8 +204,7 @@ p {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-.topnav > a,
-.catalogue-trigger {
+.topnav > a {
   display: inline-flex;
   align-items: center;
   color: #c4c4c8;
@@ -219,152 +218,9 @@ p {
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.topnav > a:hover,
-.catalogue-trigger:hover {
+.topnav > a:hover {
   color: #ffffff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-.catalogue-item {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-
-.mega-menu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  right: auto;
-  width: min(1080px, 92vw);
-  max-height: 250px;
-  margin: 0;
-  overflow: auto;
-  transform: translate(-50%, 6px);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 9999;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 0.5px solid rgba(255, 255, 255, 0.1);
-  border-radius: 18px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-  transition: opacity 0.32s ease, transform 0.32s ease;
-}
-
-.mega-menu::before {
-  content: "";
-  position: absolute;
-  top: -6px;
-  left: 50%;
-  width: 120px;
-  height: 6px;
-  transform: translateX(-50%);
-  pointer-events: auto;
-}
-
-.mega-menu,
-.mega-menu * {
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
-}
-
-.catalogue-item:hover .mega-menu,
-.catalogue-item:focus-within .mega-menu {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, 0);
-}
-
-.mega-menu__grid {
-  width: 100%;
-  margin: 0 auto;
-  padding: 14px 16px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.mega-menu__column h2 {
-  margin: 0 0 8px;
-  font-size: 13px;
-  line-height: 1.3;
-  letter-spacing: 0.08em;
-  font-weight: 300;
-  text-transform: uppercase;
-}
-
-.mega-menu__title-link {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.mega-menu__title-link:hover,
-.mega-menu__title-link:focus-visible,
-.mega-menu__column:hover .mega-menu__title-link,
-.mega-menu__column:focus-within .mega-menu__title-link {
-  color: var(--accent-soft);
-}
-
-.mega-menu__column p {
-  margin: 0 0 8px;
-  color: #888;
-  font-size: 12px;
-  line-height: 1.35;
-}
-
-.mega-menu__column .mega-menu__cta {
-  color: #c4c4c8;
-  text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-underline-offset: 4px;
-  transition: color 0.3s ease, text-decoration-color 0.3s ease;
-}
-
-.mega-menu__column:hover .mega-menu__cta,
-.mega-menu__column:focus-within .mega-menu__cta {
-  color: #ffffff;
-  text-decoration: underline;
-}
-
-.mega-menu__column .mega-menu__cta:hover,
-.mega-menu__column .mega-menu__cta:focus-visible {
-  color: #fff;
-}
-
-.mega-menu__column {
-  position: relative;
-  overflow: hidden;
-  border: 0.5px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 10px 12px;
-  background: rgba(255, 255, 255, 0.015);
-}
-
-.mega-menu__column::before {
-  content: "";
-  position: absolute;
-  inset: -30%;
-  background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.02) 30%, transparent 62%);
-  opacity: 0;
-  transform: scale(0.78);
-  transition: opacity 0.35s ease, transform 0.45s ease;
-  pointer-events: none;
-}
-
-.mega-menu__column:hover::before,
-.mega-menu__column:focus-within::before {
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-.mega-menu__column > * {
-  position: relative;
-  z-index: 1;
 }
 
 /* Hero */
@@ -585,6 +441,256 @@ body.has-scrolled a[class*="-back-link"] {
   color: #c4c4c8;
   font-style: italic;
   letter-spacing: 0.06em;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   Page BROCHURES — brochures.html
+   3 sections colorées (RIPPA bleu / Habitat vert / Loisir orange).
+   ────────────────────────────────────────────────────────────────────── */
+
+.brochures-hero {
+  padding: 4rem 6vw 3rem;
+  text-align: center;
+  background: linear-gradient(180deg, #0a0a0a, #111);
+}
+.brochures-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin: 0 0 0.8rem;
+  color: #fff;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+}
+.brochures-hero p {
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.brochures-main {
+  padding: 0;
+}
+
+.brochures-section {
+  padding: 4rem 6vw;
+  border-left: 4px solid transparent;
+  position: relative;
+}
+.brochures-section--rippa {
+  background: rgba(37, 99, 235, 0.06);
+  border-left-color: #2563eb;
+}
+.brochures-section--habitat {
+  background: rgba(22, 163, 74, 0.06);
+  border-left-color: #16a34a;
+}
+.brochures-section--loisir {
+  background: rgba(234, 88, 12, 0.06);
+  border-left-color: #ea580c;
+}
+
+.brochures-section__header {
+  max-width: 1200px;
+  margin: 0 auto 2.5rem;
+}
+.brochures-section__header h2 {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  flex-wrap: wrap;
+}
+.brochures-section__icon {
+  font-size: 1.4em;
+}
+.brochures-section__tag {
+  font-size: 0.65em;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  background: #ea580c;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.brochures-section__header p {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 760px;
+}
+
+.brochures-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+@media (max-width: 900px) {
+  .brochures-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .brochures-grid { grid-template-columns: 1fr; }
+  .brochures-section { padding: 3rem 6vw; }
+}
+
+.brochures-tile {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.brochures-tile:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.brochures-tile__img {
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  background-color: #1a1a1a;
+  position: relative;
+}
+.brochures-tile__badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #c9a227;
+  color: #0a0a0a;
+  padding: 4px 9px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  z-index: 2;
+}
+.brochures-tile__badge--soon {
+  background: #c9a227;
+  color: #0a0a0a;
+}
+.brochures-tile__label {
+  padding: 14px 14px 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+.brochures-tile__btn {
+  display: block;
+  margin: 6px 14px 14px;
+  padding: 9px 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #c4c4c8;
+  text-decoration: none;
+  cursor: not-allowed;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.brochures-tile__btn[aria-disabled="true"] {
+  opacity: 0.85;
+}
+.brochures-tile__note {
+  display: block;
+  margin: 6px 14px 16px;
+  padding: 9px 12px;
+  text-align: center;
+  font-size: 12px;
+  color: #8a8a90;
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+/* Hover buttons : teinte accentuée selon la section */
+.brochures-section--rippa .brochures-tile__btn:hover {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: #2563eb;
+  color: #fff;
+}
+.brochures-section--habitat .brochures-tile:not(.brochures-tile--coming-soon) .brochures-tile__btn:hover {
+  background: rgba(22, 163, 74, 0.15);
+  border-color: #16a34a;
+  color: #fff;
+}
+
+/* Tuile PROCHAINEMENT (Chalet / Nid d'Abeille / Tipi sur Brochures) */
+.brochures-tile--coming-soon .brochures-tile__img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+.brochures-tile--coming-soon .brochures-tile__label {
+  color: #c4c4c8;
+  font-style: italic;
+}
+
+/* Placeholder LOISIR */
+.brochures-loisir-placeholder {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 3rem 2rem;
+  border: 1px dashed rgba(234, 88, 12, 0.45);
+  border-radius: 16px;
+  background: rgba(10, 10, 10, 0.3);
+}
+.brochures-loisir-placeholder__emoji {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+.brochures-loisir-placeholder h3 {
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  margin: 0 0 1rem;
+  color: #fff;
+  font-weight: 700;
+}
+.brochures-loisir-placeholder p {
+  color: var(--text-muted);
+  margin: 0 0 1.8rem;
+  line-height: 1.6;
+}
+
+/* Bandeau contact final */
+.brochures-contact-band {
+  padding: 3rem 6vw;
+  text-align: center;
+  background: var(--bg-darker);
+  border-top: 1px solid var(--border-soft);
+}
+.brochures-contact-band h3 {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+  color: #fff;
+  font-weight: 700;
+}
+.brochures-contact-band p {
+  margin: 0 auto 1.5rem;
+  max-width: 620px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Tab header: .active sur BROCHURES dans la .topnav.
+   Réutilise le style existant de .topnav > a, on ajoute juste la variante active. */
+.topnav > a.active {
+  color: #fff;
+  font-weight: 600;
 }
 
 @media (max-width: 720px) {
@@ -1265,10 +1371,6 @@ body.has-scrolled a[class*="-back-link"] {
   .topnav {
     gap: 20px;
   }
-
-  .mega-menu__grid {
-    gap: 24px;
-  }
 }
 
 @media (max-width: 720px) {
@@ -1304,89 +1406,6 @@ body.has-scrolled a[class*="-back-link"] {
 
   .topbar-client {
     min-width: 0;
-  }
-
-  /* Sur mobile, le lien CATALOGUE ouvre l'overlay #catalogueMobileOverlay via JS.
-     Le mega-menu desktop est désactivé pour éviter qu'il apparaisse au tap (:focus-within). */
-  .mega-menu {
-    display: none;
-  }
-
-  /* Bouton fermeture × */
-  .mega-menu__close {
-    display: flex;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 32px;
-    line-height: 1;
-    cursor: pointer;
-    padding: 8px;
-    z-index: 10000;
-  }
-
-  .mega-menu__grid {
-    grid-template-columns: 1fr;
-    gap: 0;
-    padding: 0;
-    width: 100%;
-    margin-top: 60px;
-  }
-
-  .mega-menu__column {
-    display: block;
-    position: relative;
-    padding: 20px 24px;
-    border-bottom: 1px solid #222;
-    overflow: visible;
-  }
-
-  .mega-menu__column:last-child {
-    border-bottom: none;
-  }
-
-  .mega-menu__column::before {
-    display: none;
-  }
-
-  .mega-menu__column h2,
-  .mega-menu__column h3 {
-    font-size: 18px;
-    color: #fff;
-    font-weight: 500;
-    margin: 0 0 4px;
-    letter-spacing: 0.01em;
-  }
-
-  .mega-menu__column p {
-    display: none;
-  }
-
-  /* Lien "Voir" : texte masqué, flèche → dorée à droite */
-  .mega-menu__column a {
-    position: absolute;
-    inset: 0;
-    font-size: 0;
-    color: transparent;
-    text-decoration: none;
-  }
-
-  .mega-menu__column a::after {
-    content: '→';
-    position: absolute;
-    right: 24px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    color: #c9a227;
-    transition: transform 0.2s ease;
-  }
-
-  .mega-menu__column:hover a::after {
-    transform: translateY(-50%) translateX(4px);
   }
 
   .main-tabs {
