@@ -60,30 +60,42 @@
 }
 </script>
 </head>
-<body>
+<body class="has-gap-banner">
 
-<!-- Popup Foire Expo GAP -->
-<div id="popup-foire" class="popup-overlay">
-  <div class="popup-box">
-    <button class="popup-close" id="popup-close-btn">&times;</button>
-    <img src="foire-expo-gap.webp" alt="K&L Global Import - Foire Expo de GAP 2026" class="popup-image" width="1136" height="941">
-    <div class="popup-content">
-      <h2>Venez nous rencontrer !</h2>
-      <p class="popup-event">Foire Expo de GAP</p>
-      <p class="popup-dates">Du 8 au 17 mai 2026</p>
-      <p class="popup-location">Juste à côté de l'entrée du Rond-Point du Cèdre</p>
-      <a href="contact.html" class="btn-primary popup-cta">Contactez-nous</a>
-    </div>
+<!-- Bandeau sticky Foire Expo GAP (auto-retiré après 17 mai 2026 ou clic × par user) -->
+<div id="gap-banner" class="gap-banner" role="region" aria-label="Salon Foire Expo de GAP">
+  <img src="foire-expo-gap.webp" alt="" class="gap-banner__img" width="1136" height="941">
+  <div class="gap-banner__text">
+    <span class="gap-banner__title">🎪 Foire Expo de GAP</span>
+    <span class="gap-banner__dates">— 8 au 17 mai 2026</span>
+    <span class="gap-banner__location">· Rond-Point du Cèdre</span>
   </div>
+  <a href="contact.html" class="gap-banner__cta">Nous rencontrer →</a>
+  <button type="button" class="gap-banner__close" aria-label="Fermer le bandeau Foire Expo GAP">&times;</button>
 </div>
 <script>
 (function() {
-  var popup = document.getElementById('popup-foire');
-  var closeBtn = document.getElementById('popup-close-btn');
-  function closePopup() { popup.classList.remove('active'); }
-  setTimeout(function() { popup.classList.add('active'); }, 4000);
-  closeBtn.addEventListener('click', closePopup);
-  popup.addEventListener('click', function(e) { if (e.target === popup) closePopup(); });
+  var banner = document.getElementById('gap-banner');
+  if (!banner) return;
+  var KEY = 'gap-banner-dismissed-2026';
+  var EXPIRY = new Date('2026-05-17T23:59:59').getTime();
+  function hide() {
+    banner.remove();
+    document.body.classList.remove('has-gap-banner');
+  }
+  // Expiration automatique après la foire
+  if (Date.now() > EXPIRY) { hide(); return; }
+  // Fermeture persistante via localStorage
+  try {
+    if (localStorage.getItem(KEY) === '1') { hide(); return; }
+  } catch (e) { /* localStorage indisponible → banner reste visible */ }
+  var closeBtn = banner.querySelector('.gap-banner__close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      hide();
+    });
+  }
 })();
 </script>
 
