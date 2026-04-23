@@ -1,0 +1,15 @@
+# Local Netlify folder
+.netlify
+
+# macOS system files
+.DS_Store
+**/.DS_Store
+
+# Backups
+*.bak
+
+# Temp
+tmp/
+
+# Claude Code local state
+.claude/
