@@ -19,14 +19,12 @@
 
   document.addEventListener('DOMContentLoaded', function () {
 
-    // 1. WhatsApp click
+    // 1. WhatsApp click (bouton flottant rond vert pr\u00e9sent sur toutes les pages)
     var whatsapp = document.querySelector('.whatsapp-float');
     if (whatsapp) {
       whatsapp.addEventListener('click', function () {
         track('whatsapp_click', {
-          event_category: 'conversion',
-          event_label: document.title,
-          page: window.location.pathname
+          page_path: window.location.pathname
         });
       });
     }
@@ -79,6 +77,38 @@
           event_category: 'conversion',
           event_label: link.href.replace('tel:', ''),
           page: window.location.pathname
+        });
+      });
+    });
+
+    // 6. Bandeau Foire Expo GAP \u2014 clic sur le CTA "Nous rencontrer \u2192"
+    var gapCta = document.querySelector('.gap-banner__cta');
+    if (gapCta) {
+      gapCta.addEventListener('click', function () {
+        track('gap_banner_cta_click', {});
+      });
+    }
+
+    // 7. Contact link clicks (listener d\u00e9l\u00e9gu\u00e9 : tout <a href*="contact.html">)
+    //    Capture n'importe quel lien vers contact.html (menu, hero, footer, banner, etc.)
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest && e.target.closest('a[href*="contact.html"]');
+      if (!link) return;
+      track('contact_link_click', {
+        link_text: (link.textContent || '').trim(),
+        source_page: window.location.pathname
+      });
+    });
+
+    // 8. Brochure download clicks (/brochures.html \u2014 22 boutons avec data-pdf)
+    //    Track l'intention m\u00eame si le PDF n'existe pas encore (href="#").
+    var brochureBtns = document.querySelectorAll('.brochures-tile__btn[data-pdf]');
+    Array.prototype.forEach.call(brochureBtns, function (btn) {
+      btn.addEventListener('click', function () {
+        var pdf = btn.getAttribute('data-pdf') || '';
+        var productName = pdf.replace(/\.pdf$/i, '');
+        track('brochure_download_click', {
+          product_name: productName
         });
       });
     });
