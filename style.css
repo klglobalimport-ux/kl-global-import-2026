@@ -204,9 +204,6 @@ p {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* Trigger mobile catalogue : caché sur desktop */
-.catalogue-mobile-trigger { display: none; }
-
 .topnav > a,
 .catalogue-trigger {
   display: inline-flex;
@@ -1271,47 +1268,10 @@ body.has-scrolled a[class*="-back-link"] {
     min-width: 0;
   }
 
-  /* Masquer le dropdown desktop CATALOGUE sur mobile */
-  .catalogue-item {
-    display: none;
-  }
-
-  /* Afficher le trigger mobile CATALOGUE */
-  .catalogue-mobile-trigger {
-    display: inline-flex;
-  }
-
-  /* Mobile mega-menu : overlay plein écran */
+  /* Sur mobile, le lien CATALOGUE ouvre l'overlay #catalogueMobileOverlay via JS.
+     Le mega-menu desktop est désactivé pour éviter qu'il apparaisse au tap (:focus-within). */
   .mega-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: auto;
-    margin-left: 0;
-    width: 100vw;
-    height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
-    overflow-y: auto;
-    transform: none;
-    opacity: 0;
-    pointer-events: none;
-    background: #111;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    z-index: 9999;
-    transition: opacity 0.25s ease;
-  }
-
-  .catalogue-item:hover .mega-menu,
-  .catalogue-item:focus-within .mega-menu,
-  .catalogue-item.is-open .mega-menu {
-    opacity: 1;
-    pointer-events: auto;
-    transform: none;
+    display: none;
   }
 
   /* Bouton fermeture × */
