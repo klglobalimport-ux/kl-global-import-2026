@@ -62,6 +62,29 @@
       background-position: center;
       margin-bottom: 6px;
     }
+    /* Mini-carousel crossfade (tuile KL·Capsule House) : 2 <img> superposées, alternance auto 4s */
+    .model-img.has-carousel {
+      position: relative;
+      overflow: hidden;
+    }
+    .model-img.has-carousel > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      transition: opacity 800ms ease-in-out;
+    }
+    .model-img.has-carousel > img.is-active {
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .model-img.has-carousel > img {
+        transition: none;
+      }
+    }
     .model-item span {
       font-size: 12px;
       font-weight: 700;
@@ -401,7 +424,10 @@
 
           <div class="model-grid">
             <a href="capsule-house.html" class="model-item" style="text-decoration: none; display: block;">
-              <div class="model-img" style="background-image: url('assets/habitat/capsule-house/capsule-compacte.png');"></div>
+              <div class="model-img has-carousel" data-capsule-carousel>
+                <img src="assets/habitat/capsule-house/Nature.webp" alt="Capsule House en pleine nature" class="is-active" loading="lazy">
+                <img src="assets/habitat/capsule-house/Camping-4.webp" alt="Village de capsules vue aérienne" loading="lazy">
+              </div>
               <span>KL·Capsule House</span>
             </a>
           </div>
@@ -656,6 +682,33 @@
   </div>
 </section>
 <!-- FIN SECTION SEO HABITAT -->
+
+<script>
+/* Mini-carousel crossfade tuile KL·Capsule House : alternance 2 images toutes les 4s.
+   Respecte prefers-reduced-motion (figé sur 1re image). Pause au hover. */
+(function () {
+  var carousel = document.querySelector('[data-capsule-carousel]');
+  if (!carousel) return;
+  var slides = carousel.querySelectorAll('img');
+  if (slides.length < 2) return;
+  // Accessibilité : si l'utilisateur préfère réduire les animations, ne pas démarrer le cycle
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var idx = 0;
+  var timer = setInterval(next, 4000);
+  function next() {
+    slides[idx].classList.remove('is-active');
+    idx = (idx + 1) % slides.length;
+    slides[idx].classList.add('is-active');
+  }
+  // Pause au survol (nice-to-have)
+  carousel.addEventListener('mouseenter', function () {
+    if (timer) { clearInterval(timer); timer = null; }
+  });
+  carousel.addEventListener('mouseleave', function () {
+    if (!timer) timer = setInterval(next, 4000);
+  });
+})();
+</script>
 
 </body>
 </html>
