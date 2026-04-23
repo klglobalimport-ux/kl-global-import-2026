@@ -89,11 +89,14 @@
       });
     }
 
-    // 7. Contact link clicks (listener d\u00e9l\u00e9gu\u00e9 : tout <a href*="contact.html">)
-    //    Capture n'importe quel lien vers contact.html (menu, hero, footer, banner, etc.)
+    // 7. Contact link clicks (listener d\u00e9l\u00e9gu\u00e9 : tout lien vers /contact)
+    //    Match /contact (pretty URL Netlify), /contact.html, /contact?xxx, /contact#xxx.
+    //    Rejette contacts-us, contact-success, etc. via regex stricte sur le suffixe.
     document.addEventListener('click', function (e) {
-      var link = e.target.closest && e.target.closest('a[href*="contact.html"]');
+      var link = e.target.closest && e.target.closest('a[href*="contact"]');
       if (!link) return;
+      var href = link.getAttribute('href') || '';
+      if (!/(^|\/)contact(\.html)?(\?|#|$)/.test(href)) return;
       track('contact_link_click', {
         link_text: (link.textContent || '').trim(),
         source_page: window.location.pathname
