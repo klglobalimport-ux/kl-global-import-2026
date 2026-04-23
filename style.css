@@ -549,6 +549,44 @@ body.has-scrolled a[class*="-back-link"] {
   margin: 0 !important;
 }
 
+/* Tuiles "PROCHAINEMENT" — produits à venir, non-cliquables.
+   Appliquer en combinaison avec .model-item. */
+.tile--coming-soon {
+  cursor: default;
+}
+.tile--coming-soon:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+.tile--coming-soon .model-img {
+  position: relative;
+}
+.tile--coming-soon .model-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.42);
+  pointer-events: none;
+}
+.tile--coming-soon .model-img::before {
+  content: "BIENTÔT";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #c9a227;
+  color: #0a0a0a;
+  padding: 3px 7px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border-radius: 3px;
+  z-index: 2;
+}
+.tile--coming-soon span {
+  color: #c4c4c8;
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
+
 @media (max-width: 720px) {
   .btn-back,
   a[class*="-back-link"] {
