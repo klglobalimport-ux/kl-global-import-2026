@@ -1511,7 +1511,7 @@
                     <!-- LIVRAISON POLYNÉSIE -->
                     <div class="option-group" style="border: 2px solid var(--accent-green); background: rgba(74, 222, 128, 0.05);">
                         <div class="option-label" style="color: var(--accent-green);">🏝️ Livraison en Polynésie Française</div>
-                        <div class="option-description">Active l'affichage en Francs Pacifique (XPF) avec TVA réduite à 16% et frais d'importation de 26%</div>
+                        <div class="option-description">Active l'affichage en Francs Pacifique (XPF) avec TVA réduite à 16% et frais d'importation de 40%</div>
                         <div class="toggle-group">
                             <label class="toggle">
                                 <input type="checkbox" id="polynesia" data-option="polynesia">
@@ -1523,7 +1523,7 @@
                             <strong>🏝️ Spécificités Polynésie :</strong><br>
                             • <strong>Devise :</strong> Prix affichés en Francs Pacifique (XPF) au lieu d'Euros<br>
                             • <strong>TVA réduite :</strong> 16% au lieu de 20%<br>
-                            • <strong>Frais d'importation :</strong> +26% sur le total HT<br>
+                            • <strong>Frais d'importation :</strong> +40% sur le total HT<br>
                             💡 Taux de conversion : 1 EUR = 119,33 XPF
                         </div>
                     </div>
@@ -1578,7 +1578,7 @@
                         <span style="font-size: 1rem; font-weight: 600; color: var(--text-white);" id="price-ht">9 500 €</span>
                     </div>
                     <div id="import-fee-row" style="display: none; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                        <span style="font-size: 0.85rem; color: var(--text-gray);">Frais import (26%)</span>
+                        <span style="font-size: 0.85rem; color: var(--text-gray);">Frais import (40%)</span>
                         <span style="font-size: 1rem; font-weight: 600; color: var(--accent-green);" id="price-import">0 XPF</span>
                     </div>
                     <div id="clim-row" style="display: none; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
@@ -1984,15 +1984,15 @@
 
         const VAT_RATE_STANDARD = 0.20; // TVA 20% (Europe)
         const VAT_RATE_POLYNESIA = 0.16; // TVA 16% (Polynésie)
-        const IMPORT_FEE_POLYNESIA = 0.26; // Frais d'importation 26%
+        const IMPORT_FEE_POLYNESIA = 0.40; // Frais d'importation 40%
         const EUR_TO_XPF = 119.33; // Taux de conversion EUR → XPF
 
         const basePrices = {
-            '10ft': 9500,
-            '20ft': 15000,
-            '30ft': 18000,
-            '40ft': 22000,
-            'double-deck': 29500
+            '10ft': 13000,
+            '20ft': 18000,
+            '30ft': 24000,
+            '40ft': 28000,
+            'double-deck': 36000
         };
 
         const surfaces = {
@@ -2290,7 +2290,7 @@
             const priceHT = calculatePrice();
             
             if (config.polynesia) {
-                // Mode Polynésie : HT + Frais import 26% + TVA 16%
+                // Mode Polynésie : HT + Frais import 40% + TVA 16%
                 const importFee = Math.round(priceHT * IMPORT_FEE_POLYNESIA);
                 const htWithImport = priceHT + importFee;
                 const vat = Math.round(htWithImport * VAT_RATE_POLYNESIA);
@@ -2547,7 +2547,7 @@
             message += '\n--- TARIFICATION ---\n';
             message += `Prix HT: ${formatPrice(prices.ht)}\n`;
             if (prices.isPolynesia) {
-                message += `Frais d'importation (26%): ${formatPrice(prices.importFee)}\n`;
+                message += `Frais d'importation (40%): ${formatPrice(prices.importFee)}\n`;
                 message += `TVA Polynésie (16%): ${formatPrice(prices.vat)}\n`;
             } else {
                 message += `TVA (20%): ${formatPrice(prices.vat)}\n`;
