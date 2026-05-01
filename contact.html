@@ -8,6 +8,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Demandez votre devis personnalisé pour un habitat modulaire, capsule house ou engin Rippa. Réponse sous 24h. Tél : +33 6 73 30 00 54. Sisteron, France.">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Image de fond port/import — page contact */
+    .contact-page {
+      background-image:
+        linear-gradient(180deg, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.70) 100%),
+        url('assets/images/contact-bg.webp');
+      background-size: cover, cover;
+      background-position: center top, center center;
+      background-attachment: fixed, fixed;
+      background-repeat: no-repeat, no-repeat;
+    }
+    @media (max-width: 768px) {
+      .contact-page {
+        background-image:
+          linear-gradient(180deg, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.70) 100%),
+          url('assets/images/contact-bg-mobile.webp');
+        /* iOS Safari ne gère pas bien attachment:fixed → on repasse en scroll sur mobile */
+        background-attachment: scroll, scroll;
+      }
+    }
+    /* Cartes du formulaire et coordonnées : fond semi-transparent + flou pour lisibilité */
+    .contact-page .contact-form-container,
+    .contact-page .contact-info-container {
+      background: rgba(10, 14, 20, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
   <script src="micro-interactions.js" defer></script>
   <script src="ga-events.js" defer></script>
   <script type="application/ld+json">
@@ -47,7 +76,7 @@
 }
 </script>
 </head>
-<body>
+<body class="contact-page">
 
 <header class="topbar">
   <div class="logo"><img src="header-logo.webp" alt="K&L Global Import" width="640" height="640"></div>
