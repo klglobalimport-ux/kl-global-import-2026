@@ -116,5 +116,19 @@
       });
     });
 
+    // 9. Tondeuses RC \u2014 clic "Demander un devis" sur les 12 tuiles (tondeuses-rc.html)
+    //    Event d\u00e9di\u00e9 (cat\u00e9gorie engagement) distinct du request_quote g\u00e9n\u00e9rique.
+    var tondeuseBtns = document.querySelectorAll('a.tile-cta[data-modele]');
+    Array.prototype.forEach.call(tondeuseBtns, function (btn) {
+      btn.addEventListener('click', function () {
+        track('click_devis_tondeuse', {
+          event_category: 'engagement',
+          event_label: btn.dataset.modele,
+          modele: btn.dataset.modele,
+          page_location: window.location.href
+        });
+      });
+    });
+
   });
 })();
