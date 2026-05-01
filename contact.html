@@ -214,25 +214,52 @@
     'Rippa-RL10':    { nom: 'Rippa RL10',          info: 'Chargeuse compacte · Polyvalente' },
     'Rippa-RS03':    { nom: 'Rippa RS03',          info: 'Chargeuse sur chenilles' },
     'Rippa-RS04':    { nom: 'Rippa RS04',          info: 'Chargeuse sur chenilles' },
-    'Rippa-RS06':    { nom: 'Rippa RS06',          info: 'Chargeuse sur chenilles' }
+    'Rippa-RS06':    { nom: 'Rippa RS06',          info: 'Chargeuse sur chenilles' },
+    /* Tondeuses RC LM */
+    'LM500W':        { nom: 'Tondeuse RC LM500W',     info: 'Tondeuse télécommandée · 500 mm · Roues' },
+    'LM500A':        { nom: 'Tondeuse RC LM500A',     info: 'Tondeuse télécommandée · 500 mm · Chenilles' },
+    'LM500-PRO':     { nom: 'Tondeuse RC LM500 PRO',  info: 'Tondeuse télécommandée · 500 mm · Pro' },
+    'LM600':         { nom: 'Tondeuse RC LM600',      info: 'Tondeuse télécommandée · 600 mm' },
+    'LM600A':        { nom: 'Tondeuse RC LM600A',     info: 'Tondeuse télécommandée · 600 mm · Chenilles' },
+    'LM700':         { nom: 'Tondeuse RC LM700',      info: 'Tondeuse télécommandée · 700 mm' },
+    'LM800':         { nom: 'Tondeuse RC LM800',      info: 'Tondeuse télécommandée · 800 mm' },
+    'LM800-PLUS':    { nom: 'Tondeuse RC LM800 PLUS', info: 'Tondeuse télécommandée · 800 mm · Plus' },
+    'LM800-PRO':     { nom: 'Tondeuse RC LM800 PRO',  info: 'Tondeuse télécommandée · 800 mm · Pro' },
+    'LM800A':        { nom: 'Tondeuse RC LM800A',     info: 'Tondeuse télécommandée · 800 mm · Chenilles' },
+    'LM800S':        { nom: 'Tondeuse RC LM800S',     info: 'Tondeuse télécommandée · 800 mm · S' },
+    'LM1000':        { nom: 'Tondeuse RC LM1000',     info: 'Tondeuse télécommandée · 1000 mm · Pro+' }
   };
 
   var params = new URLSearchParams(window.location.search);
   var key = params.get('modele');
+  var sujet = params.get('sujet');
   if (!key) return;
 
   /* Lookup ou fallback générique */
   var m = modeles[key] || { nom: key.replace(/-/g, ' '), info: '' };
 
   /* Encadré doré */
-  document.getElementById('recap-titre').textContent = 'Produit sélectionné : ' + m.nom;
+  var recapTitre = sujet === 'devis-tondeuse'
+    ? 'Demande de devis — ' + m.nom
+    : 'Produit sélectionné : ' + m.nom;
+  document.getElementById('recap-titre').textContent = recapTitre;
   if (m.info) document.getElementById('recap-extra').textContent = m.info;
   document.getElementById('modele-recap').style.display = 'block';
+
+  /* Sélection automatique de l'objet : "Demande de cotation / Tarifs" */
+  if (sujet === 'devis-tondeuse' || sujet === 'demande-tarifs') {
+    var subjectSelect = document.getElementById('subject');
+    if (subjectSelect) subjectSelect.value = 'cotation';
+  }
 
   /* Pré-remplissage message */
   var msg = document.getElementById('message');
   if (msg && !msg.value) {
-    msg.value = 'Bonjour, je suis intéressé(e) par le modèle ' + m.nom + '. Merci de me recontacter.';
+    if (sujet === 'devis-tondeuse') {
+      msg.value = 'Bonjour, je souhaite recevoir un devis pour la tondeuse télécommandée ' + m.nom.replace(/^Tondeuse RC /, '') + '. Merci de me contacter pour discuter des modalités (prix, délai, livraison).';
+    } else {
+      msg.value = 'Bonjour, je suis intéressé(e) par le modèle ' + m.nom + '. Merci de me recontacter.';
+    }
   }
 })();
 </script>
