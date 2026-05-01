@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://klglobalimport.com/index.html</loc><lastmod>2026-04-05</lastmod><priority>1.0</priority></url>
+  <url><loc>https://klglobalimport.com/index.html</loc><lastmod>2026-05-01</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://klglobalimport.com/brochures.html</loc><lastmod>2026-04-23</lastmod><priority>0.9</priority></url>
-  <url><loc>https://klglobalimport.com/habitat.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
-  <url><loc>https://klglobalimport.com/engins-rippa.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
+  <url><loc>https://klglobalimport.com/habitat.html</loc><lastmod>2026-05-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://klglobalimport.com/engins-rippa.html</loc><lastmod>2026-05-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://klglobalimport.com/tondeuses-rc.html</loc><lastmod>2026-05-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://klglobalimport.com/contact.html</loc><lastmod>2026-05-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://klglobalimport.com/loisir-habitat.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
-  <url><loc>https://klglobalimport.com/contact.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://klglobalimport.com/derive.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://klglobalimport.com/kl-horizon.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://klglobalimport.com/capsule-house.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
@@ -13,9 +14,7 @@
   <url><loc>https://klglobalimport.com/capsule-85m.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://klglobalimport.com/capsule-115m.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://klglobalimport.com/capsule-5-5m.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
-  <url><loc>https://klglobalimport.com/capsule-8-5m.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://klglobalimport.com/capsule-9-5m.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
-  <url><loc>https://klglobalimport.com/capsule-11-5m.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://klglobalimport.com/apple-pod.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://klglobalimport.com/maison-modulaire.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://klglobalimport.com/maison-modulaire-10ft.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
@@ -40,12 +39,8 @@
   <url><loc>https://klglobalimport.com/rippa-rs07.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://klglobalimport.com/rippa-rs20.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://klglobalimport.com/rippa-rl10.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
-  <url><loc>https://klglobalimport.com/tondeuses-rc.html</loc><lastmod>2026-05-01</lastmod><priority>0.8</priority></url>
-  <url><loc>https://klglobalimport.com/RS06.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
-  <url><loc>https://klglobalimport.com/mentions-legales.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
+  <url><loc>https://klglobalimport.com/mentions-legales.html</loc><lastmod>2026-04-13</lastmod><priority>0.5</priority></url>
   <url><loc>https://klglobalimport.com/cgv.html</loc><lastmod>2026-04-13</lastmod><priority>0.5</priority></url>
   <url><loc>https://klglobalimport.com/politique-confidentialite.html</loc><lastmod>2026-04-13</lastmod><priority>0.5</priority></url>
   <url><loc>https://klglobalimport.com/politique-cookies.html</loc><lastmod>2026-04-13</lastmod><priority>0.5</priority></url>
-  <url><loc>https://klglobalimport.com/contact-success.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
-  <url><loc>https://klglobalimport.com/netlify-forms.html</loc><lastmod>2026-04-05</lastmod><priority>0.8</priority></url>
 </urlset>
