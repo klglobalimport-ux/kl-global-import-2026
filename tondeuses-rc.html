@@ -73,10 +73,14 @@ body {
   position: relative;
   padding: 120px 24px 80px;
   text-align: center;
-  background:
-    radial-gradient(ellipse at top, rgba(74,222,128,0.08), transparent 60%),
-    radial-gradient(ellipse at bottom right, rgba(251,146,60,0.06), transparent 60%),
-    var(--bg-primary);
+  background-image:
+    linear-gradient(180deg, rgba(10,14,20,0.55) 0%, rgba(10,14,20,0.85) 100%),
+    radial-gradient(ellipse at top, rgba(74,222,128,0.10), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(251,146,60,0.08), transparent 60%),
+    url('assets/images/tondeuses/lm800pro.webp');
+  background-size: cover, cover, cover, cover;
+  background-position: center, center, center, center;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
   overflow: hidden;
 }
 
