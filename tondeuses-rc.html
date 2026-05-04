@@ -19,6 +19,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* Fond d'écran générique tondeuses RC — image lm600a + overlay sombre pour lisibilité */
+body.tondeuses-page {
+  background-image:
+    linear-gradient(180deg, rgba(10,14,20,0.78) 0%, rgba(10,14,20,0.92) 100%),
+    url('assets/images/tondeuses/lm600a.webp');
+  background-size: cover, cover;
+  background-position: center top, center center;
+  background-attachment: fixed, fixed;
+  background-repeat: no-repeat, no-repeat;
+  min-height: 100vh;
+}
+@media (max-width: 768px) {
+  body.tondeuses-page {
+    background-attachment: scroll, scroll;
+  }
+}
+
 :root {
   --bg-primary: #0a0e14;
   --bg-card: #131820;
@@ -509,7 +526,7 @@ body {
 }
 </script>
 </head>
-<body>
+<body class="tondeuses-page">
 
 <header class="topbar">
   <div class="logo"><img src="header-logo.webp" alt="K&L Global Import" width="640" height="640"></div>
