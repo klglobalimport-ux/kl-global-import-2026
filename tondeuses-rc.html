@@ -73,14 +73,10 @@ body {
   position: relative;
   padding: 120px 24px 80px;
   text-align: center;
-  background-image:
-    linear-gradient(180deg, rgba(10,14,20,0.55) 0%, rgba(10,14,20,0.85) 100%),
-    radial-gradient(ellipse at top, rgba(74,222,128,0.10), transparent 60%),
-    radial-gradient(ellipse at bottom right, rgba(251,146,60,0.08), transparent 60%),
-    url('assets/images/tondeuses/lm800pro.webp');
-  background-size: cover, cover, cover, cover;
-  background-position: center, center, center, center;
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background:
+    radial-gradient(ellipse at top, rgba(74,222,128,0.08), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(251,146,60,0.06), transparent 60%),
+    var(--bg-primary);
   overflow: hidden;
 }
 
@@ -1115,33 +1111,34 @@ body {
       <div class="tile-image">
         <div class="tile-badges">
           <span class="badge badge-tracks">Chenilles</span>
-          <span class="badge badge-pro">DIESEL</span>
+          <span class="badge badge-pro">BROYEUR FLÉAU</span>
         </div>
-        <img src="assets/images/tondeuses/lm800s.webp" alt="Tondeuse télécommandée LM800S — KL Global Import" loading="lazy">
+        <img src="assets/images/tondeuses/lm800s.webp" alt="Broyeur à fléau frontal télécommandé LM800S — KL Global Import" loading="lazy">
       </div>
       <div class="tile-body">
         <header class="tile-header">
           <h3 class="tile-model">LM800S</h3>
-          <span class="tile-tagline">Diesel 192F · Pente 55° · Défrichage lourd</span>
+          <span class="tile-tagline">Broyeur à fléau frontal · Pente 55° · Défrichage lourd</span>
         </header>
         <p class="tile-description">
-          La machine de défrichage. Moteur diesel air cooled 192F, ajustement
-          automatique de pente jusqu'à 55°, télécommande 1 000 m. Pour roseaux,
-          luzerne, herbes hautes, terrains en plaine, collines, terrasses, vergers.
+          <strong>Spécialité broyeur à fléau frontal</strong> télécommandé — l'unique modèle de la gamme dédié au broyage (et non à la tonte classique). Idéal pour <strong>roseaux, luzerne, herbes hautes, ronces, friches</strong>. Ajustement automatique de pente jusqu'à 55°, télécommande 1 000 m, terrains en plaine, collines, terrasses, vergers.
         </p>
 
         <div class="specs">
-          <div class="spec"><span class="spec-label">Largeur de coupe</span><span class="spec-value">80 <span class="unit">cm</span></span></div>
+          <div class="spec"><span class="spec-label">Type</span><span class="spec-value">Broyeur fléau</span></div>
+          <div class="spec"><span class="spec-label">Largeur broyage</span><span class="spec-value">80 <span class="unit">cm</span></span></div>
           <div class="spec"><span class="spec-label">Hauteur de coupe</span><span class="spec-value">20–200 <span class="unit">mm</span></span></div>
-          <div class="spec"><span class="spec-label">Moteur</span><span class="spec-value">Diesel 192F</span></div>
-          <div class="spec"><span class="spec-label">Puissance</span><span class="spec-value">12 <span class="unit">HP</span></span></div>
+          <div class="spec"><span class="spec-label">Moteur (Diesel)</span><span class="spec-value">Diesel 192F</span></div>
+          <div class="spec"><span class="spec-label">Moteur (Essence)</span><span class="spec-value">Loncin V-twin 764cc</span></div>
           <div class="spec"><span class="spec-label">Pente max</span><span class="spec-value">55°</span></div>
           <div class="spec"><span class="spec-label">Télécommande</span><span class="spec-value">1 000 <span class="unit">m</span></span></div>
         </div>
 
         <ul class="features">
+          <li>Broyeur à fléau frontal — défrichage lourd (roseaux, luzerne, ronces)</li>
+          <li>2 motorisations : Diesel 192F ou Essence Loncin V-twin 764cc</li>
           <li>Système d'auto-ajustement de pente</li>
-          <li>Lames acier carbone 6 mm — défrichage lourd</li>
+          <li>Lames acier carbone 6 mm</li>
           <li>Génératrice 2 kW intégrée</li>
           <li>Mode étendu (extended range), 6 km/h max</li>
           <li>Contrôle télécommande + manuel</li>
