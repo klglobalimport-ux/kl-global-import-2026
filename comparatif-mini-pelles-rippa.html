@@ -40,6 +40,10 @@
 .article-related a{color:#f5f5f7;text-decoration:none;font-weight:500}
 .article-related a:hover{color:#2e9fff}
 @media(max-width:600px){.compare-table{font-size:0.78rem}.compare-table th,.compare-table td{padding:8px 6px}}
+
+.article-section table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%; }
+.article-section table thead, .article-section table tbody { display:table; width:100%; }
+@media (max-width:600px) { .article-section table thead, .article-section table tbody { display:block; } .article-section table tr { display:flex; flex-wrap:nowrap; } .article-section table th, .article-section table td { flex:1 0 auto; } }
 </style>
 <script type="application/ld+json">
 {
