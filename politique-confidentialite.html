@@ -61,21 +61,43 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "LocalBusiness"],
   "name": "K&L Global Import",
   "legalName": "K&L Global Import SAS",
   "url": "https://klglobalimport.com/",
   "logo": "https://klglobalimport.com/header-logo.webp",
+  "image": "https://klglobalimport.com/header-logo.webp",
   "email": "klglobalimport@gmail.com",
   "telephone": ["+33 6 62 15 15 81", "+33 6 73 30 00 54"],
   "taxID": "SIREN 100791839",
+  "priceRange": "€€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Virement bancaire, Chèque, Carte bancaire",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "129 chemin de Mételine",
     "postalCode": "04200",
     "addressLocality": "Sisteron",
+    "addressRegion": "Provence-Alpes-Côte d'Azur",
     "addressCountry": "FR"
   },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 44.1903,
+    "longitude": 5.9450
+  },
+  "areaServed": [
+    {"@type": "Country", "name": "France"},
+    {"@type": "Country", "name": "Polynésie française"},
+    {"@type": "AdministrativeArea", "name": "Provence-Alpes-Côte d'Azur"},
+    {"@type": "AdministrativeArea", "name": "Occitanie"},
+    {"@type": "AdministrativeArea", "name": "Auvergne-Rhône-Alpes"},
+    {"@type": "AdministrativeArea", "name": "Île-de-France"}
+  ],
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "12:00"}
+  ],
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+33 6 73 30 00 54",
@@ -267,7 +289,7 @@
 </main>
 
 <footer class="footer">
-  <p>© 2026 K&L Global Import · <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions Légales</a> · <a href="cgv.html" style="color: inherit; text-decoration: underline;">CGV</a> · <a href="politique-confidentialite.html" style="color: inherit; text-decoration: underline;">Confidentialité</a> · <a href="politique-cookies.html" style="color: inherit; text-decoration: underline;">Cookies</a> · Tous droits réservés.</p>
+  <p>© 2026 K&L Global Import · <a href="nous-trouver.html" style="color: inherit; text-decoration: underline;">Nous trouver</a> · <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions Légales</a> · <a href="cgv.html" style="color: inherit; text-decoration: underline;">CGV</a> · <a href="politique-confidentialite.html" style="color: inherit; text-decoration: underline;">Confidentialité</a> · <a href="politique-cookies.html" style="color: inherit; text-decoration: underline;">Cookies</a> · Tous droits réservés.</p>
 </footer>
 
 <a href="https://wa.me/33673300054" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Nous contacter sur WhatsApp">
