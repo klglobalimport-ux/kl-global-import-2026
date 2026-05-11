@@ -1097,6 +1097,93 @@
         .size-option-wrapper .btn-option {
             width: 100%;
         }
+
+        /* ── Section vidéos démo ── */
+        .video-demo-section {
+            padding: 48px 24px 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .video-demo-section h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #f5f5f7;
+            margin-bottom: 24px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #c9a84c;
+            display: inline-block;
+        }
+        .video-demo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 768px) {
+            .video-demo-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .video-demo-grid { grid-template-columns: 1fr; }
+        }
+        .yt-facade {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+            cursor: pointer;
+            aspect-ratio: 9/16;
+        }
+        .yt-facade img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity .3s;
+        }
+        .yt-facade:hover img { opacity: .75; }
+        .yt-play {
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 56px; height: 56px;
+            background: rgba(255,0,0,.85);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform .2s, background .2s;
+        }
+        .yt-play::after {
+            content: '';
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 4px;
+        }
+        .yt-facade:hover .yt-play {
+            background: rgba(255,0,0,1);
+            transform: scale(1.1);
+        }
+        .yt-title {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 8px 10px;
+            background: linear-gradient(transparent, rgba(0,0,0,.75));
+            color: #fff;
+            font-size: .78rem;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.3;
+        }
+        .yt-facade.playing {
+            aspect-ratio: 9/16;
+        }
+        .yt-facade.playing iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
     </style>
   <script src="ga-events.js" defer></script>
 <!-- JSON-LD Organization (KL Global Import — sitewide) -->
@@ -1673,6 +1760,50 @@
                 <button class="cta-button" onclick="requestQuote()">Demander un Devis</button>
             </aside>
         </div>
+
+        <!-- Vidéos démo -->
+        <section class="video-demo-section">
+            <h2>Nos maisons en vidéo</h2>
+            <div class="video-demo-grid">
+
+                <div class="yt-facade" data-id="cZwv2Vjwvq0">
+                    <img src="https://img.youtube.com/vi/cZwv2Vjwvq0/hqdefault.jpg" alt="Maison modulaire 10 ft Flat Roof" loading="lazy">
+                    <button class="yt-play" aria-label="Lire"></button>
+                    <p class="yt-title">10 ft — Flat Roof</p>
+                </div>
+
+                <div class="yt-facade" data-id="9koGbIxtdLw">
+                    <img src="https://img.youtube.com/vi/9koGbIxtdLw/hqdefault.jpg" alt="Maison modulaire 2×20 pieds empilables 74 m²" loading="lazy">
+                    <button class="yt-play" aria-label="Lire"></button>
+                    <p class="yt-title">2×20 pieds empilables — 74 m²</p>
+                </div>
+
+                <div class="yt-facade" data-id="GXbGJaXaYGY">
+                    <img src="https://img.youtube.com/vi/GXbGJaXaYGY/hqdefault.jpg" alt="Maison 20 pieds standard + terrasse latérale" loading="lazy">
+                    <button class="yt-play" aria-label="Lire"></button>
+                    <p class="yt-title">20 pieds — terrasse latérale</p>
+                </div>
+
+                <div class="yt-facade" data-id="AUqANI1UZ0c">
+                    <img src="https://img.youtube.com/vi/AUqANI1UZ0c/hqdefault.jpg" alt="Maison 20 pieds E700 — transport facile" loading="lazy">
+                    <button class="yt-play" aria-label="Lire"></button>
+                    <p class="yt-title">20 pieds E700 — transport facile</p>
+                </div>
+
+                <div class="yt-facade" data-id="uyjf80_7o14">
+                    <img src="https://img.youtube.com/vi/uyjf80_7o14/hqdefault.jpg" alt="Maison 40 pieds avec terrasse" loading="lazy">
+                    <button class="yt-play" aria-label="Lire"></button>
+                    <p class="yt-title">40 pieds + terrasse</p>
+                </div>
+
+                <div class="yt-facade" data-id="bkrHSPzgvoI">
+                    <img src="https://img.youtube.com/vi/bkrHSPzgvoI/hqdefault.jpg" alt="Maison 20 pieds sur pilotis + terrasse sans toit" loading="lazy">
+                    <button class="yt-play" aria-label="Lire"></button>
+                    <p class="yt-title">20 pieds sur pilotis — terrasse sans toit</p>
+                </div>
+
+            </div>
+        </section>
 
         <!-- Carrousel Final -->
         <section class="final-carousel-section">
@@ -2675,5 +2806,20 @@
 </a>
 
 <script src="scroll-back-btn.js" defer></script>
+<script>
+/* Façade YouTube — charge l'iframe uniquement au clic */
+document.querySelectorAll('.yt-facade').forEach(function(facade) {
+    facade.addEventListener('click', function() {
+        var id = facade.dataset.id;
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+        iframe.allowFullscreen = true;
+        facade.innerHTML = '';
+        facade.appendChild(iframe);
+        facade.classList.add('playing');
+    });
+});
+</script>
 </body>
 </html>
