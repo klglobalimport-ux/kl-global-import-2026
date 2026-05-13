@@ -1559,7 +1559,7 @@
                             <span class="toggle-label">Installation solaire (+5000€)</span>
                         </div>
                         <div class="option-price" id="price-solar">+5 000 €</div>
-                        <div id="badge-solar" style="display:none;color:#e53e3e;font-size:11px;margin-top:6px;">⚠ Non disponible en 10ft</div>
+                        <div id="badge-solar" style="display:none;color:#e8a020;font-size:11px;margin-top:6px;">⚠ Option disponible si choix d'un toit</div>
                     </div>
 
                     <!-- Off-Grid -->
@@ -2300,7 +2300,8 @@
             const solarGroup = document.getElementById('option-solar');
             const solarToggle = document.getElementById('solar');
             const badgeSolar = document.getElementById('badge-solar');
-            if (is10ft) {
+            const solarBlockedBy10ft = is10ft && config.roof === 'none';
+            if (solarBlockedBy10ft) {
                 solarGroup.style.pointerEvents = 'none';
                 solarGroup.style.opacity = '0.35';
                 if (config.solar) {
@@ -2395,7 +2396,7 @@
                 
                 config[option] = option === 'acSplits' ? parseInt(value, 10) : value;
 
-                if (option === 'size') {
+                if (option === 'size' || option === 'roof') {
                     updateOptionsAvailability();
                 }
 
