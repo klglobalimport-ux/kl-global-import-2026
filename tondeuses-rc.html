@@ -490,6 +490,49 @@ body {
 }
 .tile-cta svg { width: 14px; height: 14px; }
 
+/* ── Badge C7 Mini offerte ── */
+.c7-offert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, rgba(74,222,128,0.08), rgba(74,222,128,0.15));
+  border: 1px solid rgba(74,222,128,0.35);
+  border-radius: 10px;
+}
+.c7-offert img {
+  width: 64px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.c7-offert-text { flex: 1; }
+.c7-offert-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--grass-green);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.c7-offert-sub {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.c7-badge {
+  background: var(--grass-green);
+  color: #061a0d;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
 /* ── Mini-configurateur tuile ── */
 .tile-config {
   margin: 14px 0 0;
@@ -933,15 +976,14 @@ body {
           <div class="config-options">
             <label class="config-option"><input type="checkbox" value="-27" onchange="calcPrice('KL500-Roues')"><span>Démarrage manuel <span class="opt-price">&minus;27 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL500-Roues')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL500-Roues">2 290 €</span></div>
         </div>
 
@@ -1004,15 +1046,14 @@ body {
             <label class="config-option"><input type="checkbox" value="94" onchange="calcPrice('KL550-Chenilles')"><span>Pulvérisateur <span class="opt-price">+94 €</span></span></label>
             <label class="config-option"><input type="checkbox" value="69" onchange="calcPrice('KL550-Chenilles')"><span>Brushless <span class="opt-price">+69 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL550-Chenilles')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL550-Chenilles">2 990 €</span></div>
         </div>
 
@@ -1075,15 +1116,14 @@ body {
             <label class="config-option"><input type="checkbox" value="94" onchange="calcPrice('KL550-Simple')"><span>Pulvérisateur <span class="opt-price">+94 €</span></span></label>
             <label class="config-option"><input type="checkbox" value="69" onchange="calcPrice('KL550-Simple')"><span>Brushless <span class="opt-price">+69 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL550-Simple')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL550-Simple">2 990 €</span></div>
         </div>
 
@@ -1143,15 +1183,14 @@ body {
           <div class="config-options">
             <label class="config-option"><input type="checkbox" value="69" onchange="calcPrice('KL550-Electrique')"><span>Lame neige <span class="opt-price">+69 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL550-Electrique')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL550-Electrique">3 290 €</span></div>
         </div>
 
@@ -1231,15 +1270,14 @@ body {
             <label class="config-option"><input type="checkbox" value="82" onchange="calcPrice('KL800-Broyeur')"><span>Treuil <span class="opt-price">+82 €</span></span></label>
             <label class="config-option"><input type="checkbox" value="138" onchange="calcPrice('KL800-Broyeur')"><span>Pack 48V <span class="opt-price">+138 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL800-Broyeur')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL800-Broyeur">5 290 €</span></div>
         </div>
 
@@ -1301,15 +1339,14 @@ body {
             <label class="config-option"><input type="checkbox" value="110" onchange="calcPrice('KL800-Chenilles')"><span>Lame neige <span class="opt-price">+110 €</span></span></label>
             <label class="config-option"><input type="checkbox" value="138" onchange="calcPrice('KL800-Chenilles')"><span>Pulvérisateur <span class="opt-price">+138 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL800-Chenilles')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL800-Chenilles">4 990 €</span></div>
         </div>
 
@@ -1370,15 +1407,14 @@ body {
             <label class="config-option"><input type="checkbox" value="138" onchange="calcPrice('KL800-Electrique')"><span>Lame de rechange <span class="opt-price">+138 €</span></span></label>
             <label class="config-option"><input type="checkbox" value="82" onchange="calcPrice('KL800-Electrique')"><span>Treuil <span class="opt-price">+82 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL800-Electrique')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL800-Electrique">5 490 €</span></div>
         </div>
 
@@ -1447,15 +1483,14 @@ body {
             <label class="config-option"><input type="checkbox" value="82" onchange="calcPrice('KL800-Tank')"><span>Treuil <span class="opt-price">+82 €</span></span></label>
             <label class="config-option"><input type="checkbox" value="138" onchange="calcPrice('KL800-Tank')"><span>Pack 48V <span class="opt-price">+138 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL800-Tank')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL800-Tank">4 990 €</span></div>
         </div>
 
@@ -1521,15 +1556,14 @@ body {
             <label class="config-option"><input type="checkbox" value="110" onchange="calcPrice('KL1000-Broyeur')"><span>Treuil <span class="opt-price">+110 €</span></span></label>
             <label class="config-option"><input type="checkbox" value="166" onchange="calcPrice('KL1000-Broyeur')"><span>Pack 48V <span class="opt-price">+166 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL1000-Broyeur')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL1000-Broyeur">6 490 €</span></div>
         </div>
 
@@ -1591,15 +1625,14 @@ body {
             <label class="config-option"><input type="checkbox" value="110" onchange="calcPrice('KL1000-Chenilles')"><span>Lame neige <span class="opt-price">+110 €</span></span></label>
             <label class="config-option"><input type="checkbox" value="138" onchange="calcPrice('KL1000-Chenilles')"><span>Pulvérisateur <span class="opt-price">+138 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL1000-Chenilles')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL1000-Chenilles">5 690 €</span></div>
         </div>
 
@@ -1668,15 +1701,14 @@ body {
             <label class="config-option"><input type="checkbox" value="82" onchange="calcPrice('KL1000-Tank')"><span>Treuil <span class="opt-price">+82 €</span></span></label>
             <label class="config-option"><input type="checkbox" value="138" onchange="calcPrice('KL1000-Tank')"><span>Pack 48V <span class="opt-price">+138 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL1000-Tank')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL1000-Tank">5 490 €</span></div>
         </div>
 
@@ -1744,15 +1776,14 @@ body {
             <label class="config-option"><input type="checkbox" value="82" onchange="calcPrice('KL1200-Tank')"><span>Treuil <span class="opt-price">+82 €</span></span></label>
             <label class="config-option"><input type="checkbox" value="138" onchange="calcPrice('KL1200-Tank')"><span>Pack 48V <span class="opt-price">+138 €</span></span></label>
           </div>
-          <span class="config-section-label">&#127918; Télécommande</span>
-          <select class="config-select config-rc" onchange="calcPrice('KL1200-Tank')">
-            <option value="0">C7 Standard — de série</option>
-            <option value="0">RC une main — de série</option>
-            <option value="249">C7 Mini (+249 €)</option>
-            <option value="349">A2 (+349 €)</option>
-            <option value="590">H12 (+590 €)</option>
-            <option value="690">M450 (+690 €)</option>
-          </select>
+          <div class="c7-offert">
+            <img src="assets/images/tondeuses/c7-mini-plus.jpg" alt="Télécommande Microzone C7 Mini Plus offerte" loading="lazy">
+            <div class="c7-offert-text">
+              <div class="c7-offert-title">Microzone C7 Mini Plus</div>
+              <div class="c7-offert-sub">Télécommande incluse — 2,4 GHz · écran LCD · arrêt urgence</div>
+            </div>
+            <span class="c7-badge">Offerte</span>
+          </div>
           <div class="config-total"><span class="config-total-label">Total TTC</span><span class="config-total-value" id="total-KL1200-Tank">6 990 €</span></div>
         </div>
 
@@ -1847,7 +1878,7 @@ function calcPrice(modele) {
   var cfg = document.querySelector('.tile-config[data-modele="' + modele + '"]');
   if (!cfg) return;
   var base = parseFloat(cfg.querySelector('.config-motor').value) || 0;
-  var rc   = parseFloat(cfg.querySelector('.config-rc').value)    || 0;
+  var rc   = 0; /* C7 Mini offerte — incluse de série */
   var opts = 0;
   cfg.querySelectorAll('.config-options input:checked').forEach(function(cb) {
     opts += parseFloat(cb.value) || 0;
