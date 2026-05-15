@@ -490,6 +490,88 @@ body {
 }
 .tile-cta svg { width: 14px; height: 14px; }
 
+/* ── Mini-configurateur tuile ── */
+.tile-config {
+  margin: 14px 0 0;
+  padding: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+}
+.config-section-label {
+  display: block;
+  font-size: 0.70rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.config-select {
+  width: 100%;
+  padding: 7px 10px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid var(--border-medium);
+  border-radius: 7px;
+  color: var(--text-primary);
+  font-size: 0.80rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  margin-bottom: 10px;
+  appearance: auto;
+}
+.config-select:focus { outline: none; border-color: var(--grass-green); }
+.config-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 8px;
+  margin-bottom: 10px;
+}
+.config-option {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 3px 5px;
+  border-radius: 5px;
+  transition: background .15s;
+  white-space: nowrap;
+}
+.config-option:hover { background: rgba(255,255,255,0.05); }
+.config-option input[type="checkbox"] {
+  accent-color: var(--grass-green);
+  width: 13px; height: 13px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.opt-price { color: var(--accent-orange); font-weight: 600; }
+.config-total {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.config-total-label {
+  font-size: 0.70rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+.config-total-value {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--accent-orange);
+  transition: color .2s;
+}
+.config-total-value.updated { color: var(--grass-green); }
+
 /* ---------- LIEN BROCHURE ---------- */
 .tile-brochure {
   display: flex;
@@ -841,11 +923,36 @@ body {
           <li>Système hybride huile-électrique — autonomie longue</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL500-Roues">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL500-Roues')">
+            <option value="2748">Longxin 196cc — Élec. + RC — 2 748 €</option>
+            <option value="2868">Longxin 224cc — Élec. + RC — 2 868 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="-32" onchange="calcPrice('KL500-Roues')">
+              <span>Démarrage manuel <span class="opt-price">−32 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL500-Roues')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL500-Roues">2 748 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL500-Roues" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -891,11 +998,44 @@ body {
           <li>Hybride huile-électrique · générateur embarqué 2200W</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL550-Chenilles">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL550-Chenilles')">
+            <option value="3588">Longxin 196cc — Élec. + RC — 3 588 €</option>
+            <option value="3828">Longxin 224cc — Élec. + RC — 3 828 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="83" onchange="calcPrice('KL550-Chenilles')">
+              <span>Lame neige <span class="opt-price">+83 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="113" onchange="calcPrice('KL550-Chenilles')">
+              <span>Pulvérisateur <span class="opt-price">+113 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="83" onchange="calcPrice('KL550-Chenilles')">
+              <span>Brushless <span class="opt-price">+83 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL550-Chenilles')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL550-Chenilles">3 588 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL550-Chenilles" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -941,11 +1081,44 @@ body {
           <li>Pente max 50° — adapté talus et berges</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL550-Simple">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL550-Simple')">
+            <option value="3588">Longxin 196cc — Élec. + RC — 3 588 €</option>
+            <option value="3828">Longxin 224cc — Élec. + RC — 3 828 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="83" onchange="calcPrice('KL550-Simple')">
+              <span>Lame neige <span class="opt-price">+83 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="113" onchange="calcPrice('KL550-Simple')">
+              <span>Pulvérisateur <span class="opt-price">+113 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="83" onchange="calcPrice('KL550-Simple')">
+              <span>Brushless <span class="opt-price">+83 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL550-Simple')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL550-Simple">3 588 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL550-Simple" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -991,11 +1164,35 @@ body {
           <li>Chenilles tank 120x50x40 — terrains détrempés et pentes</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL550-Electrique">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL550-Electrique')">
+            <option value="3948">48V 60A — CATL Auto — 3 948 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="83" onchange="calcPrice('KL550-Electrique')">
+              <span>Lame neige <span class="opt-price">+83 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL550-Electrique')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL550-Electrique">3 948 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL550-Electrique" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1056,11 +1253,46 @@ body {
           <li>Hybride essence-électrique, générateur 2500W</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL800-Broyeur">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL800-Broyeur')">
+            <option value="6348">Longxin 420 Ess. — Double gén. — 6 348 €</option>
+            <option value="6348">Kaiyuelin 195 Diesel — Double gén. — 6 348 €</option>
+            <option value="6588">Changchai 195 Diesel — Double gén. — 6 588 €</option>
+            <option value="6588">TI 195 Diesel — Double gén. — 6 588 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="132" onchange="calcPrice('KL800-Broyeur')">
+              <span>Lame de rechange <span class="opt-price">+132 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="98" onchange="calcPrice('KL800-Broyeur')">
+              <span>Treuil <span class="opt-price">+98 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL800-Broyeur')">
+              <span>Pack 48V <span class="opt-price">+166 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL800-Broyeur')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL800-Broyeur">6 348 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL800-Broyeur" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1106,11 +1338,40 @@ body {
           <li>Entraînement 1000Wx2 pour terrains accidentés</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL800-Chenilles">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL800-Chenilles')">
+            <option value="5988">Longxin 452cc — Élec. + RC — 5 988 €</option>
+            <option value="6588">Longxin 608cc — Élec. + RC — 6 588 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="132" onchange="calcPrice('KL800-Chenilles')">
+              <span>Lame neige <span class="opt-price">+132 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL800-Chenilles')">
+              <span>Pulvérisateur <span class="opt-price">+166 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL800-Chenilles')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL800-Chenilles">5 988 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL800-Chenilles" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1156,11 +1417,39 @@ body {
           <li>Moteur brushless 4000W 3000tr/min — puissance pro</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL800-Electrique">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL800-Electrique')">
+            <option value="6588">60V 100A — CATL Auto — 6 588 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL800-Electrique')">
+              <span>Lame de rechange <span class="opt-price">+166 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="98" onchange="calcPrice('KL800-Electrique')">
+              <span>Treuil <span class="opt-price">+98 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL800-Electrique')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL800-Electrique">6 588 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL800-Electrique" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1206,11 +1495,62 @@ body {
           <li>Double générateur hybride 2500W — puissance continue</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL800-Tank">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL800-Tank')">
+            <option value="5988">Longxin 452cc — Double charge — 5 988 €</option>
+            <option value="6588">Longxin 608cc — Double gén. — 6 588 €</option>
+            <option value="7188">Longxin 764cc — Double gén. — 7 188 €</option>
+            <option value="8388">B&S 810cc — Double allumage — 8 388 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="132" onchange="calcPrice('KL800-Tank')">
+              <span>Lame de rechange <span class="opt-price">+132 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL800-Tank')">
+              <span>Pulvérisateur <span class="opt-price">+166 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="132" onchange="calcPrice('KL800-Tank')">
+              <span>Capot bois dur <span class="opt-price">+132 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL800-Tank')">
+              <span>Plateforme <span class="opt-price">+166 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="248" onchange="calcPrice('KL800-Tank')">
+              <span>Pont latéral <span class="opt-price">+248 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="98" onchange="calcPrice('KL800-Tank')">
+              <span>Treuil <span class="opt-price">+98 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL800-Tank')">
+              <span>Pack 48V <span class="opt-price">+166 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL800-Tank')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL800-Tank">5 988 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL800-Tank" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1256,11 +1596,47 @@ body {
           <li>Usage intensif : grandes exploitations, voirie, talus</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL1000-Broyeur">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL1000-Broyeur')">
+            <option value="7788">Longxin 622 Ess. — Double gén. — 7 788 €</option>
+            <option value="7188">Kaiyuelin 195 Diesel — Double gén. — 7 188 €</option>
+            <option value="7548">Changchai 195 Diesel — Double gén. — 7 548 €</option>
+            <option value="7548">TI 195 Diesel — Double gén. — 7 548 €</option>
+            <option value="9588">TI 295 Diesel — Double gén. — 9 588 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="163" onchange="calcPrice('KL1000-Broyeur')">
+              <span>Lame de rechange <span class="opt-price">+163 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="132" onchange="calcPrice('KL1000-Broyeur')">
+              <span>Treuil <span class="opt-price">+132 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="199" onchange="calcPrice('KL1000-Broyeur')">
+              <span>Pack 48V <span class="opt-price">+199 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL1000-Broyeur')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL1000-Broyeur">7 788 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL1000-Broyeur" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1306,11 +1682,40 @@ body {
           <li>Entraînement 1000Wx2, double générateur hybride</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL1000-Chenilles">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL1000-Chenilles')">
+            <option value="6828">Longxin 452cc — Élec. + RC — 6 828 €</option>
+            <option value="7188">Longxin 608cc — Élec. + RC — 7 188 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="132" onchange="calcPrice('KL1000-Chenilles')">
+              <span>Lame neige <span class="opt-price">+132 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL1000-Chenilles')">
+              <span>Pulvérisateur <span class="opt-price">+166 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL1000-Chenilles')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL1000-Chenilles">6 828 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL1000-Chenilles" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1356,11 +1761,62 @@ body {
           <li>3 options moteur 22/25/27CV selon usage</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL1000-Tank">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL1000-Tank')">
+            <option value="6588">Longxin 452cc — Double charge — 6 588 €</option>
+            <option value="7188">Longxin 608cc — Double gén. — 7 188 €</option>
+            <option value="7788">Longxin 764cc — Double gén. — 7 788 €</option>
+            <option value="8988">B&S 810cc — Double allumage — 8 988 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="132" onchange="calcPrice('KL1000-Tank')">
+              <span>Lame de rechange <span class="opt-price">+132 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL1000-Tank')">
+              <span>Pulvérisateur <span class="opt-price">+166 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="132" onchange="calcPrice('KL1000-Tank')">
+              <span>Capot bois dur <span class="opt-price">+132 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL1000-Tank')">
+              <span>Plateforme <span class="opt-price">+166 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="248" onchange="calcPrice('KL1000-Tank')">
+              <span>Pont latéral <span class="opt-price">+248 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="98" onchange="calcPrice('KL1000-Tank')">
+              <span>Treuil <span class="opt-price">+98 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL1000-Tank')">
+              <span>Pack 48V <span class="opt-price">+166 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL1000-Tank')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL1000-Tank">6 588 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL1000-Tank" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1406,11 +1862,61 @@ body {
           <li>Double générateur hybride 2500W — autonomie longue durée</li>
         </ul>
 
-        <div class="tile-footer">
-          <div class="price-slot">
-            <span class="price-label">Tarif TTC</span>
-            <span class="price-value">Sur devis</span>
+        <div class="tile-config" data-modele="KL1200-Tank">
+          <span class="config-section-label">⚙ Motorisation</span>
+          <select class="config-select config-motor" onchange="calcPrice('KL1200-Tank')">
+            <option value="8388">Longxin 608cc — Double gén. — 8 388 €</option>
+            <option value="8988">Longxin 764cc — Double gén. — 8 988 €</option>
+            <option value="10188">B&S 810cc — Double allumage — 10 188 €</option>
+          </select>
+          <span class="config-section-label">➕ Options</span>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL1200-Tank')">
+              <span>Lame de rechange <span class="opt-price">+166 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="199" onchange="calcPrice('KL1200-Tank')">
+              <span>Pulvérisateur <span class="opt-price">+199 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL1200-Tank')">
+              <span>Capot bois dur <span class="opt-price">+166 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="199" onchange="calcPrice('KL1200-Tank')">
+              <span>Plateforme <span class="opt-price">+199 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="248" onchange="calcPrice('KL1200-Tank')">
+              <span>Pont latéral <span class="opt-price">+248 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="98" onchange="calcPrice('KL1200-Tank')">
+              <span>Treuil <span class="opt-price">+98 €</span></span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" value="166" onchange="calcPrice('KL1200-Tank')">
+              <span>Pack 48V <span class="opt-price">+166 €</span></span>
+            </label>
           </div>
+          <span class="config-section-label">🎮 Télécommande</span>
+          <select class="config-select config-rc" onchange="calcPrice('KL1200-Tank')">
+            <option value="0">C7 Standard — de série</option>
+            <option value="0">RC une main — de série</option>
+            <option value="299">C7 Mini (+299 €)</option>
+            <option value="419">A2 (+419 €)</option>
+            <option value="708">H12 (+708 €)</option>
+            <option value="828">M450 (+828 €)</option>
+          </select>
+          <div class="config-total">
+            <span class="config-total-label">Total TTC estimé</span>
+            <span class="config-total-value" id="total-KL1200-Tank">8 388 €</span>
+          </div>
+        </div>
+
+        <div class="tile-footer">
+          <div class="price-slot" style="display:none"></div>
           <a href="contact.html?sujet=devis-tondeuse&modele=KL1200-Tank" class="tile-cta">
             Demander un devis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1494,6 +2000,26 @@ body {
 <footer class="footer">
   <p>© 2026 K&L Global Import · <a href="nous-trouver.html" style="color: inherit; text-decoration: underline;">Nous trouver</a> · <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions Légales</a> · <a href="cgv.html" style="color: inherit; text-decoration: underline;">CGV</a> · <a href="politique-confidentialite.html" style="color: inherit; text-decoration: underline;">Confidentialité</a> · <a href="politique-cookies.html" style="color: inherit; text-decoration: underline;">Cookies</a> · Tous droits réservés.</p>
 </footer>
+
+<script>
+function calcPrice(modele) {
+  var cfg = document.querySelector('.tile-config[data-modele="' + modele + '"]');
+  if (!cfg) return;
+  var base = parseFloat(cfg.querySelector('.config-motor').value) || 0;
+  var rc   = parseFloat(cfg.querySelector('.config-rc').value)    || 0;
+  var opts = 0;
+  cfg.querySelectorAll('.config-options input:checked').forEach(function(cb) {
+    opts += parseFloat(cb.value) || 0;
+  });
+  var total = Math.max(0, base + rc + opts);
+  var el = document.getElementById('total-' + modele);
+  if (!el) return;
+  el.textContent = total.toLocaleString('fr-FR', {minimumFractionDigits:0}) + ' €';
+  el.classList.add('updated');
+  setTimeout(function(){ el.classList.remove('updated'); }, 600);
+}
+</script>
+
 <!-- Lightbox zoom tuiles -->
 <div id="tile-lightbox">
   <button id="tile-lightbox-close" aria-label="Fermer">✕</button>
