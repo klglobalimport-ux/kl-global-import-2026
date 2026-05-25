@@ -597,11 +597,12 @@ body.has-scrolled a[class*="-back-link"] {
   letter-spacing: 0.06em;
   color: #c4c4c8;
   text-decoration: none;
-  cursor: not-allowed;
+  cursor: pointer;
   transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 .brochures-tile__btn[aria-disabled="true"] {
   opacity: 0.85;
+  cursor: not-allowed;
 }
 .brochures-tile__note {
   display: block;
