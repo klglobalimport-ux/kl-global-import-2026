@@ -45,7 +45,11 @@
     .cmp-cta p { color:#d3e2d6; max-width:620px; margin:0 auto 24px; line-height:1.6; }
     .cmp-cta .row { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
     .habitat-grid { background: radial-gradient(circle at top left, #1a2f23, #0f1a14) !important; }
+    /* Bande de vignettes (remplace l'image unique étirée) */
+    .cmp-thumbs { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; background:#0f1a14; }
+    .cmp-thumbs img { width:100%; height:104px; object-fit:cover; display:block; }
     @media (max-width:900px){ .cmp-why{grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:520px){ .cmp-thumbs img{ height:90px; } }
   </style>
   <script src="micro-interactions.js" defer></script>
   <script src="ga-events.js" defer></script>
@@ -144,7 +148,11 @@
     <section class="habitat-grid">
 
       <article class="card">
-        <div class="card-image" style="background-image:url('maison.webp');"></div>
+        <div class="cmp-thumbs">
+          <img src="maison.webp" alt="Maison modulaire — extérieur" loading="lazy">
+          <img src="nuit.webp" alt="Maison modulaire éclairée de nuit" loading="lazy">
+          <img src="30FT.webp" alt="Maison modulaire 30 pieds" loading="lazy">
+        </div>
         <div class="card-body">
           <h3>Maison Modulaire</h3>
           <p>Locatifs spacieux de 10 à 40 pieds — du studio au T4 familial. Le mobil-home nouvelle génération, isolé et durable.</p>
@@ -153,7 +161,11 @@
       </article>
 
       <article class="card">
-        <div class="card-image" style="background-image:url('assets/images/modules-collectivites/finition-bois-naturel.webp');"></div>
+        <div class="cmp-thumbs">
+          <img src="assets/images/modules-collectivites/finition-bois-naturel.webp" alt="Module finition bois naturel" loading="lazy">
+          <img src="assets/images/modules-collectivites/finition-gris-anthracite.webp" alt="Module finition gris anthracite" loading="lazy">
+          <img src="assets/images/modules-collectivites/conteneur-vitre-panoramique.webp" alt="Module conteneur vitré panoramique" loading="lazy">
+        </div>
         <div class="card-body">
           <h3>Module 20 pieds — type Algeco</h3>
           <p>Hébergement compact et économique, pliable ou monobloc, livré équipé. Extension de capacité express.</p>
@@ -162,7 +174,11 @@
       </article>
 
       <article class="card">
-        <div class="card-image" style="background-image:url('assets/habitat/horizon/Triangle T3 camping.webp');"></div>
+        <div class="cmp-thumbs">
+          <img src="assets/habitat/horizon/Triangle%20T3%20camping.webp" alt="Chalet A-frame KL Horizon en camping" loading="lazy">
+          <img src="assets/habitat/horizon/Triangle%20T1%20campagne.webp" alt="Chalet A-frame KL Horizon en campagne" loading="lazy">
+          <img src="assets/habitat/horizon/Int%C3%A9rieur%201.webp" alt="Intérieur du chalet A-frame KL Horizon" loading="lazy">
+        </div>
         <div class="card-body">
           <h3>Maison Triangle — KL Horizon</h3>
           <p>Chalet A-frame au design marquant — l'hébergement « instagrammable » qui attire les réservations.</p>
@@ -171,7 +187,11 @@
       </article>
 
       <article class="card">
-        <div class="card-image" style="background-image:url('assets/apple-pod/KL-pod-L-5.webp');"></div>
+        <div class="cmp-thumbs">
+          <img src="assets/apple-pod/KL-pod-L-5.webp" alt="KL Pod — capsule extérieur" loading="lazy">
+          <img src="assets/apple-pod/KL-pod-L-1.webp" alt="KL Pod — vue d'ensemble" loading="lazy">
+          <img src="assets/apple-pod/KL-pod-L-4.webp" alt="KL Pod — détail" loading="lazy">
+        </div>
         <div class="card-body">
           <h3>KL Pod</h3>
           <p>Capsule futuriste et autonome — produit d'appel premium et insolite pour monter en gamme.</p>
@@ -180,7 +200,11 @@
       </article>
 
       <article class="card">
-        <div class="card-image" style="background-image:url('assets/habitat/capsule-house/Camping-3.webp');"></div>
+        <div class="cmp-thumbs">
+          <img src="assets/habitat/capsule-house/Camping-3.webp" alt="Capsule House en camping" loading="lazy">
+          <img src="assets/habitat/capsule-house/Nature.webp" alt="Capsule House en pleine nature" loading="lazy">
+          <img src="assets/habitat/capsule-house/Jardin-2.webp" alt="Capsule House dans un jardin" loading="lazy">
+        </div>
         <div class="card-body">
           <h3>Capsule House</h3>
           <p>Capsule moderne tout confort, façade vitrée — un hébergement haut de gamme qui se loue toute l'année.</p>
@@ -189,7 +213,11 @@
       </article>
 
       <article class="card">
-        <div class="card-image" style="background-image:url('Chalet.webp');"></div>
+        <div class="cmp-thumbs">
+          <img src="Chalet.webp" alt="Chalet bois insolite" loading="lazy">
+          <img src="Tipi.webp" alt="Tipi insolite" loading="lazy">
+          <img src="nid-abeille.webp" alt="Hébergement nid d'abeille" loading="lazy">
+        </div>
         <div class="card-body">
           <h3>Chalets &amp; Insolites</h3>
           <p>Chalet bois, tipi, nid d'abeille — diversifiez votre offre avec des hébergements atypiques.</p>
