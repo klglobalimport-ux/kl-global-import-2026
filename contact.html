@@ -293,6 +293,30 @@
   var params = new URLSearchParams(window.location.search);
   var key = params.get('modele');
   var sujet = params.get('sujet');
+  if (!key && !sujet) return;
+
+  /* Sélection automatique de l'objet : "Demande de cotation / Tarifs" */
+  if (sujet === 'devis-tondeuse' || sujet === 'demande-tarifs' || sujet === 'devis-modules') {
+    var subjectSelect = document.getElementById('subject');
+    if (subjectSelect) subjectSelect.value = 'cotation';
+  }
+
+  /* Cas "modules collectivités" : pas forcément de modèle précis */
+  var msg = document.getElementById('message');
+  if (sujet === 'devis-modules') {
+    var recapEl = document.getElementById('modele-recap');
+    if (recapEl) {
+      document.getElementById('recap-titre').textContent = 'Demande de devis — Modules préfabriqués';
+      var extra = document.getElementById('recap-extra');
+      if (extra) extra.textContent = 'Mairie · Collectivité · Camping · Exploitation agricole';
+      recapEl.style.display = 'block';
+    }
+    if (msg && !msg.value) {
+      msg.value = 'Bonjour, je souhaite recevoir un devis pour des modules préfabriqués (logement, bureau d\'accueil, accueil d\'urgence, périscolaire, sanitaires…). Mon projet : \n- Usage envisagé : \n- Nombre de modules / surface : \n- Lieu d\'installation : \n- Délai souhaité : \nMerci de me recontacter.';
+    }
+    return;
+  }
+
   if (!key) return;
 
   /* Lookup ou fallback générique */
@@ -306,14 +330,7 @@
   if (m.info) document.getElementById('recap-extra').textContent = m.info;
   document.getElementById('modele-recap').style.display = 'block';
 
-  /* Sélection automatique de l'objet : "Demande de cotation / Tarifs" */
-  if (sujet === 'devis-tondeuse' || sujet === 'demande-tarifs') {
-    var subjectSelect = document.getElementById('subject');
-    if (subjectSelect) subjectSelect.value = 'cotation';
-  }
-
   /* Pré-remplissage message */
-  var msg = document.getElementById('message');
   if (msg && !msg.value) {
     if (sujet === 'devis-tondeuse') {
       msg.value = 'Bonjour, je souhaite recevoir un devis pour la tondeuse télécommandée ' + m.nom.replace(/^Tondeuse RC /, '') + '. Merci de me contacter pour discuter des modalités (prix, délai, livraison).';
