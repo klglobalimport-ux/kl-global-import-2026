@@ -296,13 +296,29 @@
   if (!key && !sujet) return;
 
   /* Sélection automatique de l'objet : "Demande de cotation / Tarifs" */
-  if (sujet === 'devis-tondeuse' || sujet === 'demande-tarifs' || sujet === 'devis-modules') {
+  if (sujet === 'devis-tondeuse' || sujet === 'demande-tarifs' || sujet === 'devis-modules' || sujet === 'devis-camping') {
     var subjectSelect = document.getElementById('subject');
     if (subjectSelect) subjectSelect.value = 'cotation';
   }
 
-  /* Cas "modules collectivités" : pas forcément de modèle précis */
   var msg = document.getElementById('message');
+
+  /* Cas "camping / hôtellerie de plein air" : projet B2B */
+  if (sujet === 'devis-camping') {
+    var recapCamp = document.getElementById('modele-recap');
+    if (recapCamp) {
+      document.getElementById('recap-titre').textContent = 'Projet camping — Hôtellerie de plein air';
+      var extraCamp = document.getElementById('recap-extra');
+      if (extraCamp) extraCamp.textContent = 'Mobil-homes · Capsules · Chalets A-frame · Hébergements insolites';
+      recapCamp.style.display = 'block';
+    }
+    if (msg && !msg.value) {
+      msg.value = 'Bonjour, je gère un camping / un établissement d\'hôtellerie de plein air et je souhaite un devis pour des hébergements. Mon projet : \n- Type d\'hébergements souhaités : \n- Nombre d\'unités visées : \n- Positionnement (gamme, tarif/nuit cible) : \n- Lieu et délai : \nMerci de me recontacter.';
+    }
+    return;
+  }
+
+  /* Cas "modules collectivités" : pas forcément de modèle précis */
   if (sujet === 'devis-modules') {
     var recapEl = document.getElementById('modele-recap');
     if (recapEl) {
