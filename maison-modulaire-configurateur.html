@@ -1335,13 +1335,20 @@
                     <!-- Toit -->
                     <div class="option-group">
                         <div class="option-label">Type de Toit</div>
-                        <div class="option-description">2 pentes classique, possible avancé pour terrasse (compris si option terrasse)</div>
+                        <div class="option-description">Configuration normale (toit-container plat, inclus), toit plat surélevé, ou toit 2 pentes. Double Deck : toit déjà plat, non modifiable.</div>
                         <div class="btn-group">
                             <button class="btn-option active" data-option="roof" data-value="none">
-                                <img class="btn-option-img" src="/assets/configurateur/toits/sans.jpg" alt="Sans toit" onclick="event.stopPropagation(); zoomImage(this)" width="960" height="719" loading="lazy">
+                                <img class="btn-option-img" src="/assets/configurateur/toits/sans.jpg" alt="Configuration normale" onclick="event.stopPropagation(); zoomImage(this)" width="960" height="719" loading="lazy">
                                 <div class="zoom-icon">🔍</div>
-                                <span class="btn-option-label">Sans toit</span>
+                                <span class="btn-option-label">Config. normale</span>
                                 <div class="option-price" id="price-roof-none">Inclus</div>
+                            </button>
+                            <!-- TODO: remplacer sans.jpg par la vraie photo « toit plat » (the warm home) fournie par Loïc -->
+                            <button class="btn-option" data-option="roof" data-value="flat">
+                                <img class="btn-option-img" src="/assets/configurateur/toits/sans.jpg" alt="Toit plat surélevé" onclick="event.stopPropagation(); zoomImage(this)" width="960" height="719" loading="lazy">
+                                <div class="zoom-icon">🔍</div>
+                                <span class="btn-option-label">Toit plat</span>
+                                <div class="option-price" id="price-roof-flat">+500 €</div>
                             </button>
                             <button class="btn-option" data-option="roof" data-value="uniform">
                                 <img class="btn-option-img" src="/assets/configurateur/toits/uniforme.jpg" alt="Toit 2 pentes uniforme" onclick="event.stopPropagation(); zoomImage(this)" width="1152" height="926" loading="lazy">
@@ -1386,21 +1393,102 @@
                         </div>
                     </div>
 
-                    <!-- Aménagement -->
-                    <div class="option-group" id="option-amenagement">
-                        <div class="option-header">
-                            <div class="option-label">Aménagement Intérieur Complet</div>
-                            <button class="view-pack-btn" onclick="openModal('amenagement')">📦 Voir le Pack</button>
-                        </div>
-                        <div class="option-description">Électricité, chambres avec lits et meubles, SDB complète (douche italienne, revêtements), cuisine au choix, éclairage LED complet, portes intérieures, 1 baie vitrée + 4-6 fenêtres, parquet ou dalle PVC</div>
+                    <!-- ===== AMÉNAGEMENT — 5 MODULES ===== -->
+                    <!-- Module 1 : Cuisine -->
+                    <div class="option-group" id="option-cuisine">
+                        <div class="option-label">Module Cuisine</div>
+                        <div class="option-description">Cuisine en L (meuble bas) + meuble haut suspendu. <strong>Sans électroménager.</strong></div>
                         <div class="toggle-group">
                             <label class="toggle">
-                                <input type="checkbox" id="amenagement" data-option="furnished">
+                                <input type="checkbox" id="cuisine" data-option="cuisine">
                                 <span class="toggle-slider"></span>
                             </label>
-                            <span class="toggle-label">Maison aménagée</span>
+                            <span class="toggle-label">Ajouter la cuisine</span>
                         </div>
-                        <div class="option-price" id="price-furnished">+2 500 €</div>
+                        <div class="option-price" id="price-cuisine">+1 979 €</div>
+                    </div>
+
+                    <!-- Module 2 : Salle de bain -->
+                    <div class="option-group" id="option-sdb">
+                        <div class="option-label">Module Salle de Bain</div>
+                        <div class="option-description">SDB complète (douche, vasque, revêtements dry-wet) + porte + chauffe-eau, plomberie raccordée.</div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="sdb" data-option="sdb">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Ajouter la salle de bain</span>
+                        </div>
+                        <div class="option-price" id="price-sdb">+2 437 €</div>
+                    </div>
+
+                    <!-- Module 3 : Nombre de chambres -->
+                    <div class="option-group" id="option-chambres">
+                        <div class="option-label">Nombre de Chambres</div>
+                        <div class="option-description">Cloison + porte de chambre (âme bois) par unité. Maximum selon la taille du module.</div>
+                        <div class="counter-control" style="margin-top: 8px;">
+                            <button class="counter-btn" onclick="updateChambres(-1)">−</button>
+                            <span class="counter-value" id="chambresCount">0</span>
+                            <button class="counter-btn" onclick="updateChambres(1)">+</button>
+                            <span style="margin-left: 10px; font-size: 0.75rem; color: var(--text-muted);" id="chambres-note">0 chambre</span>
+                        </div>
+                        <div class="option-price" id="price-chambre">+306 € / chambre</div>
+                    </div>
+
+                    <!-- Module 4 : Électricité -->
+                    <div class="option-group" id="option-elec">
+                        <div class="option-label">Électricité</div>
+                        <div class="option-description">Standard : 1 compteur aux normes, 5 prises cuisine/salon, 2 prises par chambre, 1 prise salle de bain, 1 luminaire par pièce (2 dans le salon-cuisine).</div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="elec" data-option="elec">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Ajouter l'électricité</span>
+                        </div>
+                        <div class="option-price" id="price-elec">+916 €</div>
+                        <div id="elec-config" style="display: none; margin-top: 12px;">
+                            <div class="btn-group" style="grid-template-columns: repeat(2, 1fr);">
+                                <button class="btn-option active" data-option="elecMode" data-value="standard">
+                                    <span class="btn-option-label">Standard<br><small>+916 €</small></span>
+                                </button>
+                                <button class="btn-option" data-option="elecMode" data-value="custom">
+                                    <span class="btn-option-label">Personnalisée<br><small>au point</small></span>
+                                </button>
+                            </div>
+                            <div id="elec-custom" style="display: none; margin-top: 12px;">
+                                <div class="counter-control">
+                                    <button class="counter-btn" onclick="updateElecCount('elecPrises', -1)">−</button>
+                                    <span class="counter-value" id="elecPrisesCount">0</span>
+                                    <button class="counter-btn" onclick="updateElecCount('elecPrises', 1)">+</button>
+                                    <span style="margin-left: 10px; font-size: 0.75rem; color: var(--text-muted);">prise(s) en plus · +50 € /u</span>
+                                </div>
+                                <div class="counter-control" style="margin-top: 8px;">
+                                    <button class="counter-btn" onclick="updateElecCount('elecLumieres', -1)">−</button>
+                                    <span class="counter-value" id="elecLumieresCount">0</span>
+                                    <button class="counter-btn" onclick="updateElecCount('elecLumieres', 1)">+</button>
+                                    <span style="margin-left: 10px; font-size: 0.75rem; color: var(--text-muted);">point(s) lumineux en plus · +50 € /u</span>
+                                </div>
+                                <div style="font-size: 0.72rem; color: var(--text-muted); font-style: italic; margin-top: 8px;">Forfait 916 € inchangé, les prises et points lumineux supplémentaires s'ajoutent à 50 € l'unité.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 5 : Aménagement intérieur -->
+                    <div class="option-group" id="option-amenagement">
+                        <div class="option-header">
+                            <div class="option-label">Aménagement Intérieur</div>
+                            <button class="view-pack-btn" onclick="openModal('amenagement')">📦 Voir le Pack</button>
+                        </div>
+                        <div class="option-description">Sol SPC (coloris au choix) + panneaux muraux/plafond en bambou + plinthes &amp; profilés de finition. Prix selon la surface du module.</div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="amenagement" data-option="amenagementInt">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Ajouter l'aménagement intérieur</span>
+                        </div>
+                        <div class="option-price" id="price-amenagement">+1 510 €</div>
                     </div>
 
                     <!-- Gouttières -->
@@ -1580,25 +1668,6 @@
                             <span class="toggle-label">Sur remorque</span>
                         </div>
                         <div class="option-price" id="price-trailer">+3 000 €</div>
-                    </div>
-
-                    <!-- HIGH CUBE -->
-                    <div class="option-group" id="option-highcube">
-                        <div class="option-label">HIGH CUBE (HC) - Hauteur Augmentée</div>
-                        <div class="option-description">Hauteur sous plafond de 2,55 m au lieu de 2,24 m (disponible uniquement pour 20/30/40 FT)</div>
-                        <div class="toggle-group">
-                            <label class="toggle">
-                                <input type="checkbox" id="highcube" data-option="highCube" disabled>
-                                <span class="toggle-slider"></span>
-                            </label>
-                            <span class="toggle-label">Version High Cube</span>
-                        </div>
-                        <div class="option-price" id="price-highcube">Indisponible pour 10FT</div>
-                        <div class="info-box">
-                            <strong>📏 Qu'est-ce que le High Cube ?</strong><br>
-                            Le format High Cube (HC) offre une hauteur sous plafond de <strong>2,55 m</strong> contre 2,24 m pour les modèles standards, soit <strong>31 cm supplémentaires</strong>. Cela apporte plus de volume, une meilleure sensation d'espace et facilite l'installation d'équipements en hauteur.<br>
-                            💰 Prix : +2000€ (20FT) | +3000€ (30FT) | +4000€ (40FT)
-                        </div>
                     </div>
 
                     <!-- Forfait Fret -->
@@ -2090,7 +2159,14 @@
             size: '10ft',
             roof: 'none',
             terrace: false,
-            furnished: false,
+            cuisine: false,
+            sdb: false,
+            chambres: 0,
+            elec: false,
+            elecMode: 'standard',
+            elecPrises: 0,
+            elecLumieres: 0,
+            amenagementInt: false,
             gutters: false,
             covering: false,
             bayWindow: false,
@@ -2100,7 +2176,6 @@
             solar: false,
             offgrid: false,
             trailer: false,
-            highCube: false,
             shippingTransport: false,
             shippingCrane: false,
             shippingBoth: false,
@@ -2117,6 +2192,23 @@
             updateSummary();
         }
 
+        // Compteur chambres (min 0, max selon taille)
+        function updateChambres(delta) {
+            const max = CHAMBRE_MAX[config.size];
+            config.chambres = Math.max(0, Math.min(max, config.chambres + delta));
+            document.getElementById('chambresCount').textContent = config.chambres;
+            document.getElementById('chambres-note').textContent = config.chambres + ' chambre' + (config.chambres > 1 ? 's' : '');
+            updateSummary();
+        }
+
+        // Compteurs électricité personnalisée (prises / points lumineux en plus)
+        function updateElecCount(field, delta) {
+            config[field] = Math.max(0, Math.min(40, config[field] + delta));
+            const id = field === 'elecPrises' ? 'elecPrisesCount' : 'elecLumieresCount';
+            document.getElementById(id).textContent = config[field];
+            updateSummary();
+        }
+
         // Toggles baies/fenêtres avec affichage compteur
         document.getElementById('bay-window').addEventListener('change', function() {
             config.bayWindow = this.checked;
@@ -2128,6 +2220,11 @@
             config.longWindow = this.checked;
             document.getElementById('window-counter').style.display = this.checked ? 'flex' : 'none';
             updateSummary();
+        });
+
+        // Toggle électricité : affiche le choix standard/personnalisée
+        document.getElementById('elec').addEventListener('change', function() {
+            document.getElementById('elec-config').style.display = this.checked ? 'block' : 'none';
         });
 
         const VAT_RATE_STANDARD = 0.20; // TVA 20% (Europe)
@@ -2167,18 +2264,21 @@
             'double-deck': 'Double Deck'
         };
 
-        const highCubePrices = {
-            '20ft': 2000,
-            '30ft': 3000,
-            '40ft': 4000
-        };
-
         const roofPrices = {
             uniform: { '10ft': 1500, '20ft': 2500, '30ft': 3500, '40ft': 4300, 'double-deck': 3500 },
-            offset: { '10ft': 1700, '20ft': 2800, '30ft': 3800, '40ft': 4600, 'double-deck': 3800 }
+            offset: { '10ft': 1700, '20ft': 2800, '30ft': 3800, '40ft': 4600, 'double-deck': 3800 },
+            flat: { '10ft': 500, '20ft': 750, '30ft': 1000, '40ft': 1250 }
         };
 
-        const furnishedPrices = { '10ft': 2500, '20ft': 6000, '30ft': 8000, '40ft': 10000, 'double-deck': 10000 };
+        // Modules d'aménagement (prix HT, marge ×3)
+        const moduleCuisine = 1979;   // cuisine en L, sans électroménager
+        const moduleSdb = 2437;       // SDB complète
+        const moduleChambre = 306;    // par chambre (cloison + porte)
+        const moduleElec = 916;       // électricité standard
+        const elecUnitPrise = 50;     // prise supplémentaire (perso)
+        const elecUnitLumiere = 50;   // point lumineux supplémentaire (perso)
+        const amenagementIntPrices = { '10ft': 1510, '20ft': 3020, '30ft': 4450, '40ft': 5882, 'double-deck': 2680 }; // prorata surface ~79,5 €/m²
+        const CHAMBRE_MAX = { '10ft': 1, '20ft': 2, '30ft': 3, '40ft': 3, 'double-deck': 3 };
         const guttersPrices = { '10ft': 400, '20ft': 650, '30ft': 800, '40ft': 1000, 'double-deck': 800 };
         const coveringPrices = { '10ft': 500, '20ft': 1000, '30ft': 1500, '40ft': 2000, 'double-deck': 3000 };
         const trailerPrices = { '10ft': 3000, '20ft': 6000, '30ft': 7500, '40ft': 10000, 'double-deck': 7500 };
@@ -2189,16 +2289,20 @@
         };
 
         const optionLabels = {
+            roof_flat: 'Toit plat',
             roof_uniform: 'Toit 2 pentes uniforme',
             roof_offset: 'Toit 2 pentes décalé',
             terrace: 'Terrasse',
-            furnished: 'Aménagement complet',
+            cuisine: 'Cuisine (sans électroménager)',
+            sdb: 'Salle de bain',
+            elec_standard: 'Électricité standard',
+            elec_custom: 'Électricité personnalisée',
+            amenagementInt: 'Aménagement intérieur',
             gutters: 'Gouttières',
             covering: 'Covering extérieur',
             solar: 'Panneaux solaires 5Kw',
             offgrid: 'Off-Grid 10kw',
             trailer: 'Remorque dépliable',
-            highCube: 'High Cube (HC)',
             shippingTransport: 'Transport',
             shippingCrane: 'Grutage',
             shippingBoth: 'Transport + Grutage'
@@ -2213,6 +2317,14 @@
             if (optKey.startsWith('longWindow_')) {
                 const count = optKey.split('_')[1];
                 return `Fenêtre${count > 1 ? 's' : ''} longue${count > 1 ? 's' : ''} (×${count})`;
+            }
+            if (optKey.startsWith('chambres_')) {
+                const count = optKey.split('_')[1];
+                return `${count} chambre${count > 1 ? 's' : ''}`;
+            }
+            if (optKey.startsWith('elec_custom_')) {
+                const parts = optKey.split('_');
+                return `Électricité perso (+${parts[2]} prise(s), +${parts[3]} point(s) lumineux)`;
             }
             return optionLabels[optKey] || optKey;
         }
@@ -2260,20 +2372,30 @@
                 if (badgeOffgrid) badgeOffgrid.style.display = 'none';
             }
 
-            // --- High Cube (désactivé 10ft ET double-deck) ---
-            const highCubeGroup = document.getElementById('option-highcube');
-            const highCubeToggle = document.getElementById('highcube');
-            if (is10ft || isDoubleDeck) {
-                highCubeGroup.style.pointerEvents = 'none';
-                highCubeGroup.style.opacity = '0.35';
-                highCubeToggle.disabled = true;
-                highCubeToggle.checked = false;
-                config.highCube = false;
-            } else {
-                highCubeGroup.style.pointerEvents = '';
-                highCubeGroup.style.opacity = '';
-                highCubeToggle.disabled = false;
+            // --- Toit : verrouillé sur "Config. normale" pour Double Deck (déjà toit plat) ---
+            document.querySelectorAll('.btn-option[data-option="roof"]').forEach(btn => {
+                if (btn.dataset.value === 'none') return;
+                if (isDoubleDeck) {
+                    btn.style.pointerEvents = 'none';
+                    btn.style.opacity = '0.35';
+                } else {
+                    btn.style.pointerEvents = '';
+                    btn.style.opacity = '';
+                }
+            });
+            if (isDoubleDeck && config.roof !== 'none') {
+                config.roof = 'none';
+                document.querySelectorAll('.btn-option[data-option="roof"]').forEach(b => b.classList.toggle('active', b.dataset.value === 'none'));
             }
+
+            // --- Chambres : plafonné selon la taille du module ---
+            if (config.chambres > CHAMBRE_MAX[config.size]) {
+                config.chambres = CHAMBRE_MAX[config.size];
+            }
+            const chCount = document.getElementById('chambresCount');
+            if (chCount) chCount.textContent = config.chambres;
+            const chNote = document.getElementById('chambres-note');
+            if (chNote) chNote.textContent = config.chambres + ' chambre' + (config.chambres > 1 ? 's' : '');
 
             // --- Remorque (désactivée pour double-deck) ---
             const trailerToggle = document.getElementById('trailer');
@@ -2323,6 +2445,9 @@
 
                 if (option === 'size' || option === 'roof') {
                     updateOptionsAvailability();
+                }
+                if (option === 'elecMode') {
+                    document.getElementById('elec-custom').style.display = value === 'custom' ? 'block' : 'none';
                 }
 
                 updateSummary();
@@ -2376,22 +2501,29 @@
             
             if (config.roof === 'uniform') total += roofPrices.uniform[config.size];
             if (config.roof === 'offset') total += roofPrices.offset[config.size];
-            
+            if (config.roof === 'flat') total += (roofPrices.flat[config.size] || 0);
+
             if (config.terrace) total += optionPrices.terrace;
             if (config.bayWindow) total += optionPrices.bayWindow * config.bayWindowCount;
             if (config.longWindow) total += optionPrices.longWindow * config.longWindowCount;
             if (config.solar) total += optionPrices.solar;
             if (config.offgrid) total += optionPrices.offgrid;
-            
-            if (config.furnished) total += furnishedPrices[config.size];
+
+            // Modules d'aménagement
+            if (config.cuisine) total += moduleCuisine;
+            if (config.sdb) total += moduleSdb;
+            if (config.chambres > 0) total += moduleChambre * config.chambres;
+            if (config.elec) {
+                total += moduleElec;
+                if (config.elecMode === 'custom') {
+                    total += config.elecPrises * elecUnitPrise + config.elecLumieres * elecUnitLumiere;
+                }
+            }
+            if (config.amenagementInt) total += amenagementIntPrices[config.size];
+
             if (config.gutters) total += guttersPrices[config.size];
             if (config.covering) total += coveringPrices[config.size];
             if (config.trailer) total += trailerPrices[config.size];
-            
-            // High Cube (seulement 20/30/40)
-            if (config.highCube && highCubePrices[config.size]) {
-                total += highCubePrices[config.size];
-            }
 
             // Escalier double-deck
             if (config.size === 'double-deck' && config.staircase === 'both') {
@@ -2446,10 +2578,21 @@
         function getActiveOptions() {
             const active = [];
             
+            if (config.roof === 'flat') active.push('roof_flat');
             if (config.roof === 'uniform') active.push('roof_uniform');
             if (config.roof === 'offset') active.push('roof_offset');
             if (config.terrace) active.push('terrace');
-            if (config.furnished) active.push('furnished');
+            if (config.cuisine) active.push('cuisine');
+            if (config.sdb) active.push('sdb');
+            if (config.chambres > 0) active.push(`chambres_${config.chambres}`);
+            if (config.elec) {
+                if (config.elecMode === 'custom') {
+                    active.push(`elec_custom_${config.elecPrises}_${config.elecLumieres}`);
+                } else {
+                    active.push('elec_standard');
+                }
+            }
+            if (config.amenagementInt) active.push('amenagementInt');
             if (config.gutters) active.push('gutters');
             if (config.covering) active.push('covering');
             if (config.bayWindow) active.push(`bayWindow_${config.bayWindowCount}`);
@@ -2457,7 +2600,6 @@
             if (config.solar) active.push('solar');
             if (config.offgrid) active.push('offgrid');
             if (config.trailer) active.push('trailer');
-            if (config.highCube) active.push('highCube');
             if (config.shippingTransport) active.push('shippingTransport');
             if (config.shippingCrane) active.push('shippingCrane');
             if (config.shippingBoth) active.push('shippingBoth');
@@ -2493,13 +2635,25 @@
             const roofOffset = document.getElementById('price-roof-offset');
             if (roofOffset) roofOffset.textContent = '+' + formatPriceForDisplay(roofPrices.offset[size], poly);
 
+            // Toit plat (variable, non applicable au Double Deck)
+            const roofFlat = document.getElementById('price-roof-flat');
+            if (roofFlat) roofFlat.textContent = (size === 'double-deck') ? '—' : '+' + formatPriceForDisplay(roofPrices.flat[size], poly);
+
             // Terrasse (fixed)
             const terrace = document.getElementById('price-terrace');
             if (terrace) terrace.textContent = '+' + formatPriceForDisplay(3000, poly);
 
-            // Aménagement (variable)
-            const furnished = document.getElementById('price-furnished');
-            if (furnished) furnished.textContent = '+' + formatPriceForDisplay(furnishedPrices[size], poly);
+            // Modules d'aménagement (cuisine/SDB/chambre/élec fixes, aménagement intérieur variable)
+            const cuisineEl = document.getElementById('price-cuisine');
+            if (cuisineEl) cuisineEl.textContent = '+' + formatPriceForDisplay(moduleCuisine, poly);
+            const sdbEl = document.getElementById('price-sdb');
+            if (sdbEl) sdbEl.textContent = '+' + formatPriceForDisplay(moduleSdb, poly);
+            const chambreEl = document.getElementById('price-chambre');
+            if (chambreEl) chambreEl.textContent = '+' + formatPriceForDisplay(moduleChambre, poly) + ' / chambre';
+            const elecEl = document.getElementById('price-elec');
+            if (elecEl) elecEl.textContent = '+' + formatPriceForDisplay(moduleElec, poly);
+            const amenEl = document.getElementById('price-amenagement');
+            if (amenEl) amenEl.textContent = '+' + formatPriceForDisplay(amenagementIntPrices[size], poly);
 
             // Gouttières (variable)
             const gutters = document.getElementById('price-gutters');
@@ -2534,16 +2688,6 @@
             // Remorque (variable)
             const trailer = document.getElementById('price-trailer');
             if (trailer) trailer.textContent = '+' + formatPriceForDisplay(trailerPrices[size], poly);
-
-            // High Cube (variable, indisponible 10ft et double-deck)
-            const highcube = document.getElementById('price-highcube');
-            if (highcube) {
-                if (size === '10ft' || size === 'double-deck') {
-                    highcube.textContent = 'Indisponible pour ce modèle';
-                } else {
-                    highcube.textContent = '+' + formatPriceForDisplay(highCubePrices[size], poly);
-                }
-            }
 
             // Fret (variable)
             const fret = document.getElementById('price-fret');
@@ -2625,9 +2769,13 @@
 
             // Detail specific option categories
             message += '\n--- DÉTAILS DES OPTIONS ---\n';
-            message += `Toiture: ${config.roof === 'none' ? 'Standard (incluse)' : (config.roof === 'uniform' ? optionLabels.roof_uniform : optionLabels.roof_offset)}\n`;
+            message += `Toiture: ${config.roof === 'none' ? 'Config. normale (incluse)' : (config.roof === 'flat' ? 'Toit plat' : (config.roof === 'uniform' ? optionLabels.roof_uniform : optionLabels.roof_offset))}\n`;
             message += `Terrasse: ${config.terrace ? 'Oui' : 'Non'}\n`;
-            message += `Aménagement complet: ${config.furnished ? 'Oui' : 'Non'}\n`;
+            message += `Cuisine (sans électroménager): ${config.cuisine ? 'Oui' : 'Non'}\n`;
+            message += `Salle de bain: ${config.sdb ? 'Oui' : 'Non'}\n`;
+            message += `Chambres: ${config.chambres}\n`;
+            message += `Électricité: ${config.elec ? (config.elecMode === 'custom' ? 'Personnalisée (+' + config.elecPrises + ' prise(s), +' + config.elecLumieres + ' point(s) lumineux)' : 'Standard') : 'Non'}\n`;
+            message += `Aménagement intérieur: ${config.amenagementInt ? 'Oui' : 'Non'}\n`;
             message += `Gouttières: ${config.gutters ? 'Oui' : 'Non'}\n`;
             message += `Covering extérieur: ${config.covering ? 'Oui' : 'Non'}\n`;
             message += `Baies vitrées: ${config.bayWindow ? 'Oui (×' + config.bayWindowCount + ')' : 'Non'}\n`;
@@ -2635,7 +2783,6 @@
             message += `Panneaux solaires: ${config.solar ? 'Oui' : 'Non'}\n`;
             message += `Off-Grid: ${config.offgrid ? 'Oui' : 'Non'}\n`;
             message += `Remorque dépliable: ${config.trailer ? 'Oui' : 'Non'}\n`;
-            message += `High Cube: ${config.highCube ? 'Oui' : 'Non'}\n`;
 
             message += '\n--- LIVRAISON & TRANSPORT ---\n';
             message += `Transport: ${config.shippingTransport ? 'Oui' : 'Non'}\n`;
@@ -2668,9 +2815,13 @@
                 params.set('polynesia', 'oui');
             }
             params.set('options', activeOptions.map(opt => getOptionLabel(opt)).join(', ') || 'Aucune');
-            params.set('toiture', config.roof === 'none' ? 'Standard' : (config.roof === 'uniform' ? optionLabels.roof_uniform : optionLabels.roof_offset));
+            params.set('toiture', config.roof === 'none' ? 'Config. normale' : (config.roof === 'flat' ? 'Toit plat' : (config.roof === 'uniform' ? optionLabels.roof_uniform : optionLabels.roof_offset)));
             params.set('terrasse', config.terrace ? 'Oui' : 'Non');
-            params.set('amenagement', config.furnished ? 'Oui' : 'Non');
+            params.set('cuisine', config.cuisine ? 'Oui (sans électroménager)' : 'Non');
+            params.set('salle_de_bain', config.sdb ? 'Oui' : 'Non');
+            params.set('chambres', config.chambres);
+            params.set('electricite', config.elec ? (config.elecMode === 'custom' ? 'Personnalisée (+' + config.elecPrises + ' prises, +' + config.elecLumieres + ' points lumineux)' : 'Standard') : 'Non');
+            params.set('amenagement_interieur', config.amenagementInt ? 'Oui' : 'Non');
             params.set('gouttieres', config.gutters ? 'Oui' : 'Non');
             params.set('covering', config.covering ? 'Oui' : 'Non');
             params.set('baies_vitrees', config.bayWindow ? 'Oui (x' + config.bayWindowCount + ')' : 'Non');
@@ -2678,7 +2829,6 @@
             params.set('solaire', config.solar ? 'Oui' : 'Non');
             params.set('offgrid', config.offgrid ? 'Oui' : 'Non');
             params.set('remorque', config.trailer ? 'Oui' : 'Non');
-            params.set('highcube', config.highCube ? 'Oui' : 'Non');
             params.set('transport', config.shippingTransport ? 'Oui' : 'Non');
             params.set('grutage', config.shippingCrane ? 'Oui' : 'Non');
             params.set('transport_grutage', config.shippingBoth ? 'Oui' : 'Non');
