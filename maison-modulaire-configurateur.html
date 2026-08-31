@@ -1395,7 +1395,10 @@
                     <!-- ===== AMÉNAGEMENT — 5 MODULES ===== -->
                     <!-- Module 1 : Cuisine -->
                     <div class="option-group" id="option-cuisine">
-                        <div class="option-label">Module Cuisine</div>
+                        <div class="option-header">
+                            <div class="option-label">Module Cuisine</div>
+                            <button class="view-pack-btn" onclick="openModal('cuisine')">📦 Voir le Pack</button>
+                        </div>
                         <div class="option-description">Cuisine en L (meuble bas) + meuble haut suspendu. <strong>Sans électroménager.</strong></div>
                         <div class="toggle-group">
                             <label class="toggle">
@@ -1409,7 +1412,10 @@
 
                     <!-- Module 2 : Salle de bain -->
                     <div class="option-group" id="option-sdb">
-                        <div class="option-label">Module Salle de Bain</div>
+                        <div class="option-header">
+                            <div class="option-label">Module Salle de Bain</div>
+                            <button class="view-pack-btn" onclick="openModal('sdb')">📦 Voir le Pack</button>
+                        </div>
                         <div class="option-description">SDB complète (douche, vasque, revêtements dry-wet) + porte + chauffe-eau, plomberie raccordée.</div>
                         <div class="toggle-group">
                             <label class="toggle">
@@ -1874,6 +1880,43 @@
                 </div>
                 <div class="pack-item">
                     <img class="pack-item-img" src="/assets/configurateur/amenagement/amenage3.webp" alt="Aménagement intérieur 3" onclick="zoomImage(this)" width="960" height="540" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cuisine -->
+    <div id="modal-cuisine" class="modal" onclick="closeModal('cuisine', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('cuisine')">&times;</button>
+            <h3 class="modal-title">📦 Module Cuisine</h3>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Cuisine en L : meuble bas + meuble haut suspendu (sans électroménager).</p>
+            <div class="pack-grid">
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/cuisine/cuisine1.webp" alt="Module cuisine en L" onclick="zoomImage(this)" width="960" height="540" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Salle de Bain -->
+    <div id="modal-sdb" class="modal" onclick="closeModal('sdb', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('sdb')">&times;</button>
+            <h3 class="modal-title">📦 Module Salle de Bain</h3>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Salle de bain complète : douche, vasque, revêtements, porte et chauffe-eau.</p>
+            <div class="pack-grid">
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/sdb/sdb1.png" alt="Salle de bain — vue 1" onclick="zoomImage(this)" width="216" height="288" loading="lazy">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/sdb/sdb2.png" alt="Salle de bain — vue 2" onclick="zoomImage(this)" width="187" height="286" loading="lazy">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/sdb/sdb3.png" alt="Salle de bain — vue 3" onclick="zoomImage(this)" width="1015" height="821" loading="lazy">
+                </div>
+                <div class="pack-item">
+                    <img class="pack-item-img" src="/assets/configurateur/sdb/sdb4.jpg" alt="Salle de bain — vue 4" onclick="zoomImage(this)" width="1280" height="1280" loading="lazy">
                 </div>
             </div>
         </div>
