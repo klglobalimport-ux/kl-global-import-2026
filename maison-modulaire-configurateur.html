@@ -1449,7 +1449,7 @@
                         <div id="elec-config" style="display: none; margin-top: 12px;">
                             <div class="btn-group" style="grid-template-columns: repeat(2, 1fr);">
                                 <button class="btn-option active" data-option="elecMode" data-value="standard">
-                                    <span class="btn-option-label">Standard<br><small>+916 €</small></span>
+                                    <span class="btn-option-label">Standard<br><small id="elec-std-price">+916 €</small></span>
                                 </button>
                                 <button class="btn-option" data-option="elecMode" data-value="custom">
                                     <span class="btn-option-label">Personnalisée<br><small>au point</small></span>
@@ -1468,7 +1468,7 @@
                                     <button class="counter-btn" onclick="updateElecCount('elecLumieres', 1)">+</button>
                                     <span style="margin-left: 10px; font-size: 0.75rem; color: var(--text-muted);">point(s) lumineux en plus · +50 € /u</span>
                                 </div>
-                                <div style="font-size: 0.72rem; color: var(--text-muted); font-style: italic; margin-top: 8px;">Forfait 916 € inchangé, les prises et points lumineux supplémentaires s'ajoutent à 50 € l'unité.</div>
+                                <div style="font-size: 0.72rem; color: var(--text-muted); font-style: italic; margin-top: 8px;">Le forfait standard de la taille choisie reste inchangé ; les prises et points lumineux supplémentaires s'ajoutent à 50 € l'unité.</div>
                             </div>
                         </div>
                     </div>
@@ -1650,6 +1650,20 @@
                             </button>
                         </div>
                         <div class="option-price" id="price-staircase">Inclus</div>
+                    </div>
+
+                    <!-- Terrasse à l'étage (Double Deck uniquement) -->
+                    <div class="option-group" id="option-terrace-upper" style="display:none;">
+                        <div class="option-label">Terrasse à l'étage</div>
+                        <div class="option-description">Seconde terrasse au niveau supérieur du Double Deck (en plus de la terrasse au sol).</div>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="terraceUpper" data-option="terraceUpper">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Ajouter une terrasse à l'étage (+3000€)</span>
+                        </div>
+                        <div class="option-price" id="price-terrace-upper">+3 000 €</div>
                     </div>
 
                     <!-- Sur Remorque -->
@@ -2158,6 +2172,7 @@
             size: '10ft',
             roof: 'none',
             terrace: false,
+            terraceUpper: false,
             cuisine: false,
             sdb: false,
             chambres: 0,
@@ -2273,7 +2288,8 @@
         const moduleCuisine = 1979;   // cuisine en L, sans électroménager
         const moduleSdb = 2437;       // SDB complète
         const moduleChambre = 306;    // par chambre (cloison + porte)
-        const moduleElec = 916;       // électricité standard
+        // Électricité standard : progressive selon la taille (plus de pièces = plus de points)
+        const moduleElecStandard = { '10ft': 916, '20ft': 1066, '30ft': 1216, '40ft': 1366, 'double-deck': 1500 };
         const elecUnitPrise = 50;     // prise supplémentaire (perso)
         const elecUnitLumiere = 50;   // point lumineux supplémentaire (perso)
         const amenagementIntPrices = { '10ft': 1510, '20ft': 3020, '30ft': 4450, '40ft': 5882, 'double-deck': 2680 }; // prorata surface ~79,5 €/m²
@@ -2292,6 +2308,7 @@
             roof_uniform: 'Toit 2 pentes uniforme',
             roof_offset: 'Toit 2 pentes décalé',
             terrace: 'Terrasse',
+            terraceUpper: 'Terrasse à l\'étage (Double Deck)',
             cuisine: 'Cuisine (sans électroménager)',
             sdb: 'Salle de bain',
             elec_standard: 'Électricité standard',
@@ -2429,6 +2446,19 @@
                     btnExt.classList.add('active');
                 }
             }
+
+            // --- Terrasse à l'étage (visible uniquement pour double-deck) ---
+            const terraceUpperGroup = document.getElementById('option-terrace-upper');
+            if (terraceUpperGroup) {
+                if (isDoubleDeck) {
+                    terraceUpperGroup.style.display = 'block';
+                } else {
+                    terraceUpperGroup.style.display = 'none';
+                    config.terraceUpper = false;
+                    const tu = document.getElementById('terraceUpper');
+                    if (tu) tu.checked = false;
+                }
+            }
         }
 
         // Boutons
@@ -2513,7 +2543,7 @@
             if (config.sdb) total += moduleSdb;
             if (config.chambres > 0) total += moduleChambre * config.chambres;
             if (config.elec) {
-                total += moduleElec;
+                total += moduleElecStandard[config.size];
                 if (config.elecMode === 'custom') {
                     total += config.elecPrises * elecUnitPrise + config.elecLumieres * elecUnitLumiere;
                 }
@@ -2526,6 +2556,11 @@
 
             // Escalier double-deck
             if (config.size === 'double-deck' && config.staircase === 'both') {
+                total += 3000;
+            }
+
+            // Terrasse à l'étage (Double Deck uniquement)
+            if (config.size === 'double-deck' && config.terraceUpper) {
                 total += 3000;
             }
             
@@ -2581,6 +2616,7 @@
             if (config.roof === 'uniform') active.push('roof_uniform');
             if (config.roof === 'offset') active.push('roof_offset');
             if (config.terrace) active.push('terrace');
+            if (config.size === 'double-deck' && config.terraceUpper) active.push('terraceUpper');
             if (config.cuisine) active.push('cuisine');
             if (config.sdb) active.push('sdb');
             if (config.chambres > 0) active.push(`chambres_${config.chambres}`);
@@ -2642,6 +2678,10 @@
             const terrace = document.getElementById('price-terrace');
             if (terrace) terrace.textContent = '+' + formatPriceForDisplay(3000, poly);
 
+            // Terrasse à l'étage (Double Deck, fixed)
+            const terraceUp = document.getElementById('price-terrace-upper');
+            if (terraceUp) terraceUp.textContent = '+' + formatPriceForDisplay(3000, poly);
+
             // Modules d'aménagement (cuisine/SDB/chambre/élec fixes, aménagement intérieur variable)
             const cuisineEl = document.getElementById('price-cuisine');
             if (cuisineEl) cuisineEl.textContent = '+' + formatPriceForDisplay(moduleCuisine, poly);
@@ -2650,7 +2690,9 @@
             const chambreEl = document.getElementById('price-chambre');
             if (chambreEl) chambreEl.textContent = '+' + formatPriceForDisplay(moduleChambre, poly) + ' / chambre';
             const elecEl = document.getElementById('price-elec');
-            if (elecEl) elecEl.textContent = '+' + formatPriceForDisplay(moduleElec, poly);
+            if (elecEl) elecEl.textContent = '+' + formatPriceForDisplay(moduleElecStandard[size], poly);
+            const elecStdPrice = document.getElementById('elec-std-price');
+            if (elecStdPrice) elecStdPrice.textContent = '+' + formatPriceForDisplay(moduleElecStandard[size], poly);
             const amenEl = document.getElementById('price-amenagement');
             if (amenEl) amenEl.textContent = '+' + formatPriceForDisplay(amenagementIntPrices[size], poly);
 
@@ -2770,6 +2812,7 @@
             message += '\n--- DÉTAILS DES OPTIONS ---\n';
             message += `Toiture: ${config.roof === 'none' ? 'Config. normale (incluse)' : (config.roof === 'flat' ? 'Toit plat' : (config.roof === 'uniform' ? optionLabels.roof_uniform : optionLabels.roof_offset))}\n`;
             message += `Terrasse: ${config.terrace ? 'Oui' : 'Non'}\n`;
+            if (config.size === 'double-deck') message += `Terrasse à l'étage: ${config.terraceUpper ? 'Oui' : 'Non'}\n`;
             message += `Cuisine (sans électroménager): ${config.cuisine ? 'Oui' : 'Non'}\n`;
             message += `Salle de bain: ${config.sdb ? 'Oui' : 'Non'}\n`;
             message += `Chambres: ${config.chambres}\n`;
@@ -2816,6 +2859,7 @@
             params.set('options', activeOptions.map(opt => getOptionLabel(opt)).join(', ') || 'Aucune');
             params.set('toiture', config.roof === 'none' ? 'Config. normale' : (config.roof === 'flat' ? 'Toit plat' : (config.roof === 'uniform' ? optionLabels.roof_uniform : optionLabels.roof_offset)));
             params.set('terrasse', config.terrace ? 'Oui' : 'Non');
+            params.set('terrasse_etage', (config.size === 'double-deck' && config.terraceUpper) ? 'Oui' : 'Non');
             params.set('cuisine', config.cuisine ? 'Oui (sans électroménager)' : 'Non');
             params.set('salle_de_bain', config.sdb ? 'Oui' : 'Non');
             params.set('chambres', config.chambres);
