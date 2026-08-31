@@ -904,6 +904,15 @@
             font-weight: 600;
         }
 
+        /* Modales cuisine/SDB : photos affichées en entier (portrait, carré…) */
+        #modal-cuisine .pack-item-img,
+        #modal-sdb .pack-item-img {
+            height: auto;
+            max-height: 340px;
+            object-fit: contain;
+            background: rgba(0, 0, 0, 0.35);
+        }
+
         /* Galerie */
         .gallery-grid {
             display: grid;
