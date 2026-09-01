@@ -86,9 +86,13 @@
     + '<button type="button" class="dm-cancel" id="dm-cancel">Annuler</button>'
     + '</form></div></div>';
 
+  function ensureStyle() {
+    if (document.getElementById('dm-style')) return;
+    var st = document.createElement('style'); st.id = 'dm-style'; st.textContent = STYLE; document.head.appendChild(st);
+  }
   function ensureModal() {
+    ensureStyle();
     if (document.getElementById('dm-modal')) return;
-    var st = document.createElement('style'); st.textContent = STYLE; document.head.appendChild(st);
     var wrap = document.createElement('div'); wrap.innerHTML = MODAL;
     document.body.appendChild(wrap.firstChild);
     document.getElementById('dm-form').addEventListener('submit', submitDevis);
@@ -214,16 +218,18 @@
   function injectFloat() {
     var cfg = window.KL_DEVIS;
     if (!cfg || document.querySelector('.kl-cta-float')) return;
-    ensureModal(); // injecte aussi le <style> (qui contient le CSS du flottant)
+    ensureStyle();
     var wrap = document.createElement('div'); wrap.className = 'kl-cta-float';
-    var b = document.createElement('button');
-    b.type = 'button'; b.className = 'kl-b kl-devis';
-    b.setAttribute('data-produit', cfg.produit || 'Machine');
-    b.setAttribute('data-prix', cfg.prix || 0);
-    b.setAttribute('data-type', cfg.type || 'machine');
-    b.innerHTML = '📄 Devis PDF';
-    b.addEventListener('click', function () { openDevisMachine(b); });
-    wrap.appendChild(b);
+    if (cfg.devis !== false) { // devis:false -> bouton Contactez-nous seul (capsules, modules)
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'kl-b kl-devis';
+      b.setAttribute('data-produit', cfg.produit || 'Machine');
+      b.setAttribute('data-prix', cfg.prix || 0);
+      b.setAttribute('data-type', cfg.type || 'machine');
+      b.innerHTML = '📄 Devis PDF';
+      b.addEventListener('click', function () { openDevisMachine(b); });
+      wrap.appendChild(b);
+    }
     if (cfg.contact) {
       var a = document.createElement('a');
       a.className = 'kl-b kl-contact'; a.href = cfg.contact; a.innerHTML = '✉️ Contactez-nous';
@@ -233,6 +239,23 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', injectFloat);
   else injectFloat();
+
+  // ===== Tondeuses : un bouton par tuile, prix lu dans le total (TTC) de la tuile =====
+  // La tuile affiche un "Total TTC" ; on le convertit en HT pour le devis (prix + transport + TVA).
+  window.openDevisTondeuse = function (btn) {
+    var tile = btn.closest('.tile-body') || btn.closest('[data-modele]') || document.body;
+    var mEl = tile.querySelector('.tile-model');
+    var tEl = tile.querySelector('.config-total-value');
+    var modele = mEl ? mEl.textContent.trim() : '';
+    var ttc = tEl ? (parseFloat(tEl.textContent.replace(/[^0-9]/g, '')) || 0) : (parseFloat(btn.getAttribute('data-prix')) || 0);
+    var ht = Math.round(ttc / 1.2);
+    ensureModal();
+    var m = document.getElementById('dm-modal');
+    m.dataset.produit = 'Tondeuse RC ' + modele;
+    m.dataset.prix = ht;
+    m.dataset.type = 'tondeuse';
+    m.classList.add('dm-active'); document.body.style.overflow = 'hidden';
+  };
 
   window.openDevisMachine = openDevisMachine;
 })();
