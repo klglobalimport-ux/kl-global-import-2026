@@ -628,3 +628,100 @@
   initContactMessagePrefill();
   initMaisonCarouselNav();
 })();
+
+/* ──────────────────────────────────────────────────────────────────────
+   Modal d'accueil « Faites votre devis en ligne » — 1x par visiteur.
+   Pousse vers l'auto-devis (maison / mini-pelle / tondeuse). Non intrusif :
+   délai avant affichage, fermable (X, « Plus tard », fond, Échap), exclu
+   des pages déjà dans le parcours devis et des pages légales/utilitaires.
+   ────────────────────────────────────────────────────────────────────── */
+(function () {
+  'use strict';
+
+  var STORAGE_KEY = 'klDevisWelcomeSeen';
+  var DELAY_MS = 2200;
+  var EXCLUDE = /(configurateur|tondeuses-rc|engins-rippa|rippa-|contact|cgv|mentions-legales|politique-|netlify-forms|404)/i;
+
+  function alreadySeen() {
+    try { return localStorage.getItem(STORAGE_KEY) === '1'; }
+    catch (e) { return window.__klDevisSeen === true; }
+  }
+  function markSeen() {
+    try { localStorage.setItem(STORAGE_KEY, '1'); }
+    catch (e) { window.__klDevisSeen = true; }
+  }
+  function track(name, params) {
+    if (typeof window.gtag === 'function') { window.gtag('event', name, params || {}); }
+  }
+
+  function buildOverlay() {
+    var overlay = document.createElement('div');
+    overlay.className = 'kl-welcome-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-labelledby', 'kl-welcome-title');
+    overlay.innerHTML =
+      '<div class="kl-welcome-modal">' +
+        '<button type="button" class="kl-welcome-modal__close" aria-label="Fermer">×</button>' +
+        '<h2 id="kl-welcome-title" class="kl-welcome-modal__title">Faites votre devis vous-même</h2>' +
+        '<p class="kl-welcome-modal__text">Paramétrez votre maison, mini-pelle ou tondeuse et téléchargez votre devis PDF instantanément — sans attendre notre réponse.</p>' +
+        '<div class="kl-welcome-modal__actions">' +
+          '<a class="kl-welcome-modal__btn" data-devis="maison" href="maison-modulaire-configurateur.html"><span class="kl-welcome-modal__btn-emoji">🏠</span> Ma maison modulaire <span class="kl-welcome-modal__btn-arrow">→</span></a>' +
+          '<a class="kl-welcome-modal__btn" data-devis="mini-pelle" href="engins-rippa.html"><span class="kl-welcome-modal__btn-emoji">🚜</span> Ma mini-pelle RIPPA <span class="kl-welcome-modal__btn-arrow">→</span></a>' +
+          '<a class="kl-welcome-modal__btn" data-devis="tondeuse" href="tondeuses-rc.html"><span class="kl-welcome-modal__btn-emoji">🌱</span> Ma tondeuse RC <span class="kl-welcome-modal__btn-arrow">→</span></a>' +
+        '</div>' +
+        '<button type="button" class="kl-welcome-modal__later">Plus tard</button>' +
+      '</div>';
+    return overlay;
+  }
+
+  function showModal() {
+    var overlay = buildOverlay();
+    document.body.appendChild(overlay);
+    markSeen();
+    track('devis_modal_shown', {});
+
+    var closeBtn = overlay.querySelector('.kl-welcome-modal__close');
+    var laterBtn = overlay.querySelector('.kl-welcome-modal__later');
+    var lastFocus = document.activeElement;
+
+    function close() {
+      overlay.classList.remove('is-visible');
+      document.removeEventListener('keydown', onKey);
+      setTimeout(function () {
+        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        if (lastFocus && lastFocus.focus) { try { lastFocus.focus(); } catch (e) {} }
+      }, 300);
+    }
+    function onKey(e) { if (e.key === 'Escape' || e.key === 'Esc') close(); }
+
+    closeBtn.addEventListener('click', close);
+    laterBtn.addEventListener('click', close);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', onKey);
+
+    Array.prototype.forEach.call(overlay.querySelectorAll('.kl-welcome-modal__btn'), function (a) {
+      a.addEventListener('click', function () {
+        track('devis_modal_click', { produit: a.getAttribute('data-devis') });
+      });
+    });
+
+    requestAnimationFrame(function () {
+      overlay.classList.add('is-visible');
+      if (closeBtn && closeBtn.focus) { try { closeBtn.focus(); } catch (e) {} }
+    });
+  }
+
+  function initDevisWelcomeModal() {
+    if (alreadySeen()) return;
+    if (EXCLUDE.test(location.pathname)) return;
+    if (document.querySelector('.kl-welcome-overlay')) return;
+    setTimeout(showModal, DELAY_MS);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDevisWelcomeModal);
+  } else {
+    initDevisWelcomeModal();
+  }
+})();
