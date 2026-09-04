@@ -218,18 +218,24 @@
 
   /* ---------- VOIX (Gemini TTS — voix naturelles, plusieurs au choix) ---------- */
   var TTS="/.netlify/functions/tts";
-  var speakBtn=$("klw-speak"), voiceSel=$("klw-voice"), voiceOn=true, ttsVoice="Puck", audioEl=null;
+  var speakBtn=$("klw-speak"), voiceSel=$("klw-voice"), voiceOn=false, ttsVoice="Puck", audioEl=null;
   // Voix Gemini proposées (le visiteur/toi peut choisir ; Puck = jeune, colle à Léo)
   var VOICES=[["Puck","Léo — jeune & vif"],["Charon","Posé & rassurant"],["Fenrir","Dynamique"],
     ["Orus","Grave & assuré"],["Aoede","Chaleureuse"],["Kore","Douce"]];
   VOICES.forEach(function(v){ var o=document.createElement("option"); o.value=v[0]; o.textContent=v[1]; voiceSel.appendChild(o); });
   voiceSel.value=ttsVoice;
+  if(!voiceOn){ speakBtn.classList.add("off"); speakBtn.childNodes[1].nodeValue="🔇 Voix"; }
   function cleanForTTS(t){ return t.replace(/<[^>]+>/g,"").replace(/\[([^\]]*)\]\([^)]*\)/g,"$1")
-    .replace(/https?:\/\/\S+/g,"").replace(/[#*_>`]/g,"").trim(); }
+    .replace(/https?:\/\/\S+/g,"").replace(/[#*_>`]/g,"").replace(/\s+/g," ").trim(); }
+  // Pour que la voix arrive vite : on ne lit que le début (≈ 2 phrases), l'audio
+  // se génère bien plus rapidement. Le texte complet reste affiché à l'écran.
+  function trimForSpeech(t){ if(t.length<=230) return t;
+    var cut=t.slice(0,230), i=Math.max(cut.lastIndexOf(". "),cut.lastIndexOf("! "),cut.lastIndexOf("? "));
+    return (i>90?cut.slice(0,i+1):cut).trim(); }
   function stopAudio(){ if(audioEl){ try{audioEl.pause();}catch(e){} audioEl=null; } }
   function speak(text, force){
     if((!voiceOn && !force)) return;
-    var clean=cleanForTTS(text); if(!clean) return;
+    var clean=trimForSpeech(cleanForTTS(text)); if(!clean) return;
     stopAudio();
     fetch(TTS,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:clean,voice:ttsVoice})})
       .then(function(r){return r.json();})
