@@ -218,13 +218,13 @@
 
   /* ---------- VOIX (Gemini TTS — voix naturelles, plusieurs au choix) ---------- */
   var TTS="/.netlify/functions/tts";
-  var speakBtn=$("klw-speak"), voiceSel=$("klw-voice"), voiceOn=false, ttsVoice="Puck", audioEl=null;
-  // Voix Gemini proposées (le visiteur/toi peut choisir ; Puck = jeune, colle à Léo)
-  var VOICES=[["Puck","Léo — jeune & vif"],["Charon","Posé & rassurant"],["Fenrir","Dynamique"],
-    ["Orus","Grave & assuré"],["Aoede","Chaleureuse"],["Kore","Douce"]];
+  var speakBtn=$("klw-speak"), voiceSel=$("klw-voice"), voiceOn=true, ttsVoice="fr-FR-Neural2-D", audioEl=null;
+  // Voix Google Cloud TTS (FR naturelles, rapides). Neural2-D = masculine chaleureuse (Léo).
+  var VOICES=[["fr-FR-Neural2-D","Léo — masculine, chaleureuse"],["fr-FR-Neural2-B","Masculine, posée"],
+    ["fr-FR-Neural2-A","Féminine, douce"],["fr-FR-Neural2-E","Féminine, dynamique"],
+    ["fr-FR-Studio-D","Studio (M) — très naturelle"],["fr-FR-Studio-A","Studio (F) — très naturelle"]];
   VOICES.forEach(function(v){ var o=document.createElement("option"); o.value=v[0]; o.textContent=v[1]; voiceSel.appendChild(o); });
   voiceSel.value=ttsVoice;
-  if(!voiceOn){ speakBtn.classList.add("off"); speakBtn.childNodes[1].nodeValue="🔇 Voix"; }
   function cleanForTTS(t){ return t.replace(/<[^>]+>/g,"").replace(/\[([^\]]*)\]\([^)]*\)/g,"$1")
     .replace(/https?:\/\/\S+/g,"").replace(/[#*_>`]/g,"").replace(/\s+/g," ").trim(); }
   // Pour que la voix arrive vite : on ne lit que le début (≈ 2 phrases), l'audio
