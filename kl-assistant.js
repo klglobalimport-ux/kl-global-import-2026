@@ -188,13 +188,13 @@
   input.addEventListener("keydown", function(e){ if(e.key==="Enter"){ ask(input.value); input.value=""; } });
 
   /* ---------- VOIX (navigateur, provisoire — sera remplacé par la voix choisie) ---------- */
-  var speakBtn=$("klw-speak"), voiceSel=$("klw-voice"), voiceOn=true, voices=[], chosen=null, synth=window.speechSynthesis;
+  var speakBtn=$("klw-speak"), voiceSel=$("klw-voice"), voiceOn=false, voices=[], chosen=null, synth=window.speechSynthesis;
   function loadVoices(){ if(!synth)return; voices=synth.getVoices();
     var fr=voices.filter(function(v){return /fr/i.test(v.lang);}); var list=fr.length?fr:voices;
     voiceSel.innerHTML=""; list.forEach(function(v){ var o=document.createElement("option");
       o.value=v.name; o.textContent=v.name.replace(/Microsoft |Google /,"")+" ("+v.lang+")"; voiceSel.appendChild(o); });
     if(list.length){ chosen=list[0]; voiceSel.value=list[0].name; } }
-  if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; } else { speakBtn.style.display="none"; voiceSel.style.display="none"; }
+  if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; speakBtn.classList.add("off"); speakBtn.childNodes[1].nodeValue="🔇 Voix"; } else { speakBtn.style.display="none"; voiceSel.style.display="none"; }
   voiceSel.addEventListener("change", function(){ chosen=voices.find(function(v){return v.name===voiceSel.value;})||chosen;
     speak("Bonjour, je suis l’assistant K et L. Comment puis-je vous aider ?", true); });
   speakBtn.addEventListener("click", function(){ voiceOn=!voiceOn; speakBtn.classList.toggle("off",!voiceOn);
