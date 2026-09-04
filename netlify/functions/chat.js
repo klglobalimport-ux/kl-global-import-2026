@@ -6,7 +6,8 @@
 // ============================================================================
 
 // Modèle Gemini (gratuit, bon en français). Tu peux le changer plus tard.
-const MODEL = "gemini-2.5-flash";
+// NB : gemini-2.5-flash a été déprécié par Google (sept. 2026) -> gemini-3.6-flash.
+const MODEL = "gemini-3.6-flash";
 
 // ----------------------------------------------------------------------------
 //  ORIGINES AUTORISÉES  —  seules ces origines peuvent utiliser l'assistant.
@@ -145,7 +146,9 @@ exports.handler = async (event) => {
   const payload = {
     systemInstruction: { parts: [{ text: SYSTEM }] },
     contents,
-    generationConfig: { temperature: 0.6, maxOutputTokens: 600, topP: 0.9 },
+    // gemini-3.x flash "pense" par défaut (consomme des tokens en interne).
+    // On laisse une marge large pour que la réponse visible ne soit jamais tronquée.
+    generationConfig: { temperature: 0.6, maxOutputTokens: 2048, topP: 0.9 },
     safetySettings: [
       { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_ONLY_HIGH" },
       { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_ONLY_HIGH" },
