@@ -216,28 +216,31 @@
   send.addEventListener("click", function(){ ask(input.value); input.value=""; });
   input.addEventListener("keydown", function(e){ if(e.key==="Enter"){ ask(input.value); input.value=""; } });
 
-  /* ---------- VOIX (navigateur, coupée par défaut — voix garçon fr-FR) ---------- */
-  var speakBtn=$("klw-speak"), voiceSel=$("klw-voice"), voiceOn=true, voices=[], chosen=null, synth=window.speechSynthesis;
-  function loadVoices(){ if(!synth)return; voices=synth.getVoices();
-    // On ne garde QUE les voix françaises fr-FR (comme demandé).
-    var frFR=voices.filter(function(v){return /fr[-_]FR/i.test(v.lang);});
-    var list=frFR.length?frFR:voices.filter(function(v){return /fr/i.test(v.lang);});
-    voiceSel.innerHTML=""; list.forEach(function(v){ var o=document.createElement("option");
-      o.value=v.name; o.textContent=v.name.replace(/Microsoft |Google /,"")+" ("+v.lang+")"; voiceSel.appendChild(o); });
-    // Voix par défaut : la DERNIÈRE voix fr-FR de la liste.
-    var def=list.length?list[list.length-1]:null;
-    if(def && !chosen){ chosen=def; voiceSel.value=def.name; } }
-  if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; } // voix ACTIVE par défaut
-  else { speakBtn.style.display="none"; voiceSel.style.display="none"; }
-  voiceSel.addEventListener("change", function(){ chosen=voices.find(function(v){return v.name===voiceSel.value;})||chosen;
+  /* ---------- VOIX (Gemini TTS — voix naturelles, plusieurs au choix) ---------- */
+  var TTS="/.netlify/functions/tts";
+  var speakBtn=$("klw-speak"), voiceSel=$("klw-voice"), voiceOn=true, ttsVoice="Puck", audioEl=null;
+  // Voix Gemini proposées (le visiteur/toi peut choisir ; Puck = jeune, colle à Léo)
+  var VOICES=[["Puck","Léo — jeune & vif"],["Charon","Posé & rassurant"],["Fenrir","Dynamique"],
+    ["Orus","Grave & assuré"],["Aoede","Chaleureuse"],["Kore","Douce"]];
+  VOICES.forEach(function(v){ var o=document.createElement("option"); o.value=v[0]; o.textContent=v[1]; voiceSel.appendChild(o); });
+  voiceSel.value=ttsVoice;
+  function cleanForTTS(t){ return t.replace(/<[^>]+>/g,"").replace(/\[([^\]]*)\]\([^)]*\)/g,"$1")
+    .replace(/https?:\/\/\S+/g,"").replace(/[#*_>`]/g,"").trim(); }
+  function stopAudio(){ if(audioEl){ try{audioEl.pause();}catch(e){} audioEl=null; } }
+  function speak(text, force){
+    if((!voiceOn && !force)) return;
+    var clean=cleanForTTS(text); if(!clean) return;
+    stopAudio();
+    fetch(TTS,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:clean,voice:ttsVoice})})
+      .then(function(r){return r.json();})
+      .then(function(d){ if(d && d.audio){ stopAudio(); audioEl=new Audio(d.audio);
+        audioEl.play().catch(function(){/* autoplay bloqué : sans gravité */}); } })
+      .catch(function(){});
+  }
+  voiceSel.addEventListener("change", function(){ ttsVoice=voiceSel.value;
     speak("Salut, moi c'est Léo, l'assistant K et L. Comment puis-je t'aider ?", true); });
   speakBtn.addEventListener("click", function(){ voiceOn=!voiceOn; speakBtn.classList.toggle("off",!voiceOn);
-    speakBtn.childNodes[1].nodeValue=voiceOn?"🔊 Voix":"🔇 Voix"; if(!voiceOn&&synth) synth.cancel(); });
-  function speak(text, force){ if(!synth||(!voiceOn&&!force))return; synth.cancel();
-    var clean=text.replace(/<[^>]+>/g,"").replace(/\[([^\]]*)\]\([^)]*\)/g,"$1")
-      .replace(/https?:\/\/\S+/g,"").replace(/[#*_>`]/g,"");
-    var u=new SpeechSynthesisUtterance(clean); if(chosen){u.voice=chosen;u.lang=chosen.lang;}else{u.lang="fr-FR";}
-    u.rate=1.05; u.pitch=1.25; synth.speak(u); } // pitch haut = voix plus jeune / "garçon"
+    speakBtn.childNodes[1].nodeValue=voiceOn?"🔊 Voix":"🔇 Voix"; if(!voiceOn) stopAudio(); });
 
   /* ---------- MICRO ---------- */
   var micBtn=$("klw-mic"), SR=window.SpeechRecognition||window.webkitSpeechRecognition;
