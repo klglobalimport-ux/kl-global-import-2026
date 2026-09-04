@@ -5,10 +5,10 @@
 //  (klglobalimport.com) et de ses previews Netlify. Tout autre site -> 403.
 // ============================================================================
 
-// Modèle Gemini (gratuit, bon en français). Tu peux le changer plus tard.
-// gemini-3.6-flash (complet) est trop LENT pour un chat (~20s) car "à réflexion".
-// On prend la variante "flash-lite", conçue pour des réponses rapides.
-const MODEL = "gemini-flash-lite-latest";
+// Modèle Gemini rapide (gratuit). On garde UN seul modèle rapide : le 2e modèle
+// (complet) est trop lent et faisait dépasser le temps max de la fonction Netlify
+// (erreur 504). Mieux vaut échouer vite et proprement (message + WhatsApp).
+const MODELS = ["gemini-flash-lite-latest"];
 
 // ----------------------------------------------------------------------------
 //  ORIGINES AUTORISÉES  —  seules ces origines peuvent utiliser l'assistant.
@@ -158,9 +158,9 @@ exports.handler = async (event) => {
   if (!contents.length)
     return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: "Message vide." }) };
 
-  const url =
+  const urlFor = (m) =>
     "https://generativelanguage.googleapis.com/v1beta/models/" +
-    MODEL + ":generateContent?key=" + encodeURIComponent(key);
+    m + ":generateContent?key=" + encodeURIComponent(key);
 
   const payload = {
     systemInstruction: { parts: [{ text: SYSTEM }] },
@@ -179,30 +179,55 @@ exports.handler = async (event) => {
     ],
   };
 
-  try {
-    const r = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    const data = await r.json();
-    if (!r.ok) {
-      const msg = (data && data.error && data.error.message) || "Erreur Gemini";
-      return { statusCode: 502, headers: CORS, body: JSON.stringify({ error: msg }) };
+  function wait(ms) { return new Promise((res) => setTimeout(res, ms)); }
+
+  // Un modèle donné, avec 2 tentatives (erreurs temporaires "high demand").
+  async function tryModel(model, attempt) {
+    let r;
+    try {
+      r = await fetch(urlFor(model), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+    } catch (netErr) {
+      if (attempt < 2) { await wait(400 * attempt); return tryModel(model, attempt + 1); }
+      return { ok: false, status: 0, data: { error: { message: netErr.message } } };
     }
-    const reply =
-      (data.candidates &&
-        data.candidates[0] &&
-        data.candidates[0].content &&
-        data.candidates[0].content.parts &&
-        data.candidates[0].content.parts.map((p) => p.text).join("")) ||
-      "Désolé, je n'ai pas de réponse pour le moment. Écrivez-nous sur WhatsApp au 06 73 30 00 54.";
-    return { statusCode: 200, headers: CORS, body: JSON.stringify({ reply }) };
-  } catch (e) {
-    return {
-      statusCode: 500,
-      headers: CORS,
-      body: JSON.stringify({ error: "Connexion à l'IA impossible : " + e.message }),
-    };
+    let data = {};
+    try { data = await r.json(); } catch (e) {}
+    if (r.ok) return { ok: true, data };
+    const retryable = r.status === 429 || r.status === 500 || r.status === 502 || r.status === 503;
+    if (retryable && attempt < 2) { await wait(500 * attempt); return tryModel(model, attempt + 1); }
+    return { ok: false, status: r.status, data };
   }
+
+  // Chaîne de secours : on essaie chaque modèle jusqu'à ce qu'un réponde.
+  async function callGemini() {
+    let last = { ok: false };
+    for (let i = 0; i < MODELS.length; i++) {
+      last = await tryModel(MODELS[i], 1);
+      if (last.ok) return last;
+    }
+    return last;
+  }
+
+  const res = await callGemini();
+  if (!res.ok) {
+    // Message propre côté client (jamais l'erreur technique anglaise).
+    const reply =
+      "Oups, je suis un peu surchargé à l'instant 😅 Réessaie dans quelques secondes — " +
+      "ou écris-nous directement sur WhatsApp au 06 73 30 00 54, on te répond vite.";
+    // On renvoie 200 avec ce texte : le widget l'affiche tel quel, proprement.
+    return { statusCode: 200, headers: CORS, body: JSON.stringify({ reply }) };
+  }
+  const data = res.data;
+  const reply =
+    (data.candidates &&
+      data.candidates[0] &&
+      data.candidates[0].content &&
+      data.candidates[0].content.parts &&
+      data.candidates[0].content.parts.map((p) => p.text).join("")) ||
+    "Désolé, je n'ai pas de réponse pour le moment. Écris-nous sur WhatsApp au 06 73 30 00 54.";
+  return { statusCode: 200, headers: CORS, body: JSON.stringify({ reply }) };
 };

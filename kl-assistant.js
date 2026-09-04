@@ -217,18 +217,17 @@
   input.addEventListener("keydown", function(e){ if(e.key==="Enter"){ ask(input.value); input.value=""; } });
 
   /* ---------- VOIX (navigateur, coupée par défaut — voix garçon fr-FR) ---------- */
-  var speakBtn=$("klw-speak"), voiceSel=$("klw-voice"), voiceOn=false, voices=[], chosen=null, synth=window.speechSynthesis;
+  var speakBtn=$("klw-speak"), voiceSel=$("klw-voice"), voiceOn=true, voices=[], chosen=null, synth=window.speechSynthesis;
   function loadVoices(){ if(!synth)return; voices=synth.getVoices();
-    var fr=voices.filter(function(v){return /fr/i.test(v.lang);}); var list=fr.length?fr:voices;
+    // On ne garde QUE les voix françaises fr-FR (comme demandé).
+    var frFR=voices.filter(function(v){return /fr[-_]FR/i.test(v.lang);});
+    var list=frFR.length?frFR:voices.filter(function(v){return /fr/i.test(v.lang);});
     voiceSel.innerHTML=""; list.forEach(function(v){ var o=document.createElement("option");
       o.value=v.name; o.textContent=v.name.replace(/Microsoft |Google /,"")+" ("+v.lang+")"; voiceSel.appendChild(o); });
-    // Voix par défaut : une voix fr-FR MASCULINE (colle à la mascotte "garçon").
-    var frFR=list.filter(function(v){return /fr[-_]FR/i.test(v.lang);});
-    var pool=frFR.length?frFR:list;
-    var male=pool.filter(function(v){return /thomas|paul|claude|nicolas|henri|daniel|mathieu|r[eé]my|guillaume|male|homme/i.test(v.name);});
-    var def=male.length?male[0]:(pool.length?pool[pool.length-1]:null);
-    if(def){ chosen=def; voiceSel.value=def.name; } }
-  if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; speakBtn.classList.add("off"); speakBtn.childNodes[1].nodeValue="🔇 Voix"; }
+    // Voix par défaut : la DERNIÈRE voix fr-FR de la liste.
+    var def=list.length?list[list.length-1]:null;
+    if(def && !chosen){ chosen=def; voiceSel.value=def.name; } }
+  if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; } // voix ACTIVE par défaut
   else { speakBtn.style.display="none"; voiceSel.style.display="none"; }
   voiceSel.addEventListener("change", function(){ chosen=voices.find(function(v){return v.name===voiceSel.value;})||chosen;
     speak("Salut, moi c'est Léo, l'assistant K et L. Comment puis-je t'aider ?", true); });
