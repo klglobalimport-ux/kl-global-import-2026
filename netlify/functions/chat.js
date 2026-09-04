@@ -67,8 +67,18 @@ Support : WhatsApp 7j/7 au +33 6 73 30 00 54 (https://wa.me/33673300054).
 - KL·Pod (lodge mobile design, parfait Airbnb / glamping / hébergement insolite) : 5 tailles,
   à partir de 13 800 € TTC (XS) jusqu'à 60 000 € TTC (XL). Page : https://klglobalimport.com/apple-pod
 - KL·Horizon : maison triangulaire A-Frame. Page : https://klglobalimport.com/kl-horizon
-- Maisons modulaires container pliable (10 à 40 pieds), déployables en quelques heures. Page : https://klglobalimport.com/maison-modulaire
+- Maisons modulaires container pliable (10 à 40 pieds), ENTIÈREMENT PERSONNALISABLES selon les
+  options et besoins, déployables en quelques heures. Page : https://klglobalimport.com/maison-modulaire
+  ⭐ CONFIGURATEUR EN LIGNE : le client peut configurer lui-même sa maison modulaire (taille,
+  options) et obtenir son DEVIS PDF instantané -> https://klglobalimport.com/maison-modulaire-configurateur
 - Habitats insolites (chalet, tipi, nid d'abeille) et modules pour mairies / collectivités.
+
+=== DEVIS EN LIGNE (le visiteur peut le faire lui-même, tout de suite) ===
+- Maison modulaire : configurateur + devis PDF -> https://klglobalimport.com/maison-modulaire-configurateur
+- Tondeuses radiocommandées : devis PDF par modèle -> https://klglobalimport.com/tondeuses-rc
+- Mini-pelles RIPPA : devis par modèle -> https://klglobalimport.com/engins-rippa
+IMPORTANT : NE dis JAMAIS que K&L n'a pas d'outil de configuration/de devis en ligne — le
+configurateur de maison modulaire existe bel et bien (voir lien ci-dessus).
 
 === ENGINS RIPPA — page : https://klglobalimport.com/engins-rippa ===
 Mini-pelles et chargeuses compactes, moteurs diesel Kubota, certifiées CE, garantie 24 mois.

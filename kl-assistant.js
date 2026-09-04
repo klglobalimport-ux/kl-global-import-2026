@@ -193,7 +193,10 @@
     var fr=voices.filter(function(v){return /fr/i.test(v.lang);}); var list=fr.length?fr:voices;
     voiceSel.innerHTML=""; list.forEach(function(v){ var o=document.createElement("option");
       o.value=v.name; o.textContent=v.name.replace(/Microsoft |Google /,"")+" ("+v.lang+")"; voiceSel.appendChild(o); });
-    if(list.length){ chosen=list[0]; voiceSel.value=list[0].name; } }
+    // Voix par défaut : la DERNIÈRE voix fr-FR de la liste (souvent la plus naturelle).
+    var frFR=list.filter(function(v){return /fr[-_]FR/i.test(v.lang);});
+    var def=frFR.length?frFR[frFR.length-1]:(list.length?list[list.length-1]:null);
+    if(def){ chosen=def; voiceSel.value=def.name; } }
   if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; speakBtn.classList.add("off"); speakBtn.childNodes[1].nodeValue="🔇 Voix"; } else { speakBtn.style.display="none"; voiceSel.style.display="none"; }
   voiceSel.addEventListener("change", function(){ chosen=voices.find(function(v){return v.name===voiceSel.value;})||chosen;
     speak("Bonjour, je suis l’assistant K et L. Comment puis-je vous aider ?", true); });
