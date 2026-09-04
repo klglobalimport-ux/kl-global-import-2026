@@ -227,15 +227,10 @@
   voiceSel.value=ttsVoice;
   function cleanForTTS(t){ return t.replace(/<[^>]+>/g,"").replace(/\[([^\]]*)\]\([^)]*\)/g,"$1")
     .replace(/https?:\/\/\S+/g,"").replace(/[#*_>`]/g,"").replace(/\s+/g," ").trim(); }
-  // Pour que la voix arrive vite : on ne lit que le début (≈ 2 phrases), l'audio
-  // se génère bien plus rapidement. Le texte complet reste affiché à l'écran.
-  function trimForSpeech(t){ if(t.length<=230) return t;
-    var cut=t.slice(0,230), i=Math.max(cut.lastIndexOf(". "),cut.lastIndexOf("! "),cut.lastIndexOf("? "));
-    return (i>90?cut.slice(0,i+1):cut).trim(); }
   function stopAudio(){ if(audioEl){ try{audioEl.pause();}catch(e){} audioEl=null; } }
   function speak(text, force){
     if((!voiceOn && !force)) return;
-    var clean=trimForSpeech(cleanForTTS(text)); if(!clean) return;
+    var clean=cleanForTTS(text); if(!clean) return; // lit tout le texte (Cloud TTS est rapide)
     stopAudio();
     fetch(TTS,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:clean,voice:ttsVoice})})
       .then(function(r){return r.json();})

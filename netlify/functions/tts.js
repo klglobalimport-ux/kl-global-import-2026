@@ -67,7 +67,7 @@ exports.handler = async (event) => {
   if (!process.env.GOOGLE_SA_JSON) return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: "GOOGLE_SA_JSON manquant." }) };
 
   let text = "", voice = "fr-FR-Neural2-D";
-  try { const b = JSON.parse(event.body || "{}"); text = String(b.text || "").slice(0, 600); if (b.voice) voice = String(b.voice); } catch (e) {}
+  try { const b = JSON.parse(event.body || "{}"); text = String(b.text || "").slice(0, 1500); if (b.voice) voice = String(b.voice); } catch (e) {}
   if (!text.trim()) return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: "Texte vide." }) };
 
   try {
