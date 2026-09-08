@@ -10,6 +10,9 @@
 (function () {
   "use strict";
   var ENDPOINT = "/.netlify/functions/chat";
+  var LOG = "/.netlify/functions/log";
+  // Identifiant unique de cette visite (1 conversation = 1 ligne dans le Sheet).
+  var SID = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);
   var MASCOT = "/kl-mascotte.webp";
   var WHATSAPP = "https://wa.me/33673300054";
 
@@ -152,7 +155,7 @@
       '<div class="klfoot"><button class="klmic" id="klw-mic" title="Parler">🎙️</button>' +
         '<input id="klw-input" placeholder="Écris ou parle à Léo…" autocomplete="off">' +
         '<button class="klsend" id="klw-send" title="Envoyer">➤</button></div>' +
-      '<div class="klnote">Assistant IA · K&amp;L Global Import</div>' +
+      '<div class="klnote">Assistant IA · K&amp;L Global Import — vos échanges peuvent être enregistrés pour traiter votre demande · <a href="/politique-confidentialite" target="_blank" rel="noopener">confidentialité</a></div>' +
     '</div>';
   document.body.appendChild(root);
 
@@ -208,9 +211,18 @@
       typing.classList.remove("klshow"); mascot.classList.remove("kltalk");
       var reply = d.reply || ("Désolé, souci technique. Écris-nous sur WhatsApp au 06 73 30 00 54." + (d.error?" ("+d.error+")":""));
       addMsg(reply,"bot"); history.push({role:"assistant",content:reply}); speak(reply);
+      logConv();
     })
     .catch(function(){ typing.classList.remove("klshow"); mascot.classList.remove("kltalk");
       addMsg("Connexion impossible pour le moment. Réessaie, ou WhatsApp : 06 73 30 00 54.","bot"); });
+  }
+  // Enregistre la conversation dans le Google Sheet (best-effort, jamais bloquant).
+  function logConv(){
+    try{
+      fetch(LOG,{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({sessionId:SID, page:location.pathname, messages:history}),
+        keepalive:true}).catch(function(){});
+    }catch(e){}
   }
   quick.addEventListener("click", function(e){ var b=e.target.closest("button"); if(b) ask(b.getAttribute("data-q")); });
   send.addEventListener("click", function(){ ask(input.value); input.value=""; });
