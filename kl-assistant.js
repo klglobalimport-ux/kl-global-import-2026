@@ -11,6 +11,9 @@
   "use strict";
   var ENDPOINT = "/.netlify/functions/chat";
   var LOG = "/.netlify/functions/log";
+  // Jeton d'appel des fonctions (barrière secondaire). NON secret : visible côté
+  // client par nature ; doit valoir la variable LEO_API_TOKEN côté Netlify.
+  var KLTOKEN = "klgi-web-2026-pub";
   // Identifiant unique de cette visite (1 conversation = 1 ligne dans le Sheet).
   var SID = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);
   var MASCOT = "/kl-mascotte.webp";
@@ -204,7 +207,7 @@
     if(!text.trim()) return;
     addMsg(text,"me"); history.push({role:"user",content:text});
     typing.classList.add("klshow"); mascot.classList.add("kltalk"); body.scrollTop=body.scrollHeight;
-    fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},
+    fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","X-KL-Token":KLTOKEN},
       body:JSON.stringify({messages:history, page:location.pathname})})
     .then(function(r){return r.json();})
     .then(function(d){
@@ -219,7 +222,7 @@
   // Enregistre la conversation dans le Google Sheet (best-effort, jamais bloquant).
   function logConv(){
     try{
-      fetch(LOG,{method:"POST",headers:{"Content-Type":"application/json"},
+      fetch(LOG,{method:"POST",headers:{"Content-Type":"application/json","X-KL-Token":KLTOKEN},
         body:JSON.stringify({sessionId:SID, page:location.pathname, messages:history}),
         keepalive:true}).catch(function(){});
     }catch(e){}
@@ -244,7 +247,7 @@
     if((!voiceOn && !force)) return;
     var clean=cleanForTTS(text); if(!clean) return; // lit tout le texte (Cloud TTS est rapide)
     stopAudio();
-    fetch(TTS,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:clean,voice:ttsVoice})})
+    fetch(TTS,{method:"POST",headers:{"Content-Type":"application/json","X-KL-Token":KLTOKEN},body:JSON.stringify({text:clean,voice:ttsVoice})})
       .then(function(r){return r.json();})
       .then(function(d){ if(d && d.audio){ stopAudio(); audioEl=new Audio(d.audio);
         audioEl.play().catch(function(){/* autoplay bloqué : sans gravité */}); } })

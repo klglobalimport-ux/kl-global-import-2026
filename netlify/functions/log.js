@@ -8,27 +8,15 @@
 // ============================================================================
 const crypto = require("crypto");
 
-// L'identifiant du Google Sheet (chaîne entre /d/ et /edit dans son URL).
-const SHEET_ID = process.env.LEO_SHEET_ID || "1dRNIU_2KTWlpJo0kCSNgunU-dLAvMJyRZlS0V4vneUY";
+// L'identifiant du Google Sheet — lu UNIQUEMENT depuis l'env (aucun repli en dur).
+const SHEET_ID = process.env.LEO_SHEET_ID || "";
 const ONGLET = "Feuille 1"; // nom de l'onglet (par défaut Google le nomme ainsi)
 
 const EN_TETES = ["Date", "Heure", "Session", "Conversation", "Nb échanges", "Téléphone", "Email", "Page"];
 const COL_CONV = 3; // colonne D (0-based) : "Conversation"
 
-function hostAllowed(host) {
-  if (!host) return false;
-  host = host.toLowerCase();
-  return (
-    host === "klglobalimport.com" || host === "www.klglobalimport.com" ||
-    host === "kl-global-maison.netlify.app" || host.endsWith("--kl-global-maison.netlify.app") ||
-    host === "localhost" || host === "127.0.0.1"
-  );
-}
-function reqOrigin(event) {
-  const h = event.headers || {};
-  const raw = h.origin || h.Origin || h.referer || h.Referer || "";
-  try { return { raw, host: raw ? new URL(raw).hostname : "" }; } catch (e) { return { raw, host: "" }; }
-}
+const { hostAllowed, reqOrigin, corsHeaders, guard } = require("./_shared/security.js");
+
 function b64url(buf) {
   return Buffer.from(buf).toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
@@ -143,16 +131,14 @@ function rowFromRange(range) {
 exports.handler = async (event) => {
   const { raw: origin, host } = reqOrigin(event);
   const allowed = hostAllowed(host);
-  const CORS = {
-    "Access-Control-Allow-Origin": allowed && origin ? origin : "https://klglobalimport.com",
-    "Vary": "Origin", "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS", "Content-Type": "application/json",
-  };
+  const CORS = corsHeaders(origin, allowed);
   if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers: CORS, body: "" };
   if (event.httpMethod !== "POST") return { statusCode: 405, headers: CORS, body: JSON.stringify({ error: "Method not allowed" }) };
   if (!allowed) return { statusCode: 403, headers: CORS, body: JSON.stringify({ error: "Accès refusé." }) };
-  if (!process.env.GOOGLE_SA_JSON) return { statusCode: 200, headers: CORS, body: JSON.stringify({ ok: false }) };
-  if (SHEET_ID.indexOf("___") === 0) return { statusCode: 200, headers: CORS, body: JSON.stringify({ ok: false, error: "SHEET_ID non configuré" }) };
+  const blocked = guard(event, CORS);
+  if (blocked) return blocked;
+  if (!process.env.GOOGLE_SA_JSON) return { statusCode: 500, headers: CORS, body: JSON.stringify({ ok: false, error: "GOOGLE_SA_JSON manquant." }) };
+  if (!SHEET_ID) return { statusCode: 500, headers: CORS, body: JSON.stringify({ ok: false, error: "LEO_SHEET_ID manquant sur Netlify." }) };
 
   let body = {};
   try { body = JSON.parse(event.body || "{}"); } catch (e) {}

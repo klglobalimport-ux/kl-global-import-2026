@@ -11,44 +11,11 @@
 const MODELS = ["gemini-flash-lite-latest"];
 
 // ----------------------------------------------------------------------------
-//  ORIGINES AUTORISÉES  —  seules ces origines peuvent utiliser l'assistant.
-//  Empêche qu'un autre site embarque le widget et consomme ton quota Gemini.
+//  SÉCURITÉ PARTAGÉE (factorisée dans _shared/security.js) :
+//  - verrou d'origine (site K&L uniquement)  - CORS
+//  - guard() = jeton partagé (si configuré) + rate-limit par IP
 // ----------------------------------------------------------------------------
-function hostAllowed(host) {
-  if (!host) return false;
-  host = host.toLowerCase();
-  return (
-    host === "klglobalimport.com" ||
-    host === "www.klglobalimport.com" ||
-    host === "kl-global-maison.netlify.app" ||          // deploy prod Netlify
-    host.endsWith("--kl-global-maison.netlify.app") ||  // deploy previews / drafts
-    host === "localhost" ||                              // tests locaux
-    host === "127.0.0.1"
-  );
-}
-
-// Récupère l'origine de la requête (Origin, sinon Referer) et son hôte.
-function requestOrigin(event) {
-  const h = event.headers || {};
-  const raw = h.origin || h.Origin || h.referer || h.Referer || "";
-  if (!raw) return { raw: "", host: "" };
-  try {
-    return { raw: raw, host: new URL(raw).hostname };
-  } catch (e) {
-    return { raw: raw, host: "" };
-  }
-}
-
-function corsHeaders(origin, allowed) {
-  return {
-    // On n'autorise QUE l'origine reconnue (pas de "*").
-    "Access-Control-Allow-Origin": allowed && origin ? origin : "https://klglobalimport.com",
-    "Vary": "Origin",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Content-Type": "application/json",
-  };
-}
+const { hostAllowed, reqOrigin, corsHeaders, guard } = require("./_shared/security.js");
 
 // ----------------------------------------------------------------------------
 //  BASE DE CONNAISSANCES  —  ✏️  C'EST ICI QUE TU MODIFIES CE QUE SAIT LE BOT
@@ -238,8 +205,9 @@ const SYSTEM = INSTRUCTIONS + "\n\n=== INFORMATIONS K&L ===\n" + CONNAISSANCES;
 //  [[LEAD]]. Passe par un petit script Google (Apps Script) dont l'URL reste
 //  SECRÈTE (côté serveur uniquement, jamais envoyée au navigateur).
 // ----------------------------------------------------------------------------
-const NOTIFY_URL = process.env.LEO_NOTIFY_URL || "https://script.google.com/macros/s/AKfycbxrKPWFYOnkd0qYpy_YlaK0xmDFZvaSqj3fPzTB3nXVMokMX9GPfDJ4erbnekflFDAPVA/exec";
-const NOTIFY_SECRET = "kl-leo-9f3a7c21b8e4d6"; // doit être identique dans le script Google
+// Secrets lus UNIQUEMENT depuis l'environnement Netlify (aucun repli en dur).
+const NOTIFY_URL = process.env.LEO_NOTIFY_URL || "";     // URL du script Google
+const NOTIFY_SECRET = process.env.NOTIFY_SECRET || "";   // secret partagé avec le script
 
 function extraitContact(userMsgs) {
   const t = userMsgs.join("\n");
@@ -248,7 +216,7 @@ function extraitContact(userMsgs) {
   return { tel, email };
 }
 async function notifyLead(payload) {
-  if (!NOTIFY_URL || NOTIFY_URL.indexOf("___") === 0) return { sent: false, reason: "non configuré" };
+  if (!NOTIFY_URL || !NOTIFY_SECRET) return { sent: false, reason: "notify non configuré (LEO_NOTIFY_URL / NOTIFY_SECRET)" };
   const ctrl = new AbortController();
   const to = setTimeout(() => ctrl.abort(), 4000);
   try {
@@ -261,7 +229,7 @@ async function notifyLead(payload) {
 }
 
 exports.handler = async (event) => {
-  const { raw: origin, host } = requestOrigin(event);
+  const { raw: origin, host } = reqOrigin(event);
   const allowed = hostAllowed(host);
   const CORS = corsHeaders(origin, allowed);
 
@@ -273,6 +241,10 @@ exports.handler = async (event) => {
   // Sécurité : refuser tout ce qui ne vient pas du site K&L (ou de ses previews).
   if (!allowed)
     return { statusCode: 403, headers: CORS, body: JSON.stringify({ error: "Accès refusé." }) };
+
+  // Jeton partagé (si LEO_API_TOKEN configuré) + rate-limit par IP.
+  const blocked = guard(event, CORS);
+  if (blocked) return blocked;
 
   const key = process.env.GEMINI_API_KEY;
   if (!key)
