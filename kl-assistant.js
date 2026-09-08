@@ -205,7 +205,7 @@
     addMsg(text,"me"); history.push({role:"user",content:text});
     typing.classList.add("klshow"); mascot.classList.add("kltalk"); body.scrollTop=body.scrollHeight;
     fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({messages:history})})
+      body:JSON.stringify({messages:history, page:location.pathname})})
     .then(function(r){return r.json();})
     .then(function(d){
       typing.classList.remove("klshow"); mascot.classList.remove("kltalk");

@@ -218,10 +218,47 @@ RÉCUPÉRER LE CONTACT (au bon moment, jamais au début) :
 - Ne demande JAMAIS les coordonnées dès le premier message ni pour une simple question d'information.
 - S'il donne un email ou un numéro, remercie-le simplement et confirme que l'équipe le recontactera vite.
 
+SIGNAL LEAD (marqueur technique, TOTALEMENT invisible pour le visiteur) :
+- UNIQUEMENT quand les TROIS conditions sont réunies : (1) le visiteur a une demande PRÉCISE et réelle
+  (devis, achat, projet concret, produit identifié), (2) il a DONNÉ un moyen de le recontacter (email OU
+  numéro de téléphone), et (3) il veut être recontacté → alors ajoute, tout à la fin de ta réponse, sur
+  une nouvelle ligne, le marqueur EXACT : [[LEAD]]
+- Ce marqueur sert à prévenir l'équipe par email. Ne l'écris JAMAIS dans les autres cas (simple question,
+  pas de coordonnées données, visiteur qui ne veut pas être rappelé). Écris-le UNE SEULE FOIS par
+  conversation, au moment où le visiteur vient de donner/confirmer son contact. N'explique jamais ce
+  marqueur et n'en parle jamais. Ta réponse visible reste normale et chaleureuse au-dessus du marqueur.
+
 OBJECTIF : un vrai conseiller utile, rapide et concret — que le visiteur trouve sa réponse tout de suite.
 `;
 
 const SYSTEM = INSTRUCTIONS + "\n\n=== INFORMATIONS K&L ===\n" + CONNAISSANCES;
+
+// ----------------------------------------------------------------------------
+//  ALERTE EMAIL "NOUVEAU LEAD"  —  envoyée à K&L quand Léo pose le marqueur
+//  [[LEAD]]. Passe par un petit script Google (Apps Script) dont l'URL reste
+//  SECRÈTE (côté serveur uniquement, jamais envoyée au navigateur).
+// ----------------------------------------------------------------------------
+const NOTIFY_URL = process.env.LEO_NOTIFY_URL || "https://script.google.com/macros/s/AKfycbxrKPWFYOnkd0qYpy_YlaK0xmDFZvaSqj3fPzTB3nXVMokMX9GPfDJ4erbnekflFDAPVA/exec";
+const NOTIFY_SECRET = "kl-leo-9f3a7c21b8e4d6"; // doit être identique dans le script Google
+
+function extraitContact(userMsgs) {
+  const t = userMsgs.join("\n");
+  const email = (t.match(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/) || [""])[0];
+  const tel = (t.match(/(?:\+33|0)\s?[1-9](?:[\s.\-]?\d{2}){4}/) || [""])[0];
+  return { tel, email };
+}
+async function notifyLead(payload) {
+  if (!NOTIFY_URL || NOTIFY_URL.indexOf("___") === 0) return { sent: false, reason: "non configuré" };
+  const ctrl = new AbortController();
+  const to = setTimeout(() => ctrl.abort(), 4000);
+  try {
+    const r = await fetch(NOTIFY_URL, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(Object.assign({ secret: NOTIFY_SECRET }, payload)), signal: ctrl.signal,
+    });
+    return { sent: true, status: r.status };
+  } catch (e) { return { sent: false, error: e.message }; } finally { clearTimeout(to); }
+}
 
 exports.handler = async (event) => {
   const { raw: origin, host } = requestOrigin(event);
@@ -327,5 +364,24 @@ exports.handler = async (event) => {
       data.candidates[0].content.parts &&
       data.candidates[0].content.parts.map((p) => p.text).join("")) ||
     "Désolé, je n'ai pas de réponse pour le moment. Écris-nous sur WhatsApp au 06 73 30 00 54.";
-  return { statusCode: 200, headers: CORS, body: JSON.stringify({ reply }) };
+
+  // Détection du marqueur [[LEAD]] -> alerte email, puis on l'efface (invisible visiteur).
+  const isLead = /\[\[\s*LEAD\s*\]\]/i.test(reply);
+  const cleanReply = reply.replace(/\[\[\s*LEAD\s*\]\]/gi, "").replace(/\n{3,}/g, "\n\n").trim();
+  let notifyRes = null, contact = null;
+  if (isLead) {
+    const userMsgs = messages.filter((m) => m.role !== "assistant").map((m) => String(m.content || ""));
+    contact = extraitContact(userMsgs);
+    let page = "";
+    try { page = JSON.parse(event.body || "{}").page || ""; } catch (e) {}
+    const transcript =
+      messages.map((m) => (m.role === "assistant" ? "Léo : " : "Visiteur : ") + String(m.content || "").trim()).join("\n\n") +
+      "\n\nLéo : " + cleanReply;
+    notifyRes = await notifyLead({ contact, transcript, page, resume: userMsgs[userMsgs.length - 1] || "" });
+  }
+  let debug = false;
+  try { debug = !!JSON.parse(event.body || "{}").debug; } catch (e) {}
+  const out = { reply: cleanReply };
+  if (debug) out._debug = { isLead, contact, notifyRes };
+  return { statusCode: 200, headers: CORS, body: JSON.stringify(out) };
 };
