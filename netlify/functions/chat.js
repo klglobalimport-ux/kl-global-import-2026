@@ -118,6 +118,8 @@ Mini-pelles et chargeuses compactes, moteurs diesel Kubota, certifiées CE, gara
 
 === INFOS PRATIQUES ===
 - Les prix ci-dessus sont des tarifs "à partir de" ; le prix exact dépend des options et de la livraison.
+- Horaires : du lundi au vendredi de 8h à 18h, le samedi de 8h à 12h, fermé le dimanche.
+- Contact : WhatsApp / téléphone au 06 73 30 00 54. Siège à Val Buech-Méouge (05) ; dépôt & SAV à Sisteron (04).
 - Brochures : https://klglobalimport.com/brochures — Contact / devis : https://klglobalimport.com/contact?sujet=demande-tarifs
 
 === TRANSPORT / LIVRAISON — CAS PARTICULIER CAPSULE HOUSE ===
@@ -215,6 +217,18 @@ function extraitContact(userMsgs) {
   const tel = (t.match(/(?:\+33|0)\s?[1-9](?:[\s.\-]?\d{2}){4}/) || [""])[0];
   return { tel, email };
 }
+
+// Extrait proprement le texte de la réponse Gemini (ignore les parties sans
+// texte, ex. "thinking"). Renvoie "" si aucun texte -> déclenche un réessai.
+function extractText(data) {
+  const c = data && data.candidates && data.candidates[0];
+  if (!c || !c.content || !Array.isArray(c.content.parts)) return "";
+  return c.content.parts
+    .filter((p) => p && typeof p.text === "string")
+    .map((p) => p.text)
+    .join("")
+    .trim();
+}
 async function notifyLead(payload) {
   if (!NOTIFY_URL || !NOTIFY_SECRET) return { sent: false, reason: "notify non configuré (LEO_NOTIFY_URL / NOTIFY_SECRET)" };
   const ctrl = new AbortController();
@@ -272,11 +286,12 @@ exports.handler = async (event) => {
   const payload = {
     systemInstruction: { parts: [{ text: SYSTEM }] },
     contents,
-    // gemini-3.x flash "pense" par défaut (ça ralentit). On limite la réflexion au
-    // minimum pour des réponses rapides, avec une marge suffisante pour l'écrit.
+    // Réflexion minimale (128) : ce modèle REFUSE thinkingBudget:0 (erreur 400).
+    // La robustesse anti-réponse-vide est assurée par le réessai automatique +
+    // l'extracteur de texte robuste ci-dessous. Marge de sortie portée à 1200.
     generationConfig: {
       temperature: 0.6,
-      maxOutputTokens: 1024,
+      maxOutputTokens: 1200,
       topP: 0.9,
       thinkingConfig: { thinkingBudget: 128 },
     },
@@ -303,7 +318,14 @@ exports.handler = async (event) => {
     }
     let data = {};
     try { data = await r.json(); } catch (e) {}
-    if (r.ok) return { ok: true, data };
+    if (r.ok) {
+      const text = extractText(data);
+      if (text) return { ok: true, data, text };
+      // Réponse VIDE (candidat sans texte) : on RÉESSAIE au lieu d'afficher le
+      // message de secours -> corrige le "je n'ai pas de réponse" intermittent.
+      if (attempt < 3) { await wait(400 * attempt); return tryModel(model, attempt + 1); }
+      return { ok: false, status: 200, data, empty: true };
+    }
     const retryable = r.status === 429 || r.status === 500 || r.status === 502 || r.status === 503;
     if (retryable && attempt < 2) { await wait(500 * attempt); return tryModel(model, attempt + 1); }
     return { ok: false, status: r.status, data };
@@ -325,17 +347,16 @@ exports.handler = async (event) => {
     const reply =
       "Oups, je suis un peu surchargé à l'instant 😅 Réessaie dans quelques secondes — " +
       "ou écris-nous directement sur WhatsApp au 06 73 30 00 54, on te répond vite.";
-    // On renvoie 200 avec ce texte : le widget l'affiche tel quel, proprement.
-    return { statusCode: 200, headers: CORS, body: JSON.stringify({ reply }) };
+    let dbg = false; try { dbg = !!JSON.parse(event.body || "{}").debug; } catch (e) {}
+    const out = { reply };
+    if (dbg) out._err = { status: res.status, empty: res.empty || false, error: res.data && res.data.error };
+    return { statusCode: 200, headers: CORS, body: JSON.stringify(out) };
   }
-  const data = res.data;
   const reply =
-    (data.candidates &&
-      data.candidates[0] &&
-      data.candidates[0].content &&
-      data.candidates[0].content.parts &&
-      data.candidates[0].content.parts.map((p) => p.text).join("")) ||
-    "Désolé, je n'ai pas de réponse pour le moment. Écris-nous sur WhatsApp au 06 73 30 00 54.";
+    res.text ||
+    extractText(res.data) ||
+    "Petit souci technique à l'instant 😅 Peux-tu reformuler ta question ? Sinon, écris-nous " +
+      "sur WhatsApp au 06 73 30 00 54, on te répond tout de suite.";
 
   // Détection du marqueur [[LEAD]] -> alerte email, puis on l'efface (invisible visiteur).
   const isLead = /\[\[\s*LEAD\s*\]\]/i.test(reply);
