@@ -2183,3 +2183,113 @@ body.mouse-halo-active .mouse-halo {
 @media (prefers-reduced-motion: reduce) {
   .neon-link, .neon-location { animation: none; }
 }
+
+
+/* ============================================================
+   MOBILE : bandeau du haut compact et fixe
+   Ligne 1 : logo + WhatsApp + Léo · Ligne 2 : menu sur une ligne (glisser)
+   WhatsApp et Léo ne flottent plus en bas de l'écran.
+   ============================================================ */
+.topbar-actions { display: none; }
+
+@media (max-width: 720px) {
+  .topbar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    padding: 6px 4vw 4px;
+    height: 92px;
+  }
+  .topbar .logo { order: 1; }
+  .topbar .logo img { max-height: 40px; }
+  .topbar-actions {
+    order: 2;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topbar-action {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  }
+  .topbar-action--wa { background: #25d366; color: #fff; }
+  .topbar-action--wa svg { width: 20px; height: 20px; }
+  .topbar-action--leo { background: #fff; overflow: visible; }
+  .topbar-action--leo img { width: 31px; height: 31px; object-fit: contain; }
+  .topbar-action__dot {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #33d17a;
+    border: 2px solid #0a0a0c;
+  }
+  .topbar .topnav {
+    order: 3;
+    flex: 0 0 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 14px;
+    padding: 4px 2px 6px;
+  }
+  .topbar .topnav::-webkit-scrollbar { display: none; }
+  .topbar .topnav > a { font-size: 11px; letter-spacing: 0.1em; white-space: nowrap; flex-shrink: 0; }
+  .topbar .topnav > a.neon-link { padding: 4px 9px; order: -1; }
+  .topbar .topbar-client { display: none; }
+  body.klw-inbar .whatsapp-float { display: none; }
+  /* html garde les 92px du bandeau ; body ne les ajoute pas une 2e fois */
+  body:not(.has-gap-banner) { padding-top: 0; }
+  /* scroll-back-btn.js détache ACCUEIL en bouton flottant (style inline) :
+     sur mobile le bandeau reste visible, on le remet dans le menu */
+  .topbar .topnav > a[style*="position:fixed"],
+  .topbar .topnav > a[style*="position: fixed"] {
+    position: static !important;
+    top: auto !important;
+    background: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.1em !important;
+    font-weight: 500 !important;
+    color: #c4c4c8 !important;
+    display: inline-flex !important;
+  }
+  .topbar:has(.hz-burger) .topnav > a[style*="position:fixed"],
+  .topbar:has(.hz-burger) .topnav > a[style*="position: fixed"] {
+    display: block !important;
+    padding: 13px 22px !important;
+    font-size: 14px !important;
+  }
+  /* Pages avec menu burger (KL-Horizon, Capsule House) : burger à droite, menu déroulant inchangé */
+  .topbar .hz-burger { order: 4; padding: 5px 9px; font-size: 18px; }
+  .topbar:has(.hz-burger) { height: auto; flex-wrap: nowrap; }
+  .topbar:has(.hz-burger) .topnav { flex: none; }
+  .topbar:has(.hz-burger) .topnav > a { font-size: 14px; }
+  .topbar:has(.hz-burger) .topnav > a.neon-link { display: block; width: auto; margin: 8px 22px; }
+}
+
+@media (max-width: 360px) {
+  .topbar .logo img { max-height: 34px; }
+  .topbar-action { width: 32px; height: 32px; }
+  .topbar-action--wa svg { width: 18px; height: 18px; }
+  .topbar-action--leo img { width: 27px; height: 27px; }
+  .topbar .topnav { gap: 12px; }
+  .topbar .topnav > a { font-size: 10.5px; }
+}
