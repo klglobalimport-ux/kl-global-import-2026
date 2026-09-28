@@ -112,6 +112,28 @@ Mini-pelles et chargeuses compactes, moteurs diesel Kubota, certifiées CE, gara
 - Chargeuses : RS03, RS04, RS06, RS07, RS20, RL10.
 - Gamme à partir d'environ 3 900 € HT. Stock à Sisteron (livraison ~1 semaine), sinon 10 à 16 semaines.
 
+=== LOCATION — KL RIPPA LOC — page : https://klglobalimport.com/location-mini-pelle-sisteron ===
+K&L loue aussi des engins, SANS CHAUFFEUR, aux PARTICULIERS uniquement (pas aux professionnels),
+18 ans minimum, à Sisteron et jusqu'à 30 km autour. Tous les prix sont TTC. "2 jours" = 2 jours
+consécutifs (idéal week-end).
+- Mini-pelle RIPPA R10 : 99 €/jour, 180 €/2 jours. Caution 1 500 €. Fournie avec godet de terre + godet de curage 100 cm.
+- Mini-pelle RIPPA R15 : 139 €/jour, 250 €/2 jours. Caution 2 000 €. Fournie avec godet de terre + godet de curage 100 cm.
+- Mini-pelle RIPPA R22 : 169 €/jour, 300 €/2 jours. Caution 2 000 €. Fournie avec godet de terre + godet de curage 120 cm.
+- Accessoires mini-pelles (par jour, adaptés à la taille de la pelle) : râteau, godet de terre 60 cm,
+  dent de ripper = 20 € (R10/R15) ou 30 € (R22) chacun ; tarière hydraulique (poteaux de clôture) =
+  60 € (R10/R15) ou 80 € (R22).
+- Mini-chargeuse RIPPA RS06 (avec godet standard) : 120 € la 1/2 journée, 180 €/jour, 330 €/2 jours. Caution 1 500 €.
+- Accessoires RS06 (par jour) : godet malaxeur 90 € (à rendre entièrement nettoyé, sans béton durci,
+  sinon forfait nettoyage 150 €), rogneuse de souches 90 €, godet 4 en 1 50 €, balayeuse 60 €, fourche à palettes 35 €.
+- Broyeur télécommandé KL-1000 (100 cm) : 230 €/jour. Tondeuse télécommandée KL-900 (90 cm) : 190 €/jour.
+  Caution 1 000 € pour chacun.
+- Livraison sur le terrain, ALLER-RETOUR compris : 70 € (0-10 km), 80 € (10-20 km), 90 € (20-30 km) depuis Sisteron.
+  Au-delà de 30 km : pas de location.
+- Réservation : téléphone / WhatsApp 06 73 30 00 54, ou formulaire -> https://klglobalimport.com/contact?sujet=location
+RÈGLES : ne propose JAMAIS la location à un professionnel ni hors de la zone des 30 km ; n'invente
+aucun autre engin, accessoire ou prix de location que ceux-ci ; les disponibilités exactes se
+confirment par téléphone. La location est un bon moyen d'essayer une machine avant de l'acheter.
+
 === LOISIR & COLLECTIVITÉ — page : https://klglobalimport.com/loisir-habitat ===
 - Tondeuses radiocommandées (terrains en pente) : gamme 2 500 à 6 000 € HT. Page : https://klglobalimport.com/tondeuses-rc
 - Équipements camping, modules pour mairies / collectivités.
