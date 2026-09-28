@@ -2190,8 +2190,6 @@ body.mouse-halo-active .mouse-halo {
    Ligne 1 : logo + WhatsApp + Léo · Ligne 2 : menu sur une ligne (glisser)
    WhatsApp et Léo ne flottent plus en bas de l'écran.
    ============================================================ */
-.topbar-actions { display: none; }
-
 @media (max-width: 720px) {
   .topbar {
     flex-direction: row;
@@ -2206,38 +2204,6 @@ body.mouse-halo-active .mouse-halo {
   .topbar-actions {
     order: 2;
     margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .topbar-action {
-    position: relative;
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    border: none;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-  }
-  .topbar-action--wa { background: #25d366; color: #fff; }
-  .topbar-action--wa svg { width: 20px; height: 20px; }
-  .topbar-action--leo { background: #fff; overflow: visible; }
-  .topbar-action--leo img { width: 31px; height: 31px; object-fit: contain; }
-  .topbar-action__dot {
-    position: absolute;
-    top: -1px;
-    right: -1px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #33d17a;
-    border: 2px solid #0a0a0c;
   }
   .topbar .topnav {
     order: 3;
@@ -2287,9 +2253,6 @@ body.mouse-halo-active .mouse-halo {
 
 @media (max-width: 360px) {
   .topbar .logo img { max-height: 34px; }
-  .topbar-action { width: 32px; height: 32px; }
-  .topbar-action--wa svg { width: 18px; height: 18px; }
-  .topbar-action--leo img { width: 27px; height: 27px; }
   .topbar .topnav { gap: 12px; }
   .topbar .topnav > a { font-size: 10.5px; }
 }
