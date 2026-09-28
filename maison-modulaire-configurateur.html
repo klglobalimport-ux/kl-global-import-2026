@@ -136,47 +136,38 @@
             padding: 76px 0 0; /* laisse la place au bouton fixe « Retour » (top 80px) */
         }
 
-        /* Bandeau photos pleine largeur, sans texte */
-        .hero-slider {
-            position: relative;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            aspect-ratio: 16 / 9;
-            max-height: 82vh;
-            overflow: hidden;
-            background: #111;
+        /* Bandeau photos façon mosaïque : cadres en métal brossé sur panneau sombre, sans texte */
+        .hero-metal {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 14px;
+            border-radius: 6px;
+            background: linear-gradient(145deg, #34383d 0%, #1b1d20 45%, #2b2e32 100%);
+            border: 2px solid #0b0c0d;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
         }
-        .hero-photo {
-            position: absolute;
-            inset: 0;
+        .metal-box {
+            padding: 9px;
+            border-radius: 4px;
+            background: linear-gradient(135deg, #eef0f2 0%, #9aa1a9 16%, #f6f7f9 33%, #7b828a 52%, #d9dde1 72%, #868d95 88%, #cfd3d8 100%);
+            box-shadow:
+                inset 0 0 0 1px rgba(0, 0, 0, 0.55),
+                inset 0 2px 2px rgba(255, 255, 255, 0.7),
+                inset 0 -2px 3px rgba(0, 0, 0, 0.35),
+                0 6px 14px rgba(0, 0, 0, 0.5);
+        }
+        .metal-box img {
             display: block;
             width: 100%;
-            height: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.2s ease;
+            border: 1px solid #1a1a1a;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6);
         }
-        .hero-photo.is-active { opacity: 1; }
-        .hero-dots {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 12px;
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            z-index: 1;
-        }
-        .hero-dots button {
-            width: 10px;
-            height: 10px;
-            padding: 0;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            background: rgba(255, 255, 255, 0.25);
-            cursor: pointer;
-        }
-        .hero-dots button.is-active { background: #fff; }
 
         /* Titre gardé pour Google et les lecteurs d'écran, invisible à l'écran */
         .visually-hidden {
@@ -1112,9 +1103,12 @@
                 padding: 8px 14px;
                 font-size: 0.7rem;
             }
-            .hero-slider {
-                max-height: none;
+            .hero-metal {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                padding: 10px;
             }
+            .metal-box { padding: 6px; }
 
             .configurator {
                 padding: 30px 20px;
@@ -1357,36 +1351,14 @@
 
         <!-- Hero -->
         <div class="hero">
-            <div class="hero-slider" id="heroSlider">
-                <img class="hero-photo is-active" src="/assets/configurateur/hero-modulaire-blanc-bois.webp" alt="Maison modulaire K&amp;L finition blanc et bois, grandes baies vitrées et terrasse bois" width="1600" height="900" fetchpriority="high">
-                <img class="hero-photo" src="/assets/configurateur/hero-modulaire-noir-bois.webp" alt="Maison modulaire K&amp;L finition noir et bois, grandes baies vitrées et terrasse bois" width="1600" height="900" loading="lazy">
-                <div class="hero-dots" role="group" aria-label="Choisir la photo">
-                    <button type="button" class="is-active" aria-label="Finition blanc et bois"></button>
-                    <button type="button" aria-label="Finition noir et bois"></button>
+            <div class="hero-metal">
+                <div class="metal-box">
+                    <img src="/assets/configurateur/hero-modulaire-blanc-bois.webp" alt="Maison modulaire K&amp;L finition blanc et bois, grandes baies vitrées et terrasse bois" width="1600" height="900" fetchpriority="high">
+                </div>
+                <div class="metal-box">
+                    <img src="/assets/configurateur/hero-modulaire-noir-bois.webp" alt="Maison modulaire K&amp;L finition noir et bois, grandes baies vitrées et terrasse bois" width="1600" height="900">
                 </div>
             </div>
-            <script>
-            (function () {
-                var slider = document.getElementById('heroSlider');
-                if (!slider) return;
-                var photos = slider.querySelectorAll('.hero-photo');
-                var dots = slider.querySelectorAll('.hero-dots button');
-                var current = 0, timer = null;
-                function show(i) {
-                    photos[current].classList.remove('is-active'); dots[current].classList.remove('is-active');
-                    current = i;
-                    photos[current].classList.add('is-active'); dots[current].classList.add('is-active');
-                }
-                function start() {
-                    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-                    timer = setInterval(function () { show((current + 1) % photos.length); }, 5000);
-                }
-                dots.forEach(function (d, i) {
-                    d.addEventListener('click', function () { clearInterval(timer); show(i); start(); });
-                });
-                start();
-            })();
-            </script>
             <h1 class="visually-hidden">Configurateur maison modulaire : créez votre habitat sur-mesure et découvrez le prix en temps réel</h1>
         </div>
 
