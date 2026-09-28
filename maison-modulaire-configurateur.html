@@ -1341,6 +1341,35 @@
             <!-- Configurator -->
             <section class="configurator">
                 <h2 class="configurator-title">Configurateur Interactif</h2>
+
+                <!-- Vignette vidéo 3D (auto-hébergée, logo cliquable en surimpression) -->
+                <div class="kl-video3d">
+                    <video class="kl-video3d__player" muted loop playsinline controls preload="none" poster="/assets/habitat/maison-modulaire-3d-poster.jpg" aria-label="Animation 3D de la maison modulaire extensible : dépliage, extérieur et plan intérieur">
+                        <source src="/assets/habitat/maison-modulaire-3d.mp4" type="video/mp4">
+                    </video>
+                    <a href="/index.html" class="kl-video3d__logo" aria-label="K&amp;L Global Import — accueil">
+                        <img src="/header-logo.webp" alt="K&amp;L Global Import" width="640" height="640" loading="lazy">
+                    </a>
+                </div>
+                <style>
+                    .kl-video3d{position:relative;width:100%;max-width:420px;margin:-30px auto 40px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);background:#fff;box-shadow:0 8px 24px rgba(0,0,0,0.35);}
+                    .kl-video3d__player{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+                    .kl-video3d__logo{position:absolute;top:8px;left:8px;width:clamp(40px,12%,56px);aspect-ratio:1;border-radius:8px;overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,0.35);transition:transform .2s ease,box-shadow .2s ease;z-index:2;}
+                    .kl-video3d__logo img{width:100%;height:100%;display:block;}
+                    .kl-video3d__logo:hover,.kl-video3d__logo:focus-visible{transform:scale(1.08);box-shadow:0 5px 16px rgba(201,168,76,0.55);}
+                </style>
+                <script>
+                    (function(){
+                        var v=document.querySelector('.kl-video3d__player');
+                        if(!v||!('IntersectionObserver' in window))return;
+                        new IntersectionObserver(function(entries){
+                            entries.forEach(function(e){
+                                if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){});}
+                                else if(!v.paused){v.pause();}
+                            });
+                        },{threshold:0.4}).observe(v);
+                    })();
+                </script>
                 
                 <div class="config-grid">
                     <!-- Taille -->
