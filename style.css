@@ -2114,3 +2114,72 @@ body.mouse-halo-active .mouse-halo {
   .kl-welcome-modal { padding: 26px 18px 18px; }
   .kl-welcome-modal__title { font-size: 1.12rem; }
 }
+
+
+/* Néon « LOCATION » : menu du haut, onglets et tuile Engins RIPPA (accueil) — même style partout */
+.neon-link,
+.neon-location {
+  color: #eaf8ff !important;
+  border: 1.5px solid #7fd3ff !important;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  text-shadow:
+    0 0 3px #fff,
+    0 0 8px #7fd3ff,
+    0 0 16px #2e9fff,
+    0 0 30px #0066cc;
+  box-shadow:
+    0 0 5px #7fd3ff,
+    0 0 14px #2e9fff,
+    inset 0 0 8px rgba(46,159,255,0.55);
+  animation: neon-flicker 5s infinite;
+}
+.neon-link:hover,
+.neon-link:focus-visible,
+.neon-location:hover,
+.neon-location:focus-visible {
+  color: #fff !important;
+  border-color: #fff !important;
+}
+.topnav > a.neon-link {
+  padding: 7px 12px;
+}
+.main-tabs a.neon-link {
+  padding: 6px 12px;
+  margin-top: -7px;
+}
+.neon-location span {
+  color: #ffd84d;
+  text-shadow:
+    0 0 3px #fff,
+    0 0 8px #ffd84d,
+    0 0 16px #ffb300,
+    0 0 30px #ff9800;
+}
+
+/* Tuile Engins RIPPA : enseigne en haut à droite de la photo */
+.card-image--neon {
+  position: relative;
+}
+.neon-location {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  padding: 5px 10px 6px;
+  background: rgba(4,10,20,0.55);
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@keyframes neon-flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .neon-link, .neon-location { animation: none; }
+}
