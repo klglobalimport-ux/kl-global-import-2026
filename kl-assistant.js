@@ -178,9 +178,10 @@
       quick = $("klw-quick"), input = $("klw-input"), send = $("klw-send");
   var interacted = false, history = [];
 
-  function openChat(){ interacted=true; hideBubble(); fabs.classList.add("klhide");
+  function openChat(auto){ interacted=true; hideBubble(); fabs.classList.add("klhide");
     chat.classList.add("klopen"); mascot.classList.remove("klattn");
-    setTimeout(function(){ try{input.focus();}catch(e){} },350); }
+    // ouverture automatique : pas de focus (sinon le clavier mobile surgit)
+    if (auto !== true) setTimeout(function(){ try{input.focus();}catch(e){} },350); }
   function closeChat(){ chat.classList.remove("klopen"); fabs.classList.remove("klhide"); }
   function hideBubble(){ bubble.classList.remove("klshow"); }
 
@@ -210,6 +211,20 @@
       if (chat.classList.contains("klopen")) closeChat(); else openChat();
     });
     document.body.classList.add("klw-inbar");
+
+    // Mobile : Léo s'ouvre tout seul après 20 s, une seule fois par visite,
+    // si le visiteur n'a pas déjà ouvert/fermé Léo et n'est pas en train de saisir.
+    var AUTO_KEY = "klw-auto-open";
+    var alreadyShown = false;
+    try { alreadyShown = sessionStorage.getItem(AUTO_KEY) === "1"; } catch (e) {}
+    if (!alreadyShown && window.matchMedia && window.matchMedia("(max-width:720px)").matches) {
+      setTimeout(function(){
+        var typing = document.activeElement && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
+        if (interacted || typing || chat.classList.contains("klopen")) return;
+        try { sessionStorage.setItem(AUTO_KEY, "1"); } catch (e) {}
+        openChat(true);
+      }, 20000);
+    }
   }
 
   /* ---------- rendu + liens ---------- */
