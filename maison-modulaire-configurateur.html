@@ -132,53 +132,35 @@
 
         /* Hero */
         .hero {
-            position: relative;
-            padding: 80px 20px;
             text-align: center;
-            background-image: url('/assets/mosaique.webp');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 420px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-left: calc(-50vw + 50%);
-            margin-right: calc(-50vw + 50%);
-            width: 100vw;
+            padding: 76px 0 0; /* laisse la place au bouton fixe « Retour » (top 80px) */
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.55);
-            z-index: 1;
-        }
-
-        .hero h1,
-        .hero p {
-            position: relative;
-            z-index: 2;
+        .hero-photo {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            aspect-ratio: 1376 / 768;
+            margin: 0 auto;
+            border-radius: 14px;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(1.5rem, 3.5vw, 2.4rem);
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin: 32px 0 10px;
             color: #ffffff;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
         }
 
         .hero p {
-            font-size: 1.1rem;
-            color: #f0f0f0;
+            font-size: 1rem;
+            color: #cfcfcf;
             max-width: 600px;
             margin: 0 auto;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
         }
 
         /* Main Layout avec Sidebar Sticky */
@@ -1102,12 +1084,8 @@
                 padding: 8px 14px;
                 font-size: 0.7rem;
             }
-            .hero {
-                min-height: 300px;
-                padding: 60px 16px;
-            }
-            .hero h1 {
-                font-size: 2rem;
+            .hero-photo {
+                border-radius: 10px;
             }
 
             .configurator {
@@ -1351,6 +1329,7 @@
 
         <!-- Hero -->
         <div class="hero">
+            <img class="hero-photo" src="/assets/mosaique.webp" alt="Maisons modulaires K&amp;L Global Import : modèles à toit plat avec terrasse, simple et double étage" width="1376" height="768" fetchpriority="high">
             <h1>CONFIGURATEUR MAISON MODULAIRE</h1>
             <p>Créez votre habitat sur-mesure avec notre configurateur interactif. Sélectionnez vos options et découvrez le prix en temps réel.</p>
         </div>
