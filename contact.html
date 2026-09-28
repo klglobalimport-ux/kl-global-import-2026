@@ -119,6 +119,7 @@
     <a href="brochures.html">BROCHURES</a>
     <a href="contact.html?sujet=demande-tarifs">TARIFS</a>
     <a href="contact.html">CONTACT</a>
+    <a href="location-mini-pelle-sisteron.html" class="neon-link">LOCATION</a>
   </nav>
   <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
 </header>
@@ -136,6 +137,7 @@
   <a href="habitat.html">SPACE CAPSULE & HABITAT</a>
   <a href="loisir-habitat.html">LOISIR ET HABITAT</a>
   <a href="engins-rippa.html">ENGINS RIPPA</a>
+  <a href="location-mini-pelle-sisteron.html" class="neon-link">LOCATION</a>
 </nav>
 
 <main class="main-content">
@@ -338,6 +340,22 @@
     }
     if (msg && !msg.value) {
       msg.value = 'Bonjour, je souhaite recevoir un devis pour des modules préfabriqués (logement, bureau d\'accueil, accueil d\'urgence, périscolaire, sanitaires…). Mon projet : \n- Usage envisagé : \n- Nombre de modules / surface : \n- Lieu d\'installation : \n- Délai souhaité : \nMerci de me recontacter.';
+    }
+    return;
+  }
+
+  /* Cas "location" (KL Rippa Loc) : machine optionnelle */
+  if (sujet === 'location') {
+    var machineLoc = key ? key.replace(/^Location-/, '').replace(/-/g, ' ').replace(/KL (\d+)/, 'KL-$1') : '';
+    var recapLoc = document.getElementById('modele-recap');
+    if (recapLoc) {
+      document.getElementById('recap-titre').textContent = 'Demande de location' + (machineLoc ? ' — ' + machineLoc : '') + ' — KL Rippa Loc';
+      var extraLoc = document.getElementById('recap-extra');
+      if (extraLoc) extraLoc.textContent = 'Sans chauffeur · Particuliers · Sisteron et 30 km';
+      recapLoc.style.display = 'block';
+    }
+    if (msg && !msg.value) {
+      msg.value = 'Bonjour, je souhaite louer ' + (machineLoc ? 'la machine ' + machineLoc : 'une machine') + '.\n- Date(s) souhaitée(s) : \n- Durée (1/2 journée, 1 jour, 2 jours) : \n- Accessoire(s) : \n- Commune de livraison : \nMerci de me recontacter.';
     }
     return;
   }
