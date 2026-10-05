@@ -2,8 +2,10 @@
 //  Léo — carnet de conversations & leads (écrit dans un Google Sheet).
 //  Réutilise le MÊME compte de service que la voix (GOOGLE_SA_JSON en env).
 //  1 ligne = 1 conversation (mise à jour en direct, repérée par sessionId).
-//  La colonne "Conversation" ne montre qu'un APERÇU ; le fil complet est dans
-//  une NOTE de cellule (s'ouvre au survol / clic — petit triangle en coin).
+//  Colonne D "Conversation" = APERÇU court. Colonne I "Texte complet" = le fil
+//  ENTIER, copiable directement (clic + Cmd+C). Une note sur D garde aussi le
+//  fil complet au survol (historique). Mode "backfill" : recopie les notes
+//  existantes vers la colonne I (one-shot, pour les anciennes conversations).
 //  Verrouillé sur l'origine du site (comme chat.js / tts.js).
 // ============================================================================
 const crypto = require("crypto");
@@ -12,8 +14,9 @@ const crypto = require("crypto");
 const SHEET_ID = process.env.LEO_SHEET_ID || "";
 const ONGLET = "Feuille 1"; // nom de l'onglet (par défaut Google le nomme ainsi)
 
-const EN_TETES = ["Date", "Heure", "Session", "Conversation", "Nb échanges", "Téléphone", "Email", "Page"];
-const COL_CONV = 3; // colonne D (0-based) : "Conversation"
+const EN_TETES = ["Date", "Heure", "Session", "Conversation", "Nb échanges", "Téléphone", "Email", "Page", "Texte complet (clic + Cmd+C)"];
+const COL_CONV = 3;   // colonne D (0-based) : "Conversation" (aperçu)
+const COL_TEXTE = 8;  // colonne I (0-based) : "Texte complet" (copiable directement)
 
 const { hostAllowed, reqOrigin, corsHeaders, guard } = require("./_shared/security.js");
 
@@ -70,6 +73,15 @@ async function sheetUpdate(range, row, token) {
   );
   return r.json();
 }
+// Écriture MULTI-LIGNES : `matrix` est déjà un tableau 2D [[..],[..]] (pas d'enrobage).
+async function sheetUpdateMatrix(range, matrix, token) {
+  const r = await fetch(
+    API + "/values/" + encodeURIComponent(range) + "?valueInputOption=RAW",
+    { method: "PUT", headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+      body: JSON.stringify({ values: matrix }) }
+  );
+  return r.json();
+}
 async function batchUpdate(requests, token) {
   const r = await fetch(API + ":batchUpdate", {
     method: "POST", headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
@@ -112,6 +124,15 @@ async function miseEnForme(gid, token) {
         cell: { userEnteredFormat: { wrapStrategy: "CLIP" } }, fields: "userEnteredFormat.wrapStrategy" } },
     { updateDimensionProperties: { range: { sheetId: gid, dimension: "COLUMNS", startIndex: COL_CONV, endIndex: COL_CONV + 1 },
         properties: { pixelSize: 340 }, fields: "pixelSize" } },
+  ], token).then(() => formatColonneTexte(gid, token));
+}
+
+// Colonne "Texte complet" (I) : largeur confortable (le texte garde ses retours
+// à la ligne pour une copie bien mise en forme).
+async function formatColonneTexte(gid, token) {
+  return batchUpdate([
+    { updateDimensionProperties: { range: { sheetId: gid, dimension: "COLUMNS", startIndex: COL_TEXTE, endIndex: COL_TEXTE + 1 },
+        properties: { pixelSize: 420 }, fields: "pixelSize" } },
   ], token);
 }
 
@@ -145,6 +166,31 @@ exports.handler = async (event) => {
   const sessionId = String(body.sessionId || "").slice(0, 60);
   const messages = Array.isArray(body.messages) ? body.messages : [];
   const page = String(body.page || "").slice(0, 200);
+
+  // --- Mode BACKFILL (ponctuel) : recopie les NOTES existantes (colonne D) vers
+  //     la nouvelle colonne "Texte complet" (I), pour rendre copiables aussi les
+  //     anciennes conversations. Verrouillé par l'origine + le jeton (guard ci-dessus).
+  if (body.backfill === true) {
+    try {
+      const token = await getAccessToken();
+      const gid = await getSheetGid(token);
+      await sheetUpdate(ONGLET + "!A1", EN_TETES, token);           // ajoute l'en-tête colonne I
+      try { await formatColonneTexte(gid, token); } catch (e) {}
+      const r = await fetch(
+        API + "?ranges=" + encodeURIComponent(ONGLET + "!D2:D100000") + "&fields=sheets(data(rowData(values(note))))",
+        { headers: { Authorization: "Bearer " + token } }
+      );
+      const d = await r.json();
+      const rowData = ((((d.sheets || [])[0] || {}).data || [])[0] || {}).rowData || [];
+      const values = rowData.map((c) => [(c.values && c.values[0] && c.values[0].note) || ""]);
+      let n = 0;
+      if (values.length) { await sheetUpdateMatrix(ONGLET + "!I2:I" + (values.length + 1), values, token); n = values.length; }
+      return { statusCode: 200, headers: CORS, body: JSON.stringify({ ok: true, backfilled: n }) };
+    } catch (e) {
+      return { statusCode: 200, headers: CORS, body: JSON.stringify({ ok: false, error: e.message }) };
+    }
+  }
+
   if (!sessionId || !messages.length) return { statusCode: 200, headers: CORS, body: JSON.stringify({ ok: false }) };
 
   const userMsgs = messages.filter((m) => m.role !== "assistant").map((m) => String(m.content || ""));
@@ -161,17 +207,24 @@ exports.handler = async (event) => {
   const now = new Date();
   const date = now.toLocaleDateString("fr-FR", { timeZone: "Europe/Paris" });
   const heure = now.toLocaleTimeString("fr-FR", { timeZone: "Europe/Paris", hour: "2-digit", minute: "2-digit" });
-  const ligne = [date, heure, sessionId, apercu, nbEchanges, tel, email, page];
+  // Fil complet copiable directement (colonne I) + aperçu court (colonne D).
+  const texteComplet = transcript.slice(0, 48000);
+  const ligne = [date, heure, sessionId, apercu, nbEchanges, tel, email, page, texteComplet];
 
   try {
     const token = await getAccessToken();
     const gid = await getSheetGid(token);
 
-    // 1) En-têtes présents ? Sinon on les crée + on applique la mise en forme.
-    const colA = await sheetGET(ONGLET + "!A1:A1", token);
-    if (!colA.values || !colA.values.length) {
+    // 1) En-têtes : création + mise en forme au 1er usage ; si la feuille avait
+    //    l'ancien format (8 colonnes), on ajoute l'en-tête "Texte complet" (I).
+    const hdr = await sheetGET(ONGLET + "!A1:I1", token);
+    const hdrRow = (hdr.values && hdr.values[0]) || [];
+    if (!hdrRow.length) {
       await sheetUpdate(ONGLET + "!A1", EN_TETES, token);
       try { await miseEnForme(gid, token); } catch (e) {}
+    } else if (hdrRow.length < EN_TETES.length) {
+      await sheetUpdate(ONGLET + "!A1", EN_TETES, token);
+      try { await formatColonneTexte(gid, token); } catch (e) {}
     }
 
     // 2) La session existe déjà (colonne C) ? -> update, sinon append.
@@ -181,7 +234,7 @@ exports.handler = async (event) => {
     let rowNumber;
     if (idx >= 0) {
       rowNumber = idx + 2;
-      await sheetUpdate(ONGLET + "!A" + rowNumber + ":H" + rowNumber, ligne, token);
+      await sheetUpdate(ONGLET + "!A" + rowNumber + ":I" + rowNumber, ligne, token);
     } else {
       const res = await sheetAppend(ONGLET + "!A1", ligne, token);
       rowNumber = rowFromRange(res && res.updates && res.updates.updatedRange);
