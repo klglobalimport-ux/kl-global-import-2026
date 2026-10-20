@@ -2256,3 +2256,13 @@ body.mouse-halo-active .mouse-halo {
   .topbar .topnav { gap: 12px; }
   .topbar .topnav > a { font-size: 10.5px; }
 }
+
+/* Néon orange pour le lien APPORTEURS */
+.neon-link.neon-orange {
+  color: #fff3e6 !important;
+  border-color: #ffa24d !important;
+  text-shadow: 0 0 3px #fff, 0 0 8px #ff9a3c, 0 0 16px #ff7a00, 0 0 30px #cc5500;
+  box-shadow: 0 0 5px #ffa24d, 0 0 14px #ff7a00, inset 0 0 8px rgba(255,122,0,0.55);
+}
+.neon-link.neon-orange:hover,
+.neon-link.neon-orange:focus-visible { color: #fff !important; border-color: #fff !important; }
