@@ -2266,3 +2266,6 @@ body.mouse-halo-active .mouse-halo {
 }
 .neon-link.neon-orange:hover,
 .neon-link.neon-orange:focus-visible { color: #fff !important; border-color: #fff !important; }
+
+/* Page apporteurs désactivée temporairement : supprimer cette ligne pour réactiver le lien */
+a[href="apporteurs.html"]{display:none!important}
