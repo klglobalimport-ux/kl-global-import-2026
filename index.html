@@ -137,6 +137,27 @@
   <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
 </header>
 
+<style>
+.app-promo-bar{margin-top:-92px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:11px 18px;background:linear-gradient(90deg,#0f1f33,#12304f 50%,#0f1f33);border-bottom:1px solid #1f4a7a;color:#e8f2ff;font-size:.95rem;text-align:center;text-decoration:none}
+.app-promo-bar b{color:#ffb454}
+.app-promo-bar span.go{background:#c0392b;color:#fff;font-weight:700;border-radius:999px;padding:5px 16px;font-size:.85rem;white-space:nowrap}
+.app-promo-bar:hover span.go{background:#d94434}
+.app-promo-card{position:relative;overflow:hidden;max-width:1100px;margin:48px auto;border-radius:22px;border:1px solid #1f4a7a;background:linear-gradient(100deg,rgba(9,16,30,.92) 0%,rgba(9,16,30,.78) 48%,rgba(9,16,30,.35) 100%),url(apporteurs-fond.webp) center/cover;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.app-promo-card .in{padding:44px 40px;max-width:640px}
+.app-promo-card .kick{color:#2e9fff;letter-spacing:.18em;font-weight:700;font-size:.8rem;text-transform:uppercase}
+.app-promo-card h2{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.12;margin:12px 0 12px}
+.app-promo-card h2 em{color:#ff5a3d;font-style:normal}
+.app-promo-card p{color:#e4e4e7;margin:0 0 20px;font-size:1.05rem}
+.app-promo-card .lv{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.app-promo-card .lv span{border:1px solid rgba(159,208,255,.35);background:rgba(12,20,36,.6);border-radius:999px;padding:6px 14px;font-size:.88rem;color:#e8f2ff}
+.app-promo-card .lv span b{color:#ffb454}
+.app-promo-card a.btn{display:inline-block;background:#c0392b;color:#fff;font-weight:700;border-radius:999px;padding:15px 34px;text-decoration:none;box-shadow:0 14px 32px rgba(0,0,0,.45)}
+.app-promo-card a.btn:hover{background:#d94434}
+@media(max-width:720px){.app-promo-bar{margin-top:0}}
+@media(max-width:640px){.app-promo-card{margin:36px 14px;border-radius:18px}.app-promo-card .in{padding:30px 22px}.app-promo-card{background:linear-gradient(180deg,rgba(9,16,30,.9),rgba(9,16,30,.8)),url(apporteurs-fond.webp) center/cover}}
+</style>
+<a class="app-promo-bar" href="apporteurs"><span>💶 <b>Devenez apporteur K&amp;L</b> : jusqu’à 3&nbsp;% de commission sur chaque vente signée</span><span class="go">En savoir plus →</span></a>
+
 <section class="hero">
   <div class="hero-bg-overlay"></div>
   <div class="hero-content">
@@ -240,6 +261,17 @@
         <a href="loisir-habitat.html" class="btn-secondary btn-loisir">DÉCOUVRIR LA GAMME</a>
       </div>
     </article>
+  </section>
+
+  <!-- Promo apporteurs -->
+  <section class="app-promo-card" aria-label="Programme apporteurs">
+    <div class="in">
+      <div class="kick">Programme apporteurs K&amp;L</div>
+      <h2>Gagnez de l’argent <em>depuis chez vous</em></h2>
+      <p>Vous connaissez quelqu’un qui cherche un engin, un habitat modulaire ou un équipement de loisirs ? Recommandez-le : on s’occupe de tout, vous touchez jusqu’à 3&nbsp;% du montant HT de la vente.</p>
+      <div class="lv"><span>Bronze <b>2&nbsp;%</b></span><span>Argent <b>2&nbsp;%</b></span><span>Or <b>2,5&nbsp;%</b></span><span>Platine <b>3&nbsp;%</b></span></div>
+      <a class="btn" href="apporteurs">Devenir apporteur</a>
+    </div>
   </section>
 
   <!-- Avis clients (avis Google réels) -->
