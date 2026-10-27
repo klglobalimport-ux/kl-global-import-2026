@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 <!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-N6DJGLCH77"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-N6DJGLCH77', { 'cookie_expires': 34190000 });</script>
   <meta charset="UTF-8">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,10 +21,8 @@
   <meta name="twitter:title" content="KL Global Import — Maisons modulaires & Mini-pelles France">
   <meta name="twitter:description" content="Importateur direct Chine : maisons modulaires, capsule house et mini-pelles RIPPA Kubota. Prix usine, livraison France. Devis gratuit sous 24h.">
   <meta name="twitter:image" content="https://klglobalimport.com/header-logo.webp">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Importateur direct Chine : maisons modulaires, capsule house et mini-pelles RIPPA Kubota. Prix usine, livraison France. Devis gratuit sous 24h.">
-  <link rel="stylesheet" href="style.css">
-  <script src="micro-interactions.js" defer></script>
   <script src="ga-events.js" defer></script>
   <script type="application/ld+json">
 {
@@ -84,197 +83,266 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-</head>
-<body class="has-gap-banner">
 
-<!-- Bandeau sticky Foire Expo GAP (auto-retiré après 17 mai 2026 ou clic × par user) -->
-<div id="gap-banner" class="gap-banner" role="region" aria-label="Salon Foire Expo de GAP">
-  <img src="foire-expo-gap.webp" alt="Foire Expo Gap 2026 — stand E03 KL Global Import" class="gap-banner__img" width="1136" height="941" fetchpriority="high">
-  <div class="gap-banner__text">
-    <span class="gap-banner__title">🎪 Foire Expo de GAP</span>
-    <span class="gap-banner__dates">— 8 au 17 mai 2026</span>
-    <span class="gap-banner__location">· Rond-Point du Cèdre</span>
-  </div>
-  <a href="foire-expo-gap.html" class="gap-banner__cta">Nous rencontrer →</a>
-  <button type="button" class="gap-banner__close" aria-label="Fermer le bandeau Foire Expo GAP">&times;</button>
-</div>
-<script>
-(function() {
-  var banner = document.getElementById('gap-banner');
-  if (!banner) return;
-  var KEY = 'gap-banner-dismissed-2026';
-  var EXPIRY = new Date('2026-05-17T23:59:59').getTime();
-  function hide() {
-    banner.remove();
-    document.body.classList.remove('has-gap-banner');
-  }
-  // Expiration automatique après la foire
-  if (Date.now() > EXPIRY) { hide(); return; }
-  // Fermeture persistante via localStorage
-  try {
-    if (localStorage.getItem(KEY) === '1') { hide(); return; }
-  } catch (e) { /* localStorage indisponible → banner reste visible */ }
-  var closeBtn = banner.querySelector('.gap-banner__close');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function() {
-      try { localStorage.setItem(KEY, '1'); } catch (e) {}
-      hide();
-    });
-  }
-})();
-</script>
-
-<header class="topbar">
-  <div class="logo"><img src="header-logo.webp" alt="K&L Global Import" width="640" height="640"></div>
-  <nav class="topnav" aria-label="Navigation principale">
-    <a href="index.html">ACCUEIL</a>
-    <a href="brochures.html">BROCHURES</a>
-    <a href="contact.html?sujet=demande-tarifs">TARIFS</a>
-    <a href="contact.html">CONTACT</a>
-    <a href="apporteurs.html" class="neon-link neon-orange">APPORTEURS</a>
-    <a href="location-mini-pelle-sisteron.html" class="neon-link">LOCATION</a>
-  </nav>
-  <a href="contact.html" class="topbar-client">ESPACE CLIENT</a>
-</header>
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap">
 <style>
-.app-promo-bar{margin-top:-92px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:11px 18px;background:linear-gradient(90deg,#0f1f33,#12304f 50%,#0f1f33);border-bottom:1px solid #1f4a7a;color:#e8f2ff;font-size:.95rem;text-align:center;text-decoration:none}
-.app-promo-bar b{color:#ffb454}
-.app-promo-bar span.go{background:#c0392b;color:#fff;font-weight:700;border-radius:999px;padding:5px 16px;font-size:.85rem;white-space:nowrap}
-.app-promo-bar:hover span.go{background:#d94434}
-.app-promo-card{position:relative;overflow:hidden;max-width:1100px;margin:48px auto;border-radius:22px;border:1px solid #1f4a7a;background:linear-gradient(100deg,rgba(9,16,30,.92) 0%,rgba(9,16,30,.78) 48%,rgba(9,16,30,.35) 100%),url(apporteurs-fond.webp) center/cover;box-shadow:0 24px 60px rgba(0,0,0,.45)}
-.app-promo-card .in{padding:44px 40px;max-width:640px}
-.app-promo-card .kick{color:#2e9fff;letter-spacing:.18em;font-weight:700;font-size:.8rem;text-transform:uppercase}
-.app-promo-card h2{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.12;margin:12px 0 12px}
-.app-promo-card h2 em{color:#ff5a3d;font-style:normal}
-.app-promo-card p{color:#e4e4e7;margin:0 0 20px;font-size:1.05rem}
-.app-promo-card .lv{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
-.app-promo-card .lv span{border:1px solid rgba(159,208,255,.35);background:rgba(12,20,36,.6);border-radius:999px;padding:6px 14px;font-size:.88rem;color:#e8f2ff}
-.app-promo-card .lv span b{color:#ffb454}
-.app-promo-card a.btn{display:inline-block;background:#c0392b;color:#fff;font-weight:700;border-radius:999px;padding:15px 34px;text-decoration:none;box-shadow:0 14px 32px rgba(0,0,0,.45)}
-.app-promo-card a.btn:hover{background:#d94434}
-@media(max-width:720px){.app-promo-bar{margin-top:0}}
-@media(max-width:640px){.app-promo-card{margin:36px 14px;border-radius:18px}.app-promo-card .in{padding:30px 22px}.app-promo-card{background:linear-gradient(180deg,rgba(9,16,30,.9),rgba(9,16,30,.8)),url(apporteurs-fond.webp) center/cover}}
-</style>
-<a class="app-promo-bar" href="apporteurs"><span>💶 <b>Devenez apporteur K&amp;L</b> : jusqu’à 3&nbsp;% de commission sur chaque vente signée</span><span class="go">En savoir plus →</span></a>
+/* Layout: fixed menu bar; pinned hero scrubbed by scroll (ship -> wide container -> inside); pinned product scene where scroll switches category with a circular reveal; then promo + trust. Palette and type from klglobalimport.com. */
+:root{
+  --bg:#0a0a0a;
+  --bg-card:#161616;
+  --border:#2b2b2f;
+  --text:#f5f5f7;
+  --muted:#a1a1aa;
+  --accent:#ff5a3d;
+  --blue:#2e9fff;
+  --btn-red:#d63a2f;
+  --font:"Inter","SF Pro Display","Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --nav-h:68px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:clamp(16px,1.232vw,24px);line-height:1.55}
 
-<section class="hero">
-  <div class="hero-bg-overlay"></div>
-  <div class="hero-content">
-    <h1>K&L : L'ESSENTIEL DU MONDE<br>DIRECTEMENT DEVANT CHEZ VOUS !</h1>
-    <p>Logistique 100% optimisée. Zero intermédiaire, prix usine.</p>
-    <div class="hero-actions">
-      <a href="brochures.html" class="btn-primary">NOS OFFRES</a>
-      <a href="https://www.vesselfinder.com/" target="_blank" class="btn-secondary">SUIVRE VOTRE CARGO</a>
+/* ---------- fixed menu ---------- */
+.top{position:fixed;top:0;left:0;right:0;z-index:50;height:calc(var(--nav-h) + env(safe-area-inset-top,0px));background:rgba(10,10,12,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07);padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:clamp(12px,3vw,40px);transition:background .3s}
+.top.solid{background:rgba(10,10,10,.92)}
+.top .logo{display:block;width:52px;height:52px;flex:none}
+.top .logo img{width:52px;height:52px;display:block}
+.top nav{display:flex;gap:clamp(14px,2.4vw,32px);margin-right:auto}
+.top nav a{color:var(--text);text-decoration:none;font-size:clamp(13px,1.001vw,19.5px);font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.9;padding:6px 0;border-bottom:2px solid transparent}
+.top nav a:hover{color:var(--accent);border-color:var(--accent)}
+.right{display:flex;align-items:center;gap:12px}
+.pill{font-size:clamp(12px,0.924vw,18px);font-weight:800;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--text);padding:9px 16px;border-radius:999px;white-space:nowrap}
+.pill.orange{border:2px solid var(--accent);box-shadow:0 0 14px rgba(255,90,61,.45);color:#ffb39f}
+.pill.blue{border:2px solid var(--blue);box-shadow:0 0 14px rgba(46,159,255,.45);color:#cfe8ff}
+.pill.client{border:1px solid rgba(255,255,255,.25);font-weight:600;font-size:clamp(11px,0.847vw,16.5px);color:var(--muted)}
+.burger{all:unset;display:none;box-sizing:border-box;cursor:pointer;width:42px;height:42px;border-radius:10px;border:1px solid rgba(255,255,255,.25);align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.burger i{display:block;width:18px;height:2px;background:var(--text);transition:transform .25s,opacity .25s}
+.burger[aria-expanded="true"] i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] i:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.menu{position:fixed;left:0;right:0;top:calc(var(--nav-h) + env(safe-area-inset-top,0px));z-index:49;background:rgba(10,10,10,.96);backdrop-filter:blur(12px);padding:8px max(16px,env(safe-area-inset-right,0px)) 18px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;border-bottom:1px solid var(--border);transform:translateY(-12px);opacity:0;pointer-events:none;transition:transform .25s,opacity .25s}
+.menu.open{transform:none;opacity:1;pointer-events:auto}
+.menu a{color:var(--text);text-decoration:none;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:clamp(14px,1.078vw,21px);padding:14px 4px;border-bottom:1px solid var(--border)}
+.menu a:last-child{border-bottom:0;color:var(--accent)}
+.top a:focus-visible,.burger:focus-visible,.menu a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+@media (max-width:900px){.top nav,.pill.orange,.pill.client{display:none}.burger{display:flex}.right{margin-left:auto}}
+
+/* ---------- hero ---------- */
+.scroll{height:470vh;position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--bg)}
+#shipwrap{position:absolute;inset:0;will-change:transform}
+.layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#ship{transform-origin:35% 30%;will-change:transform}
+.shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(10,10,10,.7),rgba(10,10,10,0) 30%,rgba(10,10,10,0) 50%,rgba(10,10,10,.82))}
+#cstage{position:absolute;inset:0;overflow:hidden;background:var(--bg);transform:translateY(100%);will-change:transform}
+#zoom{position:absolute;inset:0;will-change:transform}
+#extT,#extB{position:absolute;left:0;width:100%;display:none}
+#world{position:absolute;left:0;top:0;width:1536px;height:1024px;transform-origin:0 0;--inv:1}
+#world.feather{-webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),linear-gradient(to bottom,transparent,#000 6%,#000 94%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),linear-gradient(to bottom,transparent,#000 6%,#000 94%,transparent);mask-composite:intersect}
+#world .f{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0}
+#world .f.f0{opacity:1}
+.hs{position:absolute;width:0;height:0;opacity:0;pointer-events:none}
+.hs .dot{all:unset;box-sizing:border-box;position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;cursor:pointer;transform:translate(-50%,-50%) scale(var(--inv));background:rgba(255,90,61,.9);border:3px solid #fff;display:flex;align-items:center;justify-content:center;color:#fff;font:800 20px/1 var(--font);box-shadow:0 0 0 0 rgba(255,90,61,.7);animation:pulse 1.8s infinite}
+.hs .dot::before{content:"+"}
+.hs.act .dot{background:var(--blue);animation:none;box-shadow:0 0 0 6px rgba(46,159,255,.35)}
+.hs .dot:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,90,61,.7)}70%{box-shadow:0 0 0 18px rgba(255,90,61,0)}100%{box-shadow:0 0 0 0 rgba(255,90,61,0)}}
+.seal{position:absolute;width:0;height:0;pointer-events:none}
+.seal .tag{position:absolute;left:0;top:0;transform:translate(-50%,0) scale(var(--inv));transform-origin:50% 0;display:flex;flex-direction:column;align-items:center}
+.seal .tag i{display:block;width:2px;height:26px;background:#fff;opacity:.85}
+.seal .tag b{display:block;font:800 13px/1 var(--font);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;padding:8px 12px;border-radius:8px;background:#fff;color:#111;box-shadow:0 6px 18px rgba(0,0,0,.45);border-top:3px solid var(--accent)}
+.lbl{position:absolute;z-index:3;left:max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:10px;opacity:0;font-size:clamp(13px,1.001vw,19.5px);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(10,10,10,.62);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);padding:10px 16px;border-radius:999px}
+.lbl::before{content:"\2713";color:#22c55e;font-weight:800}
+.cap{position:absolute;z-index:4;left:0;right:0;bottom:0;padding:0 max(16px,env(safe-area-inset-right,0px)) clamp(48px,10vh,96px) max(16px,env(safe-area-inset-left,0px));opacity:0;transform:translateY(18px)}
+.cap h1,.cap h2{margin:0;font-weight:800;text-transform:uppercase;font-size:clamp(30px,5.6vw,72px);line-height:1.03;letter-spacing:-.01em;max-width:20ch;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.55)}
+.cap p{margin:14px 0 0;color:#d4d4d8;max-width:46ch;text-shadow:0 1px 12px rgba(0,0,0,.6)}
+.cap .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-block;font-family:var(--font);font-size:clamp(13px,1.001vw,19.5px);font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:14px 26px;border-radius:10px;color:#fff;background:var(--btn-red);border:1px solid var(--btn-red);cursor:pointer}
+.btn.ghost{background:rgba(10,10,10,.55);border-color:rgba(255,255,255,.6)}
+.btn:hover{filter:brightness(1.12)}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.cgrad{position:absolute;z-index:2;left:0;right:0;bottom:0;height:42%;pointer-events:none;background:linear-gradient(0deg,rgba(10,10,10,.8),transparent)}
+#tip{position:absolute;z-index:4;left:50%;bottom:clamp(20px,5vh,44px);transform:translateX(-50%);opacity:0;pointer-events:none;font-size:clamp(12px,0.924vw,18px);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(10,10,10,.65);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);padding:10px 18px;border-radius:999px;white-space:nowrap}
+#info{position:absolute;z-index:5;left:max(16px,env(safe-area-inset-left,0px));bottom:clamp(20px,6vh,56px);width:min(380px,calc(100% - 32px));background:rgba(15,15,17,.88);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:20px 20px 18px;box-shadow:0 20px 50px rgba(0,0,0,.5);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .3s,transform .35s cubic-bezier(.2,.7,.2,1)}
+#info.open{opacity:1;transform:none;pointer-events:auto}
+#info small{font-size:clamp(11px,0.847vw,16.5px);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+#info h3{margin:6px 0 6px;font-size:clamp(22px,1.694vw,33px);font-weight:800;line-height:1.15}
+#info p{margin:0;color:var(--muted);font-size:clamp(14.5px,1.117vw,21.75px)}
+#info .pr{margin-top:10px;font-size:clamp(13px,1.001vw,19.5px);color:var(--muted)}#info .pr b{color:#fff;font-size:clamp(18px,1.386vw,27px)}
+#info .row{display:flex;gap:10px;align-items:center;margin-top:14px}
+#info .go2{display:inline-block;font-size:clamp(12px,0.924vw,18px);font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#fff;background:var(--btn-red);padding:11px 18px;border-radius:999px}
+#info .x{all:unset;cursor:pointer;position:absolute;top:10px;right:12px;width:28px;height:28px;text-align:center;line-height:28px;font-size:clamp(20px,1.54vw,30px);color:var(--muted)}
+#info .x:focus-visible,#info .go2:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.hint{position:absolute;z-index:4;right:max(16px,env(safe-area-inset-right,0px));bottom:20px;font-size:clamp(11px,0.847vw,16.5px);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.rail{position:absolute;z-index:6;left:0;bottom:0;height:3px;background:var(--accent);width:0}
+@media (max-width:700px){#info{bottom:16px}#tip{white-space:normal;text-align:center;width:max-content;max-width:86vw}}
+
+/* ---------- product scene ---------- */
+.scene-wrap{height:340vh;position:relative}
+.scene{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--bg)}
+.cat{--c:0,113,227;position:absolute;inset:0;overflow:hidden;clip-path:circle(0% at 86% 52%);transition:clip-path 1.05s cubic-bezier(.7,0,.2,1)}
+.cat.rippa{--c:0,113,227}.cat.space{--c:139,195,74}.cat.loisir{--c:255,152,0}
+.cat.prev{clip-path:circle(160% at 86% 52%);z-index:1}
+.cat.on{clip-path:circle(160% at 86% 52%);z-index:2}
+.cat .bgs img{position:absolute;left:-6%;top:-6%;width:112%;height:112%;object-fit:cover;filter:blur(34px) brightness(.55) saturate(1.15);opacity:0;transition:opacity .6s;will-change:transform}
+.cat .bgs img.on{opacity:1}
+.cat .frame{position:absolute;z-index:2;right:max(16px,4vw);top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + 70px);bottom:clamp(40px,12vh,110px);width:min(52vw,980px);display:flex;align-items:center;justify-content:center;will-change:transform}
+.cat .frame img{position:absolute;max-width:100%;max-height:100%;width:auto;height:auto;border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.1),0 0 70px rgba(var(--c),.25);opacity:0;transform:scale(.97);transition:opacity .55s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.cat .frame img.on{opacity:1;transform:none}
+@media (max-width:820px){.cat .frame{left:max(16px,4vw);right:max(16px,4vw);width:auto;top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + 64px);bottom:auto;height:24vh}.copy>p:not(.eyebrow){display:none}.copy h2{font-size:clamp(28px,8.5vw,40px)}.cat .frame{height:auto;min-height:90px}}
+.cat::after{content:"";z-index:1;position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(10,10,10,.75) 0%,rgba(10,10,10,.3) 45%,rgba(10,10,10,0) 75%),linear-gradient(0deg,rgba(10,10,10,.8),rgba(10,10,10,0) 38%),radial-gradient(circle at 75% 45%,rgba(var(--c),.18),transparent 60%)}
+.tabs{position:absolute;z-index:6;top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + 14px);left:0;right:0;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));display:flex;gap:10px;flex-wrap:wrap}
+.tab{all:unset;box-sizing:border-box;cursor:pointer;position:relative;font-size:clamp(12px,0.924vw,18px);font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(10,10,10,.55);backdrop-filter:blur(8px);transition:color .25s,border-color .25s,background .25s;overflow:hidden}
+.tab span.lg{display:inline}.tab span.sh{display:none}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{color:#fff;border-color:rgb(var(--tc));background:rgba(var(--tc),.28)}
+.tab .bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:rgb(var(--tc))}
+.tab:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.tab[data-k="rippa"]{--tc:0,113,227}.tab[data-k="space"]{--tc:139,195,74}.tab[data-k="loisir"]{--tc:255,152,0}
+@media (max-width:560px){.tab span.lg{display:none}.tab span.sh{display:inline}}
+.panel{position:absolute;z-index:5;left:0;right:0;bottom:0;display:grid;padding:0 max(16px,env(safe-area-inset-right,0px)) clamp(28px,7vh,70px) max(16px,env(safe-area-inset-left,0px))}
+.copy{grid-area:1/1;max-width:min(600px,40vw);opacity:0;transform:translateY(26px);pointer-events:none;transition:opacity .5s .25s,transform .6s .25s cubic-bezier(.2,.7,.2,1)}
+@media (max-width:820px){.copy{max-width:none;min-width:0}.panel{grid-template-columns:minmax(0,1fr)}}
+.copy.on{opacity:1;transform:none;pointer-events:auto}
+.eyebrow{font-size:clamp(12px,0.924vw,18px);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgb(var(--c));margin:0 0 10px;font-variant-numeric:tabular-nums}
+.copy h2{margin:0;font-weight:800;text-transform:uppercase;font-size:clamp(34px,6vw,76px);line-height:1;letter-spacing:-.015em;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+.copy p{margin:14px 0 0;color:#d4d4d8;max-width:46ch}
+.price{margin-top:12px;font-size:clamp(13px,1.001vw,19.5px);color:var(--muted)}.price b{color:var(--text);font-size:clamp(20px,1.54vw,30px);font-weight:800}
+.chips{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.chip{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;padding:5px 14px 5px 5px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(10,10,10,.55);backdrop-filter:blur(8px);font-size:clamp(12px,0.924vw,18px);font-weight:600;color:var(--text);transition:border-color .2s,background .2s,transform .2s}
+.chip i{display:block;width:40px;height:40px;border-radius:50%;background-size:cover;background-position:center}
+.chip:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.55)}
+.chip[aria-pressed="true"]{border-color:rgb(var(--c));background:rgba(var(--c),.28)}
+.chip:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.go{display:inline-block;margin-top:22px;font-size:clamp(13px,1.001vw,19.5px);font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#fff;padding:14px 26px;border-radius:999px;border:1px solid rgb(var(--c));background:rgba(var(--c),.35);transition:background .25s}
+.go:hover,.go:focus-visible{background:rgb(var(--c));outline:none}
+.neon{display:inline-block;margin-left:8px;font-size:clamp(11px,0.847vw,16.5px);font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ffd3c7;border:2px solid var(--accent);border-radius:999px;padding:6px 14px;background:rgba(10,10,10,.5);box-shadow:0 0 12px rgba(255,90,61,.7),inset 0 0 8px rgba(255,90,61,.3);text-decoration:none}
+.count{position:absolute;z-index:6;right:max(16px,env(safe-area-inset-right,0px));bottom:clamp(28px,7vh,70px);font-size:clamp(12px,0.924vw,18px);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl}
+@media (max-width:820px){.chips{flex-wrap:nowrap;overflow-x:auto;gap:8px;margin-top:10px;scrollbar-width:none;margin-right:-16px;padding-right:16px}.chips::-webkit-scrollbar{display:none}.chip{flex:none;padding:4px 12px 4px 4px;gap:8px}.chip i{width:26px;height:26px}.price{margin-top:6px}.go{margin-top:12px;padding:11px 18px}.copy div:has(>.go){display:flex;flex-wrap:wrap;align-items:center;gap:8px}.go,.neon{margin:0}.go{margin-top:12px}.neon{margin-top:12px;padding:5px 12px}.copy h2{font-size:clamp(26px,7.6vw,38px)}.eyebrow{font-size:11px}}
+@media (max-width:820px) and (max-height:700px){.cat .frame{top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + 60px)}.copy h2{font-size:clamp(24px,7vw,30px)}.go,.neon{margin-top:8px}}
+@media (max-width:700px){.count{display:none}}
+
+/* ---------- after ---------- */
+.after{padding:clamp(48px,8vw,90px) max(16px,env(safe-area-inset-right,0px)) clamp(40px,7vw,80px) max(16px,env(safe-area-inset-left,0px));background:var(--bg)}
+.wrap{max-width:1120px;margin:0 auto}
+.promo{border-radius:16px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(100deg,rgba(255,90,61,.18),rgba(10,10,10,.6) 60%),var(--bg-card);padding:clamp(22px,4vw,36px);display:flex;flex-wrap:wrap;gap:18px 32px;align-items:center;justify-content:space-between}
+.promo small{font-size:clamp(12px,0.924vw,18px);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.promo h3{margin:6px 0 4px;font-size:clamp(22px,3.4vw,34px);font-weight:800;line-height:1.1}.promo h3 em{font-style:normal;color:var(--accent)}
+.promo p{margin:0;color:var(--muted);max-width:50ch}
+.trust{margin:clamp(30px,5vw,56px) 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:12px 28px;color:var(--muted);font-size:clamp(14px,1.078vw,21px)}
+.trust li::before{content:"\2713";color:#22c55e;font-weight:800;margin-right:8px}
+.foot{margin-top:28px;font-size:clamp(13px,1.001vw,19.5px);color:#6b6b73}
+@media (prefers-reduced-motion:reduce){.cat,.copy,.cat img{transition:none}}
+
+.ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none;transition:transform .2s;overflow:hidden;text-decoration:none}
+.ic:hover{transform:translateY(-2px) scale(1.06)}
+.ic.wa{background:#25d366}.ic.wa svg{width:22px;height:22px;fill:#fff}
+.ic.leo{position:relative;overflow:visible;background:#1c1c20;border:1px solid rgba(255,255,255,.2)}.ic.leo img{width:34px;height:auto;display:block}
+.ic.leo{opacity:0;transform:scale(.6);pointer-events:none;transition:opacity .6s,transform .6s cubic-bezier(.3,1.6,.5,1)}
+.ic.leo.on{opacity:1;transform:none;pointer-events:auto}
+.lb{position:absolute;top:calc(100% + 12px);right:0;width:220px;background:#fff;color:#111;border-radius:14px 4px 14px 14px;padding:11px 13px;font-size:clamp(13px,1.001vw,19.5px);line-height:1.35;font-weight:500;text-transform:none;letter-spacing:0;box-shadow:0 10px 30px rgba(0,0,0,.5);opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s,transform .4s;text-align:left}
+.lb.on{opacity:1;transform:none}
+.lb:before{content:"";position:absolute;top:-6px;right:14px;width:12px;height:12px;background:#fff;transform:rotate(45deg)}
+</style>
+<style>
+.legacy{background:#0a0a0a;position:relative;z-index:2}
+.legacy .footer{padding:28px 20px calc(28px + env(safe-area-inset-bottom));text-align:center;color:#a1a1aa;font-size:.85rem;background:#0a0a0a;border-top:1px solid rgba(255,255,255,.08)}
+.legacy .btn-primary{display:inline-block}
+/* Léo : le widget flottant est remplacé par l'icône du bandeau */
+#klw-mascot,#klw-fabs,#klw-bubble{display:none!important}
+body{--klw-top:76px}
+@media (max-width:720px){#klw-chat{top:var(--klw-top)!important;bottom:8px!important;left:8px!important;right:8px!important;width:auto!important;max-width:none!important;height:auto!important;max-height:none!important}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <a class="logo" href="#top" id="toTop" aria-label="K&L Global Import, haut de page"><img src="/header-logo.webp" alt="K&L Global Import" width="52" height="52"></a>
+  <nav aria-label="Menu principal">
+    <a href="#top" id="navHome">Accueil</a>
+    <a href="/brochures">Brochures</a>
+    <a href="/contact?sujet=demande-tarifs">Tarifs</a>
+    <a href="/contact">Contact</a>
+  </nav>
+  <div class="right">
+    <a class="ic wa" href="https://wa.me/33673300054" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg></a>
+    <a class="ic leo" id="leoBtn" href="#" role="button" aria-label="Discuter avec Léo, l'assistant K&amp;L" title="Discuter avec Léo"><img src="/maquette-accueil/img/leo.webp" alt="Léo"><span class="lb" id="lb"><b>Bonjour 👋</b><br>Une question ? Je suis Léo, l'assistant K&amp;L. Je réponds tout de suite !</span></a>
+    <a class="pill orange" href="/apporteurs">Apporteurs</a>
+    <a class="pill client" href="/contact">Espace client</a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</header>
+<div class="menu" id="menu">
+  <a href="#top" data-home>Accueil</a>
+  <a href="/brochures">Brochures</a>
+  <a href="/contact?sujet=demande-tarifs">Tarifs</a>
+  <a href="/contact">Contact</a>
+  <a href="/apporteurs">Apporteurs</a>
+</div>
+
+<div class="scroll" id="scroll">
+  <div class="stage">
+    <div id="shipwrap">
+      <canvas id="ship" class="layer" aria-hidden="true"></canvas>
+      <div class="shade"></div>
+      <div class="cap" id="c1"><h1>K&amp;L : l'essentiel du monde directement devant chez vous&nbsp;!</h1><p>Logistique 100&nbsp;% optimisée. Zéro intermédiaire, prix usine.</p></div>
+      <div class="cap" id="c2"><h2>Chaque produit traverse l'océan en container.</h2><p>Sourcing direct auprès des fabricants, importé et contrôlé par K&amp;L.</p></div>
     </div>
+    <div id="cstage">
+            <canvas id="extT"></canvas><canvas id="extB"></canvas>
+      <div id="zoom"><div id="world">
+        <img class="f f0" src="/maquette-accueil/img/c0.jpg" alt="Container K&L fermé devant le hangar" width="1536" height="1024">
+        <img class="f f1" src="/maquette-accueil/img/c1.jpg" alt="" width="1536" height="1024">
+        <img class="f f2" src="/maquette-accueil/img/c2.jpg" alt="" width="1536" height="1024">
+        <img class="f f3" src="/maquette-accueil/img/c3.jpg" alt="Container K&L ouvert avec des mini-pelles RIPPA à l'intérieur" width="1536" height="1024">
+        <div class="seal" id="seal" style="left:770px;top:500px"><div class="tag"><i></i><b>Scellé K&amp;L</b></div></div>
+        <div class="hs" data-k="pelle" style="left:585px;top:560px"><button class="dot" type="button" aria-label="Mini-pelle RIPPA"></button></div>
+        <div class="hs" data-k="compacte" style="left:752px;top:600px"><button class="dot" type="button" aria-label="Mini-pelle compacte"></button></div>
+        <div class="hs" data-k="dumper" style="left:850px;top:560px"><button class="dot" type="button" aria-label="Mini-dumper"></button></div>
+        <div class="hs" data-k="livraison" style="left:1255px;top:470px"><button class="dot" type="button" aria-label="Livraison et garantie"></button></div>
+      </div></div>
+      <div class="cgrad"></div>
+      <div class="lbl" id="l1" style="top:26%">Posé</div>
+      <div class="lbl" id="l2" style="top:34%">Contrôlé</div>
+      <div class="lbl" id="l3" style="top:42%">CE 2006/42/CE</div>
+      <div class="lbl" id="l4" style="top:50%">Garantie 24 mois</div>
+      <div class="cap" id="c3" style="bottom:auto;top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + 28px)"><h2>Posé, contrôlé. On ouvre.</h2></div>
+      <div id="tip">Touchez un point pour découvrir</div>
+      <div id="info" role="dialog" aria-label="Détail produit"><button class="x" type="button" id="infoX" aria-label="Fermer">&times;</button><small id="iS"></small><h3 id="iH"></h3><p id="iP"></p><div class="pr" id="iPr"></div><div class="row"><a class="go2" id="iA" target="_blank" rel="noopener" href="#">Voir la gamme</a></div></div>
+      <div class="cap" id="c4"><h2>Entrez, c'est livré.</h2><div class="btns"><a class="btn" href="#produits" id="goOffers">Nos offres</a><a class="btn ghost" href="https://klglobalimport.com" target="_blank" rel="noopener">Suivre votre cargo</a></div></div>
+    </div>
+    <div class="hint" id="hint">Faites défiler</div>
+    <div class="rail" id="rail"></div>
+  </div>
+</div>
+
+<div class="scene-wrap" id="produits">
+  <div class="scene" id="scene">
+    <div class="tabs" role="tablist" aria-label="Gammes" id="tabs"></div>
+    <div class="panel" id="panel"></div>
+    <div class="count" id="count">Faites défiler</div>
+  </div>
+</div>
+
+<section class="after">
+  <div class="wrap">
+    <div class="promo">
+      <div><small>Programme apporteurs K&amp;L</small><h3>Gagnez de l'argent <em>depuis chez vous</em></h3><p>Vous connaissez quelqu'un qui cherche un engin, un habitat modulaire ou un équipement&nbsp;? Jusqu'à 3&nbsp;% de commission sur chaque vente signée.</p></div>
+      <a class="btn" href="/apporteurs">En savoir plus</a>
+    </div>
+    <ul class="trust">
+      <li>CE, directive machines 2006/42/CE</li>
+      <li>Garantie 24 mois constructeur</li>
+      <li>SAV en français, dépôt Sisteron (04)</li>
+      <li>Livraison France métropolitaine + DOM-TOM</li>
+      <li>Devis personnalisé sous 24h</li>
+    </ul>
+    
   </div>
 </section>
-
-<nav class="main-tabs">
-  <a href="habitat.html">SPACE CAPSULE & HABITAT</a>
-  <a href="loisir-habitat.html">LOISIR ET HABITAT</a>
-  <a href="engins-rippa.html">ENGINS RIPPA</a>
-  <a href="location-mini-pelle-sisteron.html" class="neon-link">LOCATION</a>
-</nav>
-<!-- Trust signals strip -->
-<aside class="trust-strip" aria-label="Garanties et conditions KL Global Import">
-  <span class="trust-strip__item">CE — Directive machines 2006/42/CE</span>
-  <span class="trust-strip__item">Garantie 24 mois constructeur</span>
-  <span class="trust-strip__item">SAV en français — dépôt Sisteron (04)</span>
-  <span class="trust-strip__item">Livraison France métro + DOM-TOM</span>
-  <span class="trust-strip__item">Devis personnalisé sous 24h</span>
-</aside>
-
-
-<main class="main-content">
-  <section class="carousel">
-    <article class="card large card-rippa">
-      <div class="card-image card-image--neon" style="background-image:url('R32.webp');">
-        <a href="location-mini-pelle-sisteron.html" class="neon-location" aria-label="Location RIPPA à Sisteron : mini-pelles, mini-chargeuse et tondeuses">Location <span>RIPPA</span></a>
-      </div>
-      <div class="card-body">
-        <h2>ENGINS RIPPA</h2>
-        <p>Toutes nos machines sont équipées de moteur Diesel japonais KUBOTA, pour une fiabilitée extrême.</p>
-        <div class="thumbs-grid">
-          <div style="text-align: center;">
-            <div style="background-image:url('r06.webp'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
-            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">R06</p>
-          </div>
-          <div style="text-align: center;">
-            <div style="background-image:url('R22.webp'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
-            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">R22</p>
-          </div>
-          <div style="text-align: center;">
-            <div style="background-image:url('RS06.webp'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
-            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">RS 06</p>
-          </div>
-        </div>
-        <a href="engins-rippa.html" class="btn-primary btn-rippa">DÉCOUVRIR LA GAMME</a>
-      </div>
-    </article>
-
-    <article class="card large card-space">
-      <div class="card-image" style="background-image:url('caps.webp');"></div>
-      <div class="card-body">
-        <h2>SPACE CAPSULE & HABITAT</h2>
-        <p>Une gamme complète d'habitats modulaires et insolites.</p>
-        <div class="thumbs-grid">
-          <div style="text-align: center;">
-            <div style="background-image:url('maison.webp'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
-            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Maison Modulaire</p>
-          </div>
-          <div style="text-align: center;">
-            <div style="background-image:url('triangle.webp'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
-            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Maison Insolite</p>
-          </div>
-          <div style="text-align: center;">
-            <div style="background-image:url('cpas-1.webp'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
-            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Capsule Moderne</p>
-          </div>
-        </div>
-        <a href="habitat.html" class="btn-primary btn-eco">DÉCOUVRIR LA GAMME</a>
-      </div>
-    </article>
-
-    <article class="card large card-loisir">
-      <div class="card-image" style="display:flex; padding:0;">
-        <span style="flex:1; background-image:url('assets/images/tondeuse-kl-pente.webp'); background-size:cover; background-position:center; border-right:2px solid rgba(255,255,255,0.25);"></span>
-        <span style="flex:1; background-image:url('assets/images/modules-collectivites/finition-gris-anthracite.webp'); background-size:cover; background-position:center;"></span>
-      </div>
-      <div class="card-body">
-        <h2>LOISIR, HABITAT &amp; COLLECTIVITÉ</h2>
-        <p>Équipements de loisirs, et modules préfabriqués pour mairies, collectivités, campings et exploitants agricoles.</p>
-        <div class="thumbs-grid">
-          <div style="text-align: center;">
-            <div style="background-image:url('assets/habitat/capsule-house/Camping-3.webp'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
-            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Camping</p>
-          </div>
-          <div style="text-align: center;">
-            <div style="background-image:url('assets/images/modules-collectivites/ensemble-r1-verger.webp'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
-            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Mairie &amp; Collectivité</p>
-          </div>
-          <div style="text-align: center;">
-            <div style="background-image:url('assets/images/tondeuse-kl-pente.webp'); height: 50px; background-size: cover; background-position: center; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);"></div>
-            <p style="font-size: 9px; margin: 4px 0 0; color: var(--text-muted); line-height: 1.1;">Tondeuse RC</p>
-          </div>
-        </div>
-        <a href="loisir-habitat.html" class="btn-secondary btn-loisir">DÉCOUVRIR LA GAMME</a>
-      </div>
-    </article>
-  </section>
-
-  <!-- Promo apporteurs -->
-  <section class="app-promo-card" aria-label="Programme apporteurs">
-    <div class="in">
-      <div class="kick">Programme apporteurs K&amp;L</div>
-      <h2>Gagnez de l’argent <em>depuis chez vous</em></h2>
-      <p>Vous connaissez quelqu’un qui cherche un engin, un habitat modulaire ou un équipement de loisirs ? Recommandez-le : on s’occupe de tout, vous touchez jusqu’à 3&nbsp;% du montant HT de la vente.</p>
-      <div class="lv"><span>Bronze <b>2&nbsp;%</b></span><span>Argent <b>2&nbsp;%</b></span><span>Or <b>2,5&nbsp;%</b></span><span>Platine <b>3&nbsp;%</b></span></div>
-      <a class="btn" href="apporteurs">Devenir apporteur</a>
-    </div>
-  </section>
-
-  <!-- Avis clients (avis Google réels) -->
+<div class="legacy">
+<!-- Avis clients (avis Google réels) -->
   <section aria-label="Avis clients" style="background:#0d0d0d; padding:72px 20px; border-top:1px solid rgba(255,255,255,0.06);">
     <div style="max-width:1100px; margin:0 auto;">
       <div style="text-align:center; margin-bottom:36px;">
@@ -309,14 +377,7 @@
       </div>
     </div>
   </section>
-</main>
 
-<footer class="footer">
-  <p>© 2026 K&L Global Import · <a href="prix-maison-capsule-france.html" style="color: inherit; text-decoration: underline;">Guide prix maison capsule</a> · <a href="prix-maison-container-pliable.html" style="color: inherit; text-decoration: underline;">Guide prix container pliable</a> · <a href="nous-trouver.html" style="color: inherit; text-decoration: underline;">Nous trouver</a> · <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions Légales</a> · <a href="cgv.html" style="color: inherit; text-decoration: underline;">CGV</a> · <a href="politique-confidentialite.html" style="color: inherit; text-decoration: underline;">Confidentialité</a> · <a href="politique-cookies.html" style="color: inherit; text-decoration: underline;">Cookies</a> · Tous droits réservés.</p>
-</footer>
-<a href="https://wa.me/33673300054" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Nous contacter sur WhatsApp">
-  <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-</a>
 <!-- SECTION SEO - Page d'accueil optimisée pour indexation Google -->
 <section style="background: #0a0a0a; padding: 80px 20px; margin: 0;">
     <div style="max-width: 1200px; margin: 0 auto; color: #e0e0e0;">
@@ -376,10 +437,202 @@
     </div>
 </section>
 <!-- FIN SECTION SEO -->
+<footer class="footer">
+  <p>© 2026 K&L Global Import · <a href="prix-maison-capsule-france.html" style="color: inherit; text-decoration: underline;">Guide prix maison capsule</a> · <a href="prix-maison-container-pliable.html" style="color: inherit; text-decoration: underline;">Guide prix container pliable</a> · <a href="nous-trouver.html" style="color: inherit; text-decoration: underline;">Nous trouver</a> · <a href="mentions-legales.html" style="color: inherit; text-decoration: underline;">Mentions Légales</a> · <a href="cgv.html" style="color: inherit; text-decoration: underline;">CGV</a> · <a href="politique-confidentialite.html" style="color: inherit; text-decoration: underline;">Confidentialité</a> · <a href="politique-cookies.html" style="color: inherit; text-decoration: underline;">Cookies</a> · Tous droits réservés.</p>
+</footer>
+</div>
 
 
-  <script src="/kl-assistant.js" defer></script>
-<!-- Compteur anonyme des clics sur la promo apporteurs -->
-<script>(function(){var U='https://ocanforzwmonwwhekpsr.supabase.co/rest/v1/rpc/track',K='sb_publishable_fWZfTwAiL390VvUYHfocgw_WXW9xMN2';if(location.hostname!=='klglobalimport.com')return;function t(k){try{fetch(U,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json',apikey:K},body:JSON.stringify({k:k})}).catch(function(){});}catch(e){}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.app-promo-bar,.app-promo-card a.btn');if(a)t('promo');});})();</script>
+<script>
+(function(){
+  var clamp=function(v,a,b){return Math.min(b,Math.max(a,v))};
+  var seg=function(p,a,b){return clamp((p-a)/(b-a),0,1)};
+  var U='/';
+
+  /* ---- fixed menu ---- */
+  var top=document.getElementById('top'),burger=document.getElementById('burger'),menu=document.getElementById('menu');
+  function toTop(e){e&&e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});menu.classList.remove('open');burger.setAttribute('aria-expanded','false')}
+  document.getElementById('toTop').addEventListener('click',toTop);
+  document.getElementById('navHome').addEventListener('click',toTop);
+  menu.querySelector('[data-home]').addEventListener('click',toTop);
+  function closeMenu(){menu.classList.remove('open');burger.setAttribute('aria-expanded','false')}
+  document.addEventListener('pointerdown',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!burger.contains(e.target))closeMenu()});
+  window.addEventListener('scroll',function(){if(menu.classList.contains('open'))closeMenu()},{passive:true});
+  window.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu()});
+  menu.addEventListener('click',function(e){if(e.target.closest('a'))closeMenu()});
+  burger.addEventListener('click',function(){var o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',String(o))});
+
+  /* ---- hero scrubbed by scroll ---- */
+  var scrollEl=document.getElementById('scroll'),ship=document.getElementById('ship'),shipwrap=document.getElementById('shipwrap'),cstage=document.getElementById('cstage'),
+      zoom=document.getElementById('zoom'),world=document.getElementById('world'),frames=[].slice.call(world.querySelectorAll('.f')),seal=document.getElementById('seal'),
+      hss=[].slice.call(world.querySelectorAll('.hs')),lbls=[1,2,3,4].map(function(i){return document.getElementById('l'+i)}),tip=document.getElementById('tip'),
+      info=document.getElementById('info'),
+      caps=[1,2,3,4].map(function(i){return document.getElementById('c'+i)}),rail=document.getElementById('rail'),hint=document.getElementById('hint');
+  var ease=function(t){return t*t*(3-2*t)};
+  var wins=[[-1,-.5,.10,.16],[.12,.18,.25,.30],[.36,.40,.46,.52],[.9,.95,1.2,1.3]];
+  var cur=0,dur=0,lastT=-1,S=1,pmx=0,pmy=0,ptx=0,pty=0;
+  var INFO={
+    pelle:{s:'Engins RIPPA',h:'Mini-pelle RIPPA',p:'Moteur Diesel japonais KUBOTA, pour une fiabilité extrême.',pr:'dès <b>5 999 € HT</b>',a:U+'engins-rippa',t:'Voir la gamme'},
+    compacte:{s:'Essai avant achat',h:'Mini-pelle compacte',p:'Louez avant d’acheter : mini-pelle 1 tonne, accessoires et livraison.',pr:'location dès <b>99 € HT / jour</b>',a:U+'location-mini-pelle-sisteron',t:'Voir la location'},
+    dumper:{s:'Engins de chantier',h:'Mini-dumper',p:'Une gamme complète d’engins compacts. Devis personnalisé sous 24h.',pr:'',a:U+'engins-rippa',t:'Demander un devis'},
+    livraison:{s:'Prêt à l’emploi',h:'Livré, garanti, suivi',p:'Garantie 24 mois constructeur, SAV en français depuis notre dépôt de Sisteron (04), livraison France métropolitaine + DOM-TOM.',pr:'',a:U+'contact',t:'Nous contacter'}
+  };
+  var openK=null;
+  function showInfo(k){
+    var d=INFO[k];if(!d)return;openK=k;
+    document.getElementById('iS').textContent=d.s;document.getElementById('iH').textContent=d.h;document.getElementById('iP').textContent=d.p;
+    document.getElementById('iPr').innerHTML=d.pr;document.getElementById('iPr').style.display=d.pr?'block':'none';
+    var a=document.getElementById('iA');a.href=d.a;a.textContent=d.t;info.classList.add('open');
+    hss.forEach(function(h){h.classList.toggle('act',h.dataset.k===k)});
+  }
+  function hideInfo(){openK=null;info.classList.remove('open');hss.forEach(function(h){h.classList.remove('act')})}
+  hss.forEach(function(h){h.querySelector('.dot').addEventListener('click',function(){h.dataset.k===openK?hideInfo():showInfo(h.dataset.k)})});
+  document.getElementById('infoX').addEventListener('click',hideInfo);
+  var extT=document.getElementById('extT'),extB=document.getElementById('extB');
+  /* portrait screens: prolong the scene (sky above, parking below) from the photo's own edge rows */
+  function drawExt(portrait,vw,vh,ox,oy,s){
+    var src=frames[0];
+    if(!portrait||!src.complete||!src.naturalWidth){extT.style.display=extB.style.display='none';return}
+    var ov=70*s,sx=-ox/s,sw=vw/s,hT=Math.max(1,Math.ceil(oy+ov)),y0=Math.floor(oy+1024*s-ov),hB=Math.max(1,Math.ceil(vh-y0));
+    extT.width=vw;extT.height=hT;extT.style.height=hT+'px';extT.style.top='0';extT.style.display='block';
+    extB.width=vw;extB.height=hB;extB.style.height=hB+'px';extB.style.top=y0+'px';extB.style.display='block';
+    var tmp=document.createElement('canvas');tmp.width=28;tmp.height=1;var tc=tmp.getContext('2d');tc.imageSmoothingQuality='high';
+    function fill(cv,sy,h,dark){tc.clearRect(0,0,28,1);tc.drawImage(src,sx,sy,sw,6,0,0,28,1);var c=cv.getContext('2d');c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';c.drawImage(tmp,0,0,28,1,0,0,vw,h);
+      if(dark){var g=c.createLinearGradient(0,0,0,h);g.addColorStop(0,'rgba(10,10,10,0)');g.addColorStop(1,'rgba(10,10,10,.55)');c.fillStyle=g;c.fillRect(0,0,vw,h)}}
+    fill(extT,0,hT,false);fill(extB,1018,hB,true);
+  }
+  frames[0].addEventListener('load',function(){layout()});
+  function layout(){
+    var vw=window.innerWidth,vh=window.innerHeight,portrait=vw/vh<1.15,s,ox,oy;
+    if(!portrait){s=Math.max(vw/1536,vh/1024);ox=(vw-1536*s)/2;oy=(vh-1024*s)*.42;world.classList.remove('feather')}
+    else{s=vw/1100;ox=vw/2-768*s;oy=(vh-1024*s)*.4;world.classList.add('feather')}
+    drawExt(portrait,vw,vh,ox,oy,s);
+    S=s;world.style.transform='translate('+ox+'px,'+oy+'px) scale('+s+')';world.style.setProperty('--inv',String(1/s));
+  }
+  window.addEventListener('resize',layout);layout();
+  function heroP(){var r=scrollEl.getBoundingClientRect(),h=scrollEl.offsetHeight-window.innerHeight;return clamp(-r.top/h,0,1)}
+  function renderHero(P){
+    var p=P;
+    drawSeq(seg(p,0,.28));
+    ship.style.transform='scale('+(1+seg(p,0,.3)*.03)+')';
+    // the screen descends: ship goes up, container comes up from below
+    var e=ease(seg(p,.28,.4));
+    shipwrap.style.transform='translateY('+(-e*100)+'%)';
+    cstage.style.transform='translateY('+((1-e)*100)+'%)';
+    // doors: closed -> slightly open -> wide -> fully open
+    var t=seg(p,.42,.68)*3;
+    frames[1].style.opacity=ease(clamp(t,0,1));frames[2].style.opacity=ease(clamp(t-1,0,1));frames[3].style.opacity=ease(clamp(t-2,0,1));
+    // seal falls when the doors start to move
+    var f=seg(p,.405,.46);
+    seal.style.opacity=1-seg(p,.44,.48);
+    seal.firstElementChild.style.transform='translate(-50%,'+(f*260)+'px) rotate('+(f*38)+'deg) scale('+(1/S)+')';
+    // checklist labels
+    [[.47,.70],[.52,.70],[.57,.70],[.62,.70]].forEach(function(w,i){var o=Math.min(seg(p,w[0],w[0]+.035),1-seg(p,w[1],w[1]+.03));lbls[i].style.opacity=o;lbls[i].style.transform='translateX('+((1-o)*-24)+'px)'});
+    // hotspots appear one after another
+    hss.forEach(function(h,i){var o=seg(p,.72+i*.04,.76+i*.04);h.style.opacity=o;h.style.pointerEvents=o>.8?'auto':'none'});
+    tip.style.opacity=Math.min(seg(p,.78,.82),1-seg(p,.95,.99));
+    if(p<.72&&openK)hideInfo();
+    // gentle pointer parallax once the container is in view
+    ptx+=(pmx-ptx)*.08;pty+=(pmy-pty)*.08;var pa=seg(p,.4,.5);
+    zoom.style.transform='translate('+(ptx*-14*pa)+'px,'+(pty*-8*pa)+'px) scale('+(1+seg(p,.42,.7)*.03)+')';
+    caps.forEach(function(c,i){var w=wins[i],o=Math.min(seg(p,w[0],w[1]),1-seg(p,w[2],w[3]));c.style.opacity=o;c.style.transform='translateY('+((1-o)*18)+'px)';c.style.pointerEvents=o>.6?'auto':'none'});
+    info.style.bottom='';
+    rail.style.width=(P*100)+'%';hint.style.opacity=1-seg(P,0,.04);
+  }
+  window.addEventListener('pointermove',function(e){pmx=e.clientX/window.innerWidth-.5;pmy=e.clientY/window.innerHeight-.5},{passive:true});
+  /* image sequence: 64 full-quality frames, far -> near, drawn on a canvas with cross-fade between neighbours */
+  var NF=72,seqImgs=[],sctx=ship.getContext('2d'),sw=0,sh=0,lastKey='';
+  function sizeShip(){var d=Math.min(window.devicePixelRatio||1,2);sw=Math.round(window.innerWidth*d);sh=Math.round(window.innerHeight*d);ship.width=sw;ship.height=sh;lastKey=''}
+  function nearestLoaded(i){for(var k=i;k>=0;k--){if(seqImgs[k]&&seqImgs[k].complete&&seqImgs[k].naturalWidth)return k}for(k=i+1;k<NF;k++){if(seqImgs[k]&&seqImgs[k].complete&&seqImgs[k].naturalWidth)return k}return -1}
+  function paint(img,alpha){var sc=Math.max(sw/img.naturalWidth,sh/img.naturalHeight),w=img.naturalWidth*sc,h=img.naturalHeight*sc;sctx.globalAlpha=alpha;sctx.drawImage(img,(sw-w)/2,(sh-h)/2,w,h)}
+  function drawSeq(v){
+    var x=clamp(v,0,1)*(NF-1),i=Math.floor(x),f=x-i,key=i+'_'+f.toFixed(2)+'_'+sw+'_'+(seqLoaded>>3);
+    if(key===lastKey)return;lastKey=key;
+    var a=nearestLoaded(i);if(a<0)return;
+    sctx.globalCompositeOperation='source-over';paint(seqImgs[a],1);
+    if(f>.02&&i+1<NF){var b=seqImgs[i+1];if(b&&b.complete&&b.naturalWidth)paint(b,f)}
+    sctx.globalAlpha=1;
+  }
+  var seqLoaded=0;
+  (function(){for(var k=0;k<NF;k++){(function(k){var im=new Image();im.decoding='async';im.onload=function(){seqLoaded++;lastKey='';if(k===0)drawSeq(0)};im.src='/maquette-accueil/seq2/s'+('00'+k).slice(-3)+'.webp';seqImgs[k]=im})(k)}})();
+  sizeShip();window.addEventListener('resize',sizeShip);
+
+  /* ---- product scene ---- */
+  var C=[
+   {k:'rippa',tab:['Engins RIPPA','RIPPA'],h:'Engins RIPPA',p:'Toutes nos machines sont équipées de moteur Diesel japonais KUBOTA, pour une fiabilité extrême.',price:'dès <b>5 999 € HT</b>',href:U+'engins-rippa',neon:['Location RIPPA',U+'location-mini-pelle-sisteron'],
+    items:[['R32','/maquette-accueil/img/rippa.webp'],['R06','/maquette-accueil/img/r06.webp'],['R22','/maquette-accueil/img/r22.webp'],['RS 06','/maquette-accueil/img/rs06.webp']]},
+   {k:'space',tab:['Space Capsule & Habitat','Habitat'],h:'Space Capsule & Habitat',p:"Une gamme complète d'habitats modulaires et insolites.",price:'dès <b>15 600 € TTC</b>',href:U+'habitat',
+    items:[['Capsule','/maquette-accueil/img/caps.webp'],['Maison modulaire','/maquette-accueil/img/maison.webp'],['Maison insolite','/maquette-accueil/img/triangle.webp'],['Capsule moderne','/maquette-accueil/img/capsule.webp']]},
+   {k:'loisir',tab:['Loisir & Collectivité','Loisir'],h:'Loisir, Habitat & Collectivité',p:'Équipements de loisirs et modules préfabriqués pour mairies, collectivités, campings et exploitants agricoles.',href:U+'loisir-habitat',
+    items:[['Camping','/maquette-accueil/img/camping.webp'],['Mairie & Collectivité','/maquette-accueil/img/verger.webp'],['Tondeuse RC','/maquette-accueil/img/tondeuse.webp']]}
+  ];
+  var scene=document.getElementById('scene'),wrap=document.getElementById('produits'),tabsEl=document.getElementById('tabs'),panel=document.getElementById('panel'),count=document.getElementById('count');
+  var cats=[],copies=[],tabs=[],sel=C.map(function(){return 0}),active=-1,prev=-1,mx=0,my=0,tx=0,ty=0;
+  C.forEach(function(c,ci){
+    var el=document.createElement('div');el.className='cat '+c.k;
+    el.innerHTML='<div class="bgs">'+c.items.map(function(it,i){return '<img src="'+it[1]+'" alt="" class="'+(i===0?'on':'')+'">'}).join('')+'</div><div class="frame">'+c.items.map(function(it,i){return '<img src="'+it[1]+'" alt="'+it[0]+'" class="'+(i===0?'on':'')+'">'}).join('')+'</div>';
+    scene.insertBefore(el,tabsEl);cats.push(el);
+    var t=document.createElement('button');t.type='button';t.className='tab';t.dataset.k=c.k;t.setAttribute('role','tab');t.setAttribute('aria-selected','false');
+    t.innerHTML='<span class="lg">'+c.tab[0]+'</span><span class="sh">'+c.tab[1]+'</span><span class="bar"></span>';
+    t.addEventListener('click',function(){jump(ci)});tabsEl.appendChild(t);tabs.push(t);
+    var cp=document.createElement('div');cp.className='copy '+c.k;cp.style.setProperty('--c',el.classList.contains('rippa')?'0,113,227':c.k==='space'?'139,195,74':'255,152,0');
+    cp.innerHTML='<p class="eyebrow">0'+(ci+1)+' / 0'+C.length+'</p><h2>'+c.h+'</h2><p>'+c.p+'</p>'+(c.price?'<div class="price">'+c.price+'</div>':'')+
+      '<div class="chips">'+c.items.map(function(it,i){return '<button type="button" class="chip" aria-pressed="'+(i===0)+'" data-i="'+i+'"><i style="background-image:url('+it[1]+')"></i>'+it[0]+'</button>'}).join('')+'</div>'+
+      '<div><a class="go" href="'+c.href+'">Découvrir la gamme</a>'+(c.neon?'<a class="neon" href="'+c.neon[1]+'">'+c.neon[0]+'</a>':'')+'</div>';
+    panel.appendChild(cp);copies.push(cp);
+    var imgs=el.querySelectorAll('.bgs img, .frame img'),n0=c.items.length,chips=cp.querySelectorAll('.chip');
+    function pick(i){sel[ci]=i;imgs.forEach(function(m,j){m.classList.toggle('on',(j%n0)===i)});chips.forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.i===i))})}
+    chips.forEach(function(b){b.addEventListener('click',function(){pick(+b.dataset.i)});b.addEventListener('mouseenter',function(){if(matchMedia('(hover:hover)').matches)pick(+b.dataset.i)})});
+  });
+  function setActive(i){
+    if(i===active)return;
+    if(prev>=0&&prev!==active)cats[prev].classList.remove('prev');clearTimeout(setActive.t);
+    if(active>=0){cats[active].classList.remove('on');cats[active].classList.add('prev');prev=active;copies[active].classList.remove('on')}
+    active=i;cats[i].classList.remove('prev');cats[i].classList.add('on');copies[i].classList.add('on');
+    var pv=prev;setActive.t=setTimeout(function(){if(pv>=0&&pv!==active)cats[pv].classList.remove('prev')},1150);
+    tabs.forEach(function(t,j){t.setAttribute('aria-selected',String(j===i))});
+    count.textContent='0'+(i+1)+' / 0'+C.length;
+  }
+  function sceneRange(){var r=wrap.getBoundingClientRect(),h=wrap.offsetHeight-window.innerHeight;return {p:clamp(-r.top/h,0,1),top:r.top+window.scrollY,h:h}}
+  function jump(i){var s=sceneRange();window.scrollTo({top:s.top+s.h*((i+.5)/C.length)-0,behavior:'smooth'})}
+  document.getElementById('goOffers').addEventListener('click',function(e){e.preventDefault();jump(0)});
+  window.addEventListener('pointermove',function(e){mx=e.clientX/window.innerWidth-.5;my=e.clientY/window.innerHeight-.5},{passive:true});
+  function renderScene(){
+    var s=sceneRange(),n=C.length,i=clamp(Math.floor(s.p*n),0,n-1),inView=wrap.getBoundingClientRect().top<window.innerHeight&&wrap.getBoundingClientRect().bottom>0;
+    if(!inView)return;
+    setActive(i);
+    var local=clamp(s.p*n-i,0,1);
+    tx+=(mx-tx)*.08;ty+=(my-ty)*.08;
+    var fr=cats[i].querySelector('.frame'),bg=cats[i].querySelector('.bgs');
+    if(fr)fr.style.transform='translate('+(tx*-16)+'px,'+(ty*-10)+'px) scale('+(1+local*.025)+')';
+    if(bg)bg.style.transform='translate('+(tx*-40)+'px,'+(ty*-24)+'px)';
+    tabs.forEach(function(t,j){t.querySelector('.bar').style.width=(j<i?100:j===i?local*100:0)+'%'});
+  }
+
+  function loop(){
+    cur+=(heroP()-cur)*.14;if(Math.abs(heroP()-cur)<.0003)cur=heroP();
+    renderHero(cur);renderScene();
+    top.classList.toggle('solid',window.scrollY>40);
+    requestAnimationFrame(loop);
+  }
+  var leoB=document.querySelector('.ic.leo'),lb=document.getElementById('lb');
+  setTimeout(function(){leoB.classList.add('on')},6000);
+  window.addEventListener('scroll',function(){var atEnd=window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-40;lb.classList.toggle('on',atEnd);if(atEnd)leoB.classList.add('on')},{passive:true});
+
+  function fitFrame(){var f=document.querySelector('.cat.on .frame'),c=document.querySelector('.copy.on');if(!f||!c)return;
+    if(window.innerWidth>820){f.style.height='';return}
+    var cat=f.closest('.cat'),ft=parseFloat(getComputedStyle(f).top)||0;
+    var cs=c.style.transform;c.style.transform='none';var ct=c.getBoundingClientRect().top-cat.getBoundingClientRect().top;c.style.transform=cs;
+    f.style.height=Math.max(90,Math.min(window.innerHeight*.34,ct-ft-14))+'px'}
+  window.addEventListener('resize',fitFrame);setTimeout(fitFrame,300);setInterval(fitFrame,700);
+  renderHero(0);setActive(0);
+  requestAnimationFrame(loop);
+})();
+</script>
+<script>
+(function(){var L=document.getElementById('leoBtn');if(!L)return;
+ L.addEventListener('click',function(e){e.preventDefault();var m=document.getElementById('klw-mascot');if(m){m.click()}else{window.open('/contact','_self')}});})();
+</script>
+<script src="/kl-assistant.js" defer></script>
 </body>
 </html>
