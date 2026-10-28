@@ -558,6 +558,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>.seo-more{margin:0;padding:8px 6vw 28px}.seo-more details{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.12)}.seo-more summary{list-style:none;cursor:pointer;text-align:center;padding:22px 10px;color:#a1a1aa;font-size:clamp(13px,1vw,16px);font-weight:600;letter-spacing:.12em;text-transform:uppercase}.seo-more summary::-webkit-details-marker{display:none}.seo-more summary:hover{color:#f5f5f7}.seo-more summary span{color:#c9a84c;margin-left:8px;font-size:1.2em;display:inline-block;transition:transform .2s}.seo-more details[open] summary span{transform:rotate(45deg)}</style>
 </head>
 <body>
 
@@ -933,6 +934,10 @@
 
 
 <!-- Articles utiles avant achat (maillage interne SEO) -->
+
+
+<!-- Bloc SEO bas de page : intention longue traîne + zones desservies -->
+<section class="seo-more" aria-label="En savoir plus"><details><summary>En savoir plus <span aria-hidden="true">+</span></summary><div>
 <section style="padding: 24px 6vw 8px; margin: 0;">
   <h2 style="color: #f5f5f7; font-size: 1.05rem; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 2px solid #c9a84c; display: inline-block;">Pour aller plus loin avant votre projet</h2>
   <div style="max-width: 900px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
@@ -946,76 +951,12 @@
     </a>
   </div>
 </section>
-
-<!-- Bloc SEO bas de page : intention longue traîne + zones desservies -->
 <section style="padding: 32px 6vw; background: rgba(0,0,0,0.25); margin: 0;">
   <h2 style="color: #f5f5f7; font-size: 1.35rem; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 2px solid #c9a84c; display: inline-block;">Studio jardin Airbnb & tiny house clé en main : la solution KL·Pod</h2>
   <div style="max-width: 900px; color: #a1a1aa; line-height: 1.75; font-size: 0.95rem;">
     <p>Vous cherchez un <strong>studio jardin Airbnb</strong>, une <strong>tiny house clé en main</strong>, un <strong>hébergement glamping rentable</strong> ou un <strong>lodge mobile sans permis de construire</strong> ? La gamme <strong>KL·Pod</strong> en composite CFRP breveté est la réponse. <strong>5 tailles : XS, S, M, L, XL</strong> — du bureau de jardin solo (2,2 × 2,2 m) au grand lodge resort (11,6 × 2,2 m), <strong>de 13 800 € TTC à 60 000 € TTC</strong>. Structure mobile sur remorque, isolation U 0.024 W/m·K (record), livraison France entière et Polynésie française. Idéal pour <strong>investisseurs locatifs Airbnb, exploitants gîtes ruraux, particuliers résidence secondaire, télétravailleurs</strong>. Notre dépôt à Sisteron (04) garantit le SAV. Devis personnalisé sous 24h — prix usine, sans intermédiaire.</p>
   </div>
 </section>
-
-<footer class="pod-footer">
-  <span>&copy; 2026 K&amp;L Global Import · Tous droits réservés</span>
-  <div style="display:flex; gap: 24px;">
-    <a href="index.html">Accueil</a>
-    <a href="contact.html">Contact</a>
-    <a href="nous-trouver.html">Nous trouver</a> · <a href="mentions-legales.html">Mentions légales</a> · <a href="cgv.html">CGV</a> · <a href="politique-confidentialite.html">Confidentialité</a> · <a href="politique-cookies.html">Cookies</a>
-  </div>
-</footer>
-
-<!-- ══ LIGHTBOX ══ -->
-<div class="pod-lightbox" id="pod-lightbox" role="dialog" aria-modal="true" aria-label="Galerie photos">
-  <button class="pod-lightbox__close" id="pod-lightbox-close" aria-label="Fermer">&times;</button>
-  <button class="pod-lightbox__nav pod-lightbox__prev" id="pod-lightbox-prev" aria-label="Photo précédente">&#8249;</button>
-  <img class="pod-lightbox__img" id="pod-lightbox-img" src="" alt="Photo KL·Pod en agrandissement">
-  <button class="pod-lightbox__nav pod-lightbox__next" id="pod-lightbox-next" aria-label="Photo suivante">&#8250;</button>
-  <div class="pod-lightbox__counter" id="pod-lightbox-counter"></div>
-</div>
-
-<script>
-(function () {
-  var galleries = {
-    xs: ['assets/apple-pod/KL-pod-XS-2.webp','assets/apple-pod/KL-pod-XS-1.webp','assets/apple-pod/KL-pod-XS-.webp','assets/apple-pod/KL-pod-XS-3.webp','assets/apple-pod/KL-pod-XS-4.webp','assets/apple-pod/KL-pod-XS-5.webp','assets/apple-pod/KL-pod-XS-6.webp'],
-    s:  ['assets/apple-pod/KL-pod-S-3.webp','assets/apple-pod/KL-pod-S-4.webp','assets/apple-pod/KL-pod-S-5.webp','assets/apple-pod/KL-pod-S-6.webp','assets/apple-pod/KL-pod-S.webp'],
-    m:  ['assets/apple-pod/KL-pod-M-3.webp','assets/apple-pod/KL-pod-M-11.webp','assets/apple-pod/KL-pod-M-12.webp'],
-    l:  ['assets/apple-pod/KL-pod-L-1.webp','assets/apple-pod/kl-pod-L-2.webp','assets/apple-pod/KL-pod-L-3.webp','assets/apple-pod/KL-pod-L-4.webp','assets/apple-pod/KL-pod-L-5.webp','assets/apple-pod/KL-pod-L-6.webp','assets/apple-pod/KL-pod-L-.webp'],
-    xl: ['assets/apple-pod/KL-pod-XL.webp','assets/apple-pod/KL-pod-XL-1.webp','assets/apple-pod/KL-pod-XL-2.webp','assets/apple-pod/KL-pod-XL-3.webp','assets/apple-pod/KL-pod-XL-4.webp','assets/apple-pod/KL-pod-XL-5.webp','assets/apple-pod/KL-pod-XL-6.webp','assets/apple-pod/KL-pod-XL-7.webp','assets/apple-pod/KL-pod-XL-8.webp','assets/apple-pod/KL-pod-XL-9.webp','assets/apple-pod/KL-pod-XL-10.webp','assets/apple-pod/KL-pod-XL-11.webp','assets/apple-pod/KL-pod-XL-12.webp']
-  };
-  var lb      = document.getElementById('pod-lightbox');
-  var lbImg   = document.getElementById('pod-lightbox-img');
-  var lbCount = document.getElementById('pod-lightbox-counter');
-  var cur = [], idx = 0;
-
-  function show(i) {
-    idx = (i + cur.length) % cur.length;
-    lbImg.src = cur[idx];
-    lbCount.textContent = (idx + 1) + ' / ' + cur.length;
-  }
-  function close() { lb.classList.remove('is-open'); lbImg.src = ''; }
-
-  window.openLightbox = function (key, start) {
-    cur = galleries[key] || [];
-    if (!cur.length) return;
-    lb.classList.add('is-open');
-    show(start || 0);
-  };
-
-  document.getElementById('pod-lightbox-close').addEventListener('click', close);
-  document.getElementById('pod-lightbox-prev').addEventListener('click', function(){ show(idx-1); });
-  document.getElementById('pod-lightbox-next').addEventListener('click', function(){ show(idx+1); });
-  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
-  document.addEventListener('keydown', function(e){
-    if (!lb.classList.contains('is-open')) return;
-    if (e.key === 'ArrowLeft')  show(idx-1);
-    if (e.key === 'ArrowRight') show(idx+1);
-    if (e.key === 'Escape')     close();
-  });
-})();
-</script>
-
-<script src="scroll-back-btn.js" defer></script>
-<!-- DÉBUT SECTION SEO APPLE-POD -->
 <section style="background: #0a0a0a; padding: 80px 20px; margin-top: 0;">
   <div style="max-width: 1200px; margin: 0 auto; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.8;">
     
@@ -1128,6 +1069,70 @@
 
   </div>
 </section>
+</div></details></section>
+
+<footer class="pod-footer">
+  <span>&copy; 2026 K&amp;L Global Import · Tous droits réservés</span>
+  <div style="display:flex; gap: 24px;">
+    <a href="index.html">Accueil</a>
+    <a href="contact.html">Contact</a>
+    <a href="nous-trouver.html">Nous trouver</a> · <a href="mentions-legales.html">Mentions légales</a> · <a href="cgv.html">CGV</a> · <a href="politique-confidentialite.html">Confidentialité</a> · <a href="politique-cookies.html">Cookies</a>
+  </div>
+</footer>
+
+<!-- ══ LIGHTBOX ══ -->
+<div class="pod-lightbox" id="pod-lightbox" role="dialog" aria-modal="true" aria-label="Galerie photos">
+  <button class="pod-lightbox__close" id="pod-lightbox-close" aria-label="Fermer">&times;</button>
+  <button class="pod-lightbox__nav pod-lightbox__prev" id="pod-lightbox-prev" aria-label="Photo précédente">&#8249;</button>
+  <img class="pod-lightbox__img" id="pod-lightbox-img" src="" alt="Photo KL·Pod en agrandissement">
+  <button class="pod-lightbox__nav pod-lightbox__next" id="pod-lightbox-next" aria-label="Photo suivante">&#8250;</button>
+  <div class="pod-lightbox__counter" id="pod-lightbox-counter"></div>
+</div>
+
+<script>
+(function () {
+  var galleries = {
+    xs: ['assets/apple-pod/KL-pod-XS-2.webp','assets/apple-pod/KL-pod-XS-1.webp','assets/apple-pod/KL-pod-XS-.webp','assets/apple-pod/KL-pod-XS-3.webp','assets/apple-pod/KL-pod-XS-4.webp','assets/apple-pod/KL-pod-XS-5.webp','assets/apple-pod/KL-pod-XS-6.webp'],
+    s:  ['assets/apple-pod/KL-pod-S-3.webp','assets/apple-pod/KL-pod-S-4.webp','assets/apple-pod/KL-pod-S-5.webp','assets/apple-pod/KL-pod-S-6.webp','assets/apple-pod/KL-pod-S.webp'],
+    m:  ['assets/apple-pod/KL-pod-M-3.webp','assets/apple-pod/KL-pod-M-11.webp','assets/apple-pod/KL-pod-M-12.webp'],
+    l:  ['assets/apple-pod/KL-pod-L-1.webp','assets/apple-pod/kl-pod-L-2.webp','assets/apple-pod/KL-pod-L-3.webp','assets/apple-pod/KL-pod-L-4.webp','assets/apple-pod/KL-pod-L-5.webp','assets/apple-pod/KL-pod-L-6.webp','assets/apple-pod/KL-pod-L-.webp'],
+    xl: ['assets/apple-pod/KL-pod-XL.webp','assets/apple-pod/KL-pod-XL-1.webp','assets/apple-pod/KL-pod-XL-2.webp','assets/apple-pod/KL-pod-XL-3.webp','assets/apple-pod/KL-pod-XL-4.webp','assets/apple-pod/KL-pod-XL-5.webp','assets/apple-pod/KL-pod-XL-6.webp','assets/apple-pod/KL-pod-XL-7.webp','assets/apple-pod/KL-pod-XL-8.webp','assets/apple-pod/KL-pod-XL-9.webp','assets/apple-pod/KL-pod-XL-10.webp','assets/apple-pod/KL-pod-XL-11.webp','assets/apple-pod/KL-pod-XL-12.webp']
+  };
+  var lb      = document.getElementById('pod-lightbox');
+  var lbImg   = document.getElementById('pod-lightbox-img');
+  var lbCount = document.getElementById('pod-lightbox-counter');
+  var cur = [], idx = 0;
+
+  function show(i) {
+    idx = (i + cur.length) % cur.length;
+    lbImg.src = cur[idx];
+    lbCount.textContent = (idx + 1) + ' / ' + cur.length;
+  }
+  function close() { lb.classList.remove('is-open'); lbImg.src = ''; }
+
+  window.openLightbox = function (key, start) {
+    cur = galleries[key] || [];
+    if (!cur.length) return;
+    lb.classList.add('is-open');
+    show(start || 0);
+  };
+
+  document.getElementById('pod-lightbox-close').addEventListener('click', close);
+  document.getElementById('pod-lightbox-prev').addEventListener('click', function(){ show(idx-1); });
+  document.getElementById('pod-lightbox-next').addEventListener('click', function(){ show(idx+1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'ArrowLeft')  show(idx-1);
+    if (e.key === 'ArrowRight') show(idx+1);
+    if (e.key === 'Escape')     close();
+  });
+})();
+</script>
+
+<script src="scroll-back-btn.js" defer></script>
+<!-- DÉBUT SECTION SEO APPLE-POD -->
+
 <!-- FIN SECTION SEO APPLE-POD -->
 
   <script src="/kl-assistant.js" defer></script>
