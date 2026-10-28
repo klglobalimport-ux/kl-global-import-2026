@@ -594,7 +594,9 @@ body{--klw-top:76px}
     sctx.globalAlpha=1;
   }
   var seqLoaded=0;
-  (function(){for(var k=0;k<NF;k++){(function(k){var im=new Image();im.decoding='async';im.onload=function(){seqLoaded++;lastKey='';if(k===0)drawSeq(0)};im.src='/maquette-accueil/seq2/s'+('00'+k).slice(-3)+'.webp';seqImgs[k]=im})(k)}})();
+  (function(){var order=[],seen={},qi=0,act=0;[16,8,4,2,1].forEach(function(st){for(var k=0;k<NF;k+=st){if(!seen[k]){seen[k]=1;order.push(k)}}});
+    function pump(){while(act<3&&qi<order.length){(function(k){act++;var im=new Image();im.decoding='async';im.onload=function(){seqLoaded++;lastKey='';if(k===0)drawSeq(0);act--;pump()};im.onerror=function(){act--;pump()};im.src='/maquette-accueil/seq2/s'+('00'+k).slice(-3)+'.webp';seqImgs[k]=im})(order[qi++])}}
+    if(document.readyState==='complete')pump();else window.addEventListener('load',pump)})();
   sizeShip();window.addEventListener('resize',sizeShip);
 
   /* ---- product scene ---- */
