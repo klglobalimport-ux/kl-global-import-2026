@@ -330,8 +330,8 @@ body{--klw-top:76px}
             <canvas id="extT"></canvas><canvas id="extB"></canvas>
       <div id="zoom"><div id="world">
         <img class="f f0" src="/maquette-accueil/img/c0.jpg" alt="Container K&L fermé devant le hangar" width="1536" height="1024">
-        <img class="f f1" src="/maquette-accueil/img/c1.jpg" alt="" width="1536" height="1024">
-        <img class="f f2" src="/maquette-accueil/img/c2.jpg" alt="" width="1536" height="1024">
+        <img class="f f1" src="/maquette-accueil/img/c1.jpg" alt="Container rouge K&amp;L entrouvert, mini-pelle RIPPA bleue visible à l'intérieur" width="1536" height="1024">
+        <img class="f f2" src="/maquette-accueil/img/c2.jpg" alt="Trois mini-pelles RIPPA bleues dans un container rouge ouvert, dépôt K&amp;L" width="1536" height="1024">
         <img class="f f3" src="/maquette-accueil/img/c3.jpg" alt="Container K&L ouvert avec des mini-pelles RIPPA à l'intérieur" width="1536" height="1024">
         <div class="seal" id="seal" style="left:770px;top:500px"><div class="tag"><i></i><b>Scellé K&amp;L</b></div></div>
         <div class="hs" data-k="pelle" data-n="RIPPA" style="left:585px;top:560px"><button class="dot" type="button" aria-label="Mini-pelle RIPPA"></button></div>
@@ -608,7 +608,7 @@ body{--klw-top:76px}
   var cats=[],copies=[],tabs=[],sel=C.map(function(){return 0}),active=-1,prev=-1,mx=0,my=0,tx=0,ty=0;
   C.forEach(function(c,ci){
     var el=document.createElement('div');el.className='cat '+c.k;
-    el.innerHTML='<div class="bgs">'+c.items.map(function(it,i){return '<img src="'+it[1]+'" alt="" class="'+(i===0?'on':'')+'">'}).join('')+'</div><div class="frame">'+c.items.map(function(it,i){return '<img src="'+it[1]+'" alt="'+it[0]+'" class="'+(i===0?'on':'')+'">'}).join('')+'</div>';
+    el.innerHTML='<div class="bgs">'+c.items.map(function(it,i){return '<img src="'+it[1]+'" alt="" class="'+(i===0?'on':'')+'"'+(i===0?'':' loading="lazy"')+' decoding="async">'}).join('')+'</div><div class="frame">'+c.items.map(function(it,i){return '<img src="'+it[1]+'" alt="'+it[0]+'" class="'+(i===0?'on':'')+'"'+(i===0?'':' loading="lazy"')+' decoding="async">'}).join('')+'</div>';
     scene.insertBefore(el,tabsEl);cats.push(el);
     var t=document.createElement('button');t.type='button';t.className='tab';t.dataset.k=c.k;t.setAttribute('role','tab');t.setAttribute('aria-selected','false');
     t.innerHTML='<span class="lg">'+c.tab[0]+'</span><span class="sh">'+c.tab[1]+'</span><span class="bar"></span>';
