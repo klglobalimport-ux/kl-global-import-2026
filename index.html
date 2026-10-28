@@ -581,7 +581,7 @@ body{--klw-top:76px}
   }
   window.addEventListener('pointermove',function(e){pmx=e.clientX/window.innerWidth-.5;pmy=e.clientY/window.innerHeight-.5},{passive:true});
   /* image sequence: 64 full-quality frames, far -> near, drawn on a canvas with cross-fade between neighbours */
-  var NF=72,seqImgs=[],sctx=ship.getContext('2d'),sw=0,sh=0,lastKey='';
+  var MOB=window.matchMedia('(max-width:820px)').matches,NF=MOB?36:72,seqImgs=[],sctx=ship.getContext('2d'),sw=0,sh=0,lastKey='';
   function sizeShip(){var d=Math.min(window.devicePixelRatio||1,2);sw=Math.round(window.innerWidth*d);sh=Math.round(window.innerHeight*d);ship.width=sw;ship.height=sh;lastKey=''}
   function nearestLoaded(i){for(var k=i;k>=0;k--){if(seqImgs[k]&&seqImgs[k].complete&&seqImgs[k].naturalWidth)return k}for(k=i+1;k<NF;k++){if(seqImgs[k]&&seqImgs[k].complete&&seqImgs[k].naturalWidth)return k}return -1}
   function paint(img,alpha){var sc=Math.max(sw/img.naturalWidth,sh/img.naturalHeight),w=img.naturalWidth*sc,h=img.naturalHeight*sc;sctx.globalAlpha=alpha;sctx.drawImage(img,(sw-w)/2,(sh-h)/2,w,h)}
@@ -595,8 +595,10 @@ body{--klw-top:76px}
   }
   var seqLoaded=0;
   (function(){var order=[],seen={},qi=0,act=0;[16,8,4,2,1].forEach(function(st){for(var k=0;k<NF;k+=st){if(!seen[k]){seen[k]=1;order.push(k)}}});
-    function pump(){while(act<3&&qi<order.length){(function(k){act++;var im=new Image();im.decoding='async';im.onload=function(){seqLoaded++;lastKey='';if(k===0)drawSeq(0);act--;pump()};im.onerror=function(){act--;pump()};im.src='/maquette-accueil/seq2/s'+('00'+k).slice(-3)+'.webp';seqImgs[k]=im})(order[qi++])}}
-    if(document.readyState==='complete')pump();else window.addEventListener('load',pump)})();
+    function pump(){while(act<3&&qi<order.length){(function(k){act++;var im=new Image();im.decoding='async';im.onload=function(){seqLoaded++;lastKey='';if(k===0)drawSeq(0);act--;pump()};im.onerror=function(){act--;pump()};im.src=MOB?'/maquette-accueil/seq2m/m'+('00'+k).slice(-3)+'.webp':'/maquette-accueil/seq2/s'+('00'+k).slice(-3)+'.webp';seqImgs[k]=im})(order[qi++])}}
+    var started=false;function go(){if(started)return;started=true;pump()}
+    if(MOB){['scroll','touchstart','pointerdown','keydown','wheel'].forEach(function(ev){window.addEventListener(ev,go,{once:true,passive:true})});window.addEventListener('load',function(){setTimeout(go,9000)})}
+    else if(document.readyState==='complete')go();else window.addEventListener('load',go)})();
   sizeShip();window.addEventListener('resize',sizeShip);
 
   /* ---- product scene ---- */
