@@ -597,8 +597,7 @@ body{--klw-top:76px}
   (function(){var order=[],seen={},qi=0,act=0;[16,8,4,2,1].forEach(function(st){for(var k=0;k<NF;k+=st){if(!seen[k]){seen[k]=1;order.push(k)}}});
     function pump(){while(act<3&&qi<order.length){(function(k){act++;var im=new Image();im.decoding='async';im.onload=function(){seqLoaded++;lastKey='';if(k===0)drawSeq(0);act--;pump()};im.onerror=function(){act--;pump()};im.src=MOB?'/maquette-accueil/seq2m/m'+('00'+k).slice(-3)+'.webp':'/maquette-accueil/seq2/s'+('00'+k).slice(-3)+'.webp';seqImgs[k]=im})(order[qi++])}}
     var started=false;function go(){if(started)return;started=true;pump()}
-    if(MOB){['scroll','touchstart','pointerdown','keydown','wheel'].forEach(function(ev){window.addEventListener(ev,go,{once:true,passive:true})});window.addEventListener('load',function(){setTimeout(go,9000)})}
-    else if(document.readyState==='complete')go();else window.addEventListener('load',go)})();
+    ['scroll','touchstart','pointerdown','keydown','wheel'].forEach(function(ev){window.addEventListener(ev,go,{once:true,passive:true})});window.addEventListener('load',function(){setTimeout(go,9000)})})();
   sizeShip();window.addEventListener('resize',sizeShip);
 
   /* ---- product scene ---- */
