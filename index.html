@@ -265,6 +265,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:cl
 #leoWave .wb.r{left:calc(100% + 4px)}#leoWave .wb.l{right:calc(100% + 4px)}
 #leoWave:not(.d3) .wb.r{left:calc(100% + 10px)}#leoWave:not(.d3) .wb.l{right:calc(100% + 10px)}
 #leoWave:not(.d3) .wb{top:50%}
+/* Léo 3D compagnon à côté du chat */
+#leoDock{position:fixed;right:22px;bottom:6px;width:132px;height:146px;z-index:2147483000;opacity:0;transform:translateY(26px) scale(.8);pointer-events:none;transition:opacity .4s,transform .55s cubic-bezier(.22,1.2,.36,1);-webkit-tap-highlight-color:transparent}
+#leoDock.on{opacity:1;transform:none;pointer-events:auto;cursor:pointer}
+@media (min-width:721px){body.klw-leo3d #klw-chat{bottom:156px!important;max-height:calc(100vh - 176px)!important}}
+@media (max-width:720px){#leoDock{right:12px;bottom:auto;top:calc(var(--klw-top,76px) - 2px);width:92px;height:102px}
+ body.klw-leo3d #klw-chat{top:calc(var(--klw-top,76px) + 98px)!important}}
 #leoWave .wb i{position:absolute;top:4px;right:8px;font-style:normal;font-size:16px;line-height:1;color:#777;cursor:pointer;padding:2px 4px}
 @media (prefers-reduced-motion:reduce){#leoWave{transition:opacity .3s}#leoWave.wave:not(.d3) img{animation:none}}
 </style>
@@ -667,6 +673,18 @@ body{--klw-top:76px}
 </script>
 <script>
 window.KL_NO_AUTOOPEN=true;
+/* chargeur partagé de la 3D (three.js + leo3d.js), à la demande */
+(function(){
+ var q=[],st=0;
+ function load(src,cb){var s=document.createElement('script');s.src=src;s.async=true;s.onload=function(){cb(true)};s.onerror=function(){cb(false)};document.head.appendChild(s)}
+ function fin(ok){st=ok?2:3;q.splice(0).forEach(function(f){f(ok)})}
+ window.KLeoLoad=function(cb){
+  if(window.KLeo3D&&window.THREE)return cb(true);
+  if(st===3)return cb(false);
+  q.push(cb);if(st===1)return;st=1;
+  load('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',function(ok){if(!ok)return fin(false);load('/leo3d.js',fin)});
+ };
+})();
 (function(){
  var KEY='klw-wave',done=false;try{done=sessionStorage.getItem(KEY)==='1'}catch(e){}
  if(done)return;
@@ -678,9 +696,8 @@ window.KL_NO_AUTOOPEN=true;
  el.innerHTML='<img src="/maquette-accueil/img/leo.webp" alt=""><div class="cv"></div><span class="wb"><b>Coucou</b> 👋 Une question ? Je suis là pour t\'aider !<i aria-label="Fermer">&times;</i></span>';
  document.body.appendChild(el);
  var wb=el.querySelector('.wb'),x=el.querySelector('i'),cv=el.querySelector('.cv'),leoB=document.querySelector('.ic.leo');
- /* chargement différé de la 3D (three.js + leo3d.js), sans bloquer la page */
- function load(src,cb){var s=document.createElement('script');s.src=src;s.async=true;s.onload=function(){cb(true)};s.onerror=function(){cb(false)};document.head.appendChild(s)}
- setTimeout(function(){load('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',function(ok){if(!ok)return;load('/leo3d.js',function(ok2){ready3d=!!ok2})})},5000);
+ /* chargement différé de la 3D, sans bloquer la page */
+ setTimeout(function(){window.KLeoLoad(function(ok){ready3d=!!ok})},5000);
  function chatOpen(){var c=document.getElementById('klw-chat');return c&&c.classList.contains('klopen')}
  function origin(){var r=leoB?leoB.getBoundingClientRect():{left:window.innerWidth-60,top:10,width:40,height:40};return{x:r.left+r.width/2,y:r.top+r.height/2}}
  function hide(back){
@@ -720,6 +737,52 @@ window.KL_NO_AUTOOPEN=true;
   done=true;show();
  }
  setTimeout(attempt,10000);
+})();
+</script>
+<script>
+/* Léo 3D "compagnon" : reste à côté de la fenêtre de chat et fait des petites actions */
+(function(){
+ var dock=document.createElement('div');dock.id='leoDock';dock.setAttribute('aria-hidden','true');document.body.appendChild(dock);
+ var api=null,chat=null,last='',lastAct=0,failed=false,loading=false,wasTyping=false;
+ var pool=['wave','thumb','jump','up','down'];
+ function act(n){
+  if(!api)return;
+  if(!n){var c=pool.filter(function(x){return x!==last});n=c[Math.floor(Math.random()*c.length)]}
+  last=n;lastAct=Date.now();api.play(n);
+ }
+ function open(){
+  if(failed)return;
+  var w=document.getElementById('leoWave');if(w)w.classList.remove('go','say');
+  function go(){
+   if(!chat.classList.contains('klopen'))return;
+   if(!api){api=window.KLeo3D&&window.KLeo3D.mount(dock);if(!api){failed=true;return}}
+   document.body.classList.add('klw-leo3d');dock.classList.add('on');api.start();
+   setTimeout(function(){act('jump')},450);setTimeout(function(){act('wave')},1700);
+  }
+  if(window.KLeo3D&&window.THREE)go();
+  else if(!loading){loading=true;window.KLeoLoad(function(ok){loading=false;if(!ok){failed=true;return}go()})}
+ }
+ function close(){
+  dock.classList.remove('on');document.body.classList.remove('klw-leo3d');
+  if(api)setTimeout(function(){if(!dock.classList.contains('on'))api.stop()},700);
+ }
+ function bind(){
+  chat=document.getElementById('klw-chat');if(!chat)return false;
+  new MutationObserver(function(){chat.classList.contains('klopen')?open():close()}).observe(chat,{attributes:true,attributeFilter:['class']});
+  var typing=document.getElementById('klw-typing');
+  if(typing)new MutationObserver(function(){
+   var on=typing.classList.contains('klshow');
+   if(on)act('up');else if(wasTyping)act(['wave','thumb','jump'][Math.floor(Math.random()*3)]);
+   wasTyping=on;
+  }).observe(typing,{attributes:true,attributeFilter:['class']});
+  var input=document.getElementById('klw-input');
+  if(input)input.addEventListener('input',function(){if(Date.now()-lastAct>2500)act('down')});
+  if(chat.classList.contains('klopen'))open();
+  return true;
+ }
+ var n=0,iv=setInterval(function(){if(bind()||++n>40)clearInterval(iv)},400);
+ dock.addEventListener('click',function(){act()});
+ setInterval(function(){if(dock.classList.contains('on')&&!document.hidden&&Date.now()-lastAct>6500)act()},1500);
 })();
 </script>
 <script src="/kl-assistant.js" defer></script>
