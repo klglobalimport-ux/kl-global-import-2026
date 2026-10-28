@@ -1,3 +1,6 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+
+[build]
+  command = "node scripts/check-jsonld.js"
