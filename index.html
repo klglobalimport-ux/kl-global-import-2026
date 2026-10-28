@@ -84,7 +84,9 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap">
+<link rel="preload" as="image" href="/maquette-accueil/img/c0.webp" fetchpriority="high">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap"></noscript>
 <style>
 /* Layout: fixed menu bar; pinned hero scrubbed by scroll (ship -> wide container -> inside); pinned product scene where scroll switches category with a circular reveal; then promo + trust. Palette and type from klglobalimport.com. */
 :root{
@@ -329,10 +331,10 @@ body{--klw-top:76px}
     <div id="cstage">
             <canvas id="extT"></canvas><canvas id="extB"></canvas>
       <div id="zoom"><div id="world">
-        <img class="f f0" src="/maquette-accueil/img/c0.jpg" alt="Container K&L fermé devant le hangar" width="1536" height="1024">
-        <img class="f f1" src="/maquette-accueil/img/c1.jpg" alt="Container rouge K&amp;L entrouvert, mini-pelle RIPPA bleue visible à l'intérieur" width="1536" height="1024">
-        <img class="f f2" src="/maquette-accueil/img/c2.jpg" alt="Trois mini-pelles RIPPA bleues dans un container rouge ouvert, dépôt K&amp;L" width="1536" height="1024">
-        <img class="f f3" src="/maquette-accueil/img/c3.jpg" alt="Container K&L ouvert avec des mini-pelles RIPPA à l'intérieur" width="1536" height="1024">
+        <img class="f f0" fetchpriority="high" src="/maquette-accueil/img/c0.webp" alt="Container K&L fermé devant le hangar" width="1536" height="1024">
+        <img class="f f1" src="/maquette-accueil/img/c1.webp" alt="Container rouge K&amp;L entrouvert, mini-pelle RIPPA bleue visible à l'intérieur" width="1536" height="1024">
+        <img class="f f2" src="/maquette-accueil/img/c2.webp" alt="Trois mini-pelles RIPPA bleues dans un container rouge ouvert, dépôt K&amp;L" width="1536" height="1024">
+        <img class="f f3" src="/maquette-accueil/img/c3.webp" alt="Container K&L ouvert avec des mini-pelles RIPPA à l'intérieur" width="1536" height="1024">
         <div class="seal" id="seal" style="left:770px;top:500px"><div class="tag"><i></i><b>Scellé K&amp;L</b></div></div>
         <div class="hs" data-k="pelle" data-n="RIPPA" style="left:585px;top:560px"><button class="dot" type="button" aria-label="Mini-pelle RIPPA"></button></div>
         <div class="hs" data-k="compacte" data-n="Compacte" style="left:752px;top:600px"><button class="dot" type="button" aria-label="Mini-pelle compacte"></button></div>
