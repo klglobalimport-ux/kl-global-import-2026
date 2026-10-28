@@ -244,7 +244,7 @@
     var AUTO_KEY = "klw-auto-open";
     var alreadyShown = false;
     try { alreadyShown = sessionStorage.getItem(AUTO_KEY) === "1"; } catch (e) {}
-    if (!alreadyShown && window.matchMedia && window.matchMedia("(max-width:720px)").matches) {
+    if (!alreadyShown && !window.KL_NO_AUTOOPEN && window.matchMedia && window.matchMedia("(max-width:720px)").matches) {
       setTimeout(function(){
         var typing = document.activeElement && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
         if (interacted || typing || chat.classList.contains("klopen")) return;

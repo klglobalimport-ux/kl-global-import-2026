@@ -250,6 +250,17 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:cl
 .lb{position:absolute;top:calc(100% + 12px);right:0;width:220px;background:#fff;color:#111;border-radius:14px 4px 14px 14px;padding:11px 13px;font-size:clamp(13px,1.001vw,19.5px);line-height:1.35;font-weight:500;text-transform:none;letter-spacing:0;box-shadow:0 10px 30px rgba(0,0,0,.5);opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s,transform .4s;text-align:left}
 .lb.on{opacity:1;transform:none}
 .lb:before{content:"";position:absolute;top:-6px;right:14px;width:12px;height:12px;background:#fff;transform:rotate(45deg)}
+/* Léo "coucou" : descend près de la souris / du dernier toucher */
+#leoWave{position:fixed;z-index:60;width:48px;height:48px;left:0;top:0;border-radius:50%;background:#1c1c20;border:1px solid rgba(255,255,255,.3);box-shadow:0 6px 22px rgba(0,0,0,.5),0 0 0 3px rgba(255,46,203,.35);display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;transition:transform 1s cubic-bezier(.22,1.2,.36,1),opacity .5s;-webkit-tap-highlight-color:transparent}
+#leoWave.go{opacity:1;pointer-events:auto}
+#leoWave img{width:38px;height:auto;display:block;transform-origin:50% 90%}
+#leoWave.wave img{animation:leoWave 1.1s ease-in-out 2}
+@keyframes leoWave{0%,100%{transform:rotate(0)}20%{transform:rotate(-16deg)}45%{transform:rotate(14deg)}70%{transform:rotate(-10deg)}}
+#leoWave .wb{position:absolute;top:50%;width:176px;background:#fff;color:#111;border-radius:14px;padding:9px 26px 9px 12px;font:500 13px/1.3 var(--font,system-ui);text-transform:none;letter-spacing:0;text-align:left;box-shadow:0 8px 24px rgba(0,0,0,.45);opacity:0;transform:translateY(-50%) scale(.85);transition:opacity .35s,transform .35s}
+#leoWave.say .wb{opacity:1;transform:translateY(-50%) scale(1)}
+#leoWave .wb.r{left:calc(100% + 10px)}#leoWave .wb.l{right:calc(100% + 10px)}
+#leoWave .wb i{position:absolute;top:4px;right:8px;font-style:normal;font-size:16px;line-height:1;color:#777;cursor:pointer;padding:2px 4px}
+@media (prefers-reduced-motion:reduce){#leoWave{transition:opacity .3s}#leoWave.wave img{animation:none}}
 </style>
 <style>
 .legacy{background:#0a0a0a;position:relative;z-index:2}
@@ -647,6 +658,56 @@ body{--klw-top:76px}
 <script>
 (function(){var L=document.getElementById('leoBtn');if(!L)return;
  L.addEventListener('click',function(e){e.preventDefault();var m=document.getElementById('klw-mascot');if(m){m.click()}else{window.open('/contact','_self')}});})();
+</script>
+<script>
+window.KL_NO_AUTOOPEN=true;
+(function(){
+ var KEY='klw-wave',done=false;try{done=sessionStorage.getItem(KEY)==='1'}catch(e){}
+ if(done)return;
+ var px=null,py=null,lastScroll=0,busy=false;
+ function pt(e){var t=e.touches&&e.touches[0]?e.touches[0]:e;if(t&&t.clientX!=null){px=t.clientX;py=t.clientY}}
+ ['mousemove','pointerdown','touchstart','click'].forEach(function(n){window.addEventListener(n,pt,{passive:true})});
+ window.addEventListener('scroll',function(){lastScroll=Date.now()},{passive:true});
+ var el=document.createElement('div');el.id='leoWave';el.setAttribute('role','button');el.setAttribute('aria-label','Discuter avec Léo');
+ el.innerHTML='<img src="/maquette-accueil/img/leo.webp" alt=""><span class="wb"><b>Coucou</b> 👋 Une question ? Je suis là pour t\'aider !<i aria-label="Fermer">&times;</i></span>';
+ document.body.appendChild(el);
+ var wb=el.querySelector('.wb'),x=el.querySelector('i'),leoB=document.querySelector('.ic.leo');
+ function chatOpen(){var c=document.getElementById('klw-chat');return c&&c.classList.contains('klopen')}
+ function origin(){var r=leoB?leoB.getBoundingClientRect():{left:window.innerWidth-60,top:10,width:40,height:40};return{x:r.left+r.width/2,y:r.top+r.height/2}}
+ function hide(back){
+  if(!busy)return;busy=false;el.classList.remove('say','wave');
+  if(back){var o=origin(),cx=parseFloat(el.dataset.cx),cy=parseFloat(el.dataset.cy);el.style.transform='translate('+(o.x-cx)+'px,'+(o.y-cy)+'px) scale(.5)'}
+  el.classList.remove('go');
+ }
+ function show(){
+  var W=window.innerWidth,H=window.innerHeight,m=34;
+  var tx=px==null?W-70:px,ty=py==null?H-130:py-72;
+  if(ty<90)ty=(py==null?H-130:py+72);
+  tx=Math.max(m,Math.min(W-m,tx));ty=Math.max(90,Math.min(H-m,ty));
+  var o=origin();
+  el.dataset.cx=tx;el.dataset.cy=ty;
+  el.style.left=(tx-24)+'px';el.style.top=(ty-24)+'px';
+  wb.className='wb '+(tx>W*.55?'l':'r');
+  el.style.transition='none';el.style.transform='translate('+(o.x-tx)+'px,'+(o.y-ty)+'px) scale(.5)';
+  void el.offsetWidth;
+  el.style.transition='';el.classList.add('go');el.style.transform='none';busy=true;
+  try{sessionStorage.setItem(KEY,'1')}catch(e){}
+  setTimeout(function(){if(!busy)return;el.classList.add('wave','say')},900);
+  setTimeout(function(){if(busy&&!el.matches(':hover'))hide(true)},9500);
+ }
+ el.addEventListener('click',function(e){
+  if(e.target===x){e.stopPropagation();hide(true);return}
+  hide(false);var m=document.getElementById('klw-mascot');if(m)m.click();
+ });
+ var tries=0;
+ function attempt(){
+  if(done)return;
+  if(chatOpen())return;
+  if(Date.now()-lastScroll<700&&tries<40){tries++;return setTimeout(attempt,500)}
+  done=true;show();
+ }
+ setTimeout(attempt,10000);
+})();
 </script>
 <script src="/kl-assistant.js" defer></script>
 </body>
