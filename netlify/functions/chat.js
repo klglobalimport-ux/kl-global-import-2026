@@ -47,16 +47,24 @@ Support : WhatsApp 7j/7 au +33 6 73 30 00 54 (https://wa.me/33673300054).
 Modules containers pliables : 10, 20, 30 et 40 pieds. On peut monter jusqu'à 2 NIVEAUX MAXIMUM
 (rez-de-chaussée + 1 étage) — pas plus pour l'instant.
 
-SURFACE DES MAISONS MODULAIRES — nos modules sont PLIABLES / EXTENSIBLES : une fois déployés, leur
-surface est BIEN PLUS GRANDE que l'emprise d'un container brut. NE déduis JAMAIS une surface de la taille
-du container ("20 pieds ≈ 15 m²" est FAUX). Surfaces réelles DÉPLOYÉES (surface de base, hors options,
-par module) :
-- 10 pieds ≈ 18,5 m²
-- 20 pieds ≈ 38 m²
-- 30 pieds ≈ 56 m²
-- 40 pieds ≈ 72 m²
-Tu PEUX donner ces surfaces. (Avec un étage, on cumule — ex : double deck 20 pieds ≈ 2× 38 m².) Pour la
-surface EXACTE selon la configuration et les options, renvoie au configurateur en ligne ou à un devis.
+DIMENSIONS ET SURFACES DES MAISONS MODULAIRES (source : fiche technique officielle K&L) — nos modules sont
+PLIABLES / EXTENSIBLES : une fois dépliés, ils sont BIEN PLUS LARGES qu'un container brut. NE déduis JAMAIS
+une surface de la taille du container ("20 pieds ≈ 15 m²" est FAUX). Utilise UNIQUEMENT ces chiffres :
+- 10 pieds : FERMÉ (transport) 3,00 × 2,44 × 2,48 m (L × l × H) · DÉPLIÉ 3,00 × 6,22 m · surface utile ≈ 17,6 m²
+  · 1 à 2 personnes · studio, kitchenette, coin sanitaire · 6 kW · poids ≈ 1,8 t
+- 20 pieds : FERMÉ 5,90 × 2,20 × 2,48 m · DÉPLIÉ 5,90 × 6,30 m · surface utile ≈ 37 m²
+  · 2 à 4 personnes · 1 chambre, salon, kitchenette, salle d'eau · 12 kW · poids ≈ 2,8 t
+- 30 pieds : FERMÉ 9,00 × 2,20 × 2,48 m · DÉPLIÉ 9,00 × 6,22 m · surface utile ≈ 56 m²
+  · 3 à 6 personnes · 2 chambres, salon, cuisine, salle de bain · 12 kW · poids ≈ 3,75 t
+- 40 pieds : FERMÉ 11,80 × 2,20 × 2,48 m · DÉPLIÉ 11,80 × 6,22 m · surface utile ≈ 72 m²
+  · 3 à 6 personnes · 2 à 3 chambres, salon, cuisine, 1 à 2 salles de bain · 12 kW · poids ≈ 4,6 t
+Hauteur : 2,48 m (identique fermé et déplié, toit plat standard ; plus haut avec l'option toiture à pentes).
+Dépliage sur site : 1 à 2 heures, à 4 personnes.
+Quand on te demande « la taille » ou « les dimensions », donne d'abord les dimensions DÉPLIÉES (longueur ×
+largeur) et la surface, puis précise les dimensions fermées pour le transport si c'est utile.
+Avec un étage, on cumule (ex : double deck 20 pieds ≈ 2 × 37 m²). La configuration intérieure est
+personnalisable : pour une surface ou un plan EXACT selon les options, renvoie au configurateur ou à un devis.
+Fiches techniques et brochures : https://klglobalimport.com/brochures
 
 • EMPILAGE IDENTIQUE ("double deck", le même module en double) : possible dans TOUTES les tailles —
   2× 10 pieds, 2× 20 pieds, 2× 30 pieds, 2× 40 pieds.
