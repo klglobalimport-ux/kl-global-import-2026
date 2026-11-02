@@ -119,7 +119,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:cl
 .pill.orange{border:2px solid var(--accent);box-shadow:0 0 14px rgba(255,90,61,.45);color:#ffb39f}
 .pill.blue{border:2px solid var(--blue);box-shadow:0 0 14px rgba(46,159,255,.45);color:#cfe8ff}
 .pill.client{border:1px solid rgba(255,255,255,.25);font-weight:600;font-size:clamp(11px,0.847vw,16.5px);color:var(--muted)}
-.burger{all:unset;display:none;box-sizing:border-box;cursor:pointer;width:42px;height:42px;border-radius:10px;border:1px solid rgba(255,255,255,.25);align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.burger{all:unset;display:flex;box-sizing:border-box;cursor:pointer;height:42px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.35);align-items:center;justify-content:center;flex-direction:row;gap:10px;color:var(--text);font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.burger .bi{display:flex;flex-direction:column;gap:5px}
 .burger i{display:block;width:18px;height:2px;background:var(--text);transition:transform .25s,opacity .25s}
 .burger[aria-expanded="true"] i:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .burger[aria-expanded="true"] i:nth-child(2){opacity:0}
@@ -129,7 +130,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:cl
 .menu a{color:var(--text);text-decoration:none;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:clamp(14px,1.078vw,21px);padding:14px 4px;border-bottom:1px solid var(--border)}
 .menu a:last-child{border-bottom:0;color:var(--accent)}
 .top a:focus-visible,.burger:focus-visible,.menu a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-@media (max-width:900px){.top nav,.pill.orange,.pill.client{display:none}.burger{display:flex}.right{margin-left:auto}}
+@media (max-width:900px){.top nav,.pill.orange,.pill.client{display:none}.right{margin-left:auto}}
+@media (min-width:901px){.menu{left:auto;right:16px;width:340px;border:1px solid var(--border);border-radius:14px}}
 
 /* ---------- hero ---------- */
 .scroll{height:470vh;position:relative}
@@ -309,11 +311,16 @@ body{--klw-top:76px}
     <a class="ic leo" id="leoBtn" href="#" role="button" aria-label="Discuter avec Léo, l'assistant K&amp;L" title="Discuter avec Léo"><img src="/maquette-accueil/img/leo.webp" alt="Léo"><span class="lb" id="lb"><b>Bonjour 👋</b><br>Une question ? Je suis Léo, l'assistant K&amp;L. Je réponds tout de suite !</span></a>
     <a class="pill orange" href="/apporteurs">Apporteurs</a>
     <a class="pill client" href="/contact">Espace client</a>
-    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i><i></i></button>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"><span class="bi"><i></i><i></i><i></i></span><span>Menu</span></button>
   </div>
 </header>
 <div class="menu" id="menu">
   <a href="#top" data-home>Accueil</a>
+  <a href="/maison-modulaire">Maisons modulaires</a>
+  <a href="/capsule-house">Capsule house</a>
+  <a href="/engins-rippa">Mini-pelles &amp; engins RIPPA</a>
+  <a href="/location-mini-pelle-sisteron">Location de mini-pelle</a>
+  <a href="/loisir-habitat">Loisirs &amp; habitat</a>
   <a href="/brochures">Brochures</a>
   <a href="/contact?sujet=demande-tarifs">Tarifs</a>
   <a href="/contact">Contact</a>
