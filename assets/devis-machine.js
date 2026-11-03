@@ -63,8 +63,8 @@
     + '#dm-modal .dm-btn{width:100%;background:#4ade80;color:#0a0a0a;border:none;border-radius:9px;padding:14px;font-size:1rem;font-weight:800;cursor:pointer;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}'
     + '#dm-modal .dm-cancel{width:100%;background:transparent;color:#9aa1ab;border:none;padding:10px;font-size:.85rem;cursor:pointer;margin-top:6px}'
     + '#dm-modal .dm-x{position:absolute;top:14px;right:16px;background:none;border:none;color:#9aa1ab;font-size:1.5rem;cursor:pointer;line-height:1}'
-    + '.kl-cta-float{position:fixed;left:14px;bottom:14px;z-index:9998;display:flex;gap:8px;flex-wrap:wrap;max-width:calc(100% - 92px)}'
-    + '.kl-cta-float .kl-b{font:700 .78rem/1 system-ui,-apple-system,Arial;padding:11px 15px;border-radius:24px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.4);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}'
+    + '.kl-cta-float{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:9998;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:calc(100% - 150px)}'
+    + '.kl-cta-float .kl-b{font:800 .92rem/1 system-ui,-apple-system,Arial;padding:15px 22px;border-radius:24px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.4);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}'
     + '.kl-cta-float .kl-devis{background:#4ade80;color:#08210f}'
     + '.kl-cta-float .kl-contact{background:#2e6df0;color:#fff}'
     + '.kl-cta-float .kl-b:hover{filter:brightness(1.06)}';
@@ -235,7 +235,7 @@
       b.setAttribute('data-produit', cfg.produit || 'Machine');
       b.setAttribute('data-prix', cfg.prix || 0);
       b.setAttribute('data-type', cfg.type || 'machine');
-      b.innerHTML = '📄 Devis PDF';
+      b.innerHTML = '📄 Faire mon devis';
       b.addEventListener('click', function () { openDevisMachine(b); });
       wrap.appendChild(b);
     }
