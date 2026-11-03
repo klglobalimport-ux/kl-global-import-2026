@@ -56,14 +56,19 @@
     + '.topbar .topnav,.topbar .topbar-client,.main-tabs{display:none!important}'
     + '.topbar{flex-direction:row!important;align-items:center!important;justify-content:space-between!important}'
     + '.top nav,.top .pill,.top #burger,#menu{display:none!important}'
-    + '#klm-btn{all:unset;box-sizing:border-box;cursor:pointer;width:46px;height:46px;border-radius:12px;border:1px solid rgba(255,255,255,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:rgba(255,255,255,.06);margin-left:auto;flex:none}'
-    + '#klm-btn:hover{background:rgba(255,255,255,.14)}'
+    + '#klm-btn{all:unset;box-sizing:border-box;cursor:pointer;width:46px;height:46px;border-radius:12px;border:2px solid #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:#2e6df0;box-shadow:0 2px 10px rgba(0,0,0,.5);flex:none}'
+    + '#klm-btn:hover{background:#4a85ff}'
+    + '#klm-home{all:unset;box-sizing:border-box;cursor:pointer;width:46px;height:46px;border-radius:12px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;background:#16a34a;box-shadow:0 2px 10px rgba(0,0,0,.5);flex:none}'
+    + '#klm-home:hover{background:#22c55e}#klm-home svg{width:24px;height:24px;fill:#fff;display:block}'
+    + '#klm-home:focus-visible{outline:2px solid #2e9fff;outline-offset:3px}'
+    + '.klm-grp{display:flex;align-items:center;gap:10px;margin-left:auto;flex:none}'
+    + '.klm-grp.klm-float{position:fixed;top:12px;right:12px;z-index:9999}'
     + '#klm-btn:focus-visible{outline:2px solid #2e9fff;outline-offset:3px}'
     + '#klm-btn i{display:block;width:20px;height:2px;background:#fff;border-radius:2px;transition:transform .25s,opacity .25s}'
     + '#klm-btn[aria-expanded="true"] i:nth-child(1){transform:translateY(7px) rotate(45deg)}'
     + '#klm-btn[aria-expanded="true"] i:nth-child(2){opacity:0}'
     + '#klm-btn[aria-expanded="true"] i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}'
-    + '#klm-btn.klm-float{position:fixed;top:12px;right:12px;z-index:9999;background:rgba(10,10,12,.75);backdrop-filter:blur(10px)}'
+    + ''
     + '.top .right{gap:12px;margin-left:auto}'
     + '#klm-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2147483001;opacity:0;pointer-events:none;transition:opacity .25s}'
     + '#klm-ov.open{opacity:1;pointer-events:auto}'
@@ -104,8 +109,15 @@
 
     var btn = el('button', { id: 'klm-btn', type: 'button', 'aria-label': 'Ouvrir le menu', 'aria-expanded': 'false', 'aria-controls': 'klm' });
     btn.appendChild(el('i')); btn.appendChild(el('i')); btn.appendChild(el('i'));
+    var grp = el('div', { 'class': 'klm-grp' });
+    if (here !== '/') {
+      var home = el('a', { id: 'klm-home', href: '/', 'aria-label': 'Retour \u00e0 l\u2019accueil', title: 'Accueil' });
+      home.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg>';
+      grp.appendChild(home);
+    }
+    grp.appendChild(btn);
     var bar = document.querySelector('.topbar') || document.querySelector('.top .right');
-    if (bar) bar.appendChild(btn); else { btn.className = 'klm-float'; document.body.appendChild(btn); }
+    if (bar) bar.appendChild(grp); else { grp.className += ' klm-float'; document.body.appendChild(grp); }
 
     var ov = el('div', { id: 'klm-ov' });
     var nav = el('nav', { id: 'klm', 'aria-label': 'Menu principal', 'aria-hidden': 'true' });
