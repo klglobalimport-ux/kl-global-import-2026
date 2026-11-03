@@ -701,13 +701,18 @@ body.has-scrolled a[class*="-back-link"] {
     margin-bottom: 18px !important;
   }
 
+  /* Mobile : le lien retour ne flotte plus, il défile avec la page */
   body.has-scrolled .btn-back,
   body.has-scrolled a[class*="-back-link"] {
-    left: 12px !important;
-    top: calc(env(safe-area-inset-top) + 154px) !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
     right: auto !important;
     bottom: auto !important;
-    width: auto;
+    z-index: 3 !important;
+    margin-top: 12px !important;
+    margin-bottom: 18px !important;
+    width: fit-content;
     justify-content: flex-start;
   }
 }
