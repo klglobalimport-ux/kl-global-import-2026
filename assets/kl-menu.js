@@ -159,6 +159,12 @@
     nav.appendChild(head); nav.appendChild(list);
     document.body.appendChild(ov); document.body.appendChild(nav);
 
+    function setBarH() {
+      var tb = document.querySelector('.topbar') || document.querySelector('.top');
+      if (tb) document.documentElement.style.setProperty('--klbar-h', Math.round(tb.getBoundingClientRect().height) + 'px');
+    }
+    setBarH(); window.addEventListener('resize', setBarH); window.addEventListener('load', setBarH);
+
     function setOpen(o) {
       nav.classList.toggle('open', o); ov.classList.toggle('open', o);
       btn.setAttribute('aria-expanded', String(o)); nav.setAttribute('aria-hidden', String(!o));

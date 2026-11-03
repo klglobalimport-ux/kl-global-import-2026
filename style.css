@@ -701,17 +701,28 @@ body.has-scrolled a[class*="-back-link"] {
     margin-bottom: 18px !important;
   }
 
-  /* Mobile : le lien retour ne flotte plus, il défile avec la page */
+  /* Mobile : lien retour petit, néon bleu ; dans la page au départ, collé sous le bandeau au scroll */
+  .btn-back,
+  a[class*="-back-link"] {
+    font-size: 0.74rem !important;
+    padding: 6px 12px !important;
+    color: #bfe6ff !important;
+    border: 1.5px solid #2e9fff !important;
+    background: rgba(4, 14, 30, 0.88) !important;
+    box-shadow: 0 0 6px #2e9fff, 0 0 16px rgba(46, 159, 255, 0.55), inset 0 0 8px rgba(46, 159, 255, 0.25) !important;
+    text-shadow: 0 0 6px rgba(46, 159, 255, 0.9);
+    line-height: 1.2;
+  }
+
   body.has-scrolled .btn-back,
   body.has-scrolled a[class*="-back-link"] {
-    position: relative !important;
-    left: auto !important;
-    top: auto !important;
+    position: fixed !important;
+    left: 8px !important;
+    top: calc(var(--klbar-h, 92px) + 6px) !important;
     right: auto !important;
     bottom: auto !important;
-    z-index: 3 !important;
-    margin-top: 12px !important;
-    margin-bottom: 18px !important;
+    z-index: 10001 !important;
+    margin: 0 !important;
     width: fit-content;
     justify-content: flex-start;
   }
