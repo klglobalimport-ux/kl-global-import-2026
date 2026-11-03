@@ -67,7 +67,11 @@
     + '.kl-cta-float .kl-b{font:800 .92rem/1 system-ui,-apple-system,Arial;padding:15px 22px;border-radius:24px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.4);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}'
     + '.kl-cta-float .kl-devis{background:#4ade80;color:#08210f}'
     + '.kl-cta-float .kl-contact{background:#2e6df0;color:#fff}'
-    + '.kl-cta-float .kl-b:hover{filter:brightness(1.06)}';
+    + '.kl-cta-float .kl-b:hover{filter:brightness(1.06)}'
+    + '@media (max-width:720px){.kl-cta-float{left:auto;right:14px;transform:none;bottom:calc(20px + env(safe-area-inset-bottom,0px));max-width:none}'
+    + '.kl-cta-float .kl-contact{display:none}'
+    + '.kl-cta-float .kl-devis{width:54px;height:54px;padding:0;border-radius:50%;justify-content:center;font-size:0;gap:0}'
+    + '.kl-cta-float .kl-devis::before{content:"\\1F4C4";font-size:26px;line-height:1}}';
 
   var MODAL = '<div id="dm-modal"><div class="dm-card">'
     + '<button type="button" class="dm-x" id="dm-x">&times;</button>'
@@ -231,7 +235,7 @@
     var wrap = document.createElement('div'); wrap.className = 'kl-cta-float';
     if (cfg.devis !== false) { // devis:false -> bouton Contactez-nous seul (capsules, modules)
       var b = document.createElement('button');
-      b.type = 'button'; b.className = 'kl-b kl-devis';
+      b.type = 'button'; b.className = 'kl-b kl-devis'; b.setAttribute('aria-label', 'Faire mon devis');
       b.setAttribute('data-produit', cfg.produit || 'Machine');
       b.setAttribute('data-prix', cfg.prix || 0);
       b.setAttribute('data-type', cfg.type || 'machine');
