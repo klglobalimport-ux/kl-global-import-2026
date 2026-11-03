@@ -76,7 +76,8 @@
     + '<form id="dm-form" name="devis-machine" data-netlify="true" netlify-honeypot="bot-field">'
     + '<input type="hidden" name="form-name" value="devis-machine">'
     + '<p style="display:none"><label>Ne pas remplir <input name="bot-field"></label></p>'
-    + '<label>Code postal de livraison *<input type="text" name="code_postal" inputmode="numeric" maxlength="5" placeholder="ex. 33000" required></label>'
+    + '<label class="dm-consent dm-pickup"><input type="checkbox" name="retrait_depot" value="oui"> Je récupère le matériel moi-même au dépôt K&amp;L de Sisteron (sans livraison)</label>'
+    + '<label id="dm-cp-wrap">Code postal de livraison *<input type="text" name="code_postal" inputmode="numeric" maxlength="5" placeholder="ex. 33000" required></label>'
     + '<label>Nom complet *<input type="text" name="nom" required></label>'
     + '<label>Email *<input type="email" name="email" required></label>'
     + '<label>Téléphone<input type="tel" name="telephone"></label>'
@@ -96,6 +97,12 @@
     var wrap = document.createElement('div'); wrap.innerHTML = MODAL;
     document.body.appendChild(wrap.firstChild);
     document.getElementById('dm-form').addEventListener('submit', submitDevis);
+    var pk = document.querySelector('#dm-form [name="retrait_depot"]');
+    pk.addEventListener('change', function () {
+      var cpi = document.querySelector('#dm-form [name="code_postal"]');
+      document.getElementById('dm-cp-wrap').style.display = pk.checked ? 'none' : '';
+      cpi.required = !pk.checked;
+    });
     document.getElementById('dm-cancel').addEventListener('click', closeModal);
     document.getElementById('dm-x').addEventListener('click', closeModal);
     document.getElementById('dm-modal').addEventListener('click', function (e) { if (e.target.id === 'dm-modal') closeModal(); });
@@ -117,26 +124,28 @@
   function submitDevis(e) {
     e.preventDefault();
     var f = e.target, m = document.getElementById('dm-modal');
-    var cp = (f.code_postal.value || '').replace(/\D/g, '').slice(0, 5);
-    var z = zoneFromCP(cp);
+    var retrait = !!(f.retrait_depot && f.retrait_depot.checked);
+    var cp = retrait ? '' : (f.code_postal.value || '').replace(/\D/g, '').slice(0, 5);
+    var z = retrait ? null : zoneFromCP(cp);
     var grid = m.dataset.type === 'tondeuse' ? GRID_TONDEUSE : GRID_MACHINE;
     var produit = m.dataset.produit, prix = parseFloat(m.dataset.prix) || 0;
     var zoneTxt, transport;
-    if (grid[z]) { zoneTxt = 'Zone ' + z.replace('Z', ''); transport = grid[z]; }
+    if (retrait) { zoneTxt = 'Retrait au dépôt K&L, Sisteron (04)'; transport = 0; }
+    else if (grid[z]) { zoneTxt = 'Zone ' + z.replace('Z', ''); transport = grid[z]; }
     else if (z === 'CORSE' || z === 'DOM') { zoneTxt = 'sur devis'; transport = 0; }
     else { zoneTxt = 'à définir'; transport = 0; }
     var ht = prix + transport, tva = Math.round(ht * VAT), ttc = ht + tva;
     var d = {
       nom: (f.nom.value || '').trim(), email: (f.email.value || '').trim(), tel: (f.telephone.value || '').trim() || '—',
-      cp: cp || '—', zoneTxt: zoneTxt, produit: produit, prixHT: prix, transport: transport,
+      retrait: retrait, cp: cp || '—', zoneTxt: zoneTxt, produit: produit, prixHT: prix, transport: transport,
       htStr: eur(ht), tvaStr: eur(tva), ttcStr: eur(ttc)
     };
     setVal(f, 'produit', produit);
     setVal(f, 'prix_ht', eur(prix));
-    setVal(f, 'transport', transport > 0 ? eur(transport) : zoneTxt);
-    setVal(f, 'zone', d.cp + ' (' + zoneTxt + ')');
+    setVal(f, 'transport', retrait ? 'Retrait au dépôt (0 €)' : (transport > 0 ? eur(transport) : zoneTxt));
+    setVal(f, 'zone', retrait ? zoneTxt : d.cp + ' (' + zoneTxt + ')');
     setVal(f, 'total_ttc', d.ttcStr);
-    setVal(f, 'recapitulatif', 'Produit: ' + produit + '\nPrix HT: ' + eur(prix) + '\nCode postal: ' + d.cp + ' (' + zoneTxt + ')\nTransport: ' + (transport > 0 ? eur(transport) : zoneTxt) + '\nTotal TTC: ' + d.ttcStr);
+    setVal(f, 'recapitulatif', 'Produit: ' + produit + '\nPrix HT: ' + eur(prix) + (retrait ? '\nRetrait: ' + zoneTxt + '\nTransport: aucun (0 €)' : '\nCode postal: ' + d.cp + ' (' + zoneTxt + ')\nTransport: ' + (transport > 0 ? eur(transport) : zoneTxt)) + '\nTotal TTC: ' + d.ttcStr);
     try {
       var data = new URLSearchParams(new FormData(f)).toString();
       fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data }).catch(function () {});
@@ -171,7 +180,7 @@
     doc.setFont('helvetica', 'bold'); doc.setFontSize(12); doc.setTextColor(25, 25, 25); doc.text(d.nom, M, y + 20);
     doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(85, 85, 85);
     doc.text(d.email, M, y + 37); doc.text('Tél : ' + d.tel, M, y + 52);
-    doc.text('Lieu de livraison : ' + d.cp + '  (' + d.zoneTxt + ')', M, y + 67);
+    doc.text(d.retrait ? 'Retrait : ' + d.zoneTxt : 'Lieu de livraison : ' + d.cp + '  (' + d.zoneTxt + ')', M, y + 67);
     var bx = 350, bw = right - bx;
     doc.setDrawColor(205, 212, 224); doc.setLineWidth(1); doc.roundedRect(bx, y - 14, bw, 64, 5, 5, 'S');
     doc.setFont('helvetica', 'normal'); doc.setFontSize(9); doc.setTextColor(120, 120, 120); doc.text('N° de devis', bx + 14, y + 10);
@@ -192,7 +201,7 @@
       y += h; doc.setDrawColor(224, 228, 236); doc.setLineWidth(0.7); doc.line(M, y - 15, right, y - 15);
     }
     row(d.produit, eur(d.prixHT), { bold: true });
-    row('Transport — ' + d.zoneTxt + '  (estimation sous réserve)', d.transport > 0 ? eur(d.transport) : 'sur devis', { fill: true, bold: true, blue: true });
+    row(d.retrait ? 'Retrait au dépôt K&L (Sisteron) — sans transport' : 'Transport — ' + d.zoneTxt + '  (estimation sous réserve)', d.retrait ? eur(0) : (d.transport > 0 ? eur(d.transport) : 'sur devis'), { fill: true, bold: true, blue: true });
     row('Total HT', d.htStr, { bold: true });
     row('TVA (20 %)', d.tvaStr);
 
