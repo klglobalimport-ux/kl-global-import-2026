@@ -64,7 +64,7 @@
     + '#klm-btn[aria-expanded="true"] i:nth-child(2){opacity:0}'
     + '#klm-btn[aria-expanded="true"] i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}'
     + '#klm-btn.klm-float{position:fixed;top:12px;right:12px;z-index:9999;background:rgba(10,10,12,.75);backdrop-filter:blur(10px)}'
-    + '.top .right{gap:12px}'
+    + '.top .right{gap:12px;margin-left:auto}'
     + '#klm-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2147483001;opacity:0;pointer-events:none;transition:opacity .25s}'
     + '#klm-ov.open{opacity:1;pointer-events:auto}'
     + '#klm{position:fixed;top:0;right:0;bottom:0;width:min(390px,92vw);z-index:2147483002;background:#0b0d12;border-left:1px solid rgba(255,255,255,.14);transform:translateX(100%);transition:transform .28s ease;display:flex;flex-direction:column;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}'
