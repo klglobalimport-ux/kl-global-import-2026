@@ -68,7 +68,7 @@
     + '.kl-cta-float .kl-devis{background:#4ade80;color:#08210f}'
     + '.kl-cta-float .kl-contact{background:#2e6df0;color:#fff}'
     + '.kl-cta-float .kl-b:hover{filter:brightness(1.06)}'
-    + '@media (max-width:720px){.kl-cta-float{left:auto;right:14px;transform:none;bottom:150px;max-width:none}'
+    + '@media (max-width:720px){.kl-cta-float{left:auto;right:14px;transform:none;bottom:calc(20px + env(safe-area-inset-bottom,0px));max-width:none}'
     + '.kl-cta-float .kl-contact{display:none}'
     + '.kl-cta-float .kl-devis{width:54px;height:54px;padding:0;border-radius:50%;justify-content:center;font-size:0;gap:0}'
     + '.kl-cta-float .kl-devis::before{content:"\\1F4C4";font-size:26px;line-height:1}}';

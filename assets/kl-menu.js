@@ -61,7 +61,7 @@
     + '#klm-home{all:unset;box-sizing:border-box;cursor:pointer;width:46px;height:46px;border-radius:12px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;background:#16a34a;box-shadow:0 2px 10px rgba(0,0,0,.5);flex:none}'
     + '#klm-home:hover{background:#22c55e}#klm-home svg{width:24px;height:24px;fill:#fff;display:block}'
     + '#klm-home:focus-visible{outline:2px solid #2e9fff;outline-offset:3px}'
-    + '.klm-grp{display:flex;align-items:center;gap:10px;margin-left:auto;flex:none}'
+    + '.klm-grp{display:flex;align-items:center;gap:10px;margin-left:auto;flex:none}.topbar .klm-grp{order:3}'
     + '.klm-grp.klm-float{position:fixed;top:12px;right:12px;z-index:9999}'
     + '#klm-btn:focus-visible{outline:2px solid #2e9fff;outline-offset:3px}'
     + '#klm-btn i{display:block;width:20px;height:2px;background:#fff;border-radius:2px;transition:transform .25s,opacity .25s}'
