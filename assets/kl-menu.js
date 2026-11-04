@@ -26,6 +26,7 @@
       ['Mairies, collectivités & agriculture', '/modules-collectivites']
     ] },
     { t: 'Engins RIPPA', h: '/engins-rippa', c: [
+      ['Prix mini-pelle neuve 2026', '/prix-mini-pelle-neuve-france'],
       ['Mini-pelle R06-ECO (750 kg)', '/rippa-r06-eco'],
       ['Mini-pelle R10 ECO (1 t)', '/rippa-r10'],
       ['Mini-pelle R13 PRO', '/rippa-r13'],
