@@ -2499,9 +2499,17 @@
         // ===== TRANSPORT PAR ZONE (devis auto) =====
         // Une seule table à éditer pour ajuster les tarifs après les rendez-vous transporteurs.
         const TRANSPORT = {
-            semi:       { Z1: 300, Z2: 400, Z3: 600, Z4: 900, Z5: 1200 },                         // transport semi par zone (€ HT)
-            grutage:    { '10ft': 400, '20ft': 500, '30ft': 1200, '40ft': 1400, 'double-deck': 1800 }, // grue par taille (€ HT)
-            majoration: 1.20                                                                        // +20 % maisons modulaires
+            // Forfait transport + grutage TOUT COMPRIS (€ HT) par taille et par zone — grille du 05/11/2026
+            forfait: {
+                '10ft':        { Z1: 1300, Z2: 1500, Z3: 1700, Z4: 1900, Z5: 2100 },
+                '20ft':        { Z1: 1500, Z2: 1900, Z3: 2300, Z4: 2700, Z5: 3100 },
+                '30ft':        { Z1: 1600, Z2: 2000, Z3: 2400, Z4: 2800, Z5: 3200 },
+                '40ft':        { Z1: 1800, Z2: 2200, Z3: 2600, Z4: 3000, Z5: 3400 },
+                'double-deck': { Z1: 1800, Z2: 2300, Z3: 2800, Z4: 3300, Z5: 3800 }
+            },
+            // Part « grutage seul » du forfait (€ HT) : sert si le client ne prend que la grue ; « transport seul » = forfait − grutage
+            grutageSeul: { '10ft': 450, '20ft': 550, '30ft': 550, '40ft': 650, 'double-deck': 650 },
+            majoration: 1   // majoration déjà incluse dans la grille
         };
         // Départements par zone — distance routière depuis Sisteron (04)
         const ZONE_DEPTS = {
@@ -2511,6 +2519,7 @@
             Z4: ['02','08','10','16','17','27','28','37','41','44','45','49','51','52','53','54','55','57','60','61','64','67','68','72','75','76','77','78','79','80','85','86','88','90','91','92','93','94','95'],
             Z5: ['14','22','29','35','50','56','59','62']
         };
+        function isKnownZone(z) { return !!(z && TRANSPORT.forfait['20ft'][z]); }
         function zoneFromCP(cp) {
             const c = String(cp || '').replace(/\D/g, '');
             if (c.length < 2) return null;
@@ -2523,11 +2532,11 @@
         // Montant fret selon l'option cochée + zone + taille (majoration maisons incluse)
         function fretAmount() {
             const z = zoneFromCP(config.codePostal);
-            const semi = TRANSPORT.semi[z] || 0;
-            const grut = TRANSPORT.grutage[config.size] || 0;
+            const forfait = (TRANSPORT.forfait[config.size] || {})[z] || 0;   // transport + grutage
+            const grut = TRANSPORT.grutageSeul[config.size] || 0;             // grutage seul
             let amt = 0;
-            if (config.shippingBoth) amt = semi + grut;
-            else if (config.shippingTransport) amt = semi;
+            if (config.shippingBoth) amt = forfait;
+            else if (config.shippingTransport) amt = forfait > 0 ? Math.max(forfait - grut, 0) : 0;
             else if (config.shippingCrane) amt = grut;
             return Math.round(amt * TRANSPORT.majoration);
         }
@@ -2988,10 +2997,10 @@
                     fret.textContent = 'Sélectionnez transport et/ou grutage';
                 } else if (needsSemi && (z === 'CORSE' || z === 'DOM')) {
                     fret.textContent = 'Corse / Outre-mer : transport sur devis';
-                } else if (needsSemi && !TRANSPORT.semi[z]) {
+                } else if (needsSemi && !isKnownZone(z)) {
                     fret.textContent = '⚠️ Renseignez votre code postal ci-dessus pour estimer le transport';
                 } else {
-                    const zlabel = TRANSPORT.semi[z] ? ' — Zone ' + z.replace('Z', '') : '';
+                    const zlabel = isKnownZone(z) ? ' — Zone ' + z.replace('Z', '') : '';
                     fret.textContent = 'Transport estimé : ' + formatPriceForDisplay(fretAmount(), poly) + zlabel + ' (sous réserve)';
                 }
             }
@@ -3154,7 +3163,7 @@
             const cur = poly ? ' XPF' : ' €';
             const fmt = function(v){ return formatPriceForDisplay(v, poly); };
             const z = zoneFromCP(config.codePostal);
-            const zoneTxt = TRANSPORT.semi[z] ? ('Zone ' + z.replace('Z','')) : ((z === 'CORSE' || z === 'DOM') ? 'sur devis' : 'à définir');
+            const zoneTxt = isKnownZone(z) ? ('Zone ' + z.replace('Z','')) : ((z === 'CORSE' || z === 'DOM') ? 'sur devis' : 'à définir');
             const opts = getActiveOptions().filter(function(o){ return o.indexOf('shipping') !== 0; }).map(getOptionLabel);
             const now = new Date();
             const pad = function(n){ return (n < 10 ? '0' : '') + n; };
