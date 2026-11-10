@@ -23,15 +23,14 @@
     if (!n) {
       n = document.createElement('div');
       n.className = 'kl-email-note';
-      n.style.cssText = 'font-size:.9rem;margin-top:6px;line-height:1.4';
+      n.style.cssText = 'font-size:1.05rem;margin-top:8px;line-height:1.4;font-weight:600';
       input.insertAdjacentElement('afterend', n);
     }
     return n;
   }
   function render(input) {
     var v = input.value.trim(), n = note(input);
-    input.style.fontWeight = '700';
-    input.style.fontSize = '1.05rem';
+    input.style.cssText += ';font-family:"Courier New",Consolas,monospace;font-weight:800;font-size:1.45rem;letter-spacing:.5px;color:#e6007e;background:#fff7fb;border:2px solid #e6007e;padding:12px';
     if (!v) { n.textContent = ''; return; }
     var at = v.lastIndexOf('@'), fix = null;
     if (at > 0) fix = suggest(v.slice(at + 1));
@@ -41,7 +40,7 @@
       n.querySelector('b').textContent = corrected;
       n.querySelector('a').onclick = function (e) { e.preventDefault(); input.value = corrected; render(input); input.dispatchEvent(new Event('input', { bubbles: true })); };
     } else if (at > 0 && v.indexOf('.', at) > -1) {
-      n.innerHTML = 'Nous vous répondrons à : <b></b>. Vérifiez bien l’adresse.';
+      n.innerHTML = 'Nous vous répondrons à : <b style="color:#e6007e;font-family:Courier New,monospace;font-size:1.25rem"></b><br>Lettre par lettre, est-ce bien la bonne adresse ?';
       n.querySelector('b').textContent = v;
     } else {
       n.textContent = 'Vérifiez bien votre email : c’est là que nous vous répondrons.';
