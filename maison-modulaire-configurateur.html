@@ -3393,6 +3393,7 @@
             try {
                 const data = new URLSearchParams(new FormData(form)).toString();
                 fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data }).catch(function(){});
+                try { if (typeof gtag === 'function') gtag('event', 'contact_form_submit', { event_category: 'conversion', event_label: 'configurateur_maison', page: location.pathname }); } catch (e2) {}
             } catch (err) {}
             // Génération + téléchargement du PDF
             try {

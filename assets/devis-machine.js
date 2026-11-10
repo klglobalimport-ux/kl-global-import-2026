@@ -154,6 +154,7 @@
       var data = new URLSearchParams(new FormData(f)).toString();
       fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data }).catch(function () {});
     } catch (err) {}
+    try { if (typeof gtag === 'function') gtag('event', 'contact_form_submit', { event_category: 'conversion', event_label: 'devis_machine_' + produit, page: location.pathname }); } catch (err) {}
     try { buildPDF(d); } catch (err) { alert('Votre demande nous a bien été transmise. Le PDF n\'a pas pu être généré automatiquement — nous vous recontactons rapidement.'); }
     closeModal();
     return false;
