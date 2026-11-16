@@ -1,48 +1,14 @@
 /* KL Global Import — menu général (toutes les pages)
-   Bouton "burger" sans texte dans le bandeau + tiroir avec toutes les catégories et sous-catégories. */
+   Bouton "burger" sans texte dans le bandeau + tiroir avec les catégories principales uniquement (sans sous-menus). */
 (function () {
   'use strict';
   if (window.__klMenu) return; window.__klMenu = true;
 
   var MENU = [
     { t: 'Accueil', h: '/' },
-    { t: 'Maisons & capsules', h: '/habitat', c: [
-      ['Configurateur maisons modulaires', '/maison-modulaire-configurateur'],
-      ['Maison modulaire 10 FT', '/maison-modulaire-10ft'],
-      ['Maison modulaire 20 FT', '/maison-modulaire-20ft'],
-      ['Maison modulaire 30 FT', '/maison-modulaire-30ft'],
-      ['Maison modulaire 40 FT', '/maison-modulaire-40ft'],
-      ['Maison insolite — Chalet', '/maison-insolite-chalet'],
-      ['Maison insolite — Nid d’abeille', '/maison-insolite-nid-abeille'],
-      ['Maison insolite — Tipi', '/maison-insolite-tipi'],
-      ['Capsule house', '/capsule-house'],
-      ['KL·Horizon', '/kl-horizon'],
-      ['KL·Pod', '/apple-pod'],
-      ['KL·Dérive', '/derive']
-    ] },
-    { t: 'Loisirs & habitat', h: '/loisir-habitat', c: [
-      ['Tondeuses télécommandées', '/tondeuses-rc'],
-      ['Camping', '/camping'],
-      ['Mairies, collectivités & agriculture', '/modules-collectivites']
-    ] },
-    { t: 'Engins RIPPA', h: '/engins-rippa', c: [
-      ['Prix mini-pelle neuve 2026', '/prix-mini-pelle-neuve-france'],
-      ['Mini-pelle R06-ECO (750 kg)', '/rippa-r06-eco'],
-      ['Mini-pelle R10 ECO (1 t)', '/rippa-r10'],
-      ['Mini-pelle R13 PRO', '/rippa-r13'],
-      ['Mini-pelle R15 ECO (1,5 t)', '/rippa-r15'],
-      ['Mini-pelle R18 PRO', '/rippa-r18'],
-      ['Mini-pelle R22 PRO (2,2 t)', '/rippa-r22'],
-      ['Mini-pelle R32 PRO (3,2 t)', '/rippa-r32'],
-      ['Mini-pelle R57 PRO (5,7 t)', '/rippa-r57'],
-      ['Mini-chargeuse RS03', '/rippa-rs03'],
-      ['Mini-chargeuse RS04', '/rippa-rs04'],
-      ['Mini-chargeuse RS06', '/rippa-rs06'],
-      ['Mini-chargeuse RS07', '/rippa-rs07'],
-      ['Mini-chargeuse RS20', '/rippa-rs20'],
-      ['Chargeuse articulée RL10', '/rippa-rl10'],
-      ['Comparatif des mini-pelles', '/comparatif-mini-pelles-rippa']
-    ] },
+    { t: 'Maisons & capsules', h: '/habitat' },
+    { t: 'Loisirs & habitat', h: '/loisir-habitat' },
+    { t: 'Engins RIPPA', h: '/engins-rippa' },
     { t: 'Location de mini-pelle', h: '/location-mini-pelle-sisteron' },
     { sep: true },
     { t: 'Brochures', h: '/brochures' },
