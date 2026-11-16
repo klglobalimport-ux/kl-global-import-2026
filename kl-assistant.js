@@ -209,9 +209,26 @@
   function closeChat(){ chat.classList.remove("klopen"); fabs.classList.remove("klhide"); }
   function hideBubble(){ bubble.classList.remove("klshow"); }
 
-  // Bulle d'accroche après quelques secondes (si pas encore interagi)
-  setTimeout(function(){ if(!interacted){ bubble.classList.add("klshow"); mascot.classList.add("klattn");
-    setTimeout(function(){mascot.classList.remove("klattn");},2400);} },4200);
+  // Léo se présente UNE fois : la bulle d'accroche ne sort qu'à la toute première
+  // visite (mémorisé dans le navigateur, aucune donnée envoyée). Ensuite, Léo reste
+  // dans son coin et fait simplement signe de temps en temps, sans jamais s'ouvrir.
+  var GREET_KEY = "klw-greeted";
+  var greeted = false;
+  try { greeted = localStorage.getItem(GREET_KEY) === "1"; } catch (e) {}
+  function wave(){
+    if (interacted || chat.classList.contains("klopen")) return;
+    mascot.classList.add("klattn");
+    setTimeout(function(){ mascot.classList.remove("klattn"); }, 2400);
+  }
+  setTimeout(function(){
+    if (interacted) return;
+    if (!greeted) {
+      bubble.classList.add("klshow");
+      try { localStorage.setItem(GREET_KEY, "1"); } catch (e) {}
+    }
+    wave();
+  }, 4200);
+  setInterval(wave, 30000);
 
   mascot.addEventListener("click", openChat);
   $("klw-fab-chat").addEventListener("click", openChat);
@@ -239,19 +256,8 @@
     });
     document.body.classList.add("klw-inbar");
 
-    // Mobile : Léo s'ouvre tout seul après 20 s, une seule fois par visite,
-    // si le visiteur n'a pas déjà ouvert/fermé Léo et n'est pas en train de saisir.
-    var AUTO_KEY = "klw-auto-open";
-    var alreadyShown = false;
-    try { alreadyShown = sessionStorage.getItem(AUTO_KEY) === "1"; } catch (e) {}
-    if (!alreadyShown && !window.KL_NO_AUTOOPEN && window.matchMedia && window.matchMedia("(max-width:720px)").matches) {
-      setTimeout(function(){
-        var typing = document.activeElement && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
-        if (interacted || typing || chat.classList.contains("klopen")) return;
-        try { sessionStorage.setItem(AUTO_KEY, "1"); } catch (e) {}
-        openChat(true);
-      }, 20000);
-    }
+    // Mobile : Léo ne s'ouvre plus jamais tout seul. Le visiteur l'ouvre avec
+    // le bouton du bandeau quand il le souhaite.
   }
 
   /* ---------- rendu + liens ---------- */
